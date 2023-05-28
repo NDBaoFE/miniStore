@@ -10,7 +10,7 @@ export const Logo = styled.div`
     font-family: "Nunito Sans", sans-serif;
     font-style: normal;
     font-weight: 900;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 24px;
     color: #45ce7c;
     height: 32px;
@@ -20,12 +20,12 @@ export const Logo = styled.div`
 export const Wrapper = styled.div`
     font-family: "Nunito Sans", sans-serif;
     .ant-layout-sider {
-        background-color: ${themes.colors.background};
+        background-color: #ffffff;
     }
 
     .ant-menu-submenu-title > .ant-menu-title-content {
         &:hover {
-            color: "white";
+            color: black;
             background-color: ${themes.colors.primary};
         }
     }
@@ -39,15 +39,14 @@ export const Wrapper = styled.div`
     }
     .ant-menu {
         background-color: ${themes.colors.background};
-
-        &-sub {
-            &.ant-menu-inline {
-                background: ${themes.colors.submenu};
-            }
-        }
-
+        text-align: center;
         &-item {
-            color: ${themes.colors.light};
+            color: ${themes.colors.primary};
+
+            span {
+                color: ${themes.colors.primary};
+            }
+
             &-active {
                 color: ${themes.colors.white};
             }
@@ -55,7 +54,10 @@ export const Wrapper = styled.div`
                 color: ${themes.colors.white} !important;
                 background-color: ${themes.colors.primary} !important;
                 a {
-                    color: ${themes.colors.white} !important;
+                    color: ${themes.colors.black} !important;
+                }
+                span {
+                    color: ${themes.colors.white};
                 }
             }
             &.ant-menu-submenu-selected {
@@ -74,14 +76,12 @@ export const Wrapper = styled.div`
                     color: ${themes.colors.white};
                 }
             }
-        }
-
-        &-item a {
-            color: #ffffff;
-            &:hover {
-                color: ${themes.colors.white};
+            .ant-menu-item-icon {
+                color: ${themes.colors.primary};
+                /* min-width: 0; */
             }
         }
+
         &-submenu {
             &-selected {
                 & > .ant-menu-submenu-title > .ant-menu-submenu-arrow {
@@ -125,6 +125,90 @@ export const Wrapper = styled.div`
         &:hover {
             background-color: ${themes.colors.background};
         }
+    }
+    .ant-menu-item-selected {
+        box-shadow: 0px 8px 24px rgba(234, 124, 105, 0.32);
+        border-radius: 8px;
+        color: ${themes.colors.white}!important;
+        span {
+            color: ${themes.colors.white}!important;
+        }
+    }
+    .ant-menu-inline-collapsed .ant-menu-item-selected {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .ant-menu-inline-collapsed .ant-menu-item {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ant-menu-inline-collapsed > .ant-menu-item,
+    .ant-menu-inline-collapsed
+        > .ant-menu-item-group
+        > .ant-menu-item-group-list
+        > .ant-menu-item,
+    .ant-menu-inline-collapsed
+        > .ant-menu-item-group
+        > .ant-menu-item-group-list
+        > .ant-menu-submenu
+        > .ant-menu-submenu-title,
+    .ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title {
+        padding-inline: 0;
+    }
+    .ant-menu-inline .ant-menu-item:not(:last-child),
+    .ant-menu-vertical .ant-menu-item:not(:last-child) {
+        margin-bottom: 30px;
+    }
+    .ant-menu-inline .ant-menu-item,
+    .ant-menu-vertical .ant-menu-item {
+        margin: 0 auto;
+    }
+    .ant-menu-inline-collapsed > .ant-menu-item .ant-menu-item-icon + span,
+    .ant-menu-inline-collapsed
+        > .ant-menu-item-group
+        > .ant-menu-item-group-list
+        > .ant-menu-item
+        .ant-menu-item-icon
+        + span,
+    .ant-menu-inline-collapsed
+        > .ant-menu-item-group
+        > .ant-menu-item-group-list
+        > .ant-menu-submenu
+        > .ant-menu-submenu-title
+        .ant-menu-item-icon
+        + span,
+    .ant-menu-inline-collapsed
+        > .ant-menu-submenu
+        > .ant-menu-submenu-title
+        .ant-menu-item-icon
+        + span,
+    .ant-menu-inline-collapsed > .ant-menu-item .anticon + span,
+    .ant-menu-inline-collapsed
+        > .ant-menu-item-group
+        > .ant-menu-item-group-list
+        > .ant-menu-item
+        .anticon
+        + span,
+    .ant-menu-inline-collapsed
+        > .ant-menu-item-group
+        > .ant-menu-item-group-list
+        > .ant-menu-submenu
+        > .ant-menu-submenu-title
+        .anticon
+        + span,
+    .ant-menu-inline-collapsed
+        > .ant-menu-submenu
+        > .ant-menu-submenu-title
+        .anticon
+        + span {
+        display: none;
     }
 `;
 export const SideBar = styled(Sider)`

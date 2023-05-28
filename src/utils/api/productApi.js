@@ -1,9 +1,14 @@
 import { get, post, put } from "./ApiCaller";
 
 const productApi = {
-    getCoin: (token) => {
-        const url = `/api/coin`;
-        return get(url, {}, { Authorization: token });
+    getProduct: (search) => {
+        let url = "";
+        if (search !== "") {
+            url = `/product/search?keyword=${search}`;
+        } else {
+            url = `/product`;
+        }
+        return get(url, {}, {});
     },
     login: (email, password) => {
         const url = `/auth/login`;

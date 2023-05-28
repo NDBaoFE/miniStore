@@ -1,19 +1,21 @@
-import { StyledLayout } from "./style";
+import { StyledLayout, Wrapper } from "./style";
 import { Outlet } from "react-router-dom";
 import SidebarComponent from "./SideBar/index";
-import { themes } from "../utils/theme/index";
+// import { themes } from "../utils/theme/index";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import localStorageUtils from "../utils/localStorageUtils";
+import NavBar from "./Navbar";
+import { themes } from "../utils/theme";
+// import { useNavigate } from "react-router-dom";
+// import localStorageUtils from "../utils/localStorageUtils";
 const { Content } = StyledLayout;
 const LayoutComponent = () => {
-    const navigate = useNavigate();
-    const token = localStorageUtils.getItem("authorization");
-    if (!token) {
-        navigate("/login");
-    }
+    // const navigate = useNavigate();
+    // const token = localStorageUtils.getItem("authorization");
+    // if (!token) {
+    //     navigate("/login");
+    // }
+    console.log("gi")
     const [collapsed, setCollapsed] = useState(false);
-    console.log(collapsed);
     return (
         <StyledLayout collapsed={collapsed}>
             <SidebarComponent
@@ -23,16 +25,18 @@ const LayoutComponent = () => {
             <StyledLayout
                 className="site-layout"
                 style={{
-                    background: `${themes.colors.dark}`,
+                    
                     marginLeft: "0",
+                    
                 }}
-                collapsed={collapsed}
+                
             >
                 {/* <PageHeaderComponent /> */}
-                <Content style={{ minHeight: "100vh", background: "#1b1e2a" }}>
-                    <div className="site-layout-background">
+                <Content style={{   width: `calc(100vw - ${collapsed? "80px" :"240px" })`,background:`${themes.colors.background}` }}>
+                    <Wrapper className="site-layout-background" style={{ minHeight: "100vh" ,paddingTop: "8px" }} >
+                        <NavBar/>
                         <Outlet />
-                    </div>
+                    </Wrapper>
                 </Content>
             </StyledLayout>
         </StyledLayout>

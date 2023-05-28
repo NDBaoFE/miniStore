@@ -1,7 +1,8 @@
+import { Container } from "./style"
 
 function Login() {
   return (
-    <div>Login</div>
+    <Container>Login</Container>
   )
 }
 
