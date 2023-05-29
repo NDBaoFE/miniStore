@@ -36,11 +36,15 @@ export const Box404 = styled.div`
     width: 800px;
     border-radius: 10px;
     a {
-        color: #fff !important;
+        color: ${themes.colors.white};
         padding: 10px 20px;
-        background: #39ac31;
+        background: ${themes.colors.primary};
         margin: 20px 0;
         display: inline-block;
+        border-radius: 4px;
+        &:hover {
+            background-color: ${themes.colors.primaryDark};
+        }
     }
     h3,
     p {

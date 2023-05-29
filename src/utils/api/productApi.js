@@ -10,6 +10,10 @@ const productApi = {
         }
         return get(url, {}, {});
     },
+    makeOrder: (products) => {
+        let url = "/orderDetail/create";
+        return post(url, { products }, {}, {});
+    },
     login: (email, password) => {
         const url = `/auth/login`;
         return post(

@@ -2,6 +2,8 @@
 import ConfirmModal from "../../../components/ConfirmModal";
 import { GroupWrapper,FinishButton } from "./styled"
 import { useState } from "react";
+import { useSelector } from "react-redux";
+
 function ActionGroup() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -11,6 +13,7 @@ function ActionGroup() {
   const handleClose = () => {
     setIsModalOpen(false);
   };
+
   const handleOk = () => {
     console.log("ok");
   }
