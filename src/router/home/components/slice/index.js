@@ -15,7 +15,7 @@ const slice = createSlice({
     reducers: {
         addProduct: (state, action) => {
             for (let product of state.orderList) {
-                if (product.id == action.payload.id) {
+                if (product.productId == action.payload.productId) {
                     product.quantity += action.payload.quantity;
                     return;
                 }
@@ -24,7 +24,7 @@ const slice = createSlice({
         },
         deleteProduct: (state, action) => {
             for (let i = 0; i < state.orderList.length; i++) {
-                if (state.orderList[i].id == action.payload) {
+                if (state.orderList[i].productId == action.payload) {
                     state.orderList.splice(i, 1);
                 } else {
                     console.log("false");

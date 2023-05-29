@@ -16,7 +16,7 @@ export const Row = styled.div`
     font-family: "Inter";
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 22px;
     margin-top: 30px;
     .discount {
@@ -66,8 +66,9 @@ export const PaymentButton = styled.div`
         background-color: ${themes.colors.primaryDark};
         border-color: ${themes.colors.primaryDark};
     }
-    a {
-        color: ${themes.colors.white};
+
+    @media (max-width: 1125px) {
+        width: 120px;
     }
 `;
 export const Price = styled.div`

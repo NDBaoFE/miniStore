@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { selector } from "./slice/selector";
 import OrderDetail from "./OrderDetail";
 import { Link } from "react-router-dom";
+import { themes } from "../../../utils/theme";
 function Cart() {
  
   let subTotal = 0;
@@ -34,9 +35,9 @@ function Cart() {
           <div></div>
           <div className="discount">Add Discount </div>
         </Row>
-        <Row style={{padding:"0 20px",marginBottom:"20px"}}>
-         <DeleteButton><DeleteOutlined /></DeleteButton>
-         <Link to="/checkout" > <PaymentButton>Go to Payment</PaymentButton></Link>
+        <Row style={{padding:"0 20px",marginBottom:"20px",justifyContent:"center"}}>
+         <DeleteButton style={{marginRight:"20px"}} ><DeleteOutlined /></DeleteButton>
+         <Link to="/checkout"  style={{color:`${themes.colors.white}`}}> <PaymentButton>Go to Payment</PaymentButton></Link>
         </Row>
       </Total>
     </>

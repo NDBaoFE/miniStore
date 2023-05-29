@@ -8,10 +8,17 @@ export const HomeSection = styled.section`
     margin: 20px auto;
     max-width: 1096px;
     display: flex;
+    @media (max-width: 1024px) {
+        flex-direction: column;
+        align-items: center;
+    }
 `;
 export const Left = styled.div`
     width: 65%;
     border-radius: 10px;
+    @media (max-width: 1024px) {
+        width: 70%;
+    }
 `;
 export const Right = styled.div`
     position: sticky;
@@ -27,6 +34,10 @@ export const RightContainer = styled.div`
     width: 35%;
     height: 100%;
     margin-left: 36px;
+    @media (max-width: 1024px) {
+        margin-left: 20px;
+        width: 70%;
+    }
 `;
 export const ToolBox = styled.div`
     display: flex;
@@ -37,6 +48,14 @@ export const ToolBox = styled.div`
     height: 70px;
     border-radius: 10px;
     padding: 0 30px;
+    flex-wrap: wrap;
+    @media (max-width: 850px) {
+        height: 100%;
+    }
+    @media (max-width: 550px) {
+        flex-direction: column;
+        align-items: center;
+    }
 `;
 export const ProductWrapper = styled.div`
     margin-top: 30px;
@@ -51,13 +70,30 @@ export const ProductWrapper = styled.div`
 export const Col = styled.div`
     display: flex;
     align-items: center;
+    @media (max-width: 850px) {
+        flex-direction: column;
+        align-items: center;
+    }
 `;
-export const SearchBtn = styled.div``;
+export const SearchBtn = styled.div`
+    @media (max-width: 850px) {
+        margin-top: 12px;
+    }
+    @media (max-width: 550px) {
+        width: 100%;
+    }
+`;
 export const Category = styled(Cascader)`
     margin-left: 12px;
+    @media (max-width: 850px) {
+        margin: 12px 0;
+    }
     color: ${themes.colors.blackText};
     .ant-select-selector {
         height: 45px;
+    }
+    @media (max-width: 550px) {
+        width: 100%;
     }
 `;
 export const StyledSearch = styled(Search)`
@@ -65,9 +101,13 @@ export const StyledSearch = styled(Search)`
         height: 32px;
         border-right: 0;
     }
+    width: 200px;
     .ant-btn {
         height: 32px;
         border-left: 0;
+    }
+    @media (max-width: 550px) {
+        width: 100%;
     }
 `;
 export const Img = styled.img``;
@@ -107,6 +147,9 @@ export const CardHero = styled.div`
 export const CardImg = styled.img`
     height: 140px;
     width: 150px;
+    /* @media (max-width: 600px) {
+        width: 100%;
+    } */
 `;
 export const CardPrice = styled.div`
     font-style: normal;
@@ -145,6 +188,12 @@ export const CardContainer = styled.div`
         .add {
             opacity: 1;
         }
+    }
+    @media (max-width: 1024px) {
+        width: calc((100% - 48px) / 2);
+    }
+    @media (max-width: 550px) {
+        width: 100%;
     }
 `;
 export const StyledPagination = styled(Pagination)`

@@ -34,7 +34,7 @@ function ToolBoxSection({setSearchValue}) {
     <ToolBox>
         <Col> 
         <SearchBtn> 
-            <StyledSearch placeholder="input Product name, category.."  onChange={onSearch} style={{ width: 200 }}  />
+            <StyledSearch placeholder="input Product name, category.."  onChange={onSearch}   />
             </SearchBtn>
         <Category 
       options={options} 

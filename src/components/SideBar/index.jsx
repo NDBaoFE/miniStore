@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import { Menu } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
-
+import {IoIosArrowForward} from "react-icons/io"
 import SidebarLink from "../SideBarLink";
 import {  SideBar, Wrapper, SignOut, Button, Container } from "./style";
 
@@ -15,6 +15,7 @@ import {
 } from "@ant-design/icons";
 import localStorageUtils from "../../utils/localStorageUtils";
 import {ScheduleOutlined } from "@ant-design/icons"
+
 function getItem(label, key, icon, children) {
     return {
         key,
@@ -73,23 +74,7 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
                         }}
                         collapsed={collapsed }
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            viewBox="0 0 24 24"
-                        >
-                            <path d="M22 12H3" stroke="#11142d"></path>
-                            <g stroke="#808191">
-                                <path d="M22 4H13"></path>
-                                <path opacity=".301" d="M22 20H13"></path>
-                            </g>
-                            <path d="M7 7l-5 5 5 5" stroke="#11142d"></path>
-                        </svg>
+                        <IoIosArrowForward style={{ fontSize: "20px", color: "black" }}/>
                     </Button>
                 </Container>
 

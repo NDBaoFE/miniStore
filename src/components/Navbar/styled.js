@@ -11,6 +11,11 @@ export const Wrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     color: ${themes.colors.blackText};
+    @media (min-width: 992px) {
+        .menu {
+            display: none;
+        }
+    }
 `;
 export const InfoContainer = styled.div`
     display: flex;
@@ -26,6 +31,9 @@ export const InfoContainer = styled.div`
         font-weight: 400;
         font-size: 11px;
         line-height: 13px;
+    }
+    @media (max-width: 520px) {
+        display: none;
     }
 `;
 export const Right = styled.div`
