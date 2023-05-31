@@ -1,0 +1,77 @@
+.aboutus-container{
+    overflow: hidden;
+}
+
+.name-brand {
+  background-color: #00796b;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding-left: 50vw;
+  color: white;
+}
+
+.wrap-about-content-1{
+    height: 300px;
+    padding-left: 200px;
+    padding-top: 30px;
+}
+
+.name{
+    padding: 30px;
+    margin-left: 100px;
+    font-size: 18px;
+    font-weight: 600;
+    height: 5px;
+
+}
+
+.about-content-1{
+    font-size: 16px;
+    font-weight: 400;
+    width: 330px;
+    text-align: left;
+    margin-top: 5px;
+    margin-left: 130px;
+    
+}
+
+.about-img-1{
+    height: 241px;
+    width: 250px;
+    border-radius: 1000px;
+    margin-left: 700px;
+    margin-top:-190px ;
+}
+
+
+.wrap-about-content-2{
+    margin-top: 40px;
+    margin-bottom: 100px;
+    
+}
+
+.about-img-2{
+    height: 250px;
+    width: 350px;
+    margin-left: 320px;
+
+}
+
+.about-content-2{
+    font-size: 16px;
+    font-weight: 400;
+    width: 330px;
+    text-align: left;
+    margin-top:10px ;
+    margin-left: 800px;
+}
+
+.name-2{
+    font-size: 16px;
+    font-weight: 600;
+    width: 330px;
+    text-align: left;
+    margin-top:-190px ;
+    margin-left: 800px;
+}

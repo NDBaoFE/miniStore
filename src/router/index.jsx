@@ -5,6 +5,7 @@ import LayoutComponent from "../components/Layout";
 import PublicRoute from "./EmployeeRoute";
 import Home from "./home";
 import Login from "./login";
+import AboutUS from "./aboutus/aboutus";
 
 const publicRoute = [
    
@@ -15,16 +16,26 @@ const publicRoute = [
         exact: true,
         restrict: true,
     },
+
+    
+    
+    
+    
+];
+const adminRoute = [
     {
         index: true,
         path: "login",
         component: <Login />,
         exact: true,
         restrict: true,
+    },{
+        index: true,
+        path: "aboutus",
+        component: <AboutUS />,
+        exact: true,
+        restrict: true,
     },
-];
-const adminRoute = [
-    
 ];
 
 const RouterComponent = () => {
