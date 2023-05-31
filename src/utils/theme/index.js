@@ -2,7 +2,7 @@ export const themes = {
     colors: {
         light: "#FFFFEE",
         dark: "#000000",
-        primary: "#5EC401",
+        primary: "#2eb161",
         neutral5: "#D9D9D9",
         primary1: "#2E7DFF",
         primary5: "#020D26",
@@ -27,10 +27,11 @@ export const themes = {
         green: "#01e2a6",
         yellow: "#f9c41c",
         white: "#fefefe",
-        background: "#E6F8EC",
+        background: "#e6f5eb",
         blackText: "#363F4D",
         primaryRGB: "rgba(94, 196, 1, 0.8)",
         primaryDark: "#6ce100",
         gray: "rgb(247, 247, 248)",
+        primary700: "rgba(18, 126, 63, 0.8)",
     },
 };
