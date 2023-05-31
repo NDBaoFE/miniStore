@@ -5,6 +5,11 @@ import LayoutComponent from "../components/Layout";
 import PublicRoute from "./EmployeeRoute";
 import Home from "./home";
 import Login from "./login";
+import Profile from "./profile";
+import Revenue from "./revenue";
+import Checkout from "./checkout";
+import VoucherApply from "./voucherApplying";
+import ErrorPage from "./404";
 
 const publicRoute = [
    
@@ -22,6 +27,34 @@ const publicRoute = [
         exact: true,
         restrict: true,
     },
+    {
+        index: true,
+        path: "profile",
+        component: <Profile/>,
+        exact: true,
+        restrict: true,
+    },
+    {
+        index: true,
+        path: "revenue",
+        component: <Revenue/>,
+        exact: true,
+        restrict: true,
+    },
+    {
+        index: true,
+        path: "checkout",
+        component: <Checkout/>,
+        exact: true,
+        restrict: true,
+    },
+    {
+        index: true,
+        path: "voucher",
+        component: <VoucherApply/>,
+        exact: true,
+        restrict: true,
+    }
 ];
 const adminRoute = [
     
@@ -61,9 +94,10 @@ const RouterComponent = () => {
                         ))}
                     </Route>
                 </Route>
-                {/* <Route path="/auth" element={<Auth />} />
+                <Route path="/404" element={<ErrorPage />} />
+                {/* /* <Route path="/auth" element={<Auth />} />
                 <Route path="/403" element={<Error403Page />} />
-                <Route path="*" element={<Error404Page />} /> */}
+                <Route path="*" element={<Error404Page />} /> */ }
             </Routes>
         </BrowserRouter>
     );

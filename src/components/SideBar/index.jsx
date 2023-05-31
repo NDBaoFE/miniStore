@@ -3,16 +3,18 @@ import { useEffect, useState } from "react";
 
 import { Menu } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
-
+import {IoIosArrowForward} from "react-icons/io"
 import SidebarLink from "../SideBarLink";
-import { Logo, SideBar, Wrapper, SignOut, Button, Container } from "./style";
+import {  SideBar, Wrapper, SignOut, Button, Container } from "./style";
 
 import {
     HomeOutlined,
     LogoutOutlined,
-    ProfileOutlined,
+    UserOutlined ,
+    PieChartOutlined 
 } from "@ant-design/icons";
 import localStorageUtils from "../../utils/localStorageUtils";
+import {ScheduleOutlined } from "@ant-design/icons"
 
 function getItem(label, key, icon, children) {
     return {
@@ -28,23 +30,23 @@ const itemsAdmin = [
     getItem(
         <SidebarLink to="/home" child="Home" />,
         "/home",
-        <HomeOutlined style={{ fontSize: "24px" }} />
+        <HomeOutlined  />
     ),
     getItem(
-        <SidebarLink to="/profile" child="Profile" />,
-        "/profile",
-        <ProfileOutlined style={{ fontSize: "24px" }} />
+        <SidebarLink to="/schedule" child="Schedule" />,
+        "/schedule",
+        <ScheduleOutlined  />
     ),
     getItem(
-        <SidebarLink to="/leaderboard" child="Leaderboard " />,
-        "/leaderboard",
-        <HomeOutlined style={{ fontSize: "large" }} />
+        <SidebarLink to="/leaderboard" child="Revenue " />,
+        "/revenue",
+        <PieChartOutlined />
     ),
 
     getItem(
-        <SidebarLink to="/chart " child="Chart" />,
-        "/chart",
-        <HomeOutlined style={{ fontSize: "24px" }} />
+        <SidebarLink to="/chart " child="Profile" />,
+        "/profile",
+        <UserOutlined />
     ),
 ];
 
@@ -56,38 +58,23 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
     useEffect(() => {
         navigate(selectedKey);
     }, [selectedKey]);
-    const handleSignOut = () => {};
-    localStorageUtils.removeItem("authorization");
-    navigate("/login");
+    const handleSignOut = () => {
+        localStorageUtils.removeItem("authorization");
+    navigate("/login");};
+    
     return (
         <Wrapper>
             <SideBar width="240px" collapsed={collapsed}>
                 <Container>
-                    {" "}
-                    <Logo>Hii</Logo>
+                    {/* {" "}
+                    <Logo>Hii</Logo> */}
                     <Button
                         onClick={() => {
                             setCollapsed(!collapsed);
                         }}
-                        collapsed={collapsed}
+                        collapsed={collapsed }
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            viewBox="0 0 24 24"
-                        >
-                            <path d="M22 12H3" stroke="#11142d"></path>
-                            <g stroke="#808191">
-                                <path d="M22 4H13"></path>
-                                <path opacity=".301" d="M22 20H13"></path>
-                            </g>
-                            <path d="M7 7l-5 5 5 5" stroke="#11142d"></path>
-                        </svg>
+                        <IoIosArrowForward style={{ fontSize: "20px", color: "black" }}/>
                     </Button>
                 </Container>
 
@@ -97,8 +84,10 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
                     // openKeys={[selectedKey]}
                     mode="inline"
                     onSelect={({ key }) => {
+                        console.log(key);
                         setSelectedKey(key);
                     }}
+                    style={{background:'transparent',marginTop:"40px"}}
                     items={itemsAdmin}
                 />
                 <SignOut onClick={handleSignOut}>

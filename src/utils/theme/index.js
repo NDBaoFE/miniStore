@@ -1,8 +1,8 @@
 export const themes = {
     colors: {
-        light: "#FFFFFF",
+        light: "#FFFFEE",
         dark: "#000000",
-        primary: "#00E7AA",
+        primary: "#5EC401",
         neutral5: "#D9D9D9",
         primary1: "#2E7DFF",
         primary5: "#020D26",
@@ -10,7 +10,6 @@ export const themes = {
         primary400: "#45CE7C",
         danger: "#FF4D4F",
         calendulaGold: "#FFC53D",
-        gray: "#4D4D4D",
         submenu: "#818181",
         primary050: "#E6F8EC",
         secondary050: "#E3F2FE",
@@ -27,5 +26,11 @@ export const themes = {
         red2: "#DC3545",
         green: "#01e2a6",
         yellow: "#f9c41c",
+        white: "#fefefe",
+        background: "#E6F8EC",
+        blackText: "#363F4D",
+        primaryRGB: "rgba(94, 196, 1, 0.8)",
+        primaryDark: "#6ce100",
+        gray: "rgb(247, 247, 248)",
     },
 };

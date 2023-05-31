@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { API_URL } from "../../config/index";
 console.log(API_URL);
-const defaultURL = "http://localhost:8080";
+const defaultURL = "http://localhost:8080/ministore";
 // This is config default for axios caller
 const ApiCaller = (method, endpoint, headers, params, body) => {
     return axios({

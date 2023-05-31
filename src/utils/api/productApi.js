@@ -1,9 +1,26 @@
 import { get, post, put } from "./ApiCaller";
 
 const productApi = {
-    getCoin: (token) => {
-        const url = `/api/coin`;
-        return get(url, {}, { Authorization: token });
+    getProduct: (search) => {
+        let url = "";
+        if (search !== "") {
+            url = `/product/search?keyword=${search}`;
+        } else {
+            url = `/product`;
+        }
+        return get(url, {}, {});
+    },
+    makeOrder: (products) => {
+        let url = "/orderDetail/create";
+        const transformedProducts = products.map(
+            ({ productId, price, quantity, productVoucherId }) => ({
+                productId,
+                price,
+                quantity,
+                productVoucherId,
+            })
+        );
+        return post(url, [...transformedProducts], {}, {});
     },
     login: (email, password) => {
         const url = `/auth/login`;
