@@ -15,6 +15,9 @@ export const Wrapper = styled.div`
         .menu {
             display: none;
         }
+        .menuContainer {
+            display: none;
+        }
     }
 `;
 export const InfoContainer = styled.div`

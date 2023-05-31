@@ -21,7 +21,7 @@ function Cart() {
           subTotal += product.price * product.quantity;
           totalQuantity += product.quantity;
           return (
-           <OrderDetail key={product.id} product={product} ></OrderDetail>
+           <OrderDetail key={product.productId} product={product} ></OrderDetail>
 
           );
         })}

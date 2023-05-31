@@ -3,9 +3,11 @@ import ConfirmModal from "../../../components/ConfirmModal";
 import { GroupWrapper,FinishButton } from "./styled"
 import { useState } from "react";
 import { useSelector } from "react-redux";
-
+import { selector } from "../../home/components/slice/selector";
+import productApi from "../../../utils/api/productApi";
 function ActionGroup() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const {orderList} = useSelector(selector);
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -15,7 +17,7 @@ function ActionGroup() {
   };
 
   const handleOk = () => {
-    console.log("ok");
+    productApi.makeOrder(orderList);
   }
 
   const handleConfirm = () => {

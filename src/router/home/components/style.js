@@ -116,7 +116,7 @@ export const CloseButton = styled.div`
 `;
 export const Wrapper = styled.div``;
 export const ActionRow = styled(Row)`
-    color: ${themes.colors.primary};
+    color: ${themes.colors.blackText};
     margin-top: 15px;
     justify-content: flex-end;
     padding: 0;
@@ -126,5 +126,8 @@ export const ActionRow = styled(Row)`
         &:hover {
             color: ${themes.colors.primaryDark};
         }
+    }
+    a {
+        color: ${themes.colors.primary};
     }
 `;

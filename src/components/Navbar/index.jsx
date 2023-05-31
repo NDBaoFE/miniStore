@@ -5,7 +5,7 @@ import { Wrapper } from "./styled"
 function NavBar() {
   return (
     <Wrapper>
-      <StyledDrawer/>
+      <StyledDrawer />
       <BreadCrumbHeader/>
       <AvatarContainer/>
     </Wrapper>

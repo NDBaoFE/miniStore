@@ -1,8 +1,8 @@
 import { styled } from "styled-components";
 import { themes } from "../../utils/theme";
 import { Cascader } from "antd";
-import { Input } from "antd";
 import { Pagination } from "antd";
+import { Input } from "antd";
 const { Search } = Input;
 export const HomeSection = styled.section`
     margin: 20px auto;

@@ -12,7 +12,15 @@ const productApi = {
     },
     makeOrder: (products) => {
         let url = "/orderDetail/create";
-        return post(url, { products }, {}, {});
+        const transformedProducts = products.map(
+            ({ productId, price, quantity, productVoucherId }) => ({
+                productId,
+                price,
+                quantity,
+                productVoucherId,
+            })
+        );
+        return post(url, [...transformedProducts], {}, {});
     },
     login: (email, password) => {
         const url = `/auth/login`;

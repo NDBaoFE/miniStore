@@ -10,7 +10,7 @@ import store from "./store";
 ReactDOM.createRoot(document.getElementById('root')).render(
   
   // <ThemeProvider theme={themes}>
-  <Provider store={store}>
+  <Provider store={store} >
     <App />
     <Toast/>
   </Provider>

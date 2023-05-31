@@ -60,13 +60,12 @@ const StyledDrawer = () => {
     setOpen(false);
   };
   return (
-    <Container>
+    <Container className="menu">
       <Button type="primary" onClick={showDrawer} icon={<MenuOutlined />} className="menu"/>
       <Drawer title="Basic Drawer" placement="left" onClose={onClose} open={open} width={300}>
       <StyledMenu
                     defaultSelectedKeys={[selectedKey]}
                     defaultOpenKeys={["blog", "account"]}
-    
                     mode="inline"
                     onSelect={({ key }) => {
                         console.log(key);

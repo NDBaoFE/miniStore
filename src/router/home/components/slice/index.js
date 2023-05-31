@@ -7,6 +7,8 @@ export const initialState = {
     note: "hi",
     paymentMethod: 1,
     paymentArray: ["Cash", "Credit Card"],
+    selectedVoucher: {},
+    vouchers: [],
 };
 export const name = "orderList";
 const slice = createSlice({
@@ -20,7 +22,8 @@ const slice = createSlice({
                     return;
                 }
             }
-            state.orderList.push(action.payload);
+            const newProduct = { ...action.payload, productVoucherId: null };
+            state.orderList.push(newProduct);
         },
         deleteProduct: (state, action) => {
             for (let i = 0; i < state.orderList.length; i++) {
@@ -45,6 +48,15 @@ const slice = createSlice({
         updatePaymentMethod: (state, action) => {
             state.paymentMethod = action.payload;
         },
+        selectVoucher: (state, action) => {
+            state.selectedVoucher = action.payload;
+        },
+        getVouchers: (state, action) => {
+            state.vouchers = [];
+            for (let voucher in action.payload) {
+                state.vouchers.push(voucher);
+            }
+        },
     },
 });
 
@@ -56,4 +68,6 @@ export const {
     deleteProduct,
     updateNote,
     updatePaymentMethod,
+    getVouchers,
+    selectVoucher,
 } = slice.actions;
