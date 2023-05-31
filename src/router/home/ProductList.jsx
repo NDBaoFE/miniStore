@@ -15,12 +15,10 @@ function ProductList({search}) {
     async function fetchData() {
         try {
             const response = await productApi.getProduct(search);
-            if(search !== ""){
+           
               setProducts(response.data.data);
               
-            }else{
-              setProducts(response.data);
-            }
+            
            
         } catch (error) {
             console.error(error);

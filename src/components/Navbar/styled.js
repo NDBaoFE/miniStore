@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
     min-height: 48px;
     background-color: ${themes.colors.white};
     border-radius: 10px;
-    padding: 0 20px;
+    padding: 0 30px;
     align-items: center;
     justify-content: space-between;
     color: ${themes.colors.blackText};

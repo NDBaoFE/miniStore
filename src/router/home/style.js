@@ -168,7 +168,7 @@ export const AddButton = styled.div`
     height: 260px;
     width: 100%;
 
-    background-color: ${themes.colors.primaryRGB};
+    background-color: ${themes.colors.primary700};
     transform: translate(0, -100%);
     z-index: 2;
     opacity: 0;
