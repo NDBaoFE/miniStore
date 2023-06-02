@@ -1,28 +1,28 @@
-import { Layout } from "antd";
-import styled from "styled-components";
-
-import { themes } from "../../utils/theme/index";
-
-const { Sider } = Layout;
-export const Logo = styled.div`
-    display: flex;
-    align-items: center;
-    font-family: "Nunito Sans", sans-serif;
-    font-style: normal;
-    font-weight: 900;
-    font-size: 14px;
-    line-height: 24px;
-    color: #45ce7c;
-    height: 32px;
-    margin: 20px 0;
-`;
-
-export const Wrapper = styled.div`
-    font-family: "Nunito Sans", sans-serif;
-    @media (max-width: 992px) {
-        display: none;
+import { styled } from "styled-components";
+import { themes } from "../../utils/theme";
+import { Menu } from "antd";
+export const Container = styled.div`
+    .ant-btn-primary {
+        background-color: ${themes.colors.primary};
+        &:hover {
+            background-color: ${themes.colors.primaryDark};
+        }
     }
-
+    .ant-btn-primary:not(:disabled):active {
+        background-color: ${themes.colors.primaryDark};
+    }
+    .ant-btn:not(:disabled):focus-visible {
+        outline: 4px solid ${themes.colors.primaryDark};
+    }
+    button:hover {
+        border-color: ${themes.colors.primary};
+    }
+    button:focus,
+    button:focus-visible {
+        outline: none;
+    }
+`;
+export const StyledMenu = styled(Menu)`
     .ant-layout-sider {
         background-color: #ffffff;
     }
@@ -214,50 +214,4 @@ export const Wrapper = styled.div`
         + span {
         display: none;
     }
-`;
-export const SideBar = styled(Sider)`
-    /* min-width: 200px; */
-    font-family: "Nunito Sans", sans-serif;
-    position: fixed !important;
-    min-height: 100vh;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    .ant-menu {
-        font-size: 16px;
-    }
-`;
-
-export const SignOut = styled.button`
-    display: flex;
-    align-items: center;
-    font-family: "Nunito Sans", sans-serif;
-    color: rgba(255, 255, 255, 0.85);
-    position: absolute;
-    bottom: 20px;
-    padding-left: 24px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-`;
-export const Button = styled.button`
-    background: transparent;
-    border: none;
-    border-color: transparent;
-    &:hover {
-        border-color: none;
-    }
-    &:focus {
-        border-color: none;
-    }
-    svg {
-        transform: ${(props) =>
-            props.collapsed === true ? "scale(-1, -1);" : "none"};
-        transition: transform 0.2s, -webkit-transform 0.2s;
-    }
-`;
-export const Container = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
 `;
