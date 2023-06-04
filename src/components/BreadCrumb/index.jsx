@@ -10,6 +10,8 @@ function BreadCrumbHeader() {
         '/apps/2/detail': 'Detail',
         '/checkout': 'Checkout',
         '/voucher': 'Checkout/Apply Voucher',
+        '/employee': 'Employee',
+        '/employee/addEmployee': 'Adding Employee'
       };
     const location = useLocation();
   const pathSnippets = location.pathname.split('/').filter((i) => i);

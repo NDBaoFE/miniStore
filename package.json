@@ -13,6 +13,7 @@
         "@reduxjs/toolkit": "^1.9.5",
         "antd": "^5.4.7",
         "axios": "^1.4.0",
+        "cdbreact": "^1.5.16",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-icons": "^4.8.0",

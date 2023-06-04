@@ -5,11 +5,13 @@ import LayoutComponent from "../components/Layout";
 import PublicRoute from "./EmployeeRoute";
 import Home from "./home";
 import Login from "./login";
+import AboutUS from "./aboutus/aboutus";
 import Profile from "./profile";
 import Revenue from "./revenue";
 import Checkout from "./checkout";
 import VoucherApply from "./voucherApplying";
 import ErrorPage from "./404";
+import AddEmployee from "./employee/addEmployee/addEmployee";
 
 const publicRoute = [
    
@@ -22,8 +24,28 @@ const publicRoute = [
     },
     {
         index: true,
+        path: "employee/addEmployee",
+        component: <AddEmployee/>,
+        exact: true,
+        restrict: true,
+    }
+
+    
+    
+    
+    
+];
+const adminRoute = [
+    {
+        index: true,
         path: "login",
         component: <Login />,
+        exact: true,
+        restrict: true,
+    },{
+        index: true,
+        path: "aboutus",
+        component: <AboutUS />,
         exact: true,
         restrict: true,
     },
@@ -54,9 +76,7 @@ const publicRoute = [
         component: <VoucherApply/>,
         exact: true,
         restrict: true,
-    }
-];
-const adminRoute = [
+    },
     
 ];
 
