@@ -30,6 +30,9 @@ export const VoucherContainer = styled.div`
     .ant-list-item-action {
         margin-right: 20px;
     }
+    .ant-list-item-meta .ant-list-item-meta-avatar {
+        margin: 0 16px;
+    }
 `;
 export const SearchBtn = styled.div`
     @media (max-width: 850px) {

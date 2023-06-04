@@ -33,6 +33,7 @@ export const OrderDetailRow = styled.div`
     align-items: center;
     padding: 10px;
     cursor: pointer;
+    transition: 0.3s all ease;
 `;
 export const DeleteButton = styled.div`
     width: 40px;
@@ -114,7 +115,9 @@ export const CloseButton = styled.div`
         color: ${themes.colors.red2};
     }
 `;
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+    margin-top: 10px;
+`;
 export const ActionRow = styled(Row)`
     color: ${themes.colors.blackText};
     margin-top: 15px;
@@ -130,4 +133,12 @@ export const ActionRow = styled(Row)`
     a {
         color: ${themes.colors.primary};
     }
+`;
+export const BadgeContainer = styled.div`
+    border-radius: 50%;
+    background-color: ${themes.colors.primary};
+    padding: 5px;
+`;
+export const OldPrice = styled(Price)`
+    text-decoration: line-through;
 `;
