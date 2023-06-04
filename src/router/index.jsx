@@ -11,6 +11,7 @@ import Revenue from "./revenue";
 import Checkout from "./checkout";
 import VoucherApply from "./voucherApplying";
 import ErrorPage from "./404";
+import AddEmployee from "./employee/addEmployee/addEmployee";
 
 const publicRoute = [
    
@@ -21,6 +22,13 @@ const publicRoute = [
         exact: true,
         restrict: true,
     },
+    {
+        index: true,
+        path: "employee/addEmployee",
+        component: <AddEmployee/>,
+        exact: true,
+        restrict: true,
+    }
 
     
     
@@ -68,7 +76,8 @@ const adminRoute = [
         component: <VoucherApply/>,
         exact: true,
         restrict: true,
-    }
+    },
+    
 ];
 
 const RouterComponent = () => {

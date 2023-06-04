@@ -1,77 +1,51 @@
 import "./navbarstyle.css";
-import { DownOutlined } from "@ant-design/icons";
-import { Dropdown } from "antd";
-import { BsTelephoneFill } from "react-icons/Bs";
-import { Link } from "react-router-dom";
-import { BrandIcon, StyleSpace } from "./navbarstyle";
-const items = [
-  {
-    label: <a href="https://www.antgroup.com">1st menu item</a>,
-    key: "0",
-  },
-  {
-    label: <a href="https://www.aliyun.com">2nd menu item</a>,
-    key: "1",
-  },
-  {
-    type: "divider",
-  },
-  {
-    label: "3rd menu item",
-    key: "3",
-  },
-];
+
+import { SearchOutlined } from '@ant-design/icons';
+
+// import { Link } from "react-router-dom";
+import { NavLink,ContainerNavBarAll,ColorName,BrandIcon,HotlineIcon,ContainerNavBelow, ContainerNavAbove,Hotline  ,SearchInput,BrandName,WrapContactPhone,WrapBrand,WrapSearchBar } from "./navbarstyle";
 
 export const NavBarUser = () => {
   return (
-    <div className="container-navbar">
-      <div className="container-navbar-above">
-        <div className="wrap-brand">
-          <BrandIcon size="3rem" />
-          <p>
-            Mini<br></br>
-            <span>Store</span>
-          </p>
-        </div>
+    <ContainerNavBarAll>
+      <ContainerNavAbove>
+        <WrapBrand>
+          <BrandIcon></BrandIcon>
+          <BrandName>Mini<br/><ColorName>Store</ColorName></BrandName>
+        </WrapBrand>
 
-        <div className="wrap-search-bar">
-          <Dropdown
-            menu={{
-              items,
-            }}
-            trigger={["click"]}
-          >
-            <a onClick={(e) => e.preventDefault()}>
-              <StyleSpace>
-                Category
-                <DownOutlined />
-              </StyleSpace>
-            </a>
-          </Dropdown>
-          <input type="text" placeholder="Search something" />
-        </div>
-        <div className="wrap-phone-contact">
-          <BsTelephoneFill
+        <WrapSearchBar >
+          <SearchInput placeholder="Searching something.." suffix={<SearchOutlined />} />
+        </WrapSearchBar >
+
+
+        <WrapContactPhone>
+          <HotlineIcon
             className="phone-contact-icon"
             size="1.3rem"
-          ></BsTelephoneFill>
-          <p>
+          ></HotlineIcon>
+          <Hotline>
             Hotline<br></br>1800-0000
-          </p>
-        </div>
-      </div>
+          </Hotline>
+        </WrapContactPhone>
 
-      <div className="container-navbar-below">
-        <div className="nav-link">Product</div>
 
-        <div className="nav-link">News</div>
-        <Link to="/aboutus">
-          <div className="nav-link">About Us</div>
-        </Link>
-        <div className="nav-link">Career</div>
+  
+      </ContainerNavAbove>
 
-        <div className="nav-link">Login</div>
-      </div>
-    </div>
+      <ContainerNavBelow>
+        <NavLink>Product</NavLink>
+
+        <NavLink>News</NavLink>
+
+        <NavLink>About</NavLink>
+        {/* <Link to="/aboutus">
+          <
+        </Link> */}
+        <NavLink>Career</NavLink>
+
+        <NavLink>Login</NavLink>      
+        </ContainerNavBelow>
+    </ContainerNavBarAll>
   );
 };
