@@ -5,6 +5,7 @@ import LayoutComponent from "../components/Layout";
 import PublicRoute from "./EmployeeRoute";
 import Home from "./home";
 import Login from "./login";
+import AboutUS from "./aboutus/aboutus";
 import Profile from "./profile";
 import Revenue from "./revenue";
 import Checkout from "./checkout";
@@ -13,6 +14,8 @@ import ErrorPage from "./404";
 import ProductManagement from "./products";
 import AddProduct from "./AddProduct";
 import Schedule from "./schedule";
+import AddEmployee from "./employee/addEmployee/addEmployee";
+import PublicLayout from "../components/PublicLayout";
 
 const publicRoute = [
    
@@ -31,13 +34,13 @@ const publicRoute = [
         restrict: true,
     },
     {
+        
         index: true,
-        path: "login",
-        component: <Login />,
+        path: "employee/addEmployee",
+        component: <AddEmployee/>,
         exact: true,
         restrict: true,
-    },
-    {
+    },{
         index: true,
         path: "profile",
         component: <Profile/>,
@@ -93,11 +96,30 @@ const publicRoute = [
         exact: true,
         restrict: true,
     }
+
+    
+    
+    
     
 ];
 const adminRoute = [
+    {
+        index: true,
+        path: "login",
+        component: <Login />,
+        exact: true,
+        restrict: true,
+    },{
+        index: true,
+        path: "aboutus",
+        component: <AboutUS />,
+        exact: true,
+        restrict: true,
+    },
+    
     
 ];
+
 
 const RouterComponent = () => {
     // useAutoLogout(jwt);
@@ -120,7 +142,7 @@ const RouterComponent = () => {
                     </Route>
                 </Route>
                 <Route exact element={<AdminRoute />}>
-                    <Route exact>
+                    <Route exact element={<PublicLayout/>}>
                         {adminRoute.map((route) => (
                             <Route
                                 index={route.index}

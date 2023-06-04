@@ -23,6 +23,7 @@ export const VoucherPlacement = styled.div`
 export const AntdImage = styled(Image)``;
 export const VoucherInfo = styled.div`
     padding: 0 30px;
+    width: 100%;
     h1 {
         margin: 0;
         margin-bottom: 10px;
