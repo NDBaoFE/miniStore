@@ -30,8 +30,11 @@ export const themes = {
         background: "#e6f5eb",
         blackText: "#363F4D",
         primaryRGB: "rgba(94, 196, 1, 0.8)",
-        primaryDark: "#6ce100",
+        primaryDark: "#33a225",
         gray: "rgb(247, 247, 248)",
         primary700: "rgba(18, 126, 63, 0.8)",
+        stripe: "#f5f5f5",
+        primary200: "#9dd7af",
+        shadow: "rgba(0, 0, 0, 0.5)",
     },
 };

@@ -2,36 +2,50 @@ import { AntdImage, Button, Container, Row, VoucherInfo, VoucherInfoWrapper } fr
 import { VoucherPlacement } from "./style"
 import ToolBox from "./components/ToolBox"
 import VoucherList from "./components/VoucherList"
-import { useSelector } from "react-redux"
-import { selector } from "../home/components/slice/selector"
+import { useDispatch,useSelector } from "react-redux"
+
 import voucher from "../../assets/image/voucher.png"
+import { applyVoucher, getProductById} from "../home/components/slice/index"
+import { useNavigate, useParams } from "react-router-dom"
+import { useState } from "react"
+import { toastSuccess } from "../../components/Toast"
+
 function VoucherApply() {
- 
-  const {selectedVoucher} = useSelector(selector);
+const navigate=useNavigate();
+  const dispatch = useDispatch();
+  const {id} = useParams();
+  const product = useSelector(state => getProductById(state.orderList, id));
+  console.log(product);
+  const [currentVoucher,setCurrentVoucher]=useState();
+const handleApplyVoucher=()=>{
+  dispatch(applyVoucher({...currentVoucher,productId:id}))
+  navigate("/");
+  toastSuccess("add Voucher Successfully !!")
+}
   return (
     <Container>
       <VoucherPlacement>
-        <AntdImage alt="voucher" src={voucher} />
-       {selectedVoucher?.name&& <VoucherInfo>
+        <AntdImage alt="voucher" src={currentVoucher?.voucherImg||voucher} />
+       {currentVoucher?.description&& <VoucherInfo>
         <h1 style={{marginRight:"30px"}}>Detail:</h1>
         <VoucherInfoWrapper>
-        <div>Description:<span>10% discount on Nestle Product</span></div>
-        <div>Code: <span>NESTLE10</span></div>
-        <div>Quantity: <span>20</span></div>
+        <div style={{flexWrap:"wrap",marginBottom:"20px"}}>Description:<span>{currentVoucher?.description}</span></div>
+        <div>Code: <span>{currentVoucher?.name||"Voucher"}</span></div>
+        <div>Quantity: <span>{currentVoucher?.quantity}</span></div>
           
-           <div>Discount: <span>10% </span></div>
-           <div>Maximum discount: <span>30000đ</span></div>
+           <div>Discount: <span>{currentVoucher?.percentDiscount*100}%</span></div>
+           <div> Money Required: <span>{currentVoucher.minTotal}</span></div>
       
          
-           <div>Minimum Item: <span>2</span> </div>
+           <div> Item Required: <span>{currentVoucher.minItem}</span> </div>
            <div> Exprire Date :<span>30/6/2023</span></div>
       
-          <Row style={{justifyContent:"flex-end"}}><Button>Apply</Button></Row>
+          <Row style={{justifyContent:"flex-end"}}><Button onClick={handleApplyVoucher}>Apply</Button></Row>
         </VoucherInfoWrapper>
         </VoucherInfo>}
       </VoucherPlacement>
       <ToolBox/>
-      <VoucherList/>
+      <VoucherList setCurrentVoucher={setCurrentVoucher}/>
     </Container>
   )
 }

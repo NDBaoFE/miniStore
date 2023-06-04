@@ -5,10 +5,12 @@ export const StyledBreadCrumb = styled(Breadcrumb)`
     font-family: "Inter";
     font-style: normal;
     font-weight: 600;
-    font-size: 28px;
-    line-height: 34px;
+    font-size: 20px;
     .ant-breadcrumb-separator,
     .ant-breadcrumb-link a {
         color: ${themes.colors.blackText};
+    }
+    a {
+        height: 100%;
     }
 `;

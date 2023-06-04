@@ -35,7 +35,7 @@ export const VoucherInfoWrapper = styled.div`
         margin-bottom: 10px;
         display: flex;
         justify-content: space-between;
-        flex-wrap: wrap;
+
         align-items: center;
         span {
             margin-top: 10px;
