@@ -1,6 +1,7 @@
-import { Avatar, Input ,Form,Select, Button} from "antd";
+import { Avatar, Input ,Form, Button,Dropdown} from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { styled } from "styled-components";
+import { DownOutlined} from "@ant-design/icons";
 
 export const FormAddEmployeeSection = styled.section`
   margin: 20px auto;
@@ -21,7 +22,7 @@ export const EmployeeIMG = styled(Avatar)`
 
 export const WrapperForm1 = styled.div`
   background-color: white;
-  height: 400px;
+  height: 300px;
   width: 500px;
   margin-top: 40px;
   margin-left: 40px;
@@ -34,12 +35,21 @@ margin-bottom: 15px;
 margin-left: 100px;
 `
 
-export const InputID = styled(Input)`
-  width: 200px;
+
+
+export const SelectRoleName = styled(Dropdown)`
+  width: 300px;
   height: 40px;
   border: #8c8c8c solid 1px;
-  
-`;
+  border-radius: 5px;
+  padding-left:11px;
+  color: #bfbfbf;
+`
+
+export const DropdownIcon = styled(DownOutlined)`
+padding-left:220px;
+`
+
 
 export const InputName = styled(Input)`
   width: 300px;
@@ -56,7 +66,7 @@ export const WrapperForm2 = styled.div`
   background-color: white;
   height: 250px;
   width: 500px;
-  margin-top: 40px;
+  margin-top: 15px;
   margin-left: 40px;
   box-shadow: 0px 1px 8px rgba(42, 50, 63, 0.1);
     border-radius: 8px;
@@ -71,9 +81,6 @@ export const Contact = styled.div`
 
 `
 
-export const SelectOption = styled(Select)`
-
-`
 
 export const InputNumber = styled(Input)`
   width: 250px;
@@ -91,7 +98,7 @@ export const WrapperForm3 = styled.div`
   background-color: white;
   height: 360px;
   width: 500px;
-  margin-top: 40px;
+  margin-top: 15px;
   margin-left: 40px;
   box-shadow: 0px 1px 8px rgba(42, 50, 63, 0.1);
     border-radius: 8px;
@@ -106,4 +113,6 @@ export const InputAddress = styled(Input)`
 export const SubmitBtn = styled(Button)`
   width: 300px;
   background-color: green;
+  
 `
+
