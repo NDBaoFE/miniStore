@@ -5,7 +5,6 @@ import {Form, Input} from "antd"
 
 export const WrapMessage = styled.div`
     display:flex;
-    border: black solid 1px;
     margin-bottom: 100px;
     height: 500px;
     justify-content: space-around;

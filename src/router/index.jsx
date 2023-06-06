@@ -13,6 +13,7 @@ import VoucherApply from "./voucherApplying";
 import ErrorPage from "./404";
 import AddEmployee from "./employee/addEmployee/addEmployee";
 
+
 const publicRoute = [
    
     {
@@ -28,7 +29,9 @@ const publicRoute = [
         component: <AddEmployee/>,
         exact: true,
         restrict: true,
-    }
+    },
+
+
 
     
     

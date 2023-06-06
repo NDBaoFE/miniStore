@@ -1,4 +1,5 @@
 import "./AddEmployee.css";
+import { useState } from "react";
 import { UserOutlined } from "@ant-design/icons";
 import {
   FormAddEmployeeSection,
@@ -12,62 +13,58 @@ import {
   InputNumber,
   InputEmail,
   WrapperForm3,
-
   SubmitBtn,
-  SelectRoleName,
-  DropdownIcon
+  FormAddEmployee,
+  SelectRole,
+  WrapperForm4,
+  OrderBtn,
+  ShoppingCart,
+  WrapperImg,
+  Content,
+  WrapperBtn,WrapperEmployeeIMG
 } from "./addEmployeeStyle";
-import { Form, Space } from "antd";
+import { Form, Select } from "antd";
+import shoppingCartIcon from "../../../assets/image/shopping-cart.png";
 
-const handleMenuClick = (e) => {
-  console.log("click", e);
+const onSubmit = (values) => {
+  console.log("Received values of form: ", values);
+  // Convert form values to json
+  const data = JSON.stringify(values);
+  console.log("JSON data:", data);
 };
-const items = [
-  {
-    label: "Admin",
-    key: "1",
-    icon: <UserOutlined />,
-  },
-  {
-    label: "Employee",
-    key: "2",
-    icon: <UserOutlined />,
-  },
-  {
-    label: "Guard",
-    key: "3",
-    icon: <UserOutlined />,
 
-  },
-];
-const menuProps = {
-  items,
-  onClick: handleMenuClick,
-};
 const AddEmployee = () => {
+  const [selectedValue, setSelectedValue] = useState("Role");
+
+  function handleChange(value) {
+    console.log(`Selected ${value}`);
+    setSelectedValue(value);
+  }
+  const [form] = Form.useForm();
+  const { Option } = Select;
+
   return (
     <FormAddEmployeeSection>
-      <Form>
+      <FormAddEmployee form={form} onFinish={onSubmit}>
         <WrapperForm1>
-          <EmployeeIMG size={80} icon={<UserOutlined />} />
-
-          <FormItem name="username">
+          <WrapperEmployeeIMG>
+            <EmployeeIMG size={80} icon={<UserOutlined />} />
+          </WrapperEmployeeIMG>
+          <FormItem name="name">
             <InputName placeholder="Name" />
           </FormItem>
 
-          <FormItem >
-            <SelectRoleName menu={menuProps}>
-         
-                <Space>
-                  Role 
-                  <DropdownIcon />
-                </Space>
-      
-            </SelectRoleName>
+          <FormItem name="roleName">
+            <SelectRole
+              defaultValue={selectedValue}
+              style={{ width: 300 }}
+              onChange={handleChange}
+            >
+              <Option value="admin">Admin</Option>
+              <Option value="employee">Employee</Option>
+              <Option value="guard">Guard</Option>
+            </SelectRole>
           </FormItem>
-          
-  
-     
         </WrapperForm1>
 
         <WrapperForm2>
@@ -77,7 +74,7 @@ const AddEmployee = () => {
             <InputEmail placeholder="Email" />
           </FormItem>
 
-          <FormItem>
+          <FormItem name="phone">
             <InputNumber type="number" placeholder="Phone number" />
           </FormItem>
         </WrapperForm2>
@@ -85,7 +82,7 @@ const AddEmployee = () => {
         <WrapperForm3>
           <Contact> Address</Contact>
 
-          <FormItem name="address-detail">
+          <FormItem name="address">
             <InputNote rows={4} placeholder="Address" />
           </FormItem>
 
@@ -95,7 +92,21 @@ const AddEmployee = () => {
             </SubmitBtn>
           </FormItem>
         </WrapperForm3>
-      </Form>
+      </FormAddEmployee>
+
+      <WrapperForm4>
+        <WrapperImg>
+          <ShoppingCart src={shoppingCartIcon} alt="" />
+        </WrapperImg>
+
+        <Content>This customer has not placed orders yet.</Content>
+
+        <WrapperBtn>
+          <OrderBtn type="primary" htmlType="submit">
+            Submit
+          </OrderBtn>
+        </WrapperBtn>
+      </WrapperForm4>
     </FormAddEmployeeSection>
   );
 };
