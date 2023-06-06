@@ -9,11 +9,14 @@ function BreadCrumbHeader() {
         '/apps/1/detail': 'Detail',
         '/apps/2/detail': 'Detail',
         '/checkout': 'Checkout',
-        '/voucher': 'Checkout/Apply Voucher',
+        '/voucher': 'Apply Voucher',
+        '/product':'Product',
+        '/product/new':'Add Product',
         '/employee': 'Employee',
         '/employee/addEmployee': 'Adding Employee'
       };
     const location = useLocation();
+    
   const pathSnippets = location.pathname.split('/').filter((i) => i);
   const extraBreadcrumbItems = pathSnippets.map((_, index) => {
     const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;

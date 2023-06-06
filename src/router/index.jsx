@@ -11,7 +11,11 @@ import Revenue from "./revenue";
 import Checkout from "./checkout";
 import VoucherApply from "./voucherApplying";
 import ErrorPage from "./404";
+import ProductManagement from "./products";
+import AddProduct from "./AddProduct";
+import Schedule from "./schedule";
 import AddEmployee from "./employee/addEmployee/addEmployee";
+import PublicLayout from "../components/PublicLayout";
 
 
 const publicRoute = [
@@ -25,34 +29,19 @@ const publicRoute = [
     },
     {
         index: true,
+        path: "home/:page",
+        component: <Home />,
+        exact: true,
+        restrict: true,
+    },
+    {
+        
+        index: true,
         path: "employee/addEmployee",
         component: <AddEmployee/>,
         exact: true,
         restrict: true,
-    },
-
-
-
-    
-    
-    
-    
-];
-const adminRoute = [
-    {
-        index: true,
-        path: "login",
-        component: <Login />,
-        exact: true,
-        restrict: true,
     },{
-        index: true,
-        path: "aboutus",
-        component: <AboutUS />,
-        exact: true,
-        restrict: true,
-    },
-    {
         index: true,
         path: "profile",
         component: <Profile/>,
@@ -73,15 +62,65 @@ const adminRoute = [
         exact: true,
         restrict: true,
     },
+    
     {
         index: true,
-        path: "voucher",
+        path: "voucher/:id",
         component: <VoucherApply/>,
         exact: true,
         restrict: true,
     },
+    {
+        index: true,
+        path: "product/:id",
+        component: <ProductManagement/>,
+        exact: true,
+        restrict: true,
+    } , {
+        index: true,
+        path: "product",
+        component: <ProductManagement/>,
+        exact: true,
+        restrict: true,
+    }
+    ,{
+        index: true,
+        path: "product/new",
+        component: <AddProduct/>,
+        exact: true,
+        restrict: true,
+    }
+    ,{
+        index: true,
+        path: "schedule",
+        component: <Schedule/>,
+        exact: true,
+        restrict: true,
+    }
+
+    
+    
+    
     
 ];
+const adminRoute = [
+    {
+        index: true,
+        path: "login",
+        component: <Login />,
+        exact: true,
+        restrict: true,
+    },{
+        index: true,
+        path: "aboutus",
+        component: <AboutUS />,
+        exact: true,
+        restrict: true,
+    },
+    
+    
+];
+
 
 const RouterComponent = () => {
     // useAutoLogout(jwt);
@@ -104,7 +143,7 @@ const RouterComponent = () => {
                     </Route>
                 </Route>
                 <Route exact element={<AdminRoute />}>
-                    <Route exact>
+                    <Route exact element={<PublicLayout/>}>
                         {adminRoute.map((route) => (
                             <Route
                                 index={route.index}

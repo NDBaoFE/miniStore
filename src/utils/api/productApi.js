@@ -1,12 +1,12 @@
 import { get, post, put } from "./ApiCaller";
 
 const productApi = {
-    getProduct: (search) => {
+    getProduct: (search, current) => {
         let url = "";
         if (search !== "") {
-            url = `/product/search?keyword=${search}`;
+            url = `/product/search?keyword=${search}&offset=${current}`;
         } else {
-            url = `/product`;
+            url = `/product?offset=${current}`;
         }
         return get(url, {}, {});
     },
@@ -21,6 +21,19 @@ const productApi = {
             })
         );
         return post(url, [...transformedProducts], {}, {});
+    },
+    addProduct: (product) => {
+        let url = "/product";
+        return post(
+            url,
+            {
+                ...product,
+                productTypeId: product.productTypeId + 1,
+                isDeleted: null,
+            },
+            {},
+            {}
+        );
     },
     login: (email, password) => {
         const url = `/auth/login`;

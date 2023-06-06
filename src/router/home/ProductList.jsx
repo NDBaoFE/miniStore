@@ -6,18 +6,21 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import productApi from "../../utils/api/productApi";
+import { useNavigate } from "react-router-dom";
 function ProductList({search}) {
   const params = useParams();
   const [products,setProducts]=useState([]);
-  const [current, setCurrent] = useState(parseInt(params.page, 10) || 1);
+  const [max,setMax]=useState(0);
+  const [current, setCurrent] = useState(parseInt(params.page, 9) || 1);
+  const navigate = useNavigate();
   useEffect(() => {
 
     async function fetchData() {
         try {
-            const response = await productApi.getProduct(search);
+            const response = await productApi.getProduct(search,current-1);
            
-              setProducts(response.data.data);
-              
+              setProducts(response.data.data.content);
+              setMax(response.data.data.totalElements);
             
            
         } catch (error) {
@@ -29,8 +32,9 @@ function ProductList({search}) {
 
 
   const handlePageChange=(page)=>{
-    setCurrent(page+1);
-    console.log(page);
+    setCurrent(page);
+    navigate(`/home/${page}`);
+   
    
   }
   return (
@@ -54,7 +58,7 @@ function ProductList({search}) {
                 <StyledPagination
                     current={current}
                     onChange={handlePageChange}
-                    total={50}
+                    total={max}
                 />
             </div>
     </ProductWrapper>

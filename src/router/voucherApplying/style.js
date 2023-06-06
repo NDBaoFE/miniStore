@@ -23,6 +23,7 @@ export const VoucherPlacement = styled.div`
 export const AntdImage = styled(Image)``;
 export const VoucherInfo = styled.div`
     padding: 0 30px;
+    width: 100%;
     h1 {
         margin: 0;
         margin-bottom: 10px;
@@ -35,7 +36,7 @@ export const VoucherInfoWrapper = styled.div`
         margin-bottom: 10px;
         display: flex;
         justify-content: space-between;
-        flex-wrap: wrap;
+
         align-items: center;
         span {
             margin-top: 10px;

@@ -1,8 +1,3 @@
-*{
-    overflow-x: hidden;
-}
-
-.ant-btn{
-    height:100%;
-
+.ant-btn {
+    height: 100%;
 }

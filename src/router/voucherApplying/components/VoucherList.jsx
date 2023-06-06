@@ -1,12 +1,14 @@
+/* eslint-disable react/prop-types */
 import {  VoucherContainer } from "./style"
 
-import { Avatar, Button, List, Skeleton } from 'antd';
+import {  Button, List, Skeleton ,Image} from 'antd';
 import { useEffect, useState } from 'react';
-import { getVouchers, selectVoucher } from "../../home/components/slice";
+import { getVouchers } from "../../home/components/slice";
 import { useDispatch } from "react-redux";
+import { themes } from "../../../utils/theme";
 const count = 3;
-const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat,picture&noinfo`;
-function VoucherList() {
+const fakeDataUrl = `http://localhost:8080/ministore/voucher`;
+function VoucherList({setCurrentVoucher}) {
   const dispatch=useDispatch();
     const [initLoading, setInitLoading] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -16,11 +18,12 @@ function VoucherList() {
     fetch(fakeDataUrl)
       .then((res) => res.json())
       .then((res) => {
-        dispatch(getVouchers(res.results));
+        
+      
         setInitLoading(false);
-        setData(res.results);
-        setList(res.results);
-        console.log(res.results);
+        setData(res);
+        setList(res);
+        dispatch(getVouchers(res));
       });
   }, []);
   const onLoadMore = () => {
@@ -36,7 +39,7 @@ function VoucherList() {
     fetch(fakeDataUrl)
       .then((res) => res.json())
       .then((res) => {
-        const newData = data.concat(res.results);
+        const newData = data.concat(res);
         dispatch(getVouchers(newData));
         setData(newData);
         setList(newData);
@@ -48,7 +51,7 @@ function VoucherList() {
       });
   };
   const handleClickVoucher = (item) => {
-     dispatch(selectVoucher(item));
+    setCurrentVoucher(item);
   }
     const loadMore =
     !initLoading && !loading ? (
@@ -77,9 +80,9 @@ function VoucherList() {
         >
           <Skeleton avatar title={false} loading={item.loading} active>
             <List.Item.Meta onClick={()=>handleClickVoucher(item)}
-              avatar={<Avatar src={item.picture.large}  shape="square" size={64}/>}
+              avatar={<Image src={item.voucherImg}  style={{width:200,objectFit:"contain",background:`${themes.colors.background}`}}/>}
               title={"Summer 2023 Voucher"}
-              description={"10% Discount on Nestle Maximum 12000đ"}
+              description={item.description}
             />
           </Skeleton>
         </List.Item>

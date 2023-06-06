@@ -18,7 +18,7 @@ function Cart() {
     <>
       <OrderList>
         {orderList.map((product) => {
-          subTotal += product.price * product.quantity;
+          subTotal += product.finalPrice * product.quantity;
           totalQuantity += product.quantity;
           return (
            <OrderDetail key={product.productId} product={product} ></OrderDetail>
