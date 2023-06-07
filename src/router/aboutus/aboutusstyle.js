@@ -3,8 +3,7 @@ import { AiOutlineMail } from "react-icons/ai";
 import { Form, Input } from "antd";
 
 export const WrapMessage = styled.div`
-    display: flex;
-    border: black solid 1px;
+    display:flex;
     margin-bottom: 100px;
     height: 500px;
     justify-content: space-around;
@@ -20,14 +19,14 @@ export const MailIcon = styled(AiOutlineMail)`
 export const MessageUs = styled.p`
     color: black;
     margin-top: 50px;
-    width: 40%;
+    width: 20%;
     font-size: 12px;
     margin-left: -50px;
 `;
 
 export const InputMessageForm = styled(Input)`
     margin-top: 50px;
-    width: 100%;
+    width: 70%;
 `;
 
 export const MessageForm = styled(Form)`
@@ -37,17 +36,19 @@ export const MessageForm = styled(Form)`
 export const BrandName = styled.div`
     background-color: #00796b;
     height: 70px;
-    display: flex;
-    align-items: center;
-    padding-left: 47vw;
+    padding-top:25px;
+    text-align:center;
+   
     color: white;
     font-weight: 600;
 `;
 
 export const WrapContent1 = styled.div`
     height: 300px;
-    padding-top: 50px;
     display: flex;
+    justify-content: center;
+    padding-top:4px;
+    padding-right: 50px;
 `;
 
 export const Name1 = styled.div`
@@ -61,16 +62,19 @@ export const Name1 = styled.div`
 export const AboutContent1 = styled.p`
     font-size: 16px;
     font-weight: 400;
-    width: 330px;
+    width: 40%;
     text-align: left;
     margin-top: 5px;
     margin-left: 0px;
+    
 `;
 
 export const WrapIMG = styled.div`
     width: 300px;
     height: 295px;
     overflow-y: hidden;
+    margin-right:20px;
+    
 `;
 
 export const IMG = styled.img`
@@ -83,6 +87,7 @@ export const WrapContent2 = styled.div`
     padding-top: 10px;
     background-color: #00796b;
     display: flex;
+    justify-content:center;
 `;
 
 export const WrapIMG2 = styled.div`
@@ -90,12 +95,15 @@ export const WrapIMG2 = styled.div`
     height: 300px;
     overflow-y: hidden;
 
-    padding-left: 100px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    margin-left: 200px;
+
 `;
 
 export const Name2 = styled.div`
     padding-top: 60px;
-    padding-left: 100px;
+    padding-left: 200px;
     font-size: 18px;
     font-weight: 600;
     width: 50%;

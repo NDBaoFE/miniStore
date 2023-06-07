@@ -105,7 +105,7 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
                 />
                 <SignOut onClick={handleSignOut}>
                     <LogoutOutlined
-                        style={{ paddingRight: 10, fontSize: "24px" }}
+                        style={{ paddingRight: 10, fontSize: "24px", color:"green" }}
                     />
                     Logout
                 </SignOut>

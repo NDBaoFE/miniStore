@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 import { BsTelephoneFill } from "react-icons/Bs";
 
 export const ContainerNavBarAll = styled.div`
-    height: 160px;
+    height: 140px;
 `;
 
 export const ContainerNavAbove = styled.div`
@@ -12,7 +12,7 @@ export const ContainerNavAbove = styled.div`
     width: 100%;
     height: 100px;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 `;
 export const WrapBrand = styled.div`
     height: 80px;
@@ -41,7 +41,7 @@ export const BrandIcon = styled(AiOutlineShopping)`
 
 export const WrapSearchBar = styled.div`
     height: 80px;
-    width: 50%;
+    width: 30%;
 `;
 
 export const SearchInput = styled(Input)`
@@ -56,12 +56,12 @@ export const SearchInput = styled(Input)`
 
 export const WrapContactPhone = styled.div`
     height: 80px;
-    width: 20%;
+    width: 10%;
     padding-top: 10px;
 `;
 
 export const HotlineIcon = styled(BsTelephoneFill)`
-    padding-top: 20px;
+    padding-top: 40px;
 `;
 
 export const Hotline = styled.p`

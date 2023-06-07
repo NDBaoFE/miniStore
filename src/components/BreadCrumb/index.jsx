@@ -12,8 +12,8 @@ function BreadCrumbHeader() {
         '/voucher': 'Apply Voucher',
         '/product':'Product',
         '/product/new':'Add Product',
-        '/employee': 'Employee',
-        '/employee/addEmployee': 'Adding Employee'
+        '/user': 'User',
+        '/user/new': 'Add User'
       };
     const location = useLocation();
     

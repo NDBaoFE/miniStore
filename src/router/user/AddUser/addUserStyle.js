@@ -1,46 +1,73 @@
-import styled from "styled-components";
-import { themes } from "../../utils/theme";
-import { Form, Modal, Typography } from "antd";
-const { Title } = Typography;
-export const Container = styled.div`
-    width: 100%;
-    display: flex;
+import {  Form , Modal} from "antd";
+
+import { styled } from "styled-components";
+import { themes } from "../../../utils/theme";
+
+export const FormAddUserSection = styled.section`
+  margin: 20px auto;
+  margin-top:50px;
+  max-width: 1096px;
+
+  display: flex;
+  justify-center: center;
+
+  @media (max-width: 1024px) {
     flex-direction: column;
-    position: relative;
+    align-items: center;
+  }
 `;
+
+
 export const Left = styled.div`
-    width: 54%;
-    border-radius: 8px;
-    min-height: calc(100vh - 120px);
-    background-color: ${themes.colors.white};
-`;
-export const Right = styled.div`
-    width: 44%;
-    border-radius: 8px;
-    background-color: ${themes.colors.white};
-`;
-export const ProductInfo = styled.div`
-    display: flex;
-`;
-export const Stock = styled.div`
-    padding: 0 30px;
-`;
-export const ActionWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 90px;
-    font-family: "Inter", sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 11.25px;
-    line-height: 16px;
-    /* identical to box height, or 140% */
-    padding: 0 30px;
-`;
+  height:300px;
+  width:20%;
+  background-color: white;
+  margin-left:50px;
+  margin-right: 20px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 3px 1px rgba(0, 0, 0, 0.12), 0px 1px 5px rgba(0, 0, 0, 0.2);
+border-radius: 10px;
+  `
+
+  
+export const WrapperFormUser = styled.div`
+height:630px;
+width:65%;
+background-color: white;
+box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 3px 1px rgba(0, 0, 0, 0.12), 0px 1px 5px rgba(0, 0, 0, 0.2);
+border-radius: 10px;
+
+
+
+`
+
+export const Title = styled.div`
+  color: green;
+  width: 400px;
+  font-size: 20px;
+  font-weight: 500;
+  margin-left: 30px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+`
+
+export const Label = styled.div`
+  margin-left: 5px;
+  font-size:15px;
+  font-weight: 400;
+`
+
+export const Item = styled(Form.Item)`
+  // padding-right:20px;
+  // padding-top:10px;
+`
+
+export const FormUser = styled(Form)`
+
+`
 export const Row = styled.div`
     width: 100%;
     display: flex;
+   margin-top: 10px;
     justify-content: space-between;
     align-items: center;
     h2 {
@@ -49,8 +76,7 @@ export const Row = styled.div`
 `;
 export const StyledForm = styled(Form)`
     position: relative;
-    display: flex;
-    justify-content: space-between;
+    padding: 0 30px;
     margin-top: 30px;
     color: ${themes.colors.blackText};
     .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
@@ -66,17 +92,17 @@ export const StyledForm = styled(Form)`
         .ant-select-selector
         .ant-select-selection-search-input {
         height: 50px;
-    }
-    h5 {
-        margin-top: 0;
+        
     }
     .ant-input:hover {
         border-color: ${themes.colors.primary};
     }
     .ant-input {
         height: 50px;
+        
     }
 `;
+
 export const NotiModal = styled(Modal)`
     .ant-modal-content {
         border-radius: 2px;
@@ -91,16 +117,4 @@ export const NotiModal = styled(Modal)`
     .ant-btn-primary {
         background-color: ${themes.colors.primary};
     }
-`;
-export const Label = styled(Title)`
-    font-family: "Roboto";
-    font-style: normal;
-    font-weight: 400 !important;
-    font-size: 16px !important;
-    line-height: 22px !important;
-    /* identical to box height, or 157% */
-
-    /* Character/Title .85 */
-
-    color: rgba(0, 0, 0, 0.85);
 `;

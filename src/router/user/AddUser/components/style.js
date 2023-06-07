@@ -1,20 +1,21 @@
 import { styled } from "styled-components";
-import { themes } from "../../../utils/theme";
+import { themes } from "../../../../utils/theme";
 import { Image } from "antd";
+import {UserAddOutlined } from "@ant-design/icons"
 
 export const AvatarWrapper = styled.div`
     position: relative;
     border-radius: 8px 8px 0 0;
     width: 100%;
     height: 200px;
-    background: ${themes.colors.primary200};
+    
     display: flex;
     align-items: center;
     justify-content: center;
 `;
 export const AvatarInfo = styled.div`
-    margin-top: 100px;
-    border-radius: 8px;
+    margin-top:40px;
+   
     display: flex;
     flex-direction: column;
     .ant-image {
@@ -28,26 +29,42 @@ export const AvatarInfo = styled.div`
         border-radius: 8px 8px 0 0;
     }
 `;
-export const Avatar = styled(Image)``;
+export const Avatar = styled(Image)`
+
+
+`
+export const ProfileIcon = styled(UserAddOutlined)`
+padding-top:25px;
+    height: 100px;
+    width: 100px;
+    font-size:50px;
+    border: black solid 1px;
+    border-radius: 50px
+`
+
+
+
 export const Info = styled.div`
     font-family: "Inter";
     font-style: normal;
     font-weight: 400;
+   
     font-size: 10.5px;
     line-height: 17px;
     padding: 15px 15px;
     text-align: center;
-
+   
     width: 200px;
     border-radius: 0 0 8px 8px;
     h3 {
-        margin: 0;
+        margin: 10;
     }
     h2 {
         margin: 0;
         margin-bottom: 10px;
     }
 `;
+
 export const Row = styled.div`
     display: flex;
     align-items: center;
@@ -58,10 +75,11 @@ export const Row = styled.div`
         background-color: ${themes.colors.gray100};
     }
 `;
+
 export const GroupWrapper = styled.div`
     position: fixed;
-    right: 150px;
-    bottom: 40px;
+    right: 10px;
+    bottom: 10px;
     z-index: 99;
     width: 300px;
     height: 50px;
@@ -93,3 +111,5 @@ export const FinishButton = styled.div`
         border: 1px solid ${themes.colors.primaryDark};
     }
 `;
+
+
