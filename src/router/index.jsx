@@ -16,6 +16,8 @@ import AddProduct from "./AddProduct";
 import Schedule from "./schedule";
 import AddEmployee from "./employee/addEmployee/addEmployee";
 import PublicLayout from "../components/PublicLayout";
+import VoucherManagement from "./VoucherMangement";
+import AddVoucher from "./AddVoucher";
 
 const publicRoute = [
    
@@ -64,7 +66,7 @@ const publicRoute = [
     
     {
         index: true,
-        path: "voucher/:id",
+        path: "apply-voucher/:id",
         component: <VoucherApply/>,
         exact: true,
         restrict: true,
@@ -96,7 +98,20 @@ const publicRoute = [
         exact: true,
         restrict: true,
     }
-
+    ,{
+        index: true,
+        path: "voucher",
+        component: <VoucherManagement/>,
+        exact: true,
+        restrict: true,
+    }
+    ,{
+        index: true,
+        path: "voucher/new",
+        component: <AddVoucher/>,
+        exact: true,
+        restrict: true,
+    }
     
     
     

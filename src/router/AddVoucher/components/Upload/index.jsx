@@ -5,7 +5,7 @@ import { Upload, Button,Modal } from 'antd';
 
 import { UploadOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
-import { actions } from '../../router/AddProduct/components/slice';
+import { actions } from '../slice';
 function UploadImg({setOpen,open}) {
   const dispatch=useDispatch();
   const handleCancel=()=>{
@@ -18,17 +18,17 @@ function UploadImg({setOpen,open}) {
         reader.onload = (e) => {
           const base64String = btoa(e.target.result);
         
-          dispatch(actions.setProductImg(base64String));
+          dispatch(actions.setVoucherImg(base64String));
         };
       
         reader.readAsBinaryString(file);
-        
+        setOpen(false);
       };
       
   return (
     <Modal
             open={open} 
-            title="Upload Or drag any of your photo here"
+            title="Upload Or drag any of your Voucher Img here"
             footer={false}
             onCancel={() => handleCancel()}
             closable={true}

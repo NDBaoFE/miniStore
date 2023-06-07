@@ -19,7 +19,7 @@ import { actions } from "./components/slice";
 import productApi from "../../utils/api/productApi";
 import Success from "../../components/Success";
 import { useState } from "react";
-import UploadImg from "../../components/Upload";
+import UploadImg from "./components/Upload";
 import { toastError, toastSuccess } from "../../components/Toast";
 function AddProduct() {
     const [success,setSuccess]=useState(false);

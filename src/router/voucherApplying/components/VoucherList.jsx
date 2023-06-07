@@ -7,22 +7,31 @@ import { getVouchers } from "../../home/components/slice";
 import { useDispatch } from "react-redux";
 import { themes } from "../../../utils/theme";
 const count = 3;
-const fakeDataUrl = `http://localhost:8080/ministore/voucher`;
+import { useParams } from "react-router-dom";
+import localStorageUtils from "../../../utils/localStorageUtils";
 function VoucherList({setCurrentVoucher}) {
   const dispatch=useDispatch();
     const [initLoading, setInitLoading] = useState(true);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [list, setList] = useState([]);
+  const token=localStorageUtils.getItem("token");
+  const {id} = useParams();
+  const voucherByProduct = `http://localhost:8080/ministore/getVoucherByProductId?productId=${id}&results=${count}`;
+  const voucherApplyAll=`http://localhost:8080/ministore/getAllVouchers?results=${count}`;
+  const headers = {
+    token: `Bearer ${token}`,
+    // Add any other headers you need
+  };
   useEffect(() => {
-    fetch(fakeDataUrl)
+    fetch(id == "applyAll"?  voucherApplyAll: voucherByProduct,{headers})
       .then((res) => res.json())
       .then((res) => {
         
       
         setInitLoading(false);
-        setData(res);
-        setList(res);
+        setData(res.data);
+        setList(res.data);
         dispatch(getVouchers(res));
       });
   }, []);
@@ -36,7 +45,7 @@ function VoucherList({setCurrentVoucher}) {
         })),
       ),
     );
-    fetch(fakeDataUrl)
+      fetch(id == "applyAll"?  voucherApplyAll: voucherByProduct , {headers})
       .then((res) => res.json())
       .then((res) => {
         const newData = data.concat(res);
@@ -80,7 +89,7 @@ function VoucherList({setCurrentVoucher}) {
         >
           <Skeleton avatar title={false} loading={item.loading} active>
             <List.Item.Meta onClick={()=>handleClickVoucher(item)}
-              avatar={<Image src={item.voucherImg}  style={{width:200,objectFit:"contain",background:`${themes.colors.background}`}}/>}
+              avatar={<Image src={item.voucherImg.startsWith("http")||item.voucherImg.startsWith("data:image") ? item.voucherImg : `data:image/jpeg;base64,${item.voucherImg}`} style={{width:200,objectFit:"contain",background:`${themes.colors.background}`}}/>}
               title={"Summer 2023 Voucher"}
               description={item.description}
             />

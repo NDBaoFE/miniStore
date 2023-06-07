@@ -68,7 +68,7 @@ const StyledDrawer = () => {
                     defaultOpenKeys={["blog", "account"]}
                     mode="inline"
                     onSelect={({ key }) => {
-                        console.log(key);
+                       
                         setSelectedKey(key);
                     }}
                     style={{background:'transparent',marginTop:"40px"}}

@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { themes } from "../../../utils/theme";
+// import Voucher from "../../../assets/image/Voucher.svg";
 export const Total = styled.div`
     border-top: 1px solid #e8e9ea;
     color: ${themes.colors.blackText};
@@ -8,6 +9,9 @@ export const OrderList = styled.div`
     color: ${themes.colors.blackText};
     max-height: calc(100vh - 400px);
     overflow-y: auto;
+    /* background-image: url("/Voucher.svg");
+    background-position: center; /* Center the image */
+    /* background-repeat: no-repeat;  */
 `;
 export const Row = styled.div`
     display: flex;
@@ -142,3 +146,4 @@ export const BadgeContainer = styled.div`
 export const OldPrice = styled(Price)`
     text-decoration: line-through;
 `;
+export const CartWrapper = styled.div``;

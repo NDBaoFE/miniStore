@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { themes } from "../../utils/theme";
 import { Dropdown } from "antd";
+
 export const Wrapper = styled.div`
     display: flex;
     width: 100%;
@@ -44,3 +45,15 @@ export const Right = styled.div`
     align-items: center;
 `;
 export const StyledDropDown = styled(Dropdown)``;
+export const Action = styled.div`
+    display: flex;
+    align-items: center;
+`;
+export const GoBack = styled.div`
+    display: ${(props) =>
+        props.location.pathname == "/home" ? "none" : "block"};
+    cursor: pointer;
+    &:hover {
+        color: ${themes.colors.primary};
+    }
+`;

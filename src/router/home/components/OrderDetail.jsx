@@ -31,7 +31,7 @@ function  OrderDetail({product}) {
          
             <CloseButton onClick={() => dispatch(deleteProduct(product.productId))}><ImCross/></CloseButton>
           </OrderDetailRow> 
-          { showActions &&<ActionRow><div><EditOutlined />Edit Order</div><Link to={`/voucher/${product.productId}`}><div > <TagOutlined />{product.voucherId ? "Edit Voucher" : "Add Voucher"}</div></Link></ActionRow>}
+          { showActions &&<ActionRow><div><EditOutlined />Edit Order</div><Link to={`/apply-voucher/${product.productId}`}><div > <TagOutlined />{product.voucherId ? "Edit Voucher" : "Add Voucher"}</div></Link></ActionRow>}
            </Wrapper>
   )
 }

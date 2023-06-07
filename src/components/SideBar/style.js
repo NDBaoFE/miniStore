@@ -63,6 +63,9 @@ export const Wrapper = styled.div`
                 span {
                     color: ${themes.colors.white};
                 }
+                svg {
+                    color: ${themes.colors.white};
+                }
             }
             &.ant-menu-submenu-selected {
                 color: ${themes.colors.white};
@@ -134,7 +137,8 @@ export const Wrapper = styled.div`
         box-shadow: 0px 8px 24px rgba(234, 124, 105, 0.32);
         border-radius: 8px;
         color: ${themes.colors.white}!important;
-        span {
+        span,
+        svg {
             color: ${themes.colors.white}!important;
         }
     }

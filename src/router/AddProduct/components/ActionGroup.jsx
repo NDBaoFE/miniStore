@@ -3,12 +3,9 @@
 import ConfirmModal from "../../../components/ConfirmModal";
 import { GroupWrapper,FinishButton } from "./style"
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { selector } from "../../home/components/slice/selector";
-import productApi from "../../../utils/api/productApi";
 function ActionGroup({confirm}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const {orderList} = useSelector(selector);
+
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -17,14 +14,8 @@ function ActionGroup({confirm}) {
     setIsModalOpen(false);
   };
 
-  const handleOk = () => {
-    productApi.makeOrder(orderList);
-  }
 
-  const handleConfirm = () => {
-    handleOk(); // Call the handleOk function passed as prop
-    handleClose(); // Close the modal
-  };
+
 
   return (
     <GroupWrapper>
@@ -32,7 +23,7 @@ function ActionGroup({confirm}) {
          content={<><h2>Sale Finish Confirmation</h2>
          <p>Transaction Successful!</p>
          <p>Thank you for completing the sale.</p></>} title="Sale Confirmation"
-          handleConfirm={handleConfirm} handleClose={handleClose} showModal={showModal}/>
+           handleClose={handleClose} showModal={showModal}/>
         <div>Discard Change</div>
         <FinishButton onClick={()=>confirm()}>Add Product</FinishButton>
     </GroupWrapper>

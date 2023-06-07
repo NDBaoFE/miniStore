@@ -20,8 +20,8 @@ function ProductList({search}) {
             const response = await productApi.getProduct(search,current-1);
            
               setProducts(response.data.data.content);
+             
               setMax(response.data.data.totalElements);
-            
            
         } catch (error) {
             console.error(error);
@@ -55,11 +55,12 @@ function ProductList({search}) {
                     width:"100%"
                 }}
             >
-                <StyledPagination
+               { max &&<StyledPagination
                     current={current}
                     onChange={handlePageChange}
                     total={max}
-                />
+                    pageSize={9}
+                />}
             </div>
     </ProductWrapper>
   )

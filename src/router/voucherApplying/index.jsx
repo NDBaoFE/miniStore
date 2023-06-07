@@ -5,7 +5,7 @@ import VoucherList from "./components/VoucherList"
 import { useDispatch,useSelector } from "react-redux"
 
 import voucher from "../../assets/image/voucher.png"
-import { applyVoucher, getProductById} from "../home/components/slice/index"
+import { applyToAllVoucher, applyVoucher, getProductById} from "../home/components/slice/index"
 import { useNavigate, useParams } from "react-router-dom"
 import { useState } from "react"
 import { toastSuccess } from "../../components/Toast"
@@ -18,14 +18,19 @@ const navigate=useNavigate();
   console.log(product);
   const [currentVoucher,setCurrentVoucher]=useState();
 const handleApplyVoucher=()=>{
-  dispatch(applyVoucher({...currentVoucher,productId:id}))
-  navigate("/");
+  if(id == "applyAll"){
+    dispatch(applyToAllVoucher(currentVoucher));
+  }else{
+    dispatch(applyVoucher({...currentVoucher,productId:id}))
+  }
+ 
+  navigate(-1);
   toastSuccess("add Voucher Successfully !!")
 }
   return (
     <Container>
       <VoucherPlacement>
-        <AntdImage alt="voucher" src={currentVoucher?.voucherImg||voucher} />
+        <AntdImage alt="voucher"  src={currentVoucher.voucherImg.startsWith("http")||currentVoucher.voucherImg.startsWith("data:image") ? currentVoucher.voucherImg : `data:image/jpeg;base64,${currentVoucher.voucherImg}`} />
        {currentVoucher?.description&& <VoucherInfo>
         <h1 style={{marginRight:"30px"}}>Detail:</h1>
         <VoucherInfoWrapper>
@@ -34,10 +39,10 @@ const handleApplyVoucher=()=>{
         <div>Quantity: <span>{currentVoucher?.quantity}</span></div>
           
            <div>Discount: <span>{currentVoucher?.percentDiscount*100}%</span></div>
-           <div> Money Required: <span>{currentVoucher.minTotal}</span></div>
+           <div> Money Required: <span>{currentVoucher.minTotal||"None"}</span></div>
       
          
-           <div> Item Required: <span>{currentVoucher.minItem}</span> </div>
+           <div> Item Required: <span>{currentVoucher.minItem||"none"}</span> </div>
            <div> Exprire Date :<span>30/6/2023</span></div>
       
           <Row style={{justifyContent:"flex-end"}}><Button onClick={handleApplyVoucher}>Apply</Button></Row>
