@@ -237,6 +237,7 @@ export const SignOut = styled.button`
     bottom: 20px;
     padding-left: 24px;
     background-color: transparent;
+    color:green;
     border: none;
     cursor: pointer;
 `;

@@ -36,9 +36,8 @@ export const Container = styled.div`
 
 export const WrapForm = styled.div`
     width: 50%;
-
     margin-left: 5%;
-    margin-top: 15%;
+    margin-top: 5%;
 `;
 
 export const LoginFormMain = styled(Form)`
