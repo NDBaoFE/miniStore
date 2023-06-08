@@ -37,7 +37,7 @@ export const Info = styled.div`
     line-height: 17px;
     padding: 15px 15px;
     text-align: center;
-    background-color: ${themes.colors.primary};
+
     width: 200px;
     border-radius: 0 0 8px 8px;
     h3 {

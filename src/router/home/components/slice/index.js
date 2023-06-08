@@ -4,7 +4,11 @@ import { calculateFinalPrice } from "../../../../utils/price";
 
 export const initialState = {
     productId: 0,
-    orderList: [],
+    orderList: {
+        data: [],
+        voucherId: null,
+        percentDiscount: 0,
+    },
     note: "hi",
     paymentMethod: 1,
     paymentArray: ["Cash", "Credit Card"],
@@ -17,7 +21,7 @@ const slice = createSlice({
     initialState,
     reducers: {
         addProduct: (state, action) => {
-            for (let product of state.orderList) {
+            for (let product of state.orderList.data) {
                 if (product.productId == action.payload.productId) {
                     product.quantity += action.payload.quantity;
                     return;
@@ -28,19 +32,23 @@ const slice = createSlice({
                 voucherId: null,
                 finalPrice: action.payload.price,
             };
-            state.orderList.push(newProduct);
+            state.orderList.data.push(newProduct);
         },
         deleteProduct: (state, action) => {
-            for (let i = 0; i < state.orderList.length; i++) {
-                if (state.orderList[i].productId == action.payload) {
-                    state.orderList.splice(i, 1);
+            for (let i = 0; i < state.orderList.data.length; i++) {
+                if (state.orderList.data[i].productId == action.payload) {
+                    state.orderList.data.splice(i, 1);
                 } else {
                     console.log("false");
                 }
             }
         },
+        clearOrder: (state) => {
+            state.orderList.data = [];
+        },
+
         updateProductQuantity: (state, action) => {
-            for (let product of state.orderList) {
+            for (let product of state.orderList.data) {
                 if (product.id == action.payload.id) {
                     product.quantity = action.payload.quantity;
                     return;
@@ -48,8 +56,8 @@ const slice = createSlice({
             }
         },
         getProductById: (state, productId) => {
-            const orderList = state.orderList;
-            return orderList.find((product) => product.productId === productId);
+            const data = state.orderList.data;
+            return data.find((product) => product.productId === productId);
         },
         updateNote: (state, action) => {
             state.note = action.payload;
@@ -85,7 +93,7 @@ const slice = createSlice({
             }
         },
         applyVoucher: (state, action) => {
-            for (let product of state.orderList) {
+            for (let product of state.orderList.data) {
                 if (product.productId == action.payload.productId) {
                     product.voucherId = action.payload.voucherId;
                     product.finalPrice = calculateFinalPrice(
@@ -94,6 +102,10 @@ const slice = createSlice({
                     );
                 }
             }
+        },
+        applyToAllVoucher: (state, action) => {
+            state.orderList.voucherId = action.payload.voucherId;
+            state.orderList.percentDiscount = action.payload.percentDiscount;
         },
     },
 });
@@ -111,4 +123,6 @@ export const {
     applyVoucher,
     getVoucherAppliedByProduct,
     getProductById,
+    applyToAllVoucher,
+    clearOrder,
 } = slice.actions;

@@ -7,6 +7,9 @@ import {IoIosArrowForward} from "react-icons/io"
 import SidebarLink from "../SideBarLink";
 import {  SideBar, Wrapper, SignOut, Button, Container } from "./style";
 
+
+import { BsGrid } from "react-icons/Bs";
+import { RiCoupon2Line } from "react-icons/ri";
 import {
     HomeOutlined,
     LogoutOutlined,
@@ -44,9 +47,19 @@ const itemsAdmin = [
     ),
 
     getItem(
-        <SidebarLink to="/chart " child="Profile" />,
+        <SidebarLink to="/profile " child="Profile" />,
         "/profile",
         <UserOutlined />
+    ),
+    getItem(
+        <SidebarLink to="/product " child="Product" />,
+        "/product",
+        <BsGrid />
+    ),
+    getItem(
+        <SidebarLink to="/voucher " child="Voucher" />,
+        "/voucher",
+        <RiCoupon2Line />
     ),
 ];
 
@@ -92,7 +105,7 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
                 />
                 <SignOut onClick={handleSignOut}>
                     <LogoutOutlined
-                        style={{ paddingRight: 10, fontSize: "24px" }}
+                        style={{ paddingRight: 10, fontSize: "24px", color:"green" }}
                     />
                     Logout
                 </SignOut>

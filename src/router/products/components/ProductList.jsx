@@ -6,7 +6,7 @@ import { AntdTable, ProductWrapper } from './style'
 import { useEffect } from 'react';
 import productApi from '../../../utils/api/productApi';
   
-function ProductList({search,products,setProducts,columns,setCurrent,current}) {
+function ProductList({search,products,setProducts,columns,setCurrent,current,reload}) {
   const navigate = useNavigate();
   const [max,setMax]=useState(0);
 
@@ -28,7 +28,7 @@ function ProductList({search,products,setProducts,columns,setCurrent,current}) {
             }
         }
         fetchData();
-    }, [search,current]);
+    }, [current,search,reload]);
     const handlePageChange=(page)=>{
       setCurrent(page);
       navigate(`/product/${page}`);

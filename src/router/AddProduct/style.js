@@ -68,7 +68,7 @@ export const StyledForm = styled(Form)`
         height: 50px;
     }
     h5 {
-        margin: 0;
+        margin-top: 0;
     }
     .ant-input:hover {
         border-color: ${themes.colors.primary};

@@ -8,9 +8,6 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     color: ${themes.colors.blackText};
-    div {
-        margin: 15px 0;
-    }
 `;
 export const VoucherPlacement = styled.div`
     background-color: ${themes.colors.white};
@@ -19,11 +16,14 @@ export const VoucherPlacement = styled.div`
     display: flex;
     width: 100%;
     justify-content: space-between;
+    .ant-image-img {
+        height: 100%;
+    }
 `;
 export const AntdImage = styled(Image)``;
 export const VoucherInfo = styled.div`
     padding: 0 30px;
-    width: 100%;
+    width: 50%;
     h1 {
         margin: 0;
         margin-bottom: 10px;

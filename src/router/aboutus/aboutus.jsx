@@ -13,6 +13,8 @@ import {
   ,MailIcon,MessageForm,InputMessageForm,
 } from "./aboutusstyle";
 import store from "../../assets/image/about-img-1.jpg"
+import store2 from "../../assets/image/about-img-2.jpg"
+
 import {EnterOutlined} from '@ant-design/icons';
 
 import { Form} from "antd";
@@ -42,7 +44,7 @@ const AboutUS = () => {
         <WrapIMG2>
           <IMG2
             className="about-img-2"
-            src="miniStore\src\assets\image\about-img-2.jpg"
+            src={store2}
             alt=""
           />
         </WrapIMG2>

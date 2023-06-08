@@ -10,10 +10,10 @@ function Menu() {
  
   return (
     <Wrapper style={{padding:"20px",}} onClick={()=>setOpen(!open)}>
-        <ItemRow>  <div>{orderList.length +" "}{ orderList.length>1 ? "items": "item"} </div>
+        <ItemRow>  <div>{orderList.data.length +" "}{ orderList.data.length>1 ? "items": "item"} </div>
         <div style={{fontSize:"20px"}}>{open?<IoIosArrowDown/>:<IoIosArrowUp/>}</div></ItemRow>
         { open &&<DetailWrapper>
-        {orderList.map((item) => {
+        {orderList.data.map((item) => {
             return <ItemRow key={item.id}>
                 <Left>
                     <Img src={item.productImg} alt="" />
@@ -21,8 +21,8 @@ function Menu() {
                     <div className='name'>{item.name}</div>
                 </Left>
                 <Right>
-                    <div className='price'>{item.price}đ</div>
-                    <div className='originalPrice'>200000đ</div>
+                    <div className='price'>{item.finalPrice}đ</div>
+                    <div className='originalPrice'>{item.price*item.quantity}đ</div>
                 </Right>
             </ItemRow>
         })}

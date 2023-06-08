@@ -2,14 +2,21 @@
 import { useEffect, useState } from 'react'
 import ProductList from './components/ProductList'
 import ToolBoxSection from './components/ToolBox'
-import { Container, LoadingContainer } from './style'
+import { Container, LoadingContainer, NotiModal, StyledSpace } from './style'
 import { exportToExcel } from '../../utils/ToExcel';
 import Spinner from '../../components/Spinnner';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { BsExclamationCircle } from 'react-icons/Bs';
+import productApi from '../../utils/api/productApi';
+import { toastError, toastSuccess } from '../../components/Toast';
+import { Image } from 'antd';
 function ProductManagement() {
   const [loading, setLoading] = useState(false);
   const params = useParams();
   const [current, setCurrent] = useState(parseInt(params.page, 9) || 1);
+  const [search,setSearch]=useState("");
+  const [products,setProducts]=useState([]);
+ const [reload,SetReload]=useState(false);
   const handleExportToExcel = () => {
     setLoading(true);
     // Call the export function from another component
@@ -26,8 +33,31 @@ function ProductManagement() {
         // Handle any export errors here
       });
   };
- 
-
+  const handleVoucherDeleted = () => {
+    // Refresh the vouchers by triggering a re-render of the VoucherList component
+    // This can be done by incrementing the current page number or any other way to indicate a change
+    SetReload(!reload);
+  };
+  const confirm = async(id) => {
+    NotiModal.confirm({
+        maskClosable: true,
+        title: 'Bạn có muốn thay đổi thông tin tài khoản?',
+        icon: <BsExclamationCircle />,
+        content: 'Tài khoản sau khi đổi sẽ không còn còn lưu trữ thông tin trước đó được nữa.',
+        okText: 'Xác nhận',
+        cancelText: 'Huỷ',
+        onOk: async() => {
+          const res= await productApi.deleteProduct(id);
+          if(res.status===200){
+            toastSuccess("Delete Product Succesfully");
+             setSearch(search);
+          }else{
+            toastError("Delete Product Failed");
+          }
+          handleVoucherDeleted();
+        },
+    });
+  };
   
   const columns = [
     {
@@ -43,7 +73,7 @@ function ProductManagement() {
         key: 'details',
         render: (_, record) => (
           <span className='detail'>
-            <img src={record.productImg} alt="Product Image" style={{ marginRight: 8 }} />
+            <Image src={record.productImg} alt="Product Image" style={{ marginRight: 8,width:100}} />
             {record.name}
           </span>
         ),
@@ -83,10 +113,18 @@ function ProductManagement() {
         sorter: (a, b) => a.price - b.price,
         sortDirections: ['descend', 'ascend'],
       },
+      {
+        title: 'Action',
+        key: 'action',
+        render: (_, record) => (
+          <StyledSpace size="middle">
+            <Link to={`/product/${record.productId}`}>Edit </Link>
+            <div onClick={()=>confirm(record.productId)}>Delete</div>
+          </StyledSpace>
+        ),
+      },
   ];
-  const [search,setSearch]=useState("");
-  const [products,setProducts]=useState([]);
- 
+
   useEffect(() => {
 
   
@@ -94,7 +132,7 @@ function ProductManagement() {
   return (
     <Container>
         <ToolBoxSection  setSearch={setSearch} handleSave={handleExportToExcel} setCurrent={setCurrent}/>
-        <ProductList search={search} setProducts={setProducts} products={products} columns={columns}  setCurrent={setCurrent} current={current} />
+        <ProductList search={search} setProducts={setProducts} products={products} columns={columns}  setCurrent={setCurrent} current={current} handleVoucherDeleted={handleVoucherDeleted} reload={reload}/>
         
         {loading && <LoadingContainer><Spinner/></LoadingContainer> }
     </Container>  

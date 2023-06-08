@@ -1,5 +1,6 @@
-import { get, post, put } from "./ApiCaller";
-
+/* eslint-disable no-unused-vars */
+import { get, post, put, remove } from "./ApiCaller";
+const token = localStorage.getItem("token");
 const productApi = {
     getProduct: (search, current) => {
         let url = "";
@@ -8,19 +9,16 @@ const productApi = {
         } else {
             url = `/product?offset=${current}`;
         }
-        return get(url, {}, {});
+        return get(url, {}, { token: token });
+    },
+    getAllVoucher: () => {
+        const url = `/voucher`;
+        return get(url, {}, { token: token });
     },
     makeOrder: (products) => {
         let url = "/orderDetail/create";
-        const transformedProducts = products.map(
-            ({ productId, price, quantity, productVoucherId }) => ({
-                productId,
-                price,
-                quantity,
-                productVoucherId,
-            })
-        );
-        return post(url, [...transformedProducts], {}, {});
+
+        return post(url, { ...products }, {}, { token: token });
     },
     addProduct: (product) => {
         let url = "/product";
@@ -32,7 +30,20 @@ const productApi = {
                 isDeleted: null,
             },
             {},
-            {}
+            { token: token }
+        );
+    },
+    addVoucher: (voucher, productList) => {
+        console.log(voucher);
+        let url = "/applyVoucherToProducts";
+        return post(
+            url,
+            {
+                productList,
+                voucher: { ...voucher },
+            },
+            {},
+            { token: token }
         );
     },
     login: (email, password) => {
@@ -47,9 +58,17 @@ const productApi = {
             {}
         );
     },
+    deleteVoucher: (id) => {
+        const url = `/voucher/delete/${id}`;
+        return remove(url, {}, {}, { token: token });
+    },
+    deleteProduct: (id) => {
+        const url = `/product/${id}`;
+        return remove(url, {}, {}, { token: token });
+    },
     getLeaderBoard: (token) => {
         const url = `/auth/leaderboard`;
-        return get(url, {}, { Authorization: token });
+        return get(url, {}, { token: token });
     },
 
     getPersonalAccount: (token) => {
@@ -99,7 +118,7 @@ const productApi = {
     },
     getBlogDetail: (token, id) => {
         const url = `/auth/blog?id=${id}`;
-        return get(url, {}, { authorization: token });
+        return get(url, {}, { token: token });
     },
 };
 

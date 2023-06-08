@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { themes } from "../../../utils/theme";
-import { Input, Radio, Space } from "antd";
+import { Input, Modal, Radio, Space } from "antd";
 
 const { TextArea } = Input;
 export const NoteWrapper = styled.div`
@@ -48,7 +48,7 @@ export const Row = styled.div`
     font-family: "Inter";
     font-style: normal;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 16px;
     line-height: 22px;
     .discount {
         color: ${themes.colors.primary};
@@ -172,5 +172,20 @@ export const FinishButton = styled.div`
         color: ${themes.colors.white};
         text-decoration: none !important;
         border: 1px solid ${themes.colors.primaryDark};
+    }
+`;
+export const NotiModal = styled(Modal)`
+    .ant-modal-content {
+        border-radius: 2px;
+        background: #ffffff;
+        /* drop-shadow/0.12+0.8+0.5 */
+
+        box-shadow: 0px 3px 6px -4px rgba(0, 0, 0, 0.12),
+            0px 6px 16px rgba(0, 0, 0, 0.08),
+            0px 9px 28px 8px rgba(0, 0, 0, 0.05);
+        border-radius: 2px;
+    }
+    .ant-btn-primary {
+        background-color: ${themes.colors.primary};
     }
 `;

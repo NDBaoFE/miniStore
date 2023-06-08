@@ -11,6 +11,7 @@ const [searchValue,setSearchValue]=useState("");
       <ToolBoxSection setSearchValue={setSearchValue} searchValue={searchValue}/>
     <ProductList search={searchValue}/>
     </Left>
+    
     <RightContainer>
     <Right>
       <Cart/>

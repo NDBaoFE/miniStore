@@ -10,12 +10,13 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@ant-design/icons": "^5.1.4",
         "@reduxjs/toolkit": "^1.9.5",
         "antd": "^5.4.7",
         "axios": "^1.4.0",
+        "cdbreact": "^1.5.16",
         "exceljs": "^4.3.0",
         "file-saver": "^2.0.5",
-        "cdbreact": "^1.5.16",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-highlight-words": "^0.20.0",
