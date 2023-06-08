@@ -46,7 +46,8 @@ export const LoginFormMain = styled(Form)`
 
 export const NameBrand = styled.div`
     font-size: 40px;
-    margin-left: 27%;
+    text-align:center;
+    margin-left: 14%;
     margin-bottom: 20px;
     font-weight: 450;
 
@@ -60,11 +61,15 @@ export const ColorLetter = styled.span`
 `;
 
 export const InputForm = styled(Input)`
-    height: 40px;
-    width: 300px;
+    height: 50px;
+    width: 350px;
     margin-left: 15%;
     font-size: 12px;
     border: black solid 1px;
+    border-color:  ${themes.colors.primary700} !important;
+    &:hover {
+        border-color: ${themes.colors.primary700} !important;
+    }
 `;
 
 export const FormItem = styled(Form.Item)`
@@ -72,8 +77,9 @@ export const FormItem = styled(Form.Item)`
 `;
 
 export const WrapImg = styled.div`
-    width: 50%;
+    width: 60%;
     margin-top: 8%;
+    margin-left: 20px;
 `;
 
 export const IMG = styled.img`
@@ -82,7 +88,7 @@ export const IMG = styled.img`
 
 export const LoginButton = styled(Button)`
     height: 40px;
-    width: 300px;
+    width: 350px;
     font-size: 12px;
     padding-top: 10px;
     margin-left: 15%;

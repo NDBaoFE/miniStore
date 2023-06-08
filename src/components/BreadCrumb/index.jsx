@@ -13,7 +13,9 @@ function BreadCrumbHeader() {
         '/product':'Product',
         '/product/new':'Add Product',
         '/user': 'User',
-        '/user/new': 'Add User'
+        '/user/new': 'Add User',
+        '/setting' : 'Setting',
+        '/setting/general' : 'General'
       };
     const location = useLocation();
     

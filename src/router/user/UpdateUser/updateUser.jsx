@@ -9,7 +9,7 @@ import {
   Label,
   StyledForm,
   Row,NotiModal
-} from "./addUserStyle";
+} from "./updateUserStyle";
 
 import { actions } from "./components/slice";
 import { ExclamationCircleOutlined } from '@ant-design/icons';
@@ -27,9 +27,10 @@ import userApi from "../../../utils/api/userApi";
 import { toastError, toastSuccess } from "../../../components/Toast";
 import Photo from "./components/Photo";
 import UploadImg from "./components/Upload"
+import { useParams } from "react-router-dom";
 
 
-const AddUser = () => {
+function UpdateUser() {
 const [success,setSuccess]=useState(false);
 const [open, setOpen] = useState("")
 const [form] = StyledForm.useForm()
@@ -43,14 +44,15 @@ const genderTypeId = useSelector(selectors.genderTypeId);
 const info = useSelector(selectors.info) 
 const dispatch=useDispatch();
 
+const {id} = useParams()
 const UpdateInfo = async () => {
     
   dispatch(actions.getUserInfo());
-   const res= await userApi.addUser(info);
+   const res= await userApi.updateUser(info, id);
   if(res.data.status == 200){
      
       setSuccess(true);
-      setTimeout(() => {setSuccess(false);  toastSuccess("Add user Successfully") },2000);
+      setTimeout(() => {setSuccess(false);  toastSuccess("Update user Successfully") },2000);
     
   }else{
       toastError(res.data.message);
@@ -165,4 +167,4 @@ const confirm = () => {
   );
 };
 
-export default AddUser;
+export default UpdateUser;

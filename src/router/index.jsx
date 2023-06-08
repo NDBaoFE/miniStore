@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate} from "react-router-dom";
 
 import AdminRoute from "./AdminRoute";
 import LayoutComponent from "../components/Layout";
@@ -19,6 +19,9 @@ import PublicLayout from "../components/PublicLayout";
 import VoucherManagement from "./VoucherMangement";
 import AddVoucher from "./AddVoucher";
 import UserManagement from "./users";
+import Setting from "./setting";
+import UpdateUser from "./user/UpdateUser/updateUser";
+
 
 
 const publicRoute = [
@@ -43,6 +46,15 @@ const publicRoute = [
         index: true,
         path: "user",
         component: <UserManagement/>,
+        exact: true,
+        restrict: true,
+    },
+
+    {
+        
+        index: true,
+        path: "user/:id",
+        component: <UpdateUser/>,
         exact: true,
         restrict: true,
     },
@@ -120,6 +132,13 @@ const publicRoute = [
         index: true,
         path: "voucher/new",
         component: <AddVoucher/>,
+        exact: true,
+        restrict: true,
+    }
+    ,{
+        index: true,
+        path: "setting/general",
+        component: <Setting/>,
         exact: true,
         restrict: true,
     }

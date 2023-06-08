@@ -89,8 +89,8 @@ export const NavLink = styled.div`
     color: white;
     font-weight: 500;
     cursor: pointer;
-    padding-left: 80px;
-    padding-right: 80px;
+    padding-left: 60px;
+    padding-right: 90px;
 
     &:hover {
         background-color: #31353d;

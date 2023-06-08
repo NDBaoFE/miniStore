@@ -1,8 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Chart from "chart.js/auto";
 /* eslint-disable react/prop-types */
 
-import { AntdTable, UserWrapper, RevenueDashboardContainer,WrapperUserManagement } from "./style";
+import {
+  AntdTable,
+  UserWrapper,
+  RevenueDashboardContainer,
+  WrapperUserManagement,RevenueTitle
+} from "./style";
 import { useEffect } from "react";
 import userApi from "../../../utils/api/userApi";
 
@@ -34,9 +40,55 @@ function UserList({ search, users, setUsers, columns, setCurrent, current }) {
     navigate(`/user/${page}`);
   };
 
+
+  useEffect(() => {
+    const ctx = document.getElementById('myChart').getContext('2d');
+  
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow'],
+        datasets: [{
+          label: '# of Votes',
+          data: [35, 35, 30],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+       
+
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+     
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  }, []);
+
   return (
     <WrapperUserManagement>
-      <RevenueDashboardContainer />
+      <RevenueDashboardContainer>
+        <div>
+          <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+
+        <RevenueTitle>Revenue</RevenueTitle>
+        <RevenueTitle>for last 30days</RevenueTitle>
+      </RevenueDashboardContainer>
       <UserWrapper>
         <AntdTable
           columns={columns}

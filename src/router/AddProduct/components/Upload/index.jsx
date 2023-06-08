@@ -28,7 +28,7 @@ function UploadImg({setOpen,open}) {
   return (
     <Modal
             open={open} 
-            title="Upload Or drag any of your Voucher Img here"
+            title="Upload Or drag any of your User Img here"
             footer={false}
             onCancel={() => handleCancel()}
             closable={true}

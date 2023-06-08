@@ -2,10 +2,10 @@
 import { useEffect, useState } from 'react'
 import UserList from './components/UserList';
 import ToolBoxSection from './components/ToolBox'
-import { Container, LoadingContainer } from './style'
+import { Container, LoadingContainer, StyledSpace } from './style'
 import { exportToExcel } from '../../utils/ToExcel';
 import Spinner from '../../components/Spinnner';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 
 function UserManagement(){
@@ -37,6 +37,27 @@ function UserManagement(){
             title: 'Name',
             dataIndex: 'name',
             key:`name`,            
+        },
+        {
+          title: 'Email',
+          dataIndex: 'email',
+          key:`email`,            
+      },
+
+        {
+          title: 'RoleId',
+          dataIndex: 'roleTypeId',
+          key:`roleTypeId`,            
+      },
+        {
+          title: 'Action',
+          key: 'action',
+          render: (_, record) => (
+            <StyledSpace size="middle">
+              <Link to={`/user/${record.userId}`}>Edit </Link>
+              <div onClick={()=>confirm(record.userId)}>Delete</div>
+            </StyledSpace>
+          ),
         },
 
         

@@ -15,6 +15,7 @@
         "antd": "^5.4.7",
         "axios": "^1.4.0",
         "cdbreact": "^1.5.16",
+        "chart.js": "^4.3.0",
         "exceljs": "^4.3.0",
         "file-saver": "^2.0.5",
         "react": "^18.2.0",
