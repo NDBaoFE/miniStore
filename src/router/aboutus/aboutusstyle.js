@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { AiOutlineMail } from "react-icons/ai";
 import { Form, Input } from "antd";
+import { themes } from "../../utils/theme";
 
 export const WrapMessage = styled.div`
-    display:flex;
+    display: flex;
     margin-bottom: 100px;
     height: 500px;
     justify-content: space-around;
@@ -36,9 +37,9 @@ export const MessageForm = styled(Form)`
 export const BrandName = styled.div`
     background-color: #00796b;
     height: 70px;
-    padding-top:25px;
-    text-align:center;
-   
+    padding-top: 25px;
+    text-align: center;
+
     color: white;
     font-weight: 600;
 `;
@@ -47,8 +48,9 @@ export const WrapContent1 = styled.div`
     height: 300px;
     display: flex;
     justify-content: center;
-    padding-top:4px;
+    padding-top: 4px;
     padding-right: 50px;
+    color: ${themes.colors.primary700};
 `;
 
 export const Name1 = styled.div`
@@ -66,15 +68,13 @@ export const AboutContent1 = styled.p`
     text-align: left;
     margin-top: 5px;
     margin-left: 0px;
-    
 `;
 
 export const WrapIMG = styled.div`
     width: 300px;
     height: 295px;
     overflow-y: hidden;
-    margin-right:20px;
-    
+    margin-right: 20px;
 `;
 
 export const IMG = styled.img`
@@ -87,7 +87,7 @@ export const WrapContent2 = styled.div`
     padding-top: 10px;
     background-color: #00796b;
     display: flex;
-    justify-content:center;
+    justify-content: center;
 `;
 
 export const WrapIMG2 = styled.div`
@@ -98,7 +98,6 @@ export const WrapIMG2 = styled.div`
     padding-bottom: 10px;
     padding-left: 20px;
     margin-left: 200px;
-
 `;
 
 export const Name2 = styled.div`

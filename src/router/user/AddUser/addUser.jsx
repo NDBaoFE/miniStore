@@ -26,7 +26,7 @@ import selectors from "./components/slice/selectors";
 import userApi from "../../../utils/api/userApi";
 import { toastError, toastSuccess } from "../../../components/Toast";
 import Photo from "./components/Photo";
-import UploadImg from "../../../components/Upload";
+import UploadImg from "./components/Upload"
 
 
 const AddUser = () => {

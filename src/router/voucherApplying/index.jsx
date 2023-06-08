@@ -4,7 +4,7 @@ import ToolBox from "./components/ToolBox"
 import VoucherList from "./components/VoucherList"
 import { useDispatch,useSelector } from "react-redux"
 
-import voucher from "../../assets/image/voucher.png"
+
 import { applyToAllVoucher, applyVoucher, getProductById} from "../home/components/slice/index"
 import { useNavigate, useParams } from "react-router-dom"
 import { useState } from "react"
@@ -16,6 +16,7 @@ const navigate=useNavigate();
   const {id} = useParams();
   const product = useSelector(state => getProductById(state.orderList, id));
   console.log(product);
+  const voucher="https://innhanhthanhdanh.com/wp-content/uploads/2013/08/orange-and-blue-marketing-gift-voucher-free-vector.jpg"
   const [currentVoucher,setCurrentVoucher]=useState();
 const handleApplyVoucher=()=>{
   if(id == "applyAll"){
@@ -30,8 +31,8 @@ const handleApplyVoucher=()=>{
   return (
     <Container>
       <VoucherPlacement>
-        <AntdImage alt="voucher"  src={currentVoucher.voucherImg.startsWith("http")||currentVoucher.voucherImg.startsWith("data:image") ? currentVoucher.voucherImg : `data:image/jpeg;base64,${currentVoucher.voucherImg}`} />
-       {currentVoucher?.description&& <VoucherInfo>
+        <AntdImage alt="voucher"  src={currentVoucher?.voucherImg.startsWith("http")||currentVoucher?.voucherImg.startsWith("data:image") ? currentVoucher?.voucherImg : `data:image/jpeg;base64,${currentVoucher?.voucherImg}`||voucher} />
+       {currentVoucher&& <VoucherInfo>
         <h1 style={{marginRight:"30px"}}>Detail:</h1>
         <VoucherInfoWrapper>
         <div style={{flexWrap:"wrap",marginBottom:"20px"}}>Description:<span>{currentVoucher?.description}</span></div>
