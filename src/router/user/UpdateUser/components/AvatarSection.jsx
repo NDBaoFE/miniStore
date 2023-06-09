@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import UserProfile from '../../../../assets/image/user_profile.png'
 function AvatarSection(){
     const name=useSelector(selectors.name);
-    const role = useSelector(selectors.roleTypeId)
+    const role = useSelector(selectors.roleId)
     const placeholder= UserProfile
     const userImg = useSelector(selectors.userImg)
 

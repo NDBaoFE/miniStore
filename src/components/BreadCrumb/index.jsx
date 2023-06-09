@@ -12,6 +12,7 @@ function BreadCrumbHeader() {
         '/voucher': 'Apply Voucher',
         '/product':'Product',
         '/product/new':'Add Product',
+        '/product/:id':'Update Product',
         '/user': 'User',
         '/user/new': 'Add User',
         '/setting' : 'Setting',

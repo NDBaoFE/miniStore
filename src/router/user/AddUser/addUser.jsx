@@ -38,8 +38,8 @@ const email = useSelector(selectors.email) ;
 const dob = useSelector(selectors.dob);
 const phone = useSelector(selectors.phone) 
 const address = useSelector(selectors.address);
-const roleTypeId = useSelector(selectors.roleTypeId) 
-const genderTypeId = useSelector(selectors.genderTypeId);
+const roleId = useSelector(selectors.roleId) 
+const gender = useSelector(selectors.gender);
 const info = useSelector(selectors.info) 
 const dispatch=useDispatch();
 
@@ -98,8 +98,8 @@ const confirm = () => {
             name:name,
             phone:phone,
             email:email,
-            genderTypeId: genderTypeId,
-            roleTypeId: roleTypeId,
+            genderTypeId: gender,
+            roleTypeId: roleId,
             address:address,
             dob: dob
           }}
@@ -113,6 +113,12 @@ const confirm = () => {
             <Col span={24}>
               <Label level={5}>Name</Label>
               <InputName />
+            </Col>
+          </Row>
+          <Row>
+            <Col span={24}>
+              <Label level={5}>Email</Label>
+              <InputEmail />
             </Col>
           </Row>
 
@@ -149,12 +155,7 @@ const confirm = () => {
             </Col>
           </Row>
 
-          <Row>
-            <Col span={24}>
-              <Label level={5}>Email</Label>
-              <InputEmail />
-            </Col>
-          </Row>
+   
 
         <ActionGroup confirm={confirm}/>
         </StyledForm>

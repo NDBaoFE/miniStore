@@ -21,6 +21,7 @@ import AddVoucher from "./AddVoucher";
 import UserManagement from "./users";
 import Setting from "./setting";
 import UpdateUser from "./user/UpdateUser/updateUser";
+import UpdateProduct from "./UpdateProduct";
 
 
 
@@ -97,7 +98,7 @@ const publicRoute = [
     {
         index: true,
         path: "product/:id",
-        component: <ProductManagement/>,
+        component: <UpdateProduct/>,
         exact: true,
         restrict: true,
     } , {

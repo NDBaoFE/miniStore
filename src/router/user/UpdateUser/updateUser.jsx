@@ -39,8 +39,8 @@ const email = useSelector(selectors.email) ;
 const dob = useSelector(selectors.dob);
 const phone = useSelector(selectors.phone) 
 const address = useSelector(selectors.address);
-const roleTypeId = useSelector(selectors.roleTypeId) 
-const genderTypeId = useSelector(selectors.genderTypeId);
+const roleId = useSelector(selectors.roleId) 
+const gender = useSelector(selectors.gender);
 const info = useSelector(selectors.info) 
 const dispatch=useDispatch();
 
@@ -100,8 +100,8 @@ const confirm = () => {
             name:name,
             phone:phone,
             email:email,
-            genderTypeId: genderTypeId,
-            roleTypeId: roleTypeId,
+            gender: gender,
+            roleId: roleId,
             address:address,
             dob: dob
           }}
@@ -165,6 +165,6 @@ const confirm = () => {
       </WrapperFormUser>
     </FormAddUserSection>
   );
-};
+}
 
 export default UpdateUser;

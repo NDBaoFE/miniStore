@@ -2,15 +2,15 @@ import { Select } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { actions } from '../../slice';
-import selectors from '../../slice/selectors';
+import selector from '../../slice/selectors';
 
 const { Option } = Select;
 
 const SelectRole = () => {
     const dispatch = useDispatch();
 
-    const roles = useSelector(selectors.roles);
-    const roleId = useSelector(selectors.roleId);
+    const roles = useSelector(selector.roles);
+    const role = useSelector(selector.role);
 
     const handleRoleChange = (value) => {
         dispatch(actions.setRole(value));
@@ -18,7 +18,7 @@ const SelectRole = () => {
     };
 
     return (
-        <Select defaultValue={roles[roleId]} onChange={handleRoleChange}>
+        <Select defaultValue={roles[role]} onChange={handleRoleChange}>
             {roles.map((role, index) => (
                 <Option value={index} key={index}>
                     {role}

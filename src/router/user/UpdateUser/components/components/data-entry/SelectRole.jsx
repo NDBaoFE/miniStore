@@ -10,7 +10,7 @@ const SelectRole = () => {
     const dispatch = useDispatch();
 
     const roles = useSelector(selectors.roles);
-    const roleTypeId = useSelector(selectors.roleTypeId);
+    const roleId = useSelector(selectors.roleId);
 
     const handleRoleChange = (value) => {
         dispatch(actions.setRole(value));
@@ -18,7 +18,7 @@ const SelectRole = () => {
     };
 
     return (
-        <Select defaultValue={roles[roleTypeId]} onChange={handleRoleChange}>
+        <Select defaultValue={roles[roleId]} onChange={handleRoleChange}>
             {roles.map((role, index) => (
                 <Option value={index} key={index}>
                     {role}

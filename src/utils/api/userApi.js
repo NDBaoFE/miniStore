@@ -35,11 +35,12 @@ const userApi = {
         //user info to update
         name: info.name,
         phone: info.phone,
-        gender: info.genderTypeId,
+        gender: info.gender,
         dob: info.dob,
-        role: info.roleTypeId,
+        role: info.roleId,
         address: info.address,
-        email: info.email
+        email: info.email,
+        userImg: info.userImg
 
 
     },{},{token: token})

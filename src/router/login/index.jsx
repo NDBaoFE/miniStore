@@ -31,12 +31,12 @@ const LoginForm = () => {
 
           <FormItem
       
-           name="username"
+           name="email"
             rules={[
               {
                 type:"email",
                 required: true,
-                message: "Please input your username!",
+                message: "This is not valid email!",
               },
             ]}
           >
@@ -48,11 +48,12 @@ const LoginForm = () => {
             name="password"
             rules={[
               {
+                
                 required: true,
                 message: "Please input your password!",
               },
             ]}>
-            <InputForm placeholder="Enter your password" />
+            <InputForm placeholder="Enter your password" type="password"/>
           </FormItem>
 
           <FormItem>
