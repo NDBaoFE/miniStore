@@ -141,8 +141,8 @@ function ProductManagement() {
         <ProductList search={search} setProducts={setProducts} products={products} columns={columns}  setCurrent={setCurrent} current={current} handleVoucherDeleted={handleVoucherDeleted} reload={reload}/>
         
         {loading && <LoadingContainer><Spinner/></LoadingContainer> }
-        <CustomModal open={open} setOpen={setOpen}  setOpenImportList={setOpenImportList}/>
-        <ImportList openImportList={openImportList} setOpenImportList={setOpenImportList}  setProducts={setProducts} products={products} columns={columns}/>
+        <CustomModal open={open} setOpen={setOpen}  setOpenImportList={setOpenImportList} columns={columns}/>
+        <ImportList openImportList={openImportList} setOpenImportList={setOpenImportList}  setProducts={setProducts} products={products} columns={columns} setReload={SetReload} reload={reload}/>
     </Container>  
   )
 }

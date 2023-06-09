@@ -130,18 +130,41 @@ export const initialState = {
         //     minimum: null,
         // },
     ],
+    isOpenTable: false,
+    types: [],
 };
+
 export const name = "importedList";
 const slice = createSlice({
     name,
     initialState,
     reducers: {
         setProducts: (state, action) => {
-            state.importedList = action.payload;
+            const updatedList = action.payload.map((item) => ({
+                ...item,
+                productTypeId: getProductTypeId(
+                    state.types,
+                    item.productTypeName
+                ),
+                isDeleted: null,
+                minimum: null,
+            }));
+            state.importedList = updatedList;
+        },
+
+        setOpenTable: (state, action) => {
+            state.isOpenTable = action.payload;
+        },
+        setType: (state, action) => {
+            state.types = action.payload;
         },
     },
 });
-
+const getProductTypeId = (types, productTypeName) => {
+    // Retrieve the productTypeId based on the productTypeName
+    const productType = types.find((type) => type.name === productTypeName);
+    return productType ? productType.productTypeId : null;
+};
 injectReducer(name, slice.reducer);
 
-export const { setProducts } = slice.actions;
+export const { setProducts, setOpenTable, setType } = slice.actions;

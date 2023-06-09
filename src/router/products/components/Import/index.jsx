@@ -5,9 +5,9 @@ import { UploadOutlined } from '@ant-design/icons';
 import { read, utils } from 'xlsx';
 import { toastError } from '../../../../components/Toast';
 import { useDispatch } from 'react-redux';
-import { setProducts } from '../slice';
+import { setOpenTable, setProducts } from '../slice';
 
-const UploadFile = ({ openUpload, setOpenUpload }) => {
+const UploadFile = ({ openUpload, setOpenUpload,setOpen }) => {
   const dispatch = useDispatch();
   const handleCancel = () => {
     setOpenUpload(false);
@@ -53,6 +53,10 @@ const UploadFile = ({ openUpload, setOpenUpload }) => {
 
       // Dispatch the imported data to the Redux store or handle it as per your requirement
       dispatch(setProducts(formattedData));
+      
+      dispatch(setOpenTable(true));
+      setOpenUpload(false);
+      setOpen(false);
     };
 
     reader.readAsArrayBuffer(file);
@@ -61,12 +65,13 @@ const UploadFile = ({ openUpload, setOpenUpload }) => {
 
   return (
     <Modal
-      visible={openUpload}
+      open={openUpload}
       title="Import the Excel File here"
       footer={null}
       onCancel={handleCancel}
       centered
       closable={true}
+    
     >
       <Upload.Dragger
         beforeUpload={(file) => {

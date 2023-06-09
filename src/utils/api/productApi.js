@@ -15,6 +15,10 @@ const productApi = {
         const url = `/voucher`;
         return get(url, {}, { token: token });
     },
+    getAllType: () => {
+        const url = `/productType`;
+        return get(url, {}, { token: token });
+    },
     makeOrder: (products) => {
         let url = "/orderDetail/create";
 
@@ -45,6 +49,10 @@ const productApi = {
             {},
             { token: token }
         );
+    },
+    importProduct: (productList) => {
+        let url = "/productlist";
+        return post(url, productList, {}, { token: token });
     },
     login: (email, password) => {
         const url = `/auth/login`;

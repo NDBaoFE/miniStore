@@ -1,11 +1,15 @@
 
 /* eslint-disable react/prop-types */
 
-import { AntdTable, ProductWrapper } from './style'
+import { AntdTable, Button, ProductWrapper } from './style'
 import { useSelector } from 'react-redux';
-  import { Modal,Form,InputNumber,Input, Typography, Popconfirm, Image } from 'antd';
+  import { Modal,Form,InputNumber,Input, Typography, Popconfirm, Image, Select } from 'antd';
 import { productSelector } from './slice/selector';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { setOpenTable, setProducts } from './slice';
+import productApi from '../../../utils/api/productApi';
+import { toastError, toastSuccess } from '../../../components/Toast';
 const EditableCell = ({
     editing,
     dataIndex,
@@ -14,7 +18,19 @@ const EditableCell = ({
     children,
     ...restProps
   }) => {
-    const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
+    const {types}=useSelector(productSelector);
+    const inputNode = inputType === 'number' ? <InputNumber /> : inputType === 'select' ? (
+      <Select>
+        {/* Populate options from useSelector */}
+        {types.map((type) => (
+          <Select.Option key={type.name} value={type.name}>
+            {type.name}
+          </Select.Option>
+        ))}
+      </Select>
+    ) : (
+      <Input />
+    );
     return (
       <td {...restProps}>
         {editing ? (
@@ -38,9 +54,9 @@ const EditableCell = ({
       </td>
     );
   };
-function ImportList({columns,openImportList,setOpenImportList}) {
+function ImportList({columns,setReload,reload}) {
   const columnsToRemove = ['action','details','productId']; // The column key to be removed
-
+const dispatch=useDispatch();
 const newColumn = [{
   title: 'Product Image',
   dataIndex: 'productImg',
@@ -64,9 +80,9 @@ const newColumn = [{
     const editable = isEditing(record);
   
     return editable ? (
-      <span>
+      <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-between",alignItems:"center"}}>
         <Typography.Link
-          onClick={() => save(record.productId)}
+          onClick={() => save(record.productCode)}
           style={{
             marginRight: 8,
           }}
@@ -76,10 +92,9 @@ const newColumn = [{
         <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
           <a>Cancel</a>
         </Popconfirm>
-      </span>
+      </div>
     ) : (
-      <Typography.Link disabled={editingKey !== ''} onClick={() => {edit(record);
-      console.log(record)}}>
+      <Typography.Link disabled={editingKey !== ''} onClick={() => {edit(record)}}>
         Edit
       </Typography.Link>
     );
@@ -96,36 +111,41 @@ const updatedColumns = columns.map(column => ({
 })).filter(column =>  !columnsToRemove.includes(column.key)) // Remove the column
 .concat(newColumn); // Add the new column
 
-    const {importedList}=useSelector(productSelector);
+const {importedList,isOpenTable,types}=useSelector(productSelector);
 
     const [form] = Form.useForm();
-    const [data, setData] = useState(importedList);
     const [editingKey, setEditingKey] = useState('');
-    const isEditing = (record) => record.productId === editingKey;
+    const isEditing = (record) => record.productCode === editingKey;
+  
     const edit = (record) => {
       form.setFieldsValue({
         
         ...record,
       });
     
-      setEditingKey(record.productId);
+      setEditingKey(record.productCode);
     };
     const save = async (key) => {
         try {
           const row = await form.validateFields();
-          const newData = [...data];
-          const index = newData.findIndex((item) => key === item.key);
+          const newData = [...importedList];
+          const index = newData.findIndex((item) => key === item.productCode);
+          const productType = types.find((type) => type.name === row.productTypeName);
           if (index > -1) {
             const item = newData[index];
-            newData.splice(index, 1, {
+            const updatedRow = {
               ...item,
               ...row,
-            });
-            setData(newData);
+              productTypeId: productType.productTypeId ,
+              
+            };
+            newData.splice(index, 1, updatedRow);
+            
+            dispatch(setProducts(newData));
             setEditingKey('');
           } else {
             newData.push(row);
-            setData(newData);
+            dispatch(setProducts(newData));
             setEditingKey('');
           }
         } catch (errInfo) {
@@ -133,17 +153,29 @@ const updatedColumns = columns.map(column => ({
         }
       };
     const handleCancel = () => {
-        setOpenImportList(false);
+      dispatch(setOpenTable(false));
     }
+    const handleConfirm = async () => {
+      const res= await productApi.importProduct(importedList);
+        if(res.data.status===200){
+          toastSuccess("Imported Successfully");
+          dispatch(setOpenTable(false));
+        }else{
+          toastError("Imported Successfully");
+          dispatch(setOpenTable(false));
+          setReload(!reload);
+        }
+      }
     const mergedColumns = updatedColumns.map((col) => {
         if (!col.editable) {
           return col;
         }
+      
         return {
           ...col,
           onCell: (record) => ({
             record,
-            inputType: ['quantity', 'cost', 'price'].includes(col.dataIndex) ? 'number' : 'text',
+            inputType: col.dataIndex === 'productTypeName' ? 'select' : ['quantity', 'cost', 'price'].includes(col.dataIndex) ? 'number' : 'text',
             dataIndex: col.dataIndex,
             title: col.title,
             editing: isEditing(record),
@@ -153,21 +185,28 @@ const updatedColumns = columns.map(column => ({
       
   return (
     <Modal
-    open={openImportList}
+    open={isOpenTable}
     footer={null}
     onCancel={handleCancel}
     centered
     closable={true}
     width={1000}
+  
+    
   >
     <Form form={form} component={false}>
-    <ProductWrapper><AntdTable columns={mergedColumns} dataSource={importedList}    components={{
+   <ProductWrapper><AntdTable columns={mergedColumns} dataSource={importedList}    components={{
           body: {
             cell: EditableCell,
           },    
         }}/>
     </ProductWrapper>
     </Form>
+    <div style={{display:"flex",justifyContent:"space-around",alignItems:"center"}}>
+      <Button style={{maxWidth:200}} onClick={handleCancel}>Cancel</Button>
+      <Button style={{maxWidth:200}}  onClick={handleConfirm}>Confirm</Button>
+      </div>
+   
     </Modal>
   )
 }

@@ -66,3 +66,52 @@ export const exportToExcel = (data, columns, filename) => {
             });
     });
 };
+export const downloadTemplate = (columns, filename) => {
+    const removedCols = ["productId", "details", "action"];
+    const updatedColumns = [
+        ...columns,
+        {
+            title: "Product Img",
+            dataIndex: "productImg",
+            key: "productImg",
+        },
+        {
+            title: "Name",
+            dataIndex: "name",
+            key: "name",
+        },
+    ];
+    const ExportCol = updatedColumns.filter(
+        (col) => !removedCols.includes(col.dataIndex)
+    );
+    const columnNames = ExportCol.map((column) => column.title);
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet("Sheet 1");
+
+    // Add column headers to the worksheet
+    columnNames.forEach((columnName, index) => {
+        worksheet.getCell(`${String.fromCharCode(65 + index)}1`).value =
+            columnName;
+    });
+
+    // Auto-fit columns
+    worksheet.columns.forEach((column) => {
+        column.width = column.title?.length < 12 ? 12 : column.title?.length;
+    });
+
+    // Generate a buffer with the Excel file
+    workbook.xlsx
+        .writeBuffer()
+        .then((buffer) => {
+            // Create a Blob from the buffer
+            const blob = new Blob([buffer], {
+                type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            });
+
+            // Save the Blob as a file
+            saveAs(blob, `${filename}.xlsx`);
+        })
+        .catch((error) => {
+            console.error("Error while generating the template:", error);
+        });
+};

@@ -1,11 +1,16 @@
 /* eslint-disable no-unused-vars */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 /* eslint-disable react/prop-types */
 import {  Button, Modal } from 'antd';
 import UploadFile from '../Import/index';
 import { Container, Hero, Left, Right, Section, Step, Text } from './style';
 import  Import from "../../../../assets/image/Import.png"
-const CustomModal = ({ setOpen, open,setOpenImportList }) => {
+import { downloadTemplate } from '../../../../utils/ToExcel';
+import productApi from '../../../../utils/api/productApi';
+import { useDispatch } from 'react-redux';
+import { setType } from '../slice';
+const CustomModal = ({ setOpen, open,setOpenImportList ,columns}) => {
+  const dispatch=useDispatch();
     const [openUpload, setOpenUpload] = useState(false);
 const steps=[
     {id:1,name:"Download template with examples",action:true},
@@ -17,6 +22,18 @@ const steps=[
     setOpen(false);
   
   }
+  useEffect(() => {
+
+    async function fetchData() {
+        try {
+            const response = await productApi.getAllType();
+            dispatch(setType(response.data.data))
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    fetchData();
+}, []);
 
   return (
     <Modal
@@ -43,7 +60,7 @@ const steps=[
                         <h3>{step.description}</h3></Text>
                         
                 </Section>
-               {step.action &&  <Button type="primary" onClick={()=>{setOpenImportList(true)}}>Export Template</Button>}
+               {step.action &&  <Button type="primary" onClick={()=>{downloadTemplate(columns,'template')}}>Export Template</Button>}
               
             </Step>
         )
@@ -54,7 +71,7 @@ const steps=[
        <div style={{display:"flex",justifyContent:"center",marginTop:"20px"}}>  <Button type="primary" onClick={() => setOpenUpload(true)}>Import</Button></div>
   
    
-       <UploadFile openUpload={openUpload} setOpenUpload={setOpenUpload} ></UploadFile>
+       <UploadFile openUpload={openUpload} setOpenUpload={setOpenUpload} setOpen={setOpen}  open={open}></UploadFile>
     </Modal>
   );
 };
