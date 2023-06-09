@@ -2,36 +2,42 @@ import { saveAs } from "file-saver";
 import ExcelJS from "exceljs";
 
 export const exportToExcel = (data, columns, filename) => {
+    // Split the "Product Details" column into separate columns for "Product Img" and "Name"
+    const removedCols = ["productId", "details", "action"];
+    const updatedColumns = [
+        ...columns,
+        {
+            title: "Product Img",
+            dataIndex: "productImg",
+            key: "productImg",
+        },
+        {
+            title: "Name",
+            dataIndex: "name",
+            key: "name",
+        },
+    ];
+    const ExportCol = updatedColumns.filter(
+        (col) => !removedCols.includes(col.dataIndex)
+    );
+
     return new Promise((resolve, reject) => {
         const workbook = new ExcelJS.Workbook();
         const worksheet = workbook.addWorksheet("Sheet 1");
 
         // Add column headers to the worksheet
-        columns.forEach((column, index) => {
+        ExportCol.forEach((column, index) => {
             worksheet.getCell(`${String.fromCharCode(65 + index)}1`).value =
                 column.title;
         });
 
         // Add data rows to the worksheet
         data.forEach((record, rowIndex) => {
-            columns.forEach((column, columnIndex) => {
-                if (column.dataIndex === "details") {
-                    // Handle 'Product Details' column with custom render function
-                    const cellValue = column.render(null, record);
-                    const nameValue = cellValue.props.children[1]; // Access the 'name' property from the rendered component
-                    worksheet.getCell(
-                        `${String.fromCharCode(65 + columnIndex)}${
-                            rowIndex + 2
-                        }`
-                    ).value = nameValue;
-                } else {
-                    const cellValue = record[column.dataIndex] || ""; // Check if cell value is undefined or null
-                    worksheet.getCell(
-                        `${String.fromCharCode(65 + columnIndex)}${
-                            rowIndex + 2
-                        }`
-                    ).value = cellValue;
-                }
+            ExportCol.forEach((column, columnIndex) => {
+                const cellValue = record[column.dataIndex] || ""; // Check if cell value is undefined or null
+                worksheet.getCell(
+                    `${String.fromCharCode(65 + columnIndex)}${rowIndex + 2}`
+                ).value = cellValue;
             });
         });
 

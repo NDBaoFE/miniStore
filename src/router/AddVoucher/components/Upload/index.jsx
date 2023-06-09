@@ -6,6 +6,7 @@ import { Upload, Button,Modal } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { actions } from '../slice';
+import { toastError } from '../../../../components/Toast';
 function UploadImg({setOpen,open}) {
   const dispatch=useDispatch();
   const handleCancel=()=>{
@@ -13,6 +14,12 @@ function UploadImg({setOpen,open}) {
   }
 
     const handleFileUpload = (file) => {
+      const fileExtension = file.name.split('.').pop();
+
+      if (fileExtension.toLowerCase() !== ('jgp'||'jpeg'||'png')) {
+        toastError('Error: Invalid file format. Only xlsx files are allowed.');
+        return;
+      }
         const reader = new FileReader();
       
         reader.onload = (e) => {

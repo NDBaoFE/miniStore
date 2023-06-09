@@ -10,13 +10,18 @@ import { BsExclamationCircle } from 'react-icons/Bs';
 import productApi from '../../utils/api/productApi';
 import { toastError, toastSuccess } from '../../components/Toast';
 import { Image } from 'antd';
+import CustomModal from './components/Tutorial';
+import ImportList from './components/ImportList';
+
 function ProductManagement() {
   const [loading, setLoading] = useState(false);
   const params = useParams();
+  const [open,setOpen]=useState(false);
   const [current, setCurrent] = useState(parseInt(params.page, 9) || 1);
   const [search,setSearch]=useState("");
   const [products,setProducts]=useState([]);
  const [reload,SetReload]=useState(false);
+ const [openImportList,setOpenImportList]=useState(false);
   const handleExportToExcel = () => {
     setLoading(true);
     // Call the export function from another component
@@ -63,7 +68,7 @@ function ProductManagement() {
     {
       title: 'Product ID',
       dataIndex: 'productId',
-      key: ' productId',
+      key: 'productId',
      
      
     },
@@ -94,9 +99,9 @@ function ProductManagement() {
       sortDirections: ['descend', 'ascend'],
     },
     {
-        title: 'Type',
-        dataIndex: 'productTypeId',
-        key: 'productTypeId',
+        title: 'Product Type Name',
+        dataIndex: 'productTypeName',
+        key: 'productTypeName',
        
       },
       {
@@ -116,6 +121,7 @@ function ProductManagement() {
       {
         title: 'Action',
         key: 'action',
+        dataIndex:'action',
         render: (_, record) => (
           <StyledSpace size="middle">
             <Link to={`/product/${record.productId}`}>Edit </Link>
@@ -126,15 +132,17 @@ function ProductManagement() {
   ];
 
   useEffect(() => {
-
+    console.log(products);
   
 }, [loading]);
   return (
     <Container>
-        <ToolBoxSection  setSearch={setSearch} handleSave={handleExportToExcel} setCurrent={setCurrent}/>
+        <ToolBoxSection  setSearch={setSearch} handleSave={handleExportToExcel} setCurrent={setCurrent} setOpen={setOpen} open={open}/>
         <ProductList search={search} setProducts={setProducts} products={products} columns={columns}  setCurrent={setCurrent} current={current} handleVoucherDeleted={handleVoucherDeleted} reload={reload}/>
         
         {loading && <LoadingContainer><Spinner/></LoadingContainer> }
+        <CustomModal open={open} setOpen={setOpen}  setOpenImportList={setOpenImportList}/>
+        <ImportList openImportList={openImportList} setOpenImportList={setOpenImportList}  setProducts={setProducts} products={products} columns={columns}/>
     </Container>  
   )
 }
