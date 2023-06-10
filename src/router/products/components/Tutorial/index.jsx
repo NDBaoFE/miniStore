@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react';
 /* eslint-disable react/prop-types */
-import {  Button, Modal } from 'antd';
+import {   Modal } from 'antd';
 import UploadFile from '../Import/index';
 import { Container, Hero, Left, Right, Section, Step, Text } from './style';
 import  Import from "../../../../assets/image/Import.png"
@@ -9,6 +9,7 @@ import { downloadTemplate } from '../../../../utils/ToExcel';
 import productApi from '../../../../utils/api/productApi';
 import { useDispatch } from 'react-redux';
 import { setType } from '../slice';
+import { Button } from '../style';
 const CustomModal = ({ setOpen, open,setOpenImportList ,columns}) => {
   const dispatch=useDispatch();
     const [openUpload, setOpenUpload] = useState(false);
