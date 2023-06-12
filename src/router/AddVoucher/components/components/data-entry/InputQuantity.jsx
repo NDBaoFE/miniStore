@@ -10,7 +10,7 @@ const InputQuantity = () => {
     const quantity = useSelector(selector.quantity);
     const handleQuantityChange = (e) => {
         dispatch(actions.setQuantity(parseInt(e.target.value)));
-        dispatch(actions.getProductInfo());
+        dispatch(actions.getVoucherInfo());
     };
 
     return (

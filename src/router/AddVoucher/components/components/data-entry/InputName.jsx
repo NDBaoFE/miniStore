@@ -10,7 +10,7 @@ const InputName = () => {
     const name = useSelector(selector.name);
     const handleFullNameChange = (e) => {
         dispatch(actions.setName(e.target.value));
-        dispatch(actions.getVoucher());
+        dispatch(actions.getVoucherInfo());
     };
 
     return (
