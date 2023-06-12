@@ -10,12 +10,7 @@ function ProductList({search,products,setProducts,columns,setCurrent,current,rel
   const navigate = useNavigate();
   const [max,setMax]=useState(0);
 
-    const rowClassName = (record, index) => {
-        if (index % 2 === 1) {
-          return 'table-row-striped'; // Apply striped style for odd-indexed rows
-        }
-        return '';
-      };
+  
     useEffect(() => {
 
         async function fetchData() {
@@ -36,14 +31,15 @@ function ProductList({search,products,setProducts,columns,setCurrent,current,rel
      
     }
   return (
-    <ProductWrapper><AntdTable columns={columns} dataSource={products}  rowClassName={rowClassName} 
+    <ProductWrapper><AntdTable columns={columns} dataSource={products} 
     pagination={{
       current: current,
       pageSize: 9, // Number of items per page
       total: max, // Total number of items
       onChange: handlePageChange, // Handle page change event
     }}
-    /></ProductWrapper>
+    />
+    </ProductWrapper>
   )
 }
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { Button, StyledSearch, ToolBox, Type, Upload } from "./style"
 
@@ -9,7 +10,7 @@ import { BiImport } from "react-icons/bi";
 import { UploadOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-function ToolBoxSection({setSearch,handleSave,setCurrent}) {
+function ToolBoxSection({setSearch,handleSave,setCurrent,setOpen}) {
 const navigate = useNavigate();
     // const onSearch = (e) => { 
     //   console.log(e.target.value);
@@ -62,8 +63,8 @@ const navigate = useNavigate();
         <CiBarcode style={{color:"black", fontSize:"25px"}}/>
         </Action>
         </Col>
-        <Col>
-        <Button className="import">
+        <Col> 
+        <Button className="import" onClick={()=>setOpen(true)}>
           <BiImport style={{ fontSize:"20px"}}/>
         </Button>
         <Button>
