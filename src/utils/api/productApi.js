@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { get, post, put, remove } from "./ApiCaller";
-const token = localStorage.getItem("token");
+const token = localStorage.getItem("Authorization");
 const productApi = {
     getProduct: (search, current) => {
         let url = "";
