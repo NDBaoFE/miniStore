@@ -47,7 +47,7 @@ const productApi = {
                 authorization: { ...voucher },
             },
             {},
-            { token: token }
+            { authorization: token }
         );
     },
     importProduct: (productList) => {
