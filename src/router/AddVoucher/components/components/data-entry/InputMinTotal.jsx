@@ -9,8 +9,8 @@ const InputMinTotal = () => {
 
     const minTotal = useSelector(selector.minTotal);
     const handleQuantityChange = (e) => {
-        dispatch(actions.setQuantityAlert(e.target.value));
-        dispatch(actions.getProductInfo());
+        dispatch(actions.setMinTotal(e.target.value));
+        dispatch(actions.getVoucherInfo());
     };
 
     return (

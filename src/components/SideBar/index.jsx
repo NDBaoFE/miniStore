@@ -103,11 +103,10 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
                     style={{background:'transparent',marginTop:"40px"}}
                     items={itemsAdmin}
                 />
-                <SignOut onClick={handleSignOut}>
+                <SignOut onClick={handleSignOut} style={{width:"100%",textAlign:"center",display:"flex",justifyContent:"center"}}>
                     <LogoutOutlined
                         style={{ paddingRight: 10, fontSize: "24px", color:"green" }}
                     />
-                    Logout
                 </SignOut>
             </SideBar>
         </Wrapper>
