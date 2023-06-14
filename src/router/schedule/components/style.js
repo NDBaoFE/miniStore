@@ -329,12 +329,63 @@ export const PositionSlot = styled.div`
     display: flex;
     justify-content: space-between;
     svg {
-        display: ${({ employeeId }) => (employeeId ? "block" : "none")};
+        display: ${({ employeeid }) => (employeeid ? "block" : "none")};
         cursor: pointer;
         color: ${themes.colors.primary};
         &:hover {
             color: ${themes.colors.primary700};
             background-color: ${themes.colors.gray};
         }
+    }
+`;
+export const GroupWrapper = styled.div`
+    position: absolute;
+    right: 60px;
+    bottom: 20px;
+    z-index: 99;
+    width: 200px;
+    height: 20px;
+    background: ${themes.colors.blackText};
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: ${themes.colors.gray};
+    div {
+        cursor: pointer;    
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+`;
+export const FinishButton = styled.div`
+    padding: 8px 12px;
+    color: ${themes.colors.white};
+    background: ${themes.colors.primary};
+    border: 1px solid ${themes.colors.primary};
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover {
+        background: ${themes.colors.primaryDark};
+        color: ${themes.colors.white};
+        text-decoration: none !important;
+        border: 1px solid ${themes.colors.primaryDark};
+    }
+`;
+export const NotiModal = styled(Modal)`
+    .ant-modal-content {
+        border-radius: 2px;
+        background: #ffffff;
+        /* drop-shadow/0.12+0.8+0.5 */
+
+        box-shadow: 0px 3px 6px -4px rgba(0, 0, 0, 0.12),
+            0px 6px 16px rgba(0, 0, 0, 0.08),
+            0px 9px 28px 8px rgba(0, 0, 0, 0.05);
+        border-radius: 2px;
+    }
+    .ant-btn-primary {
+        background-color: ${themes.colors.primary};
     }
 `;

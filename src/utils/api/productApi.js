@@ -37,6 +37,10 @@ const productApi = {
             { authorization: token }
         );
     },
+    getUserShift: (offset) => {
+        const url = `/userShift?offset=${offset}`;
+        return get(url, {}, { authorization: token });
+    },
     addVoucher: (voucher, productList) => {
         console.log(voucher);
         let url = "/applyVoucherToProducts";
@@ -44,6 +48,17 @@ const productApi = {
             url,
             {
                 productList: { ...voucher },
+            },
+            {},
+            { authorization: token }
+        );
+    },
+    assignEmployee: (userShifts) => {
+        let url = "/userShift/assign";
+        return post(
+            url,
+            {
+                ...userShifts,
             },
             {},
             { authorization: token }
@@ -65,6 +80,7 @@ const productApi = {
             {}
         );
     },
+
     deleteVoucher: (id) => {
         const url = `/voucher/delete/${id}`;
         return remove(url, {}, {}, { authorization: token });

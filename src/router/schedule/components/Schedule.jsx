@@ -1,7 +1,8 @@
 /* eslint-disable no-case-declarations */
 import {    Calendar, Image, Tag } from 'antd';
 import dayjs from 'dayjs';
-import { useState } from 'react';
+import moment from "moment"
+import { useEffect, useState } from 'react';
 import { Card, CardWrapper, Coefficient, Container, Date, Img, Info, ModalContainer,
    ShiftName, ShiftTime, ShiftType, StyledModal, Team, Wrapper,PositionList,PositionSlot,EmployeeList,Title,EmployeeCard
    } from './style';
@@ -14,12 +15,13 @@ import { useSelector } from 'react-redux';
 
 
 import {toastError,toastSuccess} from "../../../components/Toast"
+import productApi from '../../../utils/api/productApi';
+import ActionGroup from './ActionGroup';
 
 const ScheduleComponent = () => {
   const {userList}=useSelector(scheduleSelector);
-  console.log(userList);
   const [employees, setEmployees] = useState(userList);
-
+  const [userShift,setUserShift] = useState([]);
   const [morningPos, setMorningPos] = useState([
     { id: '1', title: 'Saler', employeeId: null },
     { id: '2', title: 'Guard', employeeId: null},
@@ -32,6 +34,53 @@ const ScheduleComponent = () => {
     { id: '1', title: 'Saler', employeeId: null },
     { id: '2', title: 'Guard', employeeId: null },
   ]);
+  const [allPositions,setAllPositions] = useState([]);
+  useEffect(() => {
+
+    async function fetchData() {
+        try {
+            const response = await productApi.getUserShift(0);
+           
+             
+              const newArray=  await response.data.data.map((item) => {
+                const timestamp = item.startTime;
+                const date = moment(timestamp).format('DD/MM/YYYY');
+                
+                return {
+                  ...item,
+                  date: date
+                };
+              });
+                setUserShift ( await newArray);
+                
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    fetchData();
+}, []);
+useEffect(() => {
+  const morningPositions = morningPos.map((position, index) => ({
+    ...position,
+    id: index + 1,
+  }));
+
+  const afternoonPositions = afternoonPos.slice(0, -1).map((position, index) => ({
+    ...position,
+    id: index + 3,
+  }));
+
+  const nightPositions = nightPos.map((position, index) => ({
+    ...position,
+    id: index + 4,
+  }));
+
+  
+  setAllPositions([...morningPositions, ...afternoonPositions, ...nightPositions]);
+}, [morningPos, afternoonPos, nightPos]);
+
+
+
   const onDragEnd = (result) => {
     if (!result.destination) return;
 
@@ -53,6 +102,12 @@ const ScheduleComponent = () => {
       if (droppableId.startsWith('morningSlot')) {
         // Assign an employee to a position
         const positionIndex = parseInt(droppableId.replace('morningSlot', ''), 10);
+        if(positionIndex == 1){
+          const newPositionList = Array.from(afternoonPos);
+        const employeeId = employees[draggableIndex].userId;
+        newPositionList[positionIndex].employeeId = employeeId;
+        setAfternoonPos(newPositionList);
+        }
         const newPositionList = Array.from(morningPos);
         const employeeId = employees[draggableIndex].userId;
         newPositionList[positionIndex].employeeId = employeeId;
@@ -61,6 +116,12 @@ const ScheduleComponent = () => {
       else if(droppableId.startsWith('afternoonSlot')){
         const positionIndex = parseInt(droppableId.replace('afternoonSlot', ''), 10);
         const newPositionList = Array.from(afternoonPos);
+        if(positionIndex == 1){
+          const newPositionList = Array.from(morningPos);
+        const employeeId = employees[draggableIndex].userId;
+        newPositionList[positionIndex].employeeId = employeeId;
+        setMorningPos(newPositionList);
+        }
         const employeeId = employees[draggableIndex].userId;
         newPositionList[positionIndex].employeeId = employeeId;
         setAfternoonPos(newPositionList);
@@ -74,11 +135,15 @@ const ScheduleComponent = () => {
     }
   };
   const [value, setValue] = useState(() => dayjs());
-  const [selectedValue, setSelectedValue] = useState(() => dayjs());
+  const [selectedValue, setSelectedValue] = useState([]);
   const [open, setOpen] = useState(false);
   const onSelect = (newValue) => {
-    setValue(newValue);
-    setSelectedValue(newValue);
+  
+    const dayUserShift=userShift.filter((item)=>{
+      return item.date === newValue.format('DD/MM/YYYY');
+    
+    });
+    setSelectedValue(dayUserShift);
     setOpen(true);
   };
   const onPanelChange = (newValue) => {
@@ -91,12 +156,24 @@ const ScheduleComponent = () => {
     // Update the state based on the slotType
     try{ switch (slotType) {
       case 'morning':
+        if(slotIndex == 1){
+          // if the pos was deletion were employee , remove both on the afternoon
+          const updatedAfternoonPos = [...afternoonPos];
+        updatedAfternoonPos[slotIndex].employeeId = null; // Remove the employee from the slot
+        setMorningPos(updatedAfternoonPos);
+        }
         const updatedMorningPos = [...morningPos];
         updatedMorningPos[slotIndex].employeeId = null; // Remove the employee from the slot
         setMorningPos(updatedMorningPos);
         toastSuccess("Remove Employee Successfully");
         break;
       case 'afternoon':
+        if(slotIndex == 1){
+          // if the pos was deletion were employee , remove both on the morning
+          const updatedMorningPos = [...morningPos];
+        updatedMorningPos[slotIndex].employeeId = null; // Remove the employee from the slot
+        setMorningPos(updatedMorningPos);
+        }
         const updatedAfternoonPos = [...afternoonPos];
         updatedAfternoonPos[slotIndex].employeeId = null; // Remove the employee from the slot
         setAfternoonPos(updatedAfternoonPos);
@@ -147,7 +224,7 @@ item.shiftName === 'Shift III' ? nightPos : [];
           <Info>
             <ShiftName>{item.shiftName}</ShiftName>
             <ShiftType>{item.shiftType}</ShiftType>
-            <Date>{selectedValue?.format('DD/MM/YYYY')}</Date>
+            {/* <Date>{selectedValue[0]}</Date> */}
             <ShiftTime>{item.shiftTime}</ShiftTime>
           </Info>
           <Coefficient>Coefficient: {item.coefficient}</Coefficient>
@@ -162,7 +239,7 @@ item.shiftName === 'Shift III' ? nightPos : [];
                       ref={provided.innerRef}
                       {...provided.droppableProps}
                       isDragging={snapshot.isDragging}
-                      employeeId={position.employeeId}
+                      employeeid={position.employeeId}
                     >
                       {position.title} :
                       {position.employeeId !== null ? employees.find((e) => e.userId === position.employeeId)?.userName
@@ -204,9 +281,11 @@ item.shiftName === 'Shift III' ? nightPos : [];
               {provided.placeholder}
             </EmployeeList>
           )}
+         
         </Droppable>
-
+        <ActionGroup setOpen={setOpen} allPositions={allPositions} selectedValue={selectedValue} />
         </DragDropContext>
+      
      </ModalContainer>
     </StyledModal>
     </Container>
