@@ -55,14 +55,7 @@ const productApi = {
     },
     assignEmployee: (userShifts) => {
         let url = "/userShift/assign";
-        return post(
-            url,
-            {
-                ...userShifts,
-            },
-            {},
-            { authorization: token }
-        );
+        return post(url, [...userShifts], {}, { authorization: token });
     },
     importProduct: (productList) => {
         let url = "/productlist";
