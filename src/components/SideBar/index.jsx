@@ -9,7 +9,7 @@ import {  SideBar, Wrapper, SignOut, Button, Container } from "./style";
 
 
 import { BsGrid } from "react-icons/Bs";
-import { RiCoupon2Line } from "react-icons/ri";
+import { RiCoupon2Line, RiFileUserFill} from "react-icons/ri";
 import {
     HomeOutlined,
     LogoutOutlined,
@@ -61,6 +61,12 @@ const itemsAdmin = [
         "/voucher",
         <RiCoupon2Line />
     ),
+
+    getItem(
+        <SidebarLink to="/user " child="User" />,
+        "/user",
+        <RiFileUserFill/>
+    ),
 ];
 
 
@@ -100,7 +106,7 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
                         console.log(key);
                         setSelectedKey(key);
                     }}
-                    style={{background:'transparent',marginTop:"40px"}}
+                    style={{background:'transparent',marginTop:"20px"}}
                     items={itemsAdmin}
                 />
                 <SignOut onClick={handleSignOut} style={{width:"100%",textAlign:"center",display:"flex",justifyContent:"center"}}>

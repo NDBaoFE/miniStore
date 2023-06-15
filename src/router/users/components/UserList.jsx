@@ -14,6 +14,7 @@ import userApi from "../../../utils/api/userApi";
 
 function UserList({ search, users, setUsers, columns, setCurrent, current }) {
   const navigate = useNavigate();
+  console.log(users);
   const [max, setMax] = useState(0);
 
   const rowClassName = (record, index) => {
@@ -26,7 +27,7 @@ function UserList({ search, users, setUsers, columns, setCurrent, current }) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await userApi.getUser(search, current - 1);
+        const response = await userApi.getUserDetail(search, current - 1);
         setUsers(response.data.data.content);
         setMax(response.data.data.totalElement);
       } catch (error) {

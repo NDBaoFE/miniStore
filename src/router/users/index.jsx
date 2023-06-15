@@ -46,8 +46,8 @@ function UserManagement(){
 
         {
           title: 'RoleId',
-          dataIndex: 'roleTypeId',
-          key:`roleTypeId`,            
+          dataIndex: 'roleId',
+          key:`roleId`,            
       },
         {
           title: 'Action',
@@ -65,6 +65,7 @@ function UserManagement(){
 
     const [search,setSearch]=useState("");
     const [users,setUsers]=useState([]);
+    console.log(users);
 
     useEffect(() => {
 
@@ -73,7 +74,7 @@ function UserManagement(){
     return(
         <Container>
         <ToolBoxSection  setSearch={setSearch} handleSave={handleExportToExcel} setCurrent={setCurrent}/>
-        <UserList search={search} setUsers={setUsers} products={users} columns={columns}  setCurrent={setCurrent} current={current} />
+        <UserList search={search} setUsers={setUsers} users={users} columns={columns}  setCurrent={setCurrent} current={current} />
         
         {loading && <LoadingContainer><Spinner/></LoadingContainer> }
     </Container> 

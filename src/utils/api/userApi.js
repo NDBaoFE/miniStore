@@ -12,6 +12,12 @@ const userApi = {
     return get(url, {}, { token: token });
   },
 
+  getUserDetail:(id) =>{
+    let url = `/user/${id}`;
+    return get(url, {}, {authorization:token})
+
+  },
+
   addUser: (user) => {
     let url = "/user";
     return post(
@@ -20,7 +26,7 @@ const userApi = {
         ...user,
       },
       {},
-      {}
+      {token: token}
     );
   },
 

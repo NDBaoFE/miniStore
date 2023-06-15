@@ -29,7 +29,7 @@ import Photo from "./components/Photo";
 import UploadImg from "./components/Upload"
 import { useParams } from "react-router-dom";
 
-
+import { useEffect } from "react";
 function UpdateUser() {
 const [success,setSuccess]=useState(false);
 const [open, setOpen] = useState("")
@@ -67,6 +67,21 @@ const handleFinish = () => {
 const handleFinishFailed = () => {
   console.log(' Hãy nhập tất cả các field !!');
 };
+
+
+useEffect(() => {
+  async function fetchData() {
+    try {
+      const response = await userApi.getUserDetail(id);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  fetchData();
+});
+
+
 
 const confirm = () => {
   NotiModal.confirm({
@@ -119,6 +134,13 @@ const confirm = () => {
           </Row>
 
           <Row>
+            <Col span={24}>
+              <Label level={5}>Email</Label>
+              <InputEmail />
+            </Col>
+          </Row>
+
+          <Row>
             <Col span={13}>
               <Label level={5}>Phone</Label>
               <InputPhone />
@@ -151,12 +173,7 @@ const confirm = () => {
             </Col>
           </Row>
 
-          <Row>
-            <Col span={24}>
-              <Label level={5}>Email</Label>
-              <InputEmail />
-            </Col>
-          </Row>
+
 
         <ActionGroup confirm={confirm}/>
         </StyledForm>
