@@ -10,8 +10,9 @@ const SelectGender = () => {
     const dispatch = useDispatch();
 
     const genders = useSelector(selectors.genders);
+    console.log(genders);
     const gender = useSelector(selectors.gender);
-
+    console.log(gender);
     const handleGenderChange = (value) => {
         dispatch(actions.setCurrentGender(value));
     };

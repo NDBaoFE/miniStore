@@ -13,7 +13,7 @@ const InputEmail = () =>{
         dispatch(actions.getUserInfo());
     };
 
-
+    console.log(email);
     return (
         <Form.Item
         name="email"

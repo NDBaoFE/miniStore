@@ -13,7 +13,7 @@ import {
 
 import { actions } from "./components/slice";
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { InputPhone, InputName, InputEmail, InputAddress, } from "./components/components";
+import {  InputName,InputAddress,InputEmail,InputPhone } from "./components/components";
 import SelectDateOfBirth from "./components/components/data-entry/SelectBirthdate";
 import SelectGender from "./components/components/data-entry/SelectGender";
 import SelectRole from "./components/components/data-entry/SelectRole";
@@ -29,8 +29,10 @@ import Photo from "./components/Photo";
 import UploadImg from "./components/Upload"
 import { useParams } from "react-router-dom";
 
+
 import { useEffect } from "react";
 function UpdateUser() {
+  const [updated,setUpdated]=useState(false);
 const [success,setSuccess]=useState(false);
 const [open, setOpen] = useState("")
 const [form] = StyledForm.useForm()
@@ -45,17 +47,19 @@ const info = useSelector(selectors.info)
 const dispatch=useDispatch();
 
 const {id} = useParams()
+
 const UpdateInfo = async () => {
     
   dispatch(actions.getUserInfo());
    const res= await userApi.updateUser(info, id);
+ 
   if(res.data.status == 200){
      
       setSuccess(true);
       setTimeout(() => {setSuccess(false);  toastSuccess("Update user Successfully") },2000);
     
   }else{
-      toastError(res.data.message);
+      toastError(res.data.message||"Update failed, please try again8");
   }
  
 };
@@ -73,14 +77,15 @@ useEffect(() => {
   async function fetchData() {
     try {
       const response = await userApi.getUserDetail(id);
-      console.log(response);
+       dispatch(actions.setUser(response.data.data));
+       dispatch(actions.getUserInfo());
+       setUpdated(true);
     } catch (error) {
       console.error(error);
     }
   }
   fetchData();
-});
-
+},[]);
 
 
 const confirm = () => {
@@ -105,7 +110,7 @@ const confirm = () => {
    
       </Left>
 
-      <WrapperFormUser>
+     {updated && <WrapperFormUser>
         <Title>Personal Information</Title>
 
         <StyledForm
@@ -136,14 +141,14 @@ const confirm = () => {
           <Row>
             <Col span={24}>
               <Label level={5}>Email</Label>
-              <InputEmail />
+              <InputEmail/>
             </Col>
           </Row>
 
           <Row>
             <Col span={13}>
               <Label level={5}>Phone</Label>
-              <InputPhone />
+              <InputPhone  />
             </Col>
             <Col span={8}>
               <Label level={5}>Gender</Label>
@@ -179,7 +184,7 @@ const confirm = () => {
         </StyledForm>
         {success && <Success/>}  
         <UploadImg setOpen={setOpen} open={open}/>
-      </WrapperFormUser>
+      </WrapperFormUser>} 
     </FormAddUserSection>
   );
 }

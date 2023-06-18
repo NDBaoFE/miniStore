@@ -11,6 +11,17 @@ const productApi = {
         }
         return get(url, {}, { authorization: token });
     },
+
+    getProductDetail:(id)=>{
+        let url = `/product/${id}`
+        return get(url, {}, {authorization:token})
+    },
+
+
+
+
+
+    
     getAllVoucher: () => {
         const url = `/voucher`;
         return get(url, {}, { authorization: token });

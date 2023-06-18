@@ -58,10 +58,12 @@ export const Info = styled.div`
     border-radius: 0 0 8px 8px;
     h3 {
         margin: 10;
+        color:black;
     }
     h2 {
         margin: 0;
         margin-bottom: 10px;
+        black: black;
     }
 `;
 

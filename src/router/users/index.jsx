@@ -66,6 +66,7 @@ function UserManagement(){
     const [search,setSearch]=useState("");
     const [users,setUsers]=useState([]);
     console.log(users);
+    console.log(users[3]);
 
     useEffect(() => {
 
