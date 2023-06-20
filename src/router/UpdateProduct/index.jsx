@@ -21,7 +21,7 @@ import { useState } from "react";
 import UploadImg from "./components/Upload";
 import { toastError, toastSuccess } from "../../components/Toast";
 import { useParams } from "react-router-dom";
-
+import { useEffect } from 'react'
 function UpdateProduct() {
   const [updated, setUpdated] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -89,8 +89,9 @@ function UpdateProduct() {
   };
 
   return (
-    updated && 
-        <Container>
+    <Container>
+    {updated && 
+      <div>
       <StyledForm
         form={form}
         name="form1"
@@ -175,6 +176,8 @@ function UpdateProduct() {
       </StyledForm>
       {success && <Success />}
       <UploadImg setOpen={setOpen} open={open} />
+      </div>
+    }
     </Container>
       
     
