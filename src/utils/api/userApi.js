@@ -1,5 +1,5 @@
 import { get, post, remove, put } from "./ApiCaller";
-const token = localStorage.getItem("token");
+const token = localStorage.getItem("Authorization");
 
 const userApi = {
   getUser: (search, current) => {
@@ -9,7 +9,7 @@ const userApi = {
     } else {
       url = `/user?offset=${current}`;
     }
-    return get(url, {}, { token: token });
+    return get(url, {}, { authorization:token });
   },
 
   getUserDetail:(id) =>{
@@ -32,7 +32,7 @@ const userApi = {
 
   deleteUser: (id) => {
     const url = `/user/${id}`;
-    return remove(url,{},{},{token:token})
+    return remove(url,{},{},{authorization:token})
   },
 
   updateUser: (info,id)=>{
