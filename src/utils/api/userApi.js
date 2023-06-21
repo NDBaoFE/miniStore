@@ -22,7 +22,7 @@ const userApi = {
   },
 
   addUser: (user) => {
-    let url = "/user";
+    let url = "/user/add";
     return post(
       url,
       {
@@ -39,14 +39,14 @@ const userApi = {
   },
 
   updateUser: (info,id)=>{
-    const url = `/user/${id}`;
+    const url = `/user`;
     return put(url, {
         //user info to update
         name: info.name,
         phone: info.phone,
         gender: info.gender,
         dob: info.dob,
-        role: info.roleId,
+        roleId: info.roleId,
         address: info.address,
         email: info.email,
         userImg: info.userImg

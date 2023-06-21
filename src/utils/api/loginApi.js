@@ -3,7 +3,7 @@ const token = localStorage.getItem("Authorization");
 
 const loginApi = {
     login: (email, password) => {
-        const url = `/login`;
+        const url = "/login";
         return post(
             url,
             {
@@ -11,7 +11,7 @@ const loginApi = {
                 password: password,
             },
             {},
-            {Authorization: token}
+            {}
         );
     },
 }

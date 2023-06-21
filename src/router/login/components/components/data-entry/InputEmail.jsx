@@ -1,8 +1,8 @@
-import { Input, Form } from "antd";
+import {  Form } from "antd";
 import { useDispatch, useSelector } from "react-redux"
 import selectors from "../../slice/selectors";
 import { actions } from "../../slice";
-
+import { InputStyled } from "./inputStyle";
 
 const InputEmail = () =>{
     const dispatch = useDispatch();
@@ -10,10 +10,10 @@ const InputEmail = () =>{
     const email = useSelector(selectors.email);
     const handleEmailChange = (e) =>{
         dispatch(actions.setEmail(e.target.value));
-        dispatch(actions.getUserInfo());
+        dispatch(actions.getLoginInfo());
     };
 
-    console.log(email);
+
     return (
         <Form.Item
         name="email"
@@ -24,8 +24,7 @@ const InputEmail = () =>{
         }]}
         >
 
-            <Input
-            disabled
+            <InputStyled
             placeholder="abc123@gmail.com"
             value={email}
             onChange={handleEmailChange}

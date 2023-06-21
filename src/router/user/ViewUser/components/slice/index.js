@@ -6,18 +6,19 @@ export const initialState = {
   userId: 0,
   name: "",
   email: "",
-  dob: "",
+  dob:"",
   phone: "",
-  userImg: "",
+  userImg:"",
   address: "",
+
   roles: ["Admin", "Employee", "Guard"],
-  roleId: 1,
-  genders: ["Male", "Female"],
+  roleId:1,
+  genders:["Male", "Female"],
   gender: 0,
   info: {},
 };
 
-export const name = "AddUser";
+export const name = "editAccount";
 
 export const slice = createSlice({
   name,
@@ -32,13 +33,12 @@ export const slice = createSlice({
     setUser: (state, action) => {
       state.userId = action.payload.userId;
       state.name = action.payload.name;
-      state.dob = action.payload.dob;
+      state.dob = action.payload.dob
       state.email = action.payload.email;
       state.userImg = action.payload.userImg;
       state.phone = action.payload.phone;
       state.address = action.payload.address;
-      state.roleId = action.payload.roleId;
-      state.gender = action.gender;
+      state.gender = action.gender== true ? 1: 0;
     },
     getUserInfo: (state) => {
       state.info = {
@@ -48,7 +48,7 @@ export const slice = createSlice({
         dob: state.dob,
         phone: state.phone,
         address: state.address,
-        roleId: state.roleId,
+        roleId:state.roleId,
         gender: state.gender,
       };
     },

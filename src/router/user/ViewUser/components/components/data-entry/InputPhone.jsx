@@ -24,9 +24,8 @@ const InputPhone = () => {
         >
 
             <Input
-            disabled
             placeholder="0123456789"
-            
+            disabled
             onChange={handlePhoneChange}
             style={{marginTop:"10px"}}
             

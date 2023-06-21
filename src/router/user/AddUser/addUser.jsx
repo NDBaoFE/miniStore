@@ -9,7 +9,7 @@ import {
   StyledForm,
   Row,
   NotiModal,
-} from "./addUserStyle";
+} from "./addUserStyle";0
 
 import { actions } from "./components/slice";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
@@ -48,9 +48,11 @@ const AddUser = () => {
   const dispatch = useDispatch();
 
   const UpdateInfo = async () => {
+
     dispatch(actions.getUserInfo());
     const res = await userApi.addUser(info);
     if (res.data.status == 200) {
+
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);

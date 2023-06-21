@@ -22,6 +22,7 @@ import UserManagement from "./users";
 import Setting from "./setting";
 import UpdateUser from "./user/UpdateUser/updateUser";
 import UpdateProduct from "./UpdateProduct";
+import ViewUser from "./user/ViewUser/viewUser";
 
 
 
@@ -54,7 +55,16 @@ const publicRoute = [
     {
         
         index: true,
-        path: "user/:id",
+        path: "user/details/:id",
+        component: <ViewUser/>,
+        exact: true,
+        restrict: true,
+    },
+
+    {
+        
+        index: true,
+        path: "user/update/:id",
         component: <UpdateUser/>,
         exact: true,
         restrict: true,
