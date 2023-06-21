@@ -174,13 +174,21 @@ export const Wrapper = styled.div`
     align-items: center;
     justify-content: space-around;
     flex-direction: column;
+    .ant-carousel {
+        width: 1000px;
+        height: 300px;
+    }
 `;
 export const Card = styled.div`
     background-color: ${themes.colors.white};
-    min-height: 450px;
+    height: 450px;
     width: 300px;
     border-radius: 4px;
     position: relative;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 export const CardWrapper = styled.div`
     min-height: 400px;
@@ -193,6 +201,7 @@ export const Info = styled.div`
     position: absolute;
     top: 15px;
     left: 15px;
+    padding: 12px;
 `;
 export const Team = styled.div`
     padding: 0 15px;
@@ -267,6 +276,7 @@ export const Coefficient = styled.h1`
 export const ModalContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    position: relative;
 `;
 export const UserList = styled.div``;
 export const List = styled.div`
@@ -283,6 +293,50 @@ export const User = styled.div`
 export const StyledModal = styled(Modal)`
     .ant-modal-content {
         background: ${themes.colors.background};
+    }
+    .container {
+        display: flex;
+        justify-content: space-around;
+        padding: 12px;
+    }
+    .pos {
+        flex-grow: 1;
+    }
+    .employee-list {
+        padding: 20px;
+        text-align: center;
+        background: ${themes.colors.white};
+    }
+    .placeholder {
+        border: 2px dashed gray;
+        padding: 20px;
+        text-align: center;
+        width: 200px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        .employee {
+            position: absolute;
+        }
+    }
+
+    .slick-track {
+        display: flex;
+    }
+    .slick-slider {
+        padding: 20px;
+        height: 600px;
+        background-color: ${themes.colors.background};
+    }
+    .slick-prev,
+    .slick-next {
+        background-color: transparent;
+        &:hover {
+            color: ${themes.colors.primary};
+        }
+        color: ${themes.colors.primary};
     }
 `;
 
@@ -315,8 +369,10 @@ export const Title = styled.h3`
 export const EmployeeCard = styled.div`
     background: #fff;
     border-radius: 3px;
-    width: 100%;
-    padding: 8px;
+    width: 240px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     margin-bottom: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
@@ -343,7 +399,7 @@ export const GroupWrapper = styled.div`
     right: 60px;
     bottom: 20px;
     z-index: 99;
-    width: 200px;
+    width: 240px;
     height: 20px;
     background: ${themes.colors.blackText};
     border-radius: 8px;
@@ -353,7 +409,7 @@ export const GroupWrapper = styled.div`
     justify-content: space-around;
     color: ${themes.colors.gray};
     div {
-        cursor: pointer;    
+        cursor: pointer;
         &:hover {
             text-decoration: underline;
         }
@@ -389,3 +445,30 @@ export const NotiModal = styled(Modal)`
         background-color: ${themes.colors.primary};
     }
 `;
+export const TabContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+export const ChooseContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+export const ModalWrapper = styled.div``;
+export const PageAction = styled.div`
+    display: flex;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    background-color: ${themes.colors.white};
+    cursor: pointer;
+    &:hover {
+        color: ${themes.colors.white};
+        background-color: ${themes.colors.primary};
+    }
+`;
+export const Left = styled.div``;
+export const Right = styled.div``;

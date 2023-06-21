@@ -6,22 +6,16 @@ import { BsExclamationCircle } from "react-icons/Bs";
 import { toastError, toastSuccess } from "../../../components/Toast";
 import productApi from "../../../utils/api/productApi";
 
-function ActionGroup({setOpen,selectedValue,allPositions}) {
+function ActionGroup({setOpen ,setOpenModal,positions}) {
 
-function completeUserShiftsWithUserId(userShifts, positions) {
-  const completedUserShifts = userShifts.map((userShift,index) => {
-    const userId=positions[index].employeeId;
-  
-    return { userShiftId: userShift.userShiftId, userId };
-  });
-
-  return completedUserShifts;
-}
-
-const completedUserShifts = completeUserShiftsWithUserId(selectedValue, allPositions);
+// function completeUserShiftsWithUserId(userShifts, positions) {
 
   const handleOk = async () => {
-      const res= await productApi.assignEmployee(completedUserShifts);
+    const adjustedArray = positions.map(item => ({
+      userShiftId: item.userShiftId,
+      userId: item.user.userId
+    }));
+      const res= await productApi.assignEmployee(adjustedArray);
       if(res.data.status === 200 ){
         toastSuccess(res.data.message);
         setOpen(false);
@@ -29,6 +23,7 @@ const completedUserShifts = completeUserShiftsWithUserId(selectedValue, allPosit
               toastError(res.data.message);
               setOpen(false);
             }
+      console.log("ok");
   }
 
   const handleConfirm = () => {
@@ -55,6 +50,7 @@ const handleCancel = () => {
     <GroupWrapper>
        
         <div onClick={handleCancel}>Cancel</div>
+        <FinishButton onClick={()=>setOpenModal(true)} >Start</FinishButton>
         <FinishButton onClick={()=>confirm()}>Confirm</FinishButton>
     </GroupWrapper>
   )

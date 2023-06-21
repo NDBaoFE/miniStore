@@ -7,7 +7,6 @@ export const themes = {
         primary1: "#2E7DFF",
         primary5: "#020D26",
         neutro5: "#D9D9D9",
-        primary400: "#45CE7C",
         danger: "#FF4D4F",
         calendulaGold: "#FFC53D",
         submenu: "#818181",
@@ -35,6 +34,10 @@ export const themes = {
         primary700: "rgba(18, 126, 63, 0.8)",
         stripe: "#f5f5f5",
         primary200: "#9dd7af",
+        primary300: "#73c98f",
+        primary400: "#53bd78",
+        primary600: "#26a256",
+        primary800: "#127e3f",
         shadow: "rgba(0, 0, 0, 0.5)",
     },
 };

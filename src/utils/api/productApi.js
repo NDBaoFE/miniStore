@@ -58,7 +58,7 @@ const productApi = {
         return post(url, [...userShifts], {}, { authorization: token });
     },
     importProduct: (productList) => {
-        let url = "/productlist";
+        let url = "/product";
         return post(url, productList, {}, { authorization: token });
     },
     login: (email, password) => {
