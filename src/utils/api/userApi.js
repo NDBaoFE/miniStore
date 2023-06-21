@@ -1,5 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { get, post, remove, put } from "./ApiCaller";
+<<<<<<< HEAD
+=======
+const token = localStorage.getItem("Authorization");
+>>>>>>> 651102b891298370ffd04a09bfc30db41a5f7bc9
 
 const token = localStorage.getItem('Authorization');
 const userApi = {
@@ -12,7 +16,11 @@ const userApi = {
     } else {
       url = `/user?offset=${current}`;
     }
+<<<<<<< HEAD
     return get(url, {}, {Authorization:token});
+=======
+    return get(url, {}, { authorization:token });
+>>>>>>> 651102b891298370ffd04a09bfc30db41a5f7bc9
   },
 
   getUserDetail:(id) =>{
@@ -35,7 +43,11 @@ const userApi = {
 
   deleteUser: (id) => {
     const url = `/user/${id}`;
+<<<<<<< HEAD
     return remove(url,{},{},{Authorization:token})
+=======
+    return remove(url,{},{},{authorization:token})
+>>>>>>> 651102b891298370ffd04a09bfc30db41a5f7bc9
   },
 
   updateUser: (info,id)=>{
