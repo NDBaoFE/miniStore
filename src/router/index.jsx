@@ -62,7 +62,7 @@ const publicRoute = [
     {
         
         index: true,
-        path: "user/new",
+        path: "user/add",
         component: <AddUser/>,
         exact: true,
         restrict: true,

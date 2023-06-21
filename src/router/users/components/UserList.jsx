@@ -15,8 +15,6 @@ import userApi from "../../../utils/api/userApi";
 
 function UserList({ search, users, setUsers, columns, setCurrent, current }) {
   const navigate = useNavigate();
-
-
   const [max, setMax] = useState(0);
 
   const rowClassName = (record, index) => {

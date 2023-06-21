@@ -1,20 +1,23 @@
+/* eslint-disable no-unused-vars */
 import { get, post, remove, put } from "./ApiCaller";
-const token = localStorage.getItem("token");
 
+const token = localStorage.getItem('Authorization');
 const userApi = {
+
   getUser: (search, current) => {
+    console.log(token)
     let url = "";
     if (search !== "") {
       url = `/user/search?keyword=${search}&offset=${current}`;
     } else {
       url = `/user?offset=${current}`;
     }
-    return get(url, {}, { token: token });
+    return get(url, {}, {Authorization:token});
   },
 
   getUserDetail:(id) =>{
     let url = `/user/details?id=${id}`
-    return get(url, {}, {authorization:token})
+    return get(url, {}, {Authorization:token})
 
   },
 
@@ -26,13 +29,13 @@ const userApi = {
         ...user,
       },
       {},
-      {token: token}
+      {Authorization: token}
     );
   },
 
   deleteUser: (id) => {
     const url = `/user/${id}`;
-    return remove(url,{},{},{token:token})
+    return remove(url,{},{},{Authorization:token})
   },
 
   updateUser: (info,id)=>{
@@ -49,7 +52,7 @@ const userApi = {
         userImg: info.userImg
 
 
-    },{},{token: token})
+    },{},{ Authorization: token })
   }
 };
 

@@ -1,5 +1,6 @@
 import "./loginform.css";
-
+import { useState } from 'react';
+import { post } from '../../utils/api/ApiCaller';
 import {
   InputForm,
   LoginButton,
@@ -13,6 +14,7 @@ import {
   ColorLetter,
 } from "./style";
 import store from "../../assets/image/Store.png";
+import Password from "antd/es/input/Password";
 
 const onFinish = (values) => {
   console.log("Success:", values);
@@ -20,7 +22,26 @@ const onFinish = (values) => {
 const onFinishFailed = (errorInfo) => {
   console.log("Failed:", errorInfo);
 };
+
+
 const LoginForm = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    try {
+      const response = await post('http://localhost:8080/ministore/login', { email, password });
+      console.log(response.data);
+      // handle success
+    } catch (error) {
+      console.error(error);
+      // handle error
+    }
+  }
+
+
   return (
     <Container>
       <WrapForm>
@@ -40,7 +61,7 @@ const LoginForm = () => {
               },
             ]}
           >
-            <InputForm placeholder="Enter your email" />
+            <InputForm placeholder="Enter your email" value={email}/>
           </FormItem>
 
           <FormItem 
@@ -53,7 +74,7 @@ const LoginForm = () => {
                 message: "Please input your password!",
               },
             ]}>
-            <InputForm placeholder="Enter your password" type="password"/>
+            <InputForm placeholder="Enter your password" type="password" value={password}/>
           </FormItem>
 
           <FormItem>
