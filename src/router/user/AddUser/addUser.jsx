@@ -75,6 +75,7 @@ const confirm = () => {
       okText: 'Xác nhận',
       cancelText: 'Huỷ',
       onOk: () => {
+
           form.submit();
           // openNotification();
       },

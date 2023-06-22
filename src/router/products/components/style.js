@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-
 import { themes } from "../../../utils/theme";
 import { Cascader, Table } from "antd";
 import { Input } from "antd";
@@ -101,9 +100,11 @@ export const Button = styled.div`
     padding: 12px 12px;
     color: ${themes.colors.white};
     border-radius: 8px;
+
     text-align: center;
     display: flex;
     align-items: center;
+    justify-content: center;
     a {
         color: ${themes.colors.white};
     }
