@@ -45,7 +45,8 @@ const LoginForm = () => {
       
     
     } else {
-      toastError(res.data.message);
+      toastError(res.data.message||"Login Failed");
+
     }
   };
 

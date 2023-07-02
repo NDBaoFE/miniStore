@@ -11,7 +11,7 @@ const loginApi = {
                 password: password,
             },
             {},
-            {}
+            {Authorization: token}
         );
     },
 }

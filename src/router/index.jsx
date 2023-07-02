@@ -6,7 +6,7 @@ import PublicRoute from "./EmployeeRoute";
 import Home from "./home";
 import Login from "./login";
 import AboutUS from "./aboutus/aboutus";
-import Profile from "./profile";
+
 import Revenue from "./revenue";
 import Checkout from "./checkout";
 import VoucherApply from "./voucherApplying";
@@ -23,6 +23,7 @@ import Setting from "./setting";
 import UpdateUser from "./user/UpdateUser/updateUser";
 import UpdateProduct from "./UpdateProduct";
 import ViewUser from "./user/ViewUser/viewUser";
+import Profile from "./profile/profile";
 
 
 

@@ -9,8 +9,8 @@ import {
   StyledForm,
   Row,
   NotiModal,
-} from "./updateUserStyle";
-
+  PasswordModal,PasswordBtn
+} from "./profileStyle";
 import { actions } from "./components/slice";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import {
@@ -24,19 +24,24 @@ import SelectGender from "./components/components/data-entry/SelectGender";
 import SelectRole from "./components/components/data-entry/SelectRole";
 import AvatarSection from "./components/AvatarSection";
 import ActionGroup from "./components/ActionGroup";
-import Success from "../../../components/Success";
+import Success from "../../components/Success";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import selectors from "./components/slice/selectors";
-import userApi from "../../../utils/api/userApi";
-import { toastError, toastSuccess } from "../../../components/Toast";
+import InputPayslip from "./components/components/data-entry/InputPayslip";
+import { toastError, toastSuccess } from "../../components/Toast";
 import Photo from "./components/Photo";
 import UploadImg from "./components/Upload";
 import { useParams } from "react-router-dom";
-
 import { useEffect } from "react";
+import profileApi from "../../utils/api/profileApi";
+import InputPassword from "./components/components/data-entry/InputPassword";
+import PayslipList from "./components/components/PayslipList";
+import ViewPassword from './components/components/data-entry/ViewPassword'
+import { Button, Modal } from "antd";
 
-function UpdateUser() {
+
+function Profile() {
   const [updated, setUpdated] = useState(false);
   const [success, setSuccess] = useState(false);
   const [open, setOpen] = useState("");
@@ -48,14 +53,34 @@ function UpdateUser() {
   const address = useSelector(selectors.address);
   const roleId = useSelector(selectors.roleId);
   const gender = useSelector(selectors.gender);
+  const password = useSelector(selectors.password);
+  const payslip = useSelector(selectors.payslip);
   const info = useSelector(selectors.info);
   const dispatch = useDispatch();
 
+  const [openModal, setOpenModal] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [modalText, setModalText] = useState(false);
+  const showModalPassword = () => {
+    setOpenModal(true);
+  };
+  const handleOk = () => {
+    setModalText("The modal will be closed after two seconds");
+    setConfirmLoading(true);
+    setTimeout(() => {
+      setOpenModal(false);
+      setConfirmLoading(false);
+    }, 1000);
+  };
+  const handleCancel = () => {
+    console.log("Clicked cancel button");
+    setOpenModal(false);
+  };
   const { id } = useParams();
 
   const UpdateInfo = async () => {
-    dispatch(actions.getUserInfo());
-    const res = await userApi.updateUser(info, id);
+    dispatch(actions.getProfileInfo());
+    const res = await profileApi.updateProfile(info, id);
 
     if (res.data.status == 200) {
       setSuccess(true);
@@ -79,16 +104,18 @@ function UpdateUser() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await userApi.getUserDetail(id);
+        const response = await profileApi.getProfileDetail();
         dispatch(actions.setUser(response.data.data));
-        dispatch(actions.getUserInfo());
+        console.log(response.data.data);
+        dispatch(actions.getProfileInfo());
+
         setUpdated(true);
       } catch (error) {
         console.error(error);
       }
     }
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   const confirm = () => {
     NotiModal.confirm({
@@ -106,13 +133,65 @@ function UpdateUser() {
     });
   };
 
+  const params = useParams();
+  const [reload, SetReload] = useState(false);
+  const [current, setCurrent] = useState(parseInt(params.page, 9) || 1);
+
+  const columns = [
+    {
+      title: "userId",
+      dataIndex: "userId",
+      key: `userId`,
+    },
+
+    {
+      title: "Salary",
+      dataIndex: "salary",
+      key: `salary`,
+    },
+
+    {
+      title: "StartDate",
+      dataIndex: "startDate",
+      key: `startDate`,
+    },
+    {
+      title: "EndDate",
+      dataIndex: "endDate",
+      key: `endDate`,
+    },
+    {
+      title: "totalHour",
+      dataIndex: "totalHour",
+      key: `shiftCount`,
+    },
+
+    {
+      title: "Date",
+      dataIndex: "date",
+      key: `date`,
+    },
+
+    {
+      title: "isPaid",
+      dataIndex: "isPaid",
+      key: `isPaid`,
+      render: (_, record) => (
+        <span>{record.isPaid? 'Yes' : record.isPaid== 'No'? 'No': 'Not yet'}</span>
+      ),
+    },
+  ];
+
+  const [search, setSearch] = useState("");
+  const [payslips, setPayslips] = useState([]);
+
   return (
     <FormAddUserSection>
       <Left>
         <AvatarSection></AvatarSection>
       </Left>
 
-      {updated && 
+      {updated && (
         <WrapperFormUser>
           <Title>Personal Information</Title>
 
@@ -123,10 +202,12 @@ function UpdateUser() {
               name: name,
               phone: phone,
               email: email,
+              password: password,
               gender: gender,
               roleId: roleId,
               address: address,
               dob: dob,
+              payslip: payslip,
             }}
             onFinish={handleFinish}
             onFinishFailed={handleFinishFailed}
@@ -150,6 +231,49 @@ function UpdateUser() {
               <Col span={24}>
                 <Label level={5}>Email</Label>
                 <InputEmail />
+              </Col>
+            </Row>
+
+            <Row>
+              <Col span={13}>
+                <Label level={5}>Password</Label>
+                {/* <InputPassword /> */}
+                <PasswordBtn  onClick={showModalPassword}>
+                  Open the password
+                </PasswordBtn>
+                <PasswordModal
+                  title="Change the password"
+                  open={openModal}
+                  onOk={handleOk}
+                  confirmLoading={confirmLoading}
+                  onCancel={handleCancel}
+                >
+                  <Row>
+                    <Col span={24}>
+                      <Label level={5}>Old Password</Label>
+                     <ViewPassword></ViewPassword>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col span={24}>
+                      <Label level={5}>New Password</Label>
+                      <InputPassword></InputPassword>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col span={24}>
+                      <Label level={5}>Comfirm Password</Label>
+                      <InputPassword></InputPassword>
+                    </Col>
+                  </Row>
+                </PasswordModal>
+              </Col>
+
+              <Col span={8}>
+                <Label level={5}>Payslip</Label>
+                <InputPayslip />
               </Col>
             </Row>
 
@@ -182,15 +306,28 @@ function UpdateUser() {
                 <InputAddress />
               </Col>
             </Row>
-
+            <Row>
+              <Col span={24}>
+                <Label level={5}>Payslip List</Label>
+                <PayslipList
+                  search={search}
+                  setPayslips={setPayslips}
+                  payslips={payslips}
+                  columns={columns}
+                  setCurrent={setCurrent}
+                  current={current}
+                  reload={reload}
+                />
+              </Col>
+            </Row>
             <ActionGroup confirm={confirm} />
           </StyledForm>
           {success && <Success />}
           <UploadImg setOpen={setOpen} open={open} />
         </WrapperFormUser>
-      }
+      )}
     </FormAddUserSection>
   );
 }
 
-export default UpdateUser;
+export default Profile;

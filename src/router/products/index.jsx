@@ -124,7 +124,7 @@ function ProductManagement() {
         dataIndex:'action',
         render: (_, record) => (
           <StyledSpace size="middle">
-            <Link to={`/product/${record.productId}`}>Edit </Link>
+            <Link to={`/product/${record.productId}`}>View</Link>
             <div onClick={()=>confirm(record.productId)}>Delete</div>
           </StyledSpace>
         ),
