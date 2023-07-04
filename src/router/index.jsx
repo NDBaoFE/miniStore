@@ -24,7 +24,8 @@ import UpdateUser from "./user/UpdateUser/updateUser";
 import UpdateProduct from "./UpdateProduct";
 import ViewUser from "./user/ViewUser/viewUser";
 import Profile from "./profile/profile";
-
+import Notification from "../components/Notification/Notification";
+import Password from "./password/Password";
 
 
 const publicRoute = [
@@ -77,10 +78,27 @@ const publicRoute = [
         component: <AddUser/>,
         exact: true,
         restrict: true,
-    },{
+    }, 
+    {
+        
+        index: true,
+        path: "profile/changePassword",
+        component: <Password/>,
+        exact: true,
+        restrict: true,
+    },
+    
+    {
         index: true,
         path: "profile",
         component: <Profile/>,
+        exact: true,
+        restrict: true,
+    },
+    {
+        index: true,
+        path: "notify/:id",
+        component: <Notification/>,
         exact: true,
         restrict: true,
     },

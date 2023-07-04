@@ -18,7 +18,10 @@ function BreadCrumbHeader() {
         '/user/details':'User Detail',
         '/user/update':'User Update',
         '/setting' : 'Setting',
-        '/setting/general' : 'General'
+        '/setting/general' : 'General',
+        '/noti':'Notification',
+        '/noti/detail':'Detail',
+        
       };
     const location = useLocation();
     
