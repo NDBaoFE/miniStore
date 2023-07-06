@@ -4,10 +4,10 @@ import { useState } from "react";
 import notifyApi from "../../utils/api/notifyApi";
 import "./notifistyle.css";
 import { useParams } from "react-router-dom";
-import { useDispatch , useSelector} from "react-redux";
+import { useDispatch} from "react-redux";
 import { actions } from "./slice";
-import selectors from "./slice/selectors";
-import Item from "antd/es/list/Item";
+
+
 
 const Notification = () => {
   const {id} = useParams()
@@ -37,7 +37,6 @@ const Notification = () => {
   }, [dispatch, id]);
 
 
-console.log(content);
 
   return (
     <div className="wrapper-noti-detail">

@@ -13,7 +13,7 @@ export const initialState = {
   roles: ["Admin", "Employee", "Guard"],
   roleId:1,
   genders:["Male", "Female"],
-  gender: 0,
+  gender: true,
   password: 0,
   info: {},
   payslip: 0
@@ -35,9 +35,19 @@ export const slice = createSlice({
       state.payslip = action.payload.payslip;
     },
 
+    setSalary:(state,action)=>{
+      state.salary = action.payload.salary;
+    },
+
     getPayslipInfo: (state) =>{
       state.info={
         payslip: state.payslip
+      }
+    },
+
+    getSalaryInfo: (state) =>{
+      state.info ={
+        salary: state.salary
       }
     },
 

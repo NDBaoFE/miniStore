@@ -1,4 +1,4 @@
-import { Col } from "antd";
+import { Col , Input} from "antd";
 
 import {
   FormAddUserSection,
@@ -9,7 +9,7 @@ import {
   StyledForm,
   Row,
   NotiModal,
-  PasswordModal,PasswordBtn
+  PasswordBtn
 } from "./profileStyle";
 import { actions } from "./components/slice";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
@@ -28,18 +28,17 @@ import Success from "../../components/Success";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import selectors from "./components/slice/selectors";
-import InputPayslip from "./components/components/data-entry/InputPayslip";
+
 import { toastError, toastSuccess } from "../../components/Toast";
 import Photo from "./components/Photo";
 import UploadImg from "./components/Upload";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import profileApi from "../../utils/api/profileApi";
-import InputPassword from "./components/components/data-entry/InputPassword";
 import PayslipList from "./components/components/PayslipList";
-import ViewPassword from './components/components/data-entry/ViewPassword'
-import { Button, Modal } from "antd";
 
+import { useNavigate } from "react-router-dom";
+import salaryApi from "../../utils/api/salaryApi";
 
 function Profile() {
   const [updated, setUpdated] = useState(false);
@@ -57,21 +56,17 @@ function Profile() {
   const payslip = useSelector(selectors.payslip);
   const info = useSelector(selectors.info);
   const dispatch = useDispatch();
-
+const navigate = useNavigate()
   const [openModal, setOpenModal] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState(false);
+
+  
+  
+
   const showModalPassword = () => {
-    setOpenModal(true);
+    navigate('/user/changePassword')
   };
-  const handleOk = () => {
-    setModalText("The modal will be closed after two seconds");
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setOpenModal(false);
-      setConfirmLoading(false);
-    }, 1000);
-  };
+
   const handleCancel = () => {
     console.log("Clicked cancel button");
     setOpenModal(false);
@@ -101,14 +96,16 @@ function Profile() {
     console.log(" Hãy nhập tất cả các field !!");
   };
 
+
+  const [salary, setSalary] = useState([]);
+
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await profileApi.getProfileDetail();
         dispatch(actions.setUser(response.data.data));
-        console.log(response.data.data);
+        console.log(response.data.data)
         dispatch(actions.getProfileInfo());
-
         setUpdated(true);
       } catch (error) {
         console.error(error);
@@ -117,6 +114,23 @@ function Profile() {
     fetchData();
   }, [dispatch]);
 
+
+  useEffect(() => {
+    async function fetchSalaryData() {
+      try {
+        const response = await salaryApi.getSalaryOfUser();
+        setSalary(response.data.data.salary);
+        console.log(response.data.data.salary); // Assuming the salary data is directly available in the response
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchSalaryData();
+  }, []);
+
+  
+  
   const confirm = () => {
     NotiModal.confirm({
       maskClosable: true,
@@ -234,48 +248,7 @@ function Profile() {
               </Col>
             </Row>
 
-            <Row>
-              <Col span={13}>
-                <Label level={5}>Password</Label>
-                {/* <InputPassword /> */}
-                <PasswordBtn  onClick={showModalPassword}>
-                  Open the password
-                </PasswordBtn>
-                <PasswordModal
-                  title="Change the password"
-                  open={openModal}
-                  onOk={handleOk}
-                  confirmLoading={confirmLoading}
-                  onCancel={handleCancel}
-                >
-                  <Row>
-                    <Col span={24}>
-                      <Label level={5}>Old Password</Label>
-                     <ViewPassword></ViewPassword>
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    <Col span={24}>
-                      <Label level={5}>New Password</Label>
-                      <InputPassword></InputPassword>
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    <Col span={24}>
-                      <Label level={5}>Comfirm Password</Label>
-                      <InputPassword></InputPassword>
-                    </Col>
-                  </Row>
-                </PasswordModal>
-              </Col>
-
-              <Col span={8}>
-                <Label level={5}>Payslip</Label>
-                <InputPayslip />
-              </Col>
-            </Row>
+ 
 
             <Row>
               <Col span={13}>
@@ -284,7 +257,7 @@ function Profile() {
               </Col>
               <Col span={8}>
                 <Label level={5}>Gender</Label>
-                <SelectGender />
+                <SelectGender/>
               </Col>
             </Row>
 
@@ -305,6 +278,25 @@ function Profile() {
                 <Label level={5}>Address</Label>
                 <InputAddress />
               </Col>
+
+              
+            </Row>
+
+            <Row>
+              <Col span={13}>
+                <Label level={5}>Password</Label>
+              
+                 <PasswordBtn  onClick={showModalPassword}>
+                  Open the password
+                </PasswordBtn> 
+  
+              </Col>
+              
+              <Col span={7}>
+                <Label level={5}>Salary</Label>
+                <Input value={salary} disabled/>
+              </Col>
+      
             </Row>
             <Row>
               <Col span={24}>
@@ -320,6 +312,7 @@ function Profile() {
                 />
               </Col>
             </Row>
+            
             <ActionGroup confirm={confirm} />
           </StyledForm>
           {success && <Success />}

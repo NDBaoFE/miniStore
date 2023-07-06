@@ -2,12 +2,11 @@ import {put} from './ApiCaller'
 const token = localStorage.getItem('Authorization');
 
 const passwordApi = {
-    
-    changePassword: (info, id)=>{
-        let url = ``
+    changePassword: (info)=>{
+        const url = `/user/changePassword`
         return put(url, {
-            password: info.password
-    
+            oldPassword: info.password,
+            newPassword: info.newPassword
     
     
         },{}, {Authorization: token})

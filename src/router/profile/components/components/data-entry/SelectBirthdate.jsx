@@ -9,7 +9,7 @@ const SelectDateOfBirth = () => {
     const dispatch = useDispatch();
 
     const birthdate = useSelector(selectors.dob);
-
+    
     const handleDobChange = (date) => {
         dispatch(actions.setDob(moment(date).format('YYYY/MM/DD')));
         dispatch(actions.getUserInfo());

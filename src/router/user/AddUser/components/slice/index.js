@@ -13,7 +13,7 @@ export const initialState = {
   roles: ["Admin", "Employee", "Guard"],
   roleId: 1,
   genders: ["Male", "Female"],
-  gender: 0,
+  gender: true,
   info: {},
 };
 
@@ -38,7 +38,7 @@ export const slice = createSlice({
       state.phone = action.payload.phone;
       state.address = action.payload.address;
       state.roleId = action.payload.roleId;
-      state.gender = action.gender;
+      state.gender = action.gender == true ? 1:0;
     },
     getUserInfo: (state) => {
       state.info = {

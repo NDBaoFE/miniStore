@@ -82,7 +82,7 @@ const publicRoute = [
     {
         
         index: true,
-        path: "profile/changePassword",
+        path: "user/changePassword",
         component: <Password/>,
         exact: true,
         restrict: true,

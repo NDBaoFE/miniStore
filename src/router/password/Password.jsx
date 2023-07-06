@@ -1,13 +1,13 @@
 import "./passwordStyle.css";
 import { Row, Label, StyleForm } from "./StyledPassword";
 import { SettingOutlined } from "@ant-design/icons";
-import { Col } from "antd";
+import { Col, Input } from "antd";
 import InputPassword from "./components/data-entry/InputPassword";
 import ActionGroup from "../profile/components/ActionGroup";
 import { useSelector } from "react-redux";
 import selectors from "./slice/selectors";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+
 import { actions } from "./slice";
 import passwordApi from "../../utils/api/passwordApi";
 import { NotiModal } from "./StyledPassword";
@@ -15,6 +15,7 @@ import { toastSuccess, toastError } from "../../components/Toast";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import Success from "../../components/Success";
 import { useState } from "react";
+import InputNewPassword from "./components/data-entry/InputNewPassword";
 
 
 const Password = () => {
@@ -22,23 +23,20 @@ const Password = () => {
   const [success, setSuccess] = useState(false);
   const info = useSelector(selectors.info);
   const password = useSelector(selectors.password);
+  const newPassword = useSelector(selectors.newPassword)
+
   const [form] = StyleForm.useForm();
   const dispatch = useDispatch();
-  const [openModal, setOpenModal] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState(false);
+  
 
-  const handleOk = () => {
-    setModalText("The modal will be closed after two seconds");
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setOpenModal(false);
-      setConfirmLoading(false);
-    }, 1000);
-  };
 
-  const handleFinish = () => {
-    UpdatePassword();
+
+  const handleFinish = async (values) => {
+    if (values.newPassword !== values.confirmNewPassword) {
+      toastError("New password and confirm password do not match");
+      return;
+    }
+    UpdatePassword()
   };
 
   const handleFinishFailed = () => {
@@ -49,20 +47,20 @@ const Password = () => {
     console.log("Clicked cancel button");
     setOpenModal(false);
   };
-  const { id } = useParams();
+ 
 
   const UpdatePassword = async () => {
-    dispatch(actions.getProfileInfo());
-    const res = await passwordApi.changePassword(info, id);
-
+    dispatch(actions.getPasswordInfo());
+    const res = await passwordApi.changePassword(info);
+   
     if (res.data.status == 200) {
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
-        toastSuccess("Update user Successfully");
+        toastSuccess("Update password Successfully");
       }, 2000);
     } else {
-      toastError(res.data.message || "Update failed, please try again");
+      toastError(res.data.message || "Change password failed, please try again");
     }
   };
 
@@ -82,8 +80,6 @@ const Password = () => {
     });
   };
 
-  const params = useParams();
-
   return (
     <div className="container">
       <div className="wrapper-change-password">
@@ -95,13 +91,16 @@ const Password = () => {
             Change Password <br></br>
             You should use strong new password you have not use yet
           </div>
+          <hr />
         </div>
 
         <StyleForm
           form={form}
           name="userForm"
           initialValues={{
-            password: password,
+            oldPassword: password,
+            newPassword: newPassword
+
           }}
           onFinish={handleFinish}
           onFinishFailed={handleFinishFailed}
@@ -115,14 +114,22 @@ const Password = () => {
           <Row>
             <Col span={13}>
               <Label level={5}>New Password</Label>
-              <InputPassword></InputPassword>
+              <InputNewPassword></InputNewPassword>
             </Col>
           </Row>
 
           <Row>
             <Col span={13}>
               <Label level={5}>Confirm New Password</Label>
-              <InputPassword></InputPassword>
+              <Input.Password
+                name="confirmNewPassword"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please confirm your new password",
+                  },
+                ]}
+              />
             </Col>
           </Row>
 
