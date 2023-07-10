@@ -13,9 +13,11 @@ function ActionGroup({setOpen ,setOpenModal,positions,setLoaded}) {
   const handleOk = async () => {
     const adjustedArray = positions.map(item => ({
       userShiftId: item.userShiftId,
-      userId: item.user.userId
+      userId: item.user?.userId ? item.user.userId:null
     }));
-      const res= await productApi.assignEmployee(adjustedArray);
+    const filterArray=adjustedArray.filter(item=>item.userId!==null);
+      console.log(adjustedArray);
+      const res= await productApi.assignEmployee(filterArray);
       if(res.data.status === 200 ){
         toastSuccess(res.data.message);
         setLoaded(true);

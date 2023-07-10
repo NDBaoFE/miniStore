@@ -181,7 +181,7 @@ const handleDrag = (e, data) => {
   
   <div className="timetable" style={{ color: "black" }} ref={ref3} >
     <ActionHeader ref={ref2}>
-    <StyledButton type="primary"  style={{position:"absolute",left:"20px"}} onClick={()=>setOpenCheckin(true)}>Checkin</StyledButton>
+
       { userShift[0] && <Daytime>{userShift[userShift.length-1][0]?.date}-{userShift[0][0]?.date}</Daytime>}
       <ButtonContainer>
      
@@ -259,7 +259,7 @@ const handleDrag = (e, data) => {
 </div>
 {requests && <RequestTable requests={requests}  />}
 <ApplyTour openTour={openTour} setOpenTour={setOpenTour} ref1={ref1} ref2={ref2}  ref3={ref3} />
-<CheckinModal openCheckin={openCheckin} setOpenCheckin={setOpenCheckin}   />
+
 <ScheduleComponent open={open}  setOpen={setOpen} selectedValue={selectedValue} positions={positions} setPositions={setPositions}  setLoaded={setLoaded} loaded={loaded} requests={requests}  openCheckin={openCheckin} setOpenCheckin={setOpenCheckin}/></> ;
 };
 

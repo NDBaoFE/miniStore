@@ -18,7 +18,9 @@ const columns = [
   {
     title: 'Saler Name',
     dataIndex: 'saler-name',
-    
+    render: (_, record) => (
+      <span>{record.orderUser.name}</span>
+    ),
   },
 
   {

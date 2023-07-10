@@ -199,7 +199,7 @@ const handleColClick=(userShift)=>{
         if (day.id !== 7) {
           const shifts = userShift[day.id]?.slice(3) || [];
           return (
-            <DayCol key={day.id} className="day-column">
+            <DayCol key={day.id} className="day-column" onClick={()=>handleColClick(userShift[day.id])}>
               <div className="shift-column">
                 {/* Render Guard time slots */}
                 {shifts

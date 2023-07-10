@@ -1,26 +1,27 @@
+/* eslint-disable react/prop-types */
 
 import { Image } from 'antd'
 import {  Body, Email, EmployeeCard, HeroWrapper, Name, Wrapper } from './style'
-import { employees } from './data'
-function EmployeeRank() {
+
+function EmployeeRank({data}) {
   return (
-    <Wrapper style={{marginTop: '50px', marginBottom: '50px',flexDirection:'column',width:'49%'}}>
+    <Wrapper style={{marginTop: '50px', marginBottom: '50px',flexDirection:'column',width:'49%',justifyContent:"flex-start"}}>
         <HeroWrapper> <h2>Our Top Employees
         </h2></HeroWrapper>
-       
-        <Body style={{background:"#fff",padding:"0 20px"}}>
-            {employees.map(item =>{
+       {data &&  <Body style={{background:"#fff",padding:"0 20px",height:"100%"}}>
+            {data.userRank.map(item =>{
             
-            return(<EmployeeCard key={item.id}>
-                <div style={{display:'flex',justifyContent:'space-between'}}><Image src={item.image} />
+            return(<EmployeeCard key={item[0].user.userId}>
+                <div style={{display:'flex',justifyContent:'space-between'}}><Image src={item[0].user.userImg} />
                     <div>
-                        <Name>{item.name}</Name>
-                        <Email>{item.email}</Email>
+                        <Name>{item[0].user.name}</Name>
+                        <Email>{item[0].user.email}</Email>
                     </div></div>
-                    <div>40%</div>
+                    <div>{Math.floor(item[1].totalRevenue/data.allTimeRevenue[0].revenue*100)}%</div>
                     
             </EmployeeCard>)})}
-        </Body>
+        </Body>}
+       
     </Wrapper>
   )
 }

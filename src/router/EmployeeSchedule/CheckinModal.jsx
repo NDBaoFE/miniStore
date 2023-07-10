@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { themes } from "../../utils/theme";
 import { toastError, toastSuccess } from "../../components/Toast";
-import useAuth from "../../utils/useAuth";
+
 import productApi from "../../utils/api/productApi";
 
 const CheckinModal = ({ openCheckin,setOpenCheckin,checkinShift}) => {

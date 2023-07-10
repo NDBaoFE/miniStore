@@ -28,6 +28,7 @@ import Timetable from "./weeklyschedule";
 import EmployeeTimetable from "./EmployeeSchedule";
 import TicketPage from "./ticket";
 import TicketDetail from "./TicketDetail";
+import Error403Page from "./403/Error403Page";
 
 
 const publicRoute = [
@@ -265,9 +266,8 @@ const employeeRoute = [
                     </Route>
                 </Route>
                 <Route path="/404" element={<ErrorPage />} />
-                {/* /* <Route path="/auth" element={<Auth />} />
-                <Route path="/403" element={<Error403Page />} />
-                <Route path="*" element={<Error404Page />} /> */ }
+                 <Route path="/403" element={<Error403Page />} /> 
+                <Route path="*" element={<ErrorPage />} /> 
             </Routes>
         </BrowserRouter>
     );

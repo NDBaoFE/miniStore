@@ -11,7 +11,7 @@ export const Container = styled.div`
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
-    line-height: 17px;
+    line-height: 16px;
     border-radius: 4px;
     height: 100vh;
 `;
@@ -41,10 +41,14 @@ export const Header = styled.div`
     justify-content: space-around;
     width: 100%;
     padding: 0 10px;
+    position: relative;
 `;
 
 export const Number = styled.div`
-    font-size: 40px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    line-height: 30px;
 `;
 export const Action = styled.div``;
 
@@ -57,6 +61,8 @@ export const IconWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    left: 10px;
 `;
 export const ChartContainer = styled.div``;
 export const Wrapper = styled.div`
@@ -110,6 +116,10 @@ export const EmployeeCard = styled.div`
         margin-right: 20px;
         object-fit: cover;
     }
+    .ant-image-mask {
+        width: 50px;
+        height: 50px;
+    }
     img {
         border-radius: 50%;
     }
@@ -132,4 +142,7 @@ export const TableContainer = styled.div`
     h2 {
         margin: 20px 15px;
     }
+`;
+export const Info = styled.div`
+    margin-left: 50px;
 `;

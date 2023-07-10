@@ -35,6 +35,42 @@ export const employees = [
         email: "nguyenducbaodh3@gmail.com",
         image: "https://rerollcdn.com/characters/Skin/9/Swain.png",
     },
+    {
+        id: 5,
+        name: "John",
+        email: "baondforwork@gmail.com",
+        image: "https://rerollcdn.com/characters/Skin/9/Irelia.png",
+    },
+    {
+        id: 6,
+        name: "John 123",
+        email: "nguyenducbaodh3@gmail.com",
+        image: "https://rerollcdn.com/characters/Skin/9/Swain.png",
+    },
+    {
+        id: 5,
+        name: "John",
+        email: "baondforwork@gmail.com",
+        image: "https://rerollcdn.com/characters/Skin/9/Irelia.png",
+    },
+    {
+        id: 6,
+        name: "John 123",
+        email: "nguyenducbaodh3@gmail.com",
+        image: "https://rerollcdn.com/characters/Skin/9/Swain.png",
+    },
+    {
+        id: 5,
+        name: "John",
+        email: "baondforwork@gmail.com",
+        image: "https://rerollcdn.com/characters/Skin/9/Irelia.png",
+    },
+    {
+        id: 6,
+        name: "John 123",
+        email: "nguyenducbaodh3@gmail.com",
+        image: "https://rerollcdn.com/characters/Skin/9/Swain.png",
+    },
 ];
 export const products = [
     {

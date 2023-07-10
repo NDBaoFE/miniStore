@@ -190,6 +190,10 @@ const productApi = {
         const url = `/ticket/approve?ticketId=${ticketId}&isApproved=${status}`;
         return get(url, {}, { Authorization: token });
     },
+    dashboard: () => {
+        const url = `/dashboard`;
+        return get(url, {}, { Authorization: token });
+    },
 };
 
 export default productApi;

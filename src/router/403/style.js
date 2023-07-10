@@ -11,27 +11,24 @@ export const Wrapper = styled.section`
     font-weight: 600;
     font-size: 28px;
     line-height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    max-width: 1096px;
 `;
-export const Background = styled.div`
-    background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
-    height: 400px;
-    width: 800px;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 10px;
-`;
+export const Background = styled.div``;
 export const Hero = styled.h1`
     font-size: 80px;
     margin-top: 20px;
 `;
 export const Box404 = styled.div`
-    margin-top: -50px;
+    margin-top: 500px;
     background-color: ${themes.colors.white};
     width: 800px;
     border-radius: 10px;
@@ -51,4 +48,8 @@ export const Box404 = styled.div`
         width: 100%;
         margin: 20px 0;
     }
+`;
+export const Img = styled.div`
+    width: 100%;
+    height: 50px;
 `;
