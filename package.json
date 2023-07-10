@@ -1,27 +1,56 @@
 {
-  "name": "ministore",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.11.1"
-  },
-  "devDependencies": {
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
-    "@vitejs/plugin-react": "^4.0.0",
-    "eslint": "^8.38.0",
-    "eslint-plugin-react": "^7.32.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.3.4",
-    "vite": "^4.3.5"
-  }
+    "name": "ministore",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@ant-design/icons": "^5.1.4",
+        "@reduxjs/toolkit": "^1.9.5",
+        "antd": "^5.4.7",
+        "axios": "^1.4.0",
+        "cdbreact": "^1.5.16",
+        "chart.js": "^4.3.0",
+        "daypilot-pro-react": "^0.0.0",
+        "exceljs": "^4.3.0",
+        "file-saver": "^2.0.5",
+        "moment": "^2.29.4",
+        "react": "^18.2.0",
+        "react-animated-numbers": "^0.16.0",
+        "react-chartjs-2": "^5.2.0",
+        "react-dnd": "^16.0.1",
+        "react-dnd-html5-backend": "^16.0.1",
+        "react-dom": "^18.2.0",
+        "react-draggable": "^4.4.5",
+        "react-highlight-words": "^0.20.0",
+        "react-icons": "^4.8.0",
+        "react-jwt": "^1.2.0",
+        "react-redux": "^8.0.5",
+        "react-router-dom": "^6.11.1",
+        "react-slick": "^0.29.0",
+        "react-toastify": "^9.1.2",
+        "react-tooltip": "^5.13.1",
+        "recharts": "^2.7.1",
+        "redux": "^4.2.1",
+        "remixicon-react": "^1.0.0",
+        "slick-carousel": "^1.8.1",
+        "styled-components": "^6.0.1",
+        "uuid": "^9.0.0",
+        "xlsx": "^0.18.5"
+    },
+    "devDependencies": {
+        "@types/react": "^18.0.28",
+        "@types/react-dom": "^18.0.11",
+        "@vitejs/plugin-react": "^4.0.0",
+        "eslint": "^8.38.0",
+        "eslint-plugin-react": "^7.25.3",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "eslint-plugin-react-refresh": "^0.3.4",
+        "vite": "^4.3.5"
+    }
 }
