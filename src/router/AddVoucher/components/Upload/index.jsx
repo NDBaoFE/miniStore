@@ -16,7 +16,7 @@ function UploadImg({setOpen,open}) {
     const handleFileUpload = (file) => {
       const fileExtension = file.name.split('.').pop();
 
-      if (fileExtension.toLowerCase() !== ('jgp'||'jpeg'||'png')) {
+      if (fileExtension.toLowerCase() !== ('jpg'||'jpeg'||'png')) {
         toastError('Error: Invalid file format. Only xlsx files are allowed.');
         return;
       }

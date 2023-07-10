@@ -1,4 +1,6 @@
 import { styled } from "styled-components";
+import { Space } from "antd";
+import { themes } from "../../utils/theme";
 
 export const Container = styled.div`
     position: relative;
@@ -13,4 +15,18 @@ export const LoadingContainer = styled.div`
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
+`;
+export const StyledSpace = styled(Space)`
+    a {
+        color: ${themes.colors.primary};
+        &:hover {
+            color: ${themes.colors.primary700};
+        }
+    }
+    color: ${themes.colors.primary};
+    cursor: pointer;
+    font-family: "Inter";
+    &:hover {
+        color: ${themes.colors.primary700};
+    }
 `;

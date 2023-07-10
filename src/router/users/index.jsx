@@ -2,15 +2,19 @@
 import { useEffect, useState } from 'react'
 import UserList from './components/UserList';
 import ToolBoxSection from './components/ToolBox'
-import { Container, LoadingContainer } from './style'
+import { Container, LoadingContainer, StyledSpace } from './style'
 import { exportToExcel } from '../../utils/ToExcel';
 import Spinner from '../../components/Spinnner';
-import { useParams } from 'react-router-dom';
-
+import { useParams, Link } from 'react-router-dom';
+import userApi from '../../utils/api/userApi';
+import { toastError, toastSuccess } from '../../components/Toast';
+import { NotiModal } from '../products/style';
+import { BsExclamationCircle } from 'react-icons/Bs';
 
 function UserManagement(){
     const [loading, setLoading] = useState(false);
     const params = useParams();
+    const [reload,SetReload]=useState(false);
     const [current, setCurrent] = useState(parseInt(params.page, 9) || 1);
     const handleExportToExcel = () => {
       setLoading(true);
@@ -29,6 +33,33 @@ function UserManagement(){
         });
     }
 
+      const handleUserDeleted = () => {
+    // Refresh the vouchers by triggering a re-render of the VoucherList component
+    // This can be done by incrementing the current page number or any other way to indicate a change
+    SetReload(!reload);
+  };
+
+    const confirm = async(id) => {
+      NotiModal.confirm({
+          maskClosable: true,
+          title: 'Bạn có muốn thay đổi thông tin tài khoản?',
+          icon: <BsExclamationCircle />,
+          content: 'Tài khoản sau khi đổi sẽ không còn còn lưu trữ thông tin trước đó được nữa.',
+          okText: 'Xác nhận',
+          cancelText: 'Huỷ',
+          onOk: async() => {
+            const res= await userApi.deleteUser(id);
+            if(res.status===200){
+              toastSuccess("Delete User Succesfully");
+               setSearch(search);
+            }else{
+              toastError("Delete User Failed");
+            }
+            handleUserDeleted()
+          },
+      });
+    };
+
 
     const columns = [
 
@@ -38,12 +69,36 @@ function UserManagement(){
             dataIndex: 'name',
             key:`name`,            
         },
+        {
+          title: 'Email',
+          dataIndex: 'email',
+          key:`email`,            
+      },
+
+        {
+          title: 'RoleId',
+          dataIndex: 'roleId',
+          key:`roleId`,            
+      },
+        {
+          title: 'Action',
+          key: 'action',
+          dataIndex:'action',
+          render: (_, record) => (
+            <StyledSpace size="middle">
+              <Link to={`/user/details/${record.userId}`}>View </Link>
+              <div onClick={()=>confirm(record.userId)}>Delete</div>
+            </StyledSpace>
+          ),
+        },
 
         
     ]
 
     const [search,setSearch]=useState("");
     const [users,setUsers]=useState([]);
+    console.log(users);
+    console.log(users[3]);
 
     useEffect(() => {
 
@@ -52,7 +107,7 @@ function UserManagement(){
     return(
         <Container>
         <ToolBoxSection  setSearch={setSearch} handleSave={handleExportToExcel} setCurrent={setCurrent}/>
-        <UserList search={search} setUsers={setUsers} products={users} columns={columns}  setCurrent={setCurrent} current={current} />
+        <UserList search={search} setUsers={setUsers} users={users} columns={columns}  setCurrent={setCurrent} current={current} reload={reload}/>
         
         {loading && <LoadingContainer><Spinner/></LoadingContainer> }
     </Container> 

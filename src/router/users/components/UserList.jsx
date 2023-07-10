@@ -1,12 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Chart from "chart.js/auto";
 /* eslint-disable react/prop-types */
 
-import { AntdTable, UserWrapper, RevenueDashboardContainer,WrapperUserManagement } from "./style";
+import {
+  AntdTable,
+  UserWrapper,
+  RevenueDashboardContainer,
+  WrapperUserManagement,RevenueTitle
+} from "./style";
+
 import { useEffect } from "react";
 import userApi from "../../../utils/api/userApi";
+import { theme } from "antd";
+import { themes } from "../../../utils/theme";
 
-function UserList({ search, users, setUsers, columns, setCurrent, current }) {
+function UserList({ search, users, setUsers, columns, setCurrent, current, reload }) {
   const navigate = useNavigate();
   const [max, setMax] = useState(0);
 
@@ -28,15 +37,63 @@ function UserList({ search, users, setUsers, columns, setCurrent, current }) {
       }
     }
     fetchData();
-  }, [search, current]);
+  }, [search, current, reload]);
   const handlePageChange = (page) => {
     setCurrent(page);
     navigate(`/user/${page}`);
   };
 
+
+  useEffect(() => {
+    const ctx = document.getElementById('myChart').getContext('2d');
+  
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['AdminTest', 'Admin', 'Saler','Guard'],
+        datasets: [{
+          label: '# of Votes',
+          data: [40,20, 20, 20],
+          backgroundColor: [
+            `${themes.colors.primary200}`,
+            `${themes.colors.primary300}`,
+            `${themes.colors.primary400}`,
+            `${themes.colors.primary}`,
+       
+
+          ],
+          borderColor: [
+            `${themes.colors.primary200}`,
+            `${themes.colors.primary300}`,
+            `${themes.colors.primary400}`,
+            `${themes.colors.primary}`,
+     
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  }, []);
+
   return (
     <WrapperUserManagement>
-      <RevenueDashboardContainer />
+      <RevenueDashboardContainer>
+        <div>
+          <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+
+        <RevenueTitle>Revenue</RevenueTitle>
+        <RevenueTitle>for last 30days</RevenueTitle>
+      </RevenueDashboardContainer>
       <UserWrapper>
         <AntdTable
           columns={columns}

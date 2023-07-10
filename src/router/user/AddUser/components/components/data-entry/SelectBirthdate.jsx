@@ -8,14 +8,18 @@ import selectors from '../../slice/selectors';
 const SelectDateOfBirth = () => {
     const dispatch = useDispatch();
 
-    const birthdate = useSelector(selectors.birthdate);
+    const birthdate = useSelector(selectors.dob);
 
-    const handleBirthdateChange = (date) => {
-        dispatch(actions.setBirthdate(date.valueOf()));
-        dispatch(actions.getAccount());
+    const handleDobChange = (date) => {
+        dispatch(actions.setDob(moment(date).format('YYYY-MM-DD')));
+        dispatch(actions.getUserInfo());
+        console.log(date);
     };
 
-    return <DatePicker value={moment(birthdate)} onChange={handleBirthdateChange} />;
+
+    return (
+        <DatePicker onChange={handleDobChange} />
+    );
 };
 
 export default SelectDateOfBirth;

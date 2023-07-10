@@ -47,7 +47,7 @@ function ToolBoxSection({setSearch,handleSave,setCurrent}) {
         </Col>
         <Col>
         <Button>
-          <Link to="/user/new"> <PlusOutlined style={{ fontSize:"20px" ,marginRight:"20px"}} /> Add User</Link>
+          <Link to="/user/add"> <PlusOutlined style={{ fontSize:"20px" ,marginRight:"20px"}} /> Add User</Link>
         </Button>
         </Col>
     </ToolBox>

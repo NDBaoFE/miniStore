@@ -10,14 +10,14 @@ const SelectGender = () => {
     const dispatch = useDispatch();
 
     const genders = useSelector(selectors.genders);
-    const genderTypeId = useSelector(selectors.genderTypeId);
+    const gender = useSelector(selectors.gender);
 
     const handleGenderChange = (value) => {
         dispatch(actions.setCurrentGender(value));
     };
 
     return (
-        <Select defaultValue={genders[genderTypeId]} onChange={handleGenderChange}>
+        <Select defaultValue={genders[gender]} onChange={handleGenderChange}>
             {genders.map((gender, index) => (
                 <Option value={index} key={index}>
                     {gender}

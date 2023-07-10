@@ -18,7 +18,9 @@ const InputEmail = () =>{
         <Form.Item
         name="email"
         rules={[{
-            required:true, message: "Email can not be empty"
+            required:true, 
+            type:"email",
+            message: "The input is not valid Email"
         }]}
         >
 

@@ -27,13 +27,13 @@ export const InfoContainer = styled.div`
     h3 {
         margin: 0;
         font-weight: 500;
-        font-size: 13.4062px;
+        font-size: 16px;
         line-height: 16px;
     }
     h5 {
         margin: 0;
         font-weight: 400;
-        font-size: 11px;
+        font-size: 15px;
         line-height: 13px;
     }
     @media (max-width: 520px) {

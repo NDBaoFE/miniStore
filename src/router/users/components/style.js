@@ -120,7 +120,7 @@ export const UserWrapper = styled.div`
     align-items: center;
     border-radius: 10px;
 
-    margin-top: 30px;
+    margin-top: 0px;
     color: ${themes.colors.blackText};
 `;
 export const AntdTable = styled(Table)`
@@ -131,6 +131,7 @@ export const AntdTable = styled(Table)`
         object-fit: contain;
         border: 1px solid ${themes.colors.primary};
         border-radius: 5px;
+        margin-top:-20px;
     }
     .table-row-striped {
         background-color: ${themes.colors.stripe};
@@ -147,13 +148,17 @@ export const RevenueDashboardContainer = styled.div`
     width: 20%;
     border: black solid 1px;
     margin-right: 20px;
-    background-color: white;
-   
+    background-color: white; 
 `
+export const RevenueTitle = styled.div`
+    text-align:center;
+    padding-top: 20px;
+    line-height: 1px;
+` 
 
 export const WrapperUserManagement = styled.div`
     display:flex;
     justify-content: center;
-    margin-top:100px;
+    margin-top:20px;
 
 `
