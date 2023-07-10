@@ -5,9 +5,11 @@ import { actions } from "../../slice";
 
 
 
+
+
 const InputName = () =>{
     const dispatch = useDispatch();
-
+    
     const name = useSelector(selectors.name);
     const handleFullNameChange = (e) =>{
         dispatch(actions.setName(e.target.value));
@@ -21,13 +23,13 @@ const InputName = () =>{
 
         }]
 
-        }>
+        }>  <Input placeholder="Enter your name"
+        value={name}
+        onChange={handleFullNameChange}
+        size="large"
+       />
 
-            <Input placeholder="Enter your name"
-            value={name}
-            onChange={handleFullNameChange}
-            size="large"
-           />
+           
 
         </Form.Item>
     )

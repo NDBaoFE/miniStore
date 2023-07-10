@@ -9,10 +9,13 @@ import {
   RevenueDashboardContainer,
   WrapperUserManagement,RevenueTitle
 } from "./style";
+
 import { useEffect } from "react";
 import userApi from "../../../utils/api/userApi";
+import { theme } from "antd";
+import { themes } from "../../../utils/theme";
 
-function UserList({ search, users, setUsers, columns, setCurrent, current }) {
+function UserList({ search, users, setUsers, columns, setCurrent, current, reload }) {
   const navigate = useNavigate();
   const [max, setMax] = useState(0);
 
@@ -34,7 +37,7 @@ function UserList({ search, users, setUsers, columns, setCurrent, current }) {
       }
     }
     fetchData();
-  }, [search, current]);
+  }, [search, current, reload]);
   const handlePageChange = (page) => {
     setCurrent(page);
     navigate(`/user/${page}`);
@@ -47,21 +50,23 @@ function UserList({ search, users, setUsers, columns, setCurrent, current }) {
     new Chart(ctx, {
       type: 'pie',
       data: {
-        labels: ['Red', 'Blue', 'Yellow'],
+        labels: ['AdminTest', 'Admin', 'Saler','Guard'],
         datasets: [{
           label: '# of Votes',
-          data: [35, 35, 30],
+          data: [40,20, 20, 20],
           backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
+            `${themes.colors.primary200}`,
+            `${themes.colors.primary300}`,
+            `${themes.colors.primary400}`,
+            `${themes.colors.primary}`,
        
 
           ],
           borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
+            `${themes.colors.primary200}`,
+            `${themes.colors.primary300}`,
+            `${themes.colors.primary400}`,
+            `${themes.colors.primary}`,
      
           ],
           borderWidth: 1

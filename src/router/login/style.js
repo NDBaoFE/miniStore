@@ -48,7 +48,7 @@ export const NameBrand = styled.div`
     font-size: 40px;
     text-align:center;
     margin-left: 14%;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     font-weight: 450;
 
     @media screen and (max-width: 1000px) {

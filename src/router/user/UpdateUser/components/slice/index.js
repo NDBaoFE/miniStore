@@ -10,10 +10,10 @@ export const initialState = {
   phone: "",
   userImg:"",
   address: "",
-  roleTypeId:0,
   roles: ["Admin", "Employee", "Guard"],
+  roleId:1,
   genders:["Male", "Female"],
-  genderTypeId: 0,
+  gender: 0,
   info: {},
 };
 
@@ -37,10 +37,7 @@ export const slice = createSlice({
       state.userImg = action.payload.userImg;
       state.phone = action.payload.phone;
       state.address = action.payload.address;
-      state.roles = action.payload.roles;
-      state.roleTypeId = action.payload.roleTypeId
-      state.genders = action.payload.genders
-      state.genderTypeId = action.genderTypeId
+      state.gender = action.gender== true ? 1: 0;
     },
     getUserInfo: (state) => {
       state.info = {
@@ -50,8 +47,8 @@ export const slice = createSlice({
         dob: state.dob,
         phone: state.phone,
         address: state.address,
-        roleTypeId:state.roleTypeId,
-        genderTypeId: state.genderTypeId,
+        roleId:state.roleId,
+        gender: state.gender,
       };
     },
   },

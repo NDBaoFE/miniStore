@@ -25,6 +25,7 @@ export const BrandName = styled.p`
     padding-left: 20px;
     line-height: 25px;
     font-weight: 500;
+    color:black;
 `;
 
 export const ColorName = styled.span`
@@ -37,6 +38,7 @@ export const BrandIcon = styled(AiOutlineShopping)`
     width: 50px;
     margin-left: 20px;
     margin-top: 10px;
+    color:black;
 `;
 
 export const WrapSearchBar = styled.div`
@@ -62,13 +64,15 @@ export const WrapContactPhone = styled.div`
 
 export const HotlineIcon = styled(BsTelephoneFill)`
     padding-top: 40px;
+    color:red;
 `;
 
 export const Hotline = styled.p`
     font-size: 15px;
     line-height: 20px;
-    padding-top: 30px;
+    padding-top: 78px;
     font-weight: 500;
+    color:black;
 `;
 
 export const ContainerNavBelow = styled.div`

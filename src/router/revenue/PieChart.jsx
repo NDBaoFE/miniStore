@@ -26,7 +26,7 @@ function CategoryChart() {
   };
 
   return (
-    <PieChart width={800} height={400}>
+    <PieChart width={320} height={320} style={{display:"flex", alignItems:"flex-start"}}>
       <Pie
         data={data}
         cx={120}
@@ -36,8 +36,10 @@ function CategoryChart() {
         fill="#8884d8"
         paddingAngle={5}
         dataKey="value"
+      
         onClick={handleMouseEnter}
       >
+        Our Revenue
         {data.map((entry, index) => (
           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
         ))}

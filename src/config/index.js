@@ -2,7 +2,7 @@
 const publicRuntimeConfig = {
     NODE_ENV: import.meta.env.NODE_ENV || "production",
     API_URL: import.meta.env.REACT_APP_API_URL,
-    LOCAL_STORAGE_TOKEN: "authorization",
+    LOCAL_STORAGE_TOKEN: "Authorization",
     // create fake token here
 };
 

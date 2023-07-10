@@ -8,7 +8,7 @@ import { actions } from "../../slice";
 const InputPhone = () => {
     const dispatch = useDispatch();
 
-    const phone = useSelector(selectors.phone);
+    const phone = useSelector(selectors.phone) || '';
     const handlePhoneChange = (e) =>{
         dispatch(actions.setPhone(e.target.value));
         dispatch(actions.getUserInfo());
@@ -24,12 +24,13 @@ const InputPhone = () => {
         >
 
             <Input
+            disabled
             placeholder="0123456789"
-            value={phone}
+            
             onChange={handlePhoneChange}
             style={{marginTop:"10px"}}
             
-            
+            value={phone}
             />
 
 

@@ -6,7 +6,7 @@ import { themes } from "../../utils/theme";
 export const WrapMessage = styled.div`
     display: flex;
     margin-bottom: 100px;
-    height: 500px;
+    height: 200px;
     justify-content: space-around;
     padding: 0px 100px;
 `;
@@ -15,12 +15,13 @@ export const MailIcon = styled(AiOutlineMail)`
     width: 30%;
     height: 50px;
     margin-top: 40px;
+    color: #00796b;
 `;
 
 export const MessageUs = styled.p`
     color: black;
     margin-top: 50px;
-    width: 20%;
+    width: 25%;
     font-size: 12px;
     margin-left: -50px;
 `;
@@ -62,7 +63,7 @@ export const Name1 = styled.div`
 `;
 
 export const AboutContent1 = styled.p`
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     width: 40%;
     text-align: left;
@@ -101,7 +102,7 @@ export const WrapIMG2 = styled.div`
 `;
 
 export const Name2 = styled.div`
-    padding-top: 60px;
+    padding-top: 40px;
     padding-left: 200px;
     font-size: 18px;
     font-weight: 600;
@@ -116,11 +117,11 @@ export const IMG2 = styled.img`
 `;
 
 export const AboutContent2 = styled.p`
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     width: 330px;
     text-align: left;
-    margin-top: 5px;
+    margin-top: 3px;
     margin-left: 0px;
     color: white;
 `;

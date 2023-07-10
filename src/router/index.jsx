@@ -2,7 +2,8 @@ import { BrowserRouter, Route, Routes, Navigate} from "react-router-dom";
 
 import AdminRoute from "./AdminRoute";
 import LayoutComponent from "../components/Layout";
-import PublicRoute from "./EmployeeRoute";
+import EmployeeRoute from "./EmployeeRoute";
+import PublicRoute from "./PublicRoute";
 import Home from "./home";
 import Login from "./login";
 import AboutUS from "./aboutus/aboutus";
@@ -13,7 +14,6 @@ import VoucherApply from "./voucherApplying";
 import ErrorPage from "./404";
 import ProductManagement from "./products";
 import AddProduct from "./AddProduct";
-import Schedule from "./schedule";
 import AddUser from "./user/AddUser/addUser";
 import PublicLayout from "../components/PublicLayout";
 import VoucherManagement from "./VoucherMangement";
@@ -21,11 +21,71 @@ import AddVoucher from "./AddVoucher";
 import UserManagement from "./users";
 import Setting from "./setting";
 import UpdateUser from "./user/UpdateUser/updateUser";
-
+import UpdateProduct from "./UpdateProduct";
+import ViewUser from "./user/ViewUser/viewUser";
+import EmployeeSchedule from "./EmployeeSchedule";
+import Timetable from "./weeklyschedule";
+import EmployeeTimetable from "./EmployeeSchedule";
+import TicketPage from "./ticket";
+import TicketDetail from "./TicketDetail";
 
 
 const publicRoute = [
    
+   
+    {
+        index: true,
+        path: "login",
+        component: <Login />,
+        exact: true,
+        restrict: true,
+    },
+    {
+        index: true,
+        path: "about",
+        component: <AboutUS />,
+        exact: true,
+        restrict: true,
+    },
+    
+    
+    
+    
+];
+const adminRoute = [
+    
+    {
+        index: true,
+        path: "schedule",
+        component: <Timetable/>,
+        exact: true,
+        restrict: true,
+    },
+    
+    
+];
+const employeeRoute = [
+    {
+        index: true,
+        path: "employee-schedule",
+        component: <EmployeeTimetable/>,
+        exact: true,
+        restrict: true,
+    },
+    {
+        index: true,
+        path: "ticket/:id",
+        component: <TicketDetail/>,
+        exact: true,
+        restrict: true,
+    },
+    {
+        index: true,
+        path: "ticket",
+        component: <TicketPage/>,
+        exact: true,
+        restrict: true,
+    },
     {
         index: true,
         path: "home",
@@ -53,7 +113,16 @@ const publicRoute = [
     {
         
         index: true,
-        path: "user/:id",
+        path: "user/details/:id",
+        component: <ViewUser/>,
+        exact: true,
+        restrict: true,
+    },
+
+    {
+        
+        index: true,
+        path: "user/update/:id",
         component: <UpdateUser/>,
         exact: true,
         restrict: true,
@@ -61,7 +130,7 @@ const publicRoute = [
     {
         
         index: true,
-        path: "user/new",
+        path: "user/add",
         component: <AddUser/>,
         exact: true,
         restrict: true,
@@ -114,13 +183,7 @@ const publicRoute = [
         exact: true,
         restrict: true,
     }
-    ,{
-        index: true,
-        path: "schedule",
-        component: <Schedule/>,
-        exact: true,
-        restrict: true,
-    }
+
     ,{
         index: true,
         path: "voucher",
@@ -141,23 +204,11 @@ const publicRoute = [
         component: <Setting/>,
         exact: true,
         restrict: true,
-    }
-    
-    
-    
-    
-];
-const adminRoute = [
+    },
     {
         index: true,
-        path: "login",
-        component: <Login />,
-        exact: true,
-        restrict: true,
-    },{
-        index: true,
-        path: "aboutus",
-        component: <AboutUS />,
+        path: "employee-schedule",
+        component: <EmployeeSchedule/>,
         exact: true,
         restrict: true,
     },
@@ -165,15 +216,14 @@ const adminRoute = [
     
 ];
 
-
-const RouterComponent = () => {
+ const RouterComponent = () => {
     // useAutoLogout(jwt);
     return (
         <BrowserRouter>
             <Routes>
                 <Route exact path="/" element={<Navigate to="home" />} />
                 <Route exact path="/" element={<PublicRoute />}>
-                    <Route exact element={<LayoutComponent />}>
+                    <Route exact element={<PublicLayout />}>
                         {publicRoute.map((route) => (
                             <Route
                                 index={route.index}
@@ -186,8 +236,22 @@ const RouterComponent = () => {
                         ))}
                     </Route>
                 </Route>
+                <Route exact element={<EmployeeRoute />}>
+                    <Route exact element={<LayoutComponent/>}>
+                        {employeeRoute.map((route) => (
+                            <Route
+                                index={route.index}
+                                key={route.path}
+                                path={route.path}
+                                element={route.component}
+                                exact={route.exact}
+                                restrict={route.restrict}
+                            />
+                        ))}
+                    </Route>
+                </Route>
                 <Route exact element={<AdminRoute />}>
-                    <Route exact element={<PublicLayout/>}>
+                    <Route exact element={<LayoutComponent/>}>
                         {adminRoute.map((route) => (
                             <Route
                                 index={route.index}
@@ -208,5 +272,6 @@ const RouterComponent = () => {
         </BrowserRouter>
     );
 };
+
 
 export default RouterComponent;

@@ -15,6 +15,7 @@ function ProductList({search,products,setProducts,columns,setCurrent,current,rel
 
         async function fetchData() {
             try {
+              console.log(current);
                 const response = await productApi.getProduct(search,current-1);
                   setProducts(response.data.data.content);  
                   setMax(response.data.data.totalElements)  ;      

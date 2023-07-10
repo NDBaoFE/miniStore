@@ -1,4 +1,3 @@
-
 import { Col } from "antd";
 
 import {
@@ -8,16 +7,22 @@ import {
   WrapperFormUser,
   Label,
   StyledForm,
-  Row,NotiModal
-} from "./addUserStyle";
+  Row,
+  NotiModal,
+} from "./addUserStyle";0
 
 import { actions } from "./components/slice";
-import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { InputPhone, InputName, InputEmail, InputAddress, } from "./components/components";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import {
+  InputPhone,
+  InputName,
+  InputEmail,
+  InputAddress,
+} from "./components/components";
 import SelectDateOfBirth from "./components/components/data-entry/SelectBirthdate";
 import SelectGender from "./components/components/data-entry/SelectGender";
 import SelectRole from "./components/components/data-entry/SelectRole";
-import AvatarSection from "./components/AvatarSection"; 
+import AvatarSection from "./components/AvatarSection";
 import ActionGroup from "./components/ActionGroup";
 import Success from "../../../components/Success";
 import { useState } from "react";
@@ -26,67 +31,67 @@ import selectors from "./components/slice/selectors";
 import userApi from "../../../utils/api/userApi";
 import { toastError, toastSuccess } from "../../../components/Toast";
 import Photo from "./components/Photo";
-import UploadImg from "./components/Upload"
-
+import UploadImg from "./components/Upload";
 
 const AddUser = () => {
-const [success,setSuccess]=useState(false);
-const [open, setOpen] = useState("")
-const [form] = StyledForm.useForm()
-const name = useSelector(selectors.name);
-const email = useSelector(selectors.email) ;
-const dob = useSelector(selectors.dob);
-const phone = useSelector(selectors.phone) 
-const address = useSelector(selectors.address);
-const roleTypeId = useSelector(selectors.roleTypeId) 
-const genderTypeId = useSelector(selectors.genderTypeId);
-const info = useSelector(selectors.info) 
-const dispatch=useDispatch();
+  const [success, setSuccess] = useState(false);
+  const [open, setOpen] = useState("");
+  const [form] = StyledForm.useForm();
+  const name = useSelector(selectors.name);
+  const email = useSelector(selectors.email);
+  const dob = useSelector(selectors.dob);
+  const phone = useSelector(selectors.phone);
+  const address = useSelector(selectors.address);
+  const roleId = useSelector(selectors.roleId);
+  const gender = useSelector(selectors.gender);
+  const info = useSelector(selectors.info);
+  const dispatch = useDispatch();
 
-const UpdateInfo = async () => {
-    
-  dispatch(actions.getUserInfo());
-   const res= await userApi.addUser(info);
-  if(res.data.status == 200){
-     
+  const UpdateInfo = async () => {
+
+    dispatch(actions.getUserInfo());
+    const res = await userApi.addUser(info);
+    if (res.data.status == 200) {
+
       setSuccess(true);
-      setTimeout(() => {setSuccess(false);  toastSuccess("Add user Successfully") },2000);
-    
-  }else{
+      setTimeout(() => {
+        setSuccess(false);
+        toastSuccess("Add User Successfully");
+      }, 2000);
+    } else {
       toastError(res.data.message);
-  }
- 
-};
+    }
+  };
 
-const handleFinish = () => {
-  UpdateInfo();
-};
+  const handleFinish = () => {
+    UpdateInfo();
+  };
 
-const handleFinishFailed = () => {
-  console.log(' Hãy nhập tất cả các field !!');
-};
+  const handleFinishFailed = () => {
+    console.log(" Hãy nhập tất cả các field !!");
+  };
 
-const confirm = () => {
-  NotiModal.confirm({
+  const confirm = () => {
+    NotiModal.confirm({
       maskClosable: true,
-      title: 'Bạn có muốn thay đổi thông tin tài khoản?',
+      title: "Bạn có muốn thay đổi thông tin tài khoản?",
       icon: <ExclamationCircleOutlined />,
-      content: 'Tài khoản sau khi đổi sẽ không còn còn lưu trữ thông tin trước đó được nữa.',
-      okText: 'Xác nhận',
-      cancelText: 'Huỷ',
+      content:
+        "Tài khoản sau khi đổi sẽ không còn còn lưu trữ thông tin trước đó được nữa.",
+      okText: "Xác nhận",
+      cancelText: "Huỷ",
       onOk: () => {
 
           form.submit();
           // openNotification();
       },
-  });
-};
+    });
+  };
 
   return (
     <FormAddUserSection>
       <Left>
-    <AvatarSection></AvatarSection>
-   
+        <AvatarSection></AvatarSection>
       </Left>
 
       <WrapperFormUser>
@@ -94,26 +99,37 @@ const confirm = () => {
 
         <StyledForm
           form={form}
-          name="userForm"
+          name="form1"
           initialValues={{
-            name:name,
-            phone:phone,
-            email:email,
-            genderTypeId: genderTypeId,
-            roleTypeId: roleTypeId,
-            address:address,
-            dob: dob
+            name: name,
+            phone: phone,
+            email: email,
+            gender: gender,
+            roleId: roleId,
+            address: address,
+            dob: dob,
           }}
-
           onFinish={handleFinish}
           onFinishFailed={handleFinishFailed}
-        
         >
-            <Row  onClick={()=>{setOpen(true)}} style={{justifyContent:"center"} }><Photo /></Row>
+          <Row
+            onClick={() => {
+              setOpen(true);
+            }}
+            style={{ justifyContent: "center" }}
+          >
+            <Photo />
+          </Row>
           <Row>
             <Col span={24}>
               <Label level={5}>Name</Label>
               <InputName />
+            </Col>
+          </Row>
+          <Row>
+            <Col span={24}>
+              <Label level={5}>Email</Label>
+              <InputEmail />
             </Col>
           </Row>
 
@@ -126,16 +142,13 @@ const confirm = () => {
               <Label level={5}>Gender</Label>
               <SelectGender />
             </Col>
-          
           </Row>
 
           <Row>
             <Col span={11}>
               <Label level={5}>Date of Birth</Label>
-              <SelectDateOfBirth/>
+              <SelectDateOfBirth />
             </Col>
-
-          
 
             <Col span={8}>
               <Label level={5}>Role</Label>
@@ -150,17 +163,10 @@ const confirm = () => {
             </Col>
           </Row>
 
-          <Row>
-            <Col span={24}>
-              <Label level={5}>Email</Label>
-              <InputEmail />
-            </Col>
-          </Row>
-
-        <ActionGroup confirm={confirm}/>
+          <ActionGroup confirm={confirm} />
         </StyledForm>
-        {success && <Success/>}  
-        <UploadImg setOpen={setOpen} open={open}/>
+        {success && <Success />}
+        <UploadImg setOpen={setOpen} open={open} />
       </WrapperFormUser>
     </FormAddUserSection>
   );

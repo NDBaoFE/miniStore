@@ -3,7 +3,7 @@ import "./navbarstyle.css";
 import { SearchOutlined } from '@ant-design/icons';
 
 // import { Link } from "react-router-dom";
-import { NavLink,ContainerNavBarAll,ColorName,BrandIcon,HotlineIcon,ContainerNavBelow, ContainerNavAbove,Hotline  ,SearchInput,BrandName,WrapContactPhone,WrapBrand,WrapSearchBar } from "./navbarstyle";
+import { NavLink,ContainerNavBarAll,ColorName,BrandIcon,ContainerNavBelow, ContainerNavAbove,Hotline  ,SearchInput,BrandName,WrapContactPhone,WrapBrand,WrapSearchBar } from "./navbarstyle";
 
 export const NavBarUser = () => {
   return (
@@ -20,10 +20,6 @@ export const NavBarUser = () => {
 
 
         <WrapContactPhone>
-          <HotlineIcon
-            className="phone-contact-icon"
-            size="1.3rem"
-          ></HotlineIcon>
           <Hotline>
             Hotline<br></br>1800-0000
           </Hotline>
