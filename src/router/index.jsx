@@ -7,7 +7,7 @@ import PublicRoute from "./PublicRoute";
 import Home from "./home";
 import Login from "./login";
 import AboutUS from "./aboutus/aboutus";
-import Profile from "./profile";
+
 import Revenue from "./revenue";
 import Checkout from "./checkout";
 import VoucherApply from "./voucherApplying";
@@ -29,6 +29,9 @@ import EmployeeTimetable from "./EmployeeSchedule";
 import TicketPage from "./ticket";
 import TicketDetail from "./TicketDetail";
 import Error403Page from "./403/Error403Page";
+import Profile from "./profile/profile";
+import Notification from "../components/Notification/Notification";
+import Password from "./password/Password";
 
 
 const publicRoute = [
@@ -135,10 +138,27 @@ const employeeRoute = [
         component: <AddUser/>,
         exact: true,
         restrict: true,
-    },{
+    }, 
+    {
+        
+        index: true,
+        path: "user/changePassword",
+        component: <Password/>,
+        exact: true,
+        restrict: true,
+    },
+    
+    {
         index: true,
         path: "profile",
         component: <Profile/>,
+        exact: true,
+        restrict: true,
+    },
+    {
+        index: true,
+        path: "notify/:id",
+        component: <Notification/>,
         exact: true,
         restrict: true,
     },
@@ -167,7 +187,7 @@ const employeeRoute = [
     {
         index: true,
         path: "product/:id",
-        component: <ProductManagement/>,
+        component: <UpdateProduct/>,
         exact: true,
         restrict: true,
     } , {

@@ -24,7 +24,7 @@ function Revenue() {
     async function fetchData() {
       try {
         const response = await productApi.dashboard();
-    
+        console.log(response.data.data);
         setData(response.data.data);
       } catch (error) {
         console.error(error);
@@ -34,7 +34,7 @@ function Revenue() {
   }, []);
   return (
     <Container>
-      {data &&<><Hero>DashBoard</Hero>
+      {data!=null &&<><Hero>DashBoard</Hero>
       <Wrapper>
         <Left>
         <Summary>

@@ -58,7 +58,8 @@ const productApi = {
         return post(
             url,
             {
-                productList: { ...voucher },
+                ...voucher,
+                products: [...productList],
             },
             {},
             { Authorization: token }

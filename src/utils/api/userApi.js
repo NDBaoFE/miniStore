@@ -11,11 +11,11 @@ const userApi = {
         } else {
             url = `/user?offset=${current}`;
         }
-        return get(url, {}, { authorization: token });
+        return get(url, {}, { Authorization: token });
     },
 
     getUserDetail: (id) => {
-        let url = `/user/details?id=${id}`;
+        let url = `/user/detail?id=${id}`;
         return get(url, {}, { Authorization: token });
     },
 
@@ -33,7 +33,7 @@ const userApi = {
 
     deleteUser: (id) => {
         const url = `/user/${id}`;
-        return remove(url, {}, {}, { authorization: token });
+        return remove(url, {}, {}, { Authorization: token });
     },
 
     updateUser: (info, id) => {

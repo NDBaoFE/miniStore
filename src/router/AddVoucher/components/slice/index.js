@@ -60,7 +60,7 @@ export const slice = createSlice({
         applyProductToVoucher: (state, action) => {
             state.productList = [];
             for (let item of action.payload) {
-                state.productList.push({ productId: item });
+                state.productList.push(item);
             }
         },
     },

@@ -64,7 +64,7 @@ function UpdateUser() {
         toastSuccess("Update user Successfully");
       }, 2000);
     } else {
-      toastError(res.data.message || "Update failed, please try again8");
+      toastError(res.data.message || "Update failed, please try again");
     }
   };
 

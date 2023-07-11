@@ -10,7 +10,8 @@ function AvatarContainer() {
   console.log(profile);
     const info={
         fullName:profile?.name||"User",
-        email:profile?.email||"user@gmail.com"
+        email:profile?.email||"user@gmail.com",
+        img:profile?.userImg||"https://rerollcdn.com/characters/Skin/9/Kayle.png",
     }
     const items = [
         {
@@ -33,7 +34,7 @@ function AvatarContainer() {
       ];
   return (
     <Space wrap size={16}>
-    {profile && <><Avatar size="large" icon={<UserOutlined />} />
+    {profile && <><Avatar size="large" icon={<img src={info.img} alt="avatar"  />} />
     <Right>
     <InfoContainer style={{marginRight:"12px"}}>
     <h3>{info.fullName}</h3>

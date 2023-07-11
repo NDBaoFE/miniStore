@@ -12,8 +12,9 @@ import {
 
 import { useEffect } from "react";
 import userApi from "../../../utils/api/userApi";
-import { theme } from "antd";
+
 import { themes } from "../../../utils/theme";
+
 
 function UserList({ search, users, setUsers, columns, setCurrent, current, reload }) {
   const navigate = useNavigate();
@@ -94,6 +95,7 @@ function UserList({ search, users, setUsers, columns, setCurrent, current, reloa
         <RevenueTitle>Revenue</RevenueTitle>
         <RevenueTitle>for last 30days</RevenueTitle>
       </RevenueDashboardContainer>
+      
       <UserWrapper>
         <AntdTable
           columns={columns}
