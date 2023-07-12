@@ -9,7 +9,8 @@ import {
   StyledForm,
   Row,
   NotiModal,
-  PasswordBtn
+  PasswordBtn,
+  WrapperSalary
 } from "./profileStyle";
 import { actions } from "./components/slice";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
@@ -68,7 +69,7 @@ const navigate = useNavigate()
   };
 
   const handleCancel = () => {
-    console.log("Clicked cancel button");
+    console.log("Clicked cancel button"); 
     setOpenModal(false);
   };
   const { id } = useParams();
@@ -97,14 +98,13 @@ const navigate = useNavigate()
   };
 
 
-  const [salary, setSalary] = useState([]);
+  const [salary, setSalary] = useState(1000);
 
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await profileApi.getProfileDetail();
         dispatch(actions.setUser(response.data.data));
-        console.log(response.data.data)
         dispatch(actions.getProfileInfo());
         setUpdated(true);
       } catch (error) {
@@ -115,19 +115,19 @@ const navigate = useNavigate()
   }, [dispatch]);
 
 
-  useEffect(() => {
-    async function fetchSalaryData() {
-      try {
-        const response = await salaryApi.getSalaryOfUser();
-        setSalary(response.data.data.salary);
-        console.log(response.data.data.salary); // Assuming the salary data is directly available in the response
-      } catch (error) {
-        console.error(error);
-      }
-    }
+  // useEffect(() => {
+  //   async function fetchSalaryData() {
+  //     try {
+  //       const response = await salaryApi.getSalaryOfUser();
+  //       setSalary(response.data.data.salary);
+  //       console.log(response.data.data.salary); // Assuming the salary data is directly available in the response
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
 
-    fetchSalaryData();
-  }, []);
+  //   fetchSalaryData();
+  // }, []);
 
   
   
@@ -292,12 +292,14 @@ const navigate = useNavigate()
   
               </Col>
               
-              <Col span={7}>
-                <Label level={5}>Salary</Label>
-                <Input value={salary} disabled/>
-              </Col>
+            
       
             </Row>
+
+            <Row style={{marginBottom: 15}}>
+            <WrapperSalary>
+              <div style={{fontSize: 20}}>Salary: <span style={{color: "green", fontWeight: 600}}>  {salary}</span></div></WrapperSalary>
+            </Row >
             <Row>
               <Col span={24}>
                 <Label level={5}>Payslip List</Label>

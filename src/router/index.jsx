@@ -34,6 +34,7 @@ import Notification from "../components/Notification/Notification";
 import Password from "./password/Password";
 import Payroll from "./payroll";
 import PayrollByUser from "./payrollByUser";
+import OrderManagemntPage from "./OrderManagement";
 
 
 const publicRoute = [
@@ -250,6 +251,14 @@ const employeeRoute = [
         index: true,
         path: "employee-schedule",
         component: <EmployeeSchedule/>,
+        exact: true,
+        restrict: true,
+    },
+
+    {
+        index: true,
+        path: "orderManagement",
+        component: <OrderManagemntPage/>,
         exact: true,
         restrict: true,
     },

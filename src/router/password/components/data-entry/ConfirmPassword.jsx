@@ -4,18 +4,19 @@ import selectors from "../../slice/selectors";
 import { actions } from "../../slice";
 
 
-const InputPassword = () =>{
+const ConfirmPassword = () =>{
     const dispatch = useDispatch();
 
-    const password = useSelector(selectors.password);
-    const handleEmailChange = (e) =>{
-        dispatch(actions.setPassword(e.target.value));
+    const confirmPassword = useSelector(selectors.confirmPassword);
+    const handlePasswordChange = (e) =>{
+        dispatch(actions.setNewPassword(e.target.value));
         dispatch(actions.getPasswordInfo());
     };
 
+
     return (
         <Form.Item
-        name="oldPassword"     
+        name="confirmPassword"
         rules={[{
             required:true, 
             type:"text",
@@ -23,10 +24,9 @@ const InputPassword = () =>{
         }]}
         >
 
-            <Input.Password   
-           
-            value={password}
-            onChange={handleEmailChange}
+            <Input.Password        
+            value={confirmPassword}
+            onChange={handlePasswordChange}
             
             />
 
@@ -37,4 +37,4 @@ const InputPassword = () =>{
     )
 }
 
-export default InputPassword
+export default ConfirmPassword

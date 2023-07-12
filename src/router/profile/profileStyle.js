@@ -133,3 +133,14 @@ export const PasswordBtn = styled(Button)`
 &:hover {
   background-color: white; /* Replace with your desired hover color */
 `;
+
+
+export const WrapperSalary = styled.div`
+  width: 100%;
+  height: 50px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+`
