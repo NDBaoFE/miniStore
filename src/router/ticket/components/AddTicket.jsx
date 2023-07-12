@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 
 
@@ -26,7 +27,8 @@ function AddTicket({setLoaded}) {
       description :values.description,
       ticketTypeId: options.find((option)=>option.name===values.type).ticketTypeId
     }
-   const response = await productApi.addTicket(newArray);
+    const token=localStorage.getItem("Authorization");
+   const response = await productApi.addTicket(newArray,token);
    if(response.data.status===200){
     toastSuccess("Add ticket successfully !!");
     setLoaded(true);
@@ -38,11 +40,12 @@ function AddTicket({setLoaded}) {
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
+  const token=localStorage.getItem("Authorization");
 useEffect(() => {
 
     async function fetchData() {
         try {
-            const response = await productApi.getTicketType();
+            const response = await productApi.getTicketType(token);
             setOptions(response.data.data);
 
         } catch (error) {
@@ -50,7 +53,7 @@ useEffect(() => {
         }
     }
     fetchData();
-}, []);
+}, [token]);
   const [type,setType]=useState("");
 
   const onSearch = (value) => {

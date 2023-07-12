@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Layout } from "antd";
 import { themes } from "../utils/theme";
 export const Container = styled.div`
-    font-family: "Nunito Sans", sans-serif;
+    font-family: "Inter", sans-serif;
 `;
 
 export const StyledLayout = styled(Layout)`

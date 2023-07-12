@@ -1,13 +1,13 @@
 
 import { Avatar, Space } from 'antd';
-import { UserOutlined } from '@ant-design/icons'
+
 import { InfoContainer,Right,StyledDropDown } from './styled';
 import { DownOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import useAuth from '../../utils/useAuth';
 function AvatarContainer() {
   const {profile}=useAuth();
-  console.log(profile);
+
     const info={
         fullName:profile?.name||"User",
         email:profile?.email||"user@gmail.com",

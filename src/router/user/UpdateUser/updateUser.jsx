@@ -55,7 +55,8 @@ function UpdateUser() {
 
   const UpdateInfo = async () => {
     dispatch(actions.getUserInfo());
-    const res = await userApi.updateUser(info, id);
+    const token=localStorage.getItem("Authorization");
+    const res = await userApi.updateUser(info, id,token);
 
     if (res.data.status == 200) {
       setSuccess(true);
@@ -75,11 +76,11 @@ function UpdateUser() {
   const handleFinishFailed = () => {
     console.log(" Hãy nhập tất cả các field !!");
   };
-
+const token=localStorage.getItem("Authorization");
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await userApi.getUserDetail(id);
+        const response = await userApi.getUserDetail(id,token);
         dispatch(actions.setUser(response.data.data));
         dispatch(actions.getUserInfo());
         setUpdated(true);

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 
 import {
     Chart as ChartJS,
@@ -38,22 +39,24 @@ ChartJS.register(
     },
   };
   
-  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   
-  export const data = {
+ 
+function LineChart({data}) {
+    console.log(data);
+  const tableData = {
     labels,
     datasets: [
       {
         label: 'Revenue',
-        data: [0, 10, 5, 2, 20, 30, 45],
-        tension: 0.3,
+        data: data.monthRevenues[0].revenue,
         fill: true,
         backgroundColor: 'rgba(4, 209, 130, 0.2)',
         borderColor: 'rgb(4, 209, 130)',
       },
       {
         label: 'Cost',
-        data: [0, 20, 10, 30, 15, 40, 20],
+        data: data.monthRevenues[0].cost,
         tension: 0.6,
         fill: true,
         backgroundColor: 'rgba(44, 120, 220, 0.2)',
@@ -61,10 +64,10 @@ ChartJS.register(
       },
     ],
   };
-function LineChart() {
-
   return (
-    <StyledLine options={options} data={data}  style={{marginTop:"30px"}}/>
+    <>
+    { data && <StyledLine options={options} data={tableData}  style={{marginTop:"30px"}}/>}
+    </>
   )
 }
 

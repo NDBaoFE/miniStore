@@ -9,32 +9,37 @@ import { themes } from "../../../utils/theme";
 const count = 3;
 import { useParams } from "react-router-dom";
 import localStorageUtils from "../../../utils/localStorageUtils";
+import productApi from "../../../utils/api/productApi";
 function VoucherList({setCurrentVoucher}) {
   const dispatch=useDispatch();
     const [initLoading, setInitLoading] = useState(true);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [list, setList] = useState([]);
-  const token=localStorageUtils.getItem("token");
+  const token=localStorageUtils.getItem("Authorization");
   const {id} = useParams();
   const voucherByProduct = `http://localhost:8080/ministore/getVoucherByProductId?productId=${id}&results=${count}`;
   const voucherApplyAll=`http://localhost:8080/ministore/getAllVouchers?results=${count}`;
-  const headers = {
-    token: `Bearer ${token}`,
-    // Add any other headers you need
-  };
   useEffect(() => {
-    fetch(id == "applyAll"?  voucherApplyAll: voucherByProduct,{headers})
-      .then((res) => res.json())
-      .then((res) => {
-        
+    let type= (id == "applyAll");
+    const fetchData=async ()=>{
       
+      const res = await productApi.getVoucher(type,id,count,token);
+      console.log(res.data.status);
+      if(res.data.status==200){
         setInitLoading(false);
-        setData(res.data);
-        setList(res.data);
+        setData(res.data.data);
+        console.log(res.data.data);
+        setList(res.data.data);
         dispatch(getVouchers(res));
-      });
-  }, []);
+      }
+   
+      
+       
+      
+    }
+    fetchData();
+  }, [token]);
   const onLoadMore = () => {
     setLoading(true);
     setList(
@@ -45,7 +50,7 @@ function VoucherList({setCurrentVoucher}) {
         })),
       ),
     );
-      fetch(id == "applyAll"?  voucherApplyAll: voucherByProduct , {headers})
+      fetch(id == "applyAll"?  voucherApplyAll: voucherByProduct ,)
       .then((res) => res.json())
       .then((res) => {
         const newData = data.concat(res);
@@ -89,7 +94,7 @@ function VoucherList({setCurrentVoucher}) {
         >
           <Skeleton avatar title={false} loading={item.loading} active>
             <List.Item.Meta onClick={()=>handleClickVoucher(item)}
-              avatar={<Image src={item.voucherImg.startsWith("http")||item.voucherImg.startsWith("data:image") ? item.voucherImg : `data:image/jpeg;base64,${item.voucherImg}`} style={{width:200,objectFit:"contain",background:`${themes.colors.background}`}}/>}
+              avatar={<Image src={item?.voucherImg?.startsWith("http")||item?.voucherImg?.startsWith("data:image") ? item?.voucherImg : `data:image/jpeg;base64,${item?.voucherImg}`} style={{width:200,objectFit:"contain",background:`${themes.colors.background}`}}/>}
               title={"Summer 2023 Voucher"}
               description={item.description}
             />

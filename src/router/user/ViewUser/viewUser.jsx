@@ -30,7 +30,6 @@ import { useSelector, useDispatch } from "react-redux";
 import selectors from "./components/slice/selectors";
 import userApi from "../../../utils/api/userApi";
 import { toastError, toastSuccess } from "../../../components/Toast";
-import Photo from "./components/Photo";
 import UploadImg from "./components/Upload";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -54,8 +53,9 @@ function ViewUser() {
   const { id } = useParams();
   const navigate = useNavigate()
   const UpdateInfo = async () => {
+    const token=localStorage.getItem("Authorization");
     dispatch(actions.getUserInfo());
-    const res = await userApi.updateUser(info, id);
+    const res = await userApi.updateUser(info, id,token);
 
     if (res.data.status == 200) {
       setSuccess(true);
@@ -75,11 +75,11 @@ function ViewUser() {
   const handleFinishFailed = () => {
     console.log(" Hãy nhập tất cả các field !!");
   };
-
+  const token=localStorage.getItem("Authorization");
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await userApi.getUserDetail(id);
+        const response = await userApi.getUserDetail(id,token);
         dispatch(actions.setUser(response.data.data));
         dispatch(actions.getUserInfo());
         setUpdated(true);

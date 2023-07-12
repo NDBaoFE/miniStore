@@ -14,12 +14,12 @@ const Notification = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const dispatch = useDispatch();
-
+  const token=localStorage.getItem("Authorization");
   useEffect(() => {
     // Fetch the notification details using the ID
     async function fetchData(){
       try{
-        const response = await notifyApi.getNotifyDetail(id);
+        const response = await notifyApi.getNotifyDetail(id,token);
         const notificationData = response.data.data;
     
         // Update the state variables
@@ -34,7 +34,7 @@ const Notification = () => {
       }
     }
     fetchData()
-  }, [dispatch, id]);
+  }, [dispatch, id,token]);
 
 
 

@@ -16,9 +16,9 @@ function ActionGroup({confirm}) {
   const handleClose = () => {
     setIsModalOpen(false);
   };
-
+  const token = localStorage.getItem("Authorization");
   const handleOk = () => {
-    productApi.makeOrder(orderList);
+    productApi.makeOrder(orderList,token);
   }
 
   const handleConfirm = () => {

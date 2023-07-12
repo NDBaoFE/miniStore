@@ -46,7 +46,7 @@ export const LoginFormMain = styled(Form)`
 
 export const NameBrand = styled.div`
     font-size: 40px;
-    text-align:center;
+    text-align: center;
     margin-left: 14%;
     margin-bottom: 40px;
     font-weight: 450;
@@ -66,7 +66,7 @@ export const InputForm = styled(Input)`
     margin-left: 15%;
     font-size: 12px;
     border: black solid 1px;
-    border-color:  ${themes.colors.primary700} !important;
+    border-color: ${themes.colors.primary700} !important;
     &:hover {
         border-color: ${themes.colors.primary700} !important;
     }
@@ -84,6 +84,20 @@ export const WrapImg = styled.div`
 
 export const IMG = styled.img`
     width: 100%;
+    overflow: hidden;
+    transform: translatey(0px);
+    animation: float 6s ease-in-out infinite;
+    @keyframes float {
+        0% {
+            transform: translatey(0px);
+        }
+        50% {
+            transform: translatey(-40px);
+        }
+        100% {
+            transform: translatey(0px);
+        }
+    }
 `;
 
 export const LoginButton = styled(Button)`

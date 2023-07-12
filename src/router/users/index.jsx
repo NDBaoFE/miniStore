@@ -48,7 +48,8 @@ function UserManagement(){
           okText: 'Xác nhận',
           cancelText: 'Huỷ',
           onOk: async() => {
-            const res= await userApi.deleteUser(id);
+            const token=localStorage.getItem("Authorization");
+            const res= await userApi.deleteUser(id,token);
             if(res.status===200){
               toastSuccess("Delete User Succesfully");
                setSearch(search);

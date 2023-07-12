@@ -57,11 +57,11 @@ function UpdateProduct() {
   const handleFinishFailed = () => {
     console.log(" Hãy nhập tất cả các field !!");
   };
-
+  const token = localStorage.getItem("Authorization");
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await productApi.getProductDetail(id);
+        const response = await productApi.getProductDetail(id,token);
         dispatch(actions.setProduct(response.data.data));
         dispatch(actions.getProductInfo());
         setUpdated(true);
@@ -70,7 +70,7 @@ function UpdateProduct() {
       }
     }
     fetchData();
-  }, []);
+  }, [token]);
 
   const confirm = () => {
     NotiModal.confirm({

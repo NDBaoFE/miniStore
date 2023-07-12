@@ -187,10 +187,18 @@ const employeeRoute = [
     {
         index: true,
         path: "product/:id",
+        component: <ProductManagement/>,
+        exact: true,
+        restrict: true,
+    },
+    {
+        index: true,
+        path: "product/view/:id",
         component: <UpdateProduct/>,
         exact: true,
         restrict: true,
-    } , {
+    }
+     , {
         index: true,
         path: "product",
         component: <ProductManagement/>,

@@ -7,10 +7,11 @@ import productApi from '../../utils/api/productApi';
 function TicketList
 () {
   const [data,setData]=useState(null);
+  const token=localStorage.getItem("Authorization");
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await productApi.getAllTicket();
+        const response = await productApi.getAllTicket(token);
     
         setData(response.data.data);
       } catch (error) {
@@ -18,7 +19,7 @@ function TicketList
       }
     }
     fetchData();
-  }, []);
+  }, [token]);
   return (
     <Wrapper style={{marginTop: '50px', marginBottom: '50px',flexDirection:'column',width:'49%'}}>
        {data && <><HeroWrapper> <h2>Latest Ticket

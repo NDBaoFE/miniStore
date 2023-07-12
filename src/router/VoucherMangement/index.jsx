@@ -5,7 +5,7 @@ import ToolBoxSection from './components/ToolBox'
 import { Container, LoadingContainer, NotiModal, StyledSpace } from './style'
 import { exportToExcel } from '../../utils/ToExcel';
 import Spinner from '../../components/Spinnner';
-import { Link, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import VoucherList from './components/VoucherList';
 
 import {ExclamationCircleOutlined} from "@ant-design/icons"
@@ -48,19 +48,21 @@ function VoucherManagement() {
         okText: 'Xác nhận',
         cancelText: 'Huỷ',
         onOk: async() => {
-          const res= await productApi.deleteVoucher(id);
+          const token= localStorage.getItem("Authorization");
+          const res= await productApi.deleteVoucher(id,token);
           if(res.status===200){
             toastSuccess("Delete Voucher Succesfully");
-            
+            setLoader(!loader);
           }else{
             toastError("Delete Voucher Failed");
+            setLoader(!loader);
           }
           handleVoucherDeleted();
         },
     });
   };
 
-  
+  const placeholder="https://jennynewboundartist.com/cdn/shop/products/image_68db844f-1e2d-4585-ac11-8c643c72c8e0_720x.jpg?v=1614144436";
   const columns = [
   
     {
@@ -70,7 +72,7 @@ function VoucherManagement() {
       
       render: (_, record) => (
         <span className='detail'>
-          <Image src={record.voucherImg.startsWith("http")||record.voucherImg.startsWith("data:image") ? record.voucherImg : `data:image/jpeg;base64,${record.voucherImg}`} alt="Product Image" style={{ marginRight: 8, objectFit: 'cover' ,width:150}}  />
+          <Image src={record?.voucherImg ?  record?.voucherImg?.startsWith("http")||record?.voucherImg?.startsWith("data:image") ? record?.voucherImg : `data:image/jpeg;base64,${record.voucherImg}`: placeholder} alt="Product Image" style={{ marginRight: 8, objectFit: 'cover' ,width:150}}  />
       
         </span>
       
@@ -104,13 +106,24 @@ function VoucherManagement() {
         key: 'minimumItem',
         sorter: (a, b) => a.minimumItem - b.minimumItem,
         sortDirections: ['descend', 'ascend'],
+        render: (_, record) => (
+
+          <div >{record.expireDate||"None"}</div>
+       
+      ),
       },
+      
       {
         title: 'Min Total',
         dataIndex: 'minTotal',
         key: 'minTotal',
         sorter: (a, b) => a.minTotal - b.minTotal,
         sortDirections: ['descend', 'ascend'],
+        render: (_, record) => (
+
+          <div >{record.expireDate||"None"}</div>
+       
+      ),
       },
       {
         title: 'Percent Discount',
@@ -123,6 +136,11 @@ function VoucherManagement() {
         title: 'Expire Date',
         dataIndex: 'expireDate',
         key: 'expireDate',
+        render: (_, record) => (
+
+            <div >{record.expireDate||"None"}</div>
+         
+        ),
         // sorter: (a, b) => a.minTotal - b.minTotal,
         // sortDirections: ['descend', 'ascend'],
       },
@@ -131,7 +149,7 @@ function VoucherManagement() {
         key: 'action',
         render: (_, record) => (
           <StyledSpace size="middle">
-            <Link to={`/voucher/${record.voucherId}`}>Edit </Link>
+
             <div onClick={()=>confirm(record.voucherId)}>Delete</div>
           </StyledSpace>
         ),
@@ -148,7 +166,7 @@ function VoucherManagement() {
   return (
     <Container>
         <ToolBoxSection  setSearch={setSearch} handleSave={handleExportToExcel} setCurrent={setCurrent}/>
-        <VoucherList search={search} setProducts={setProducts} products={products} columns={columns}  setCurrent={setCurrent} current={current} 
+        <VoucherList search={search} setProducts={setProducts} products={products} columns={columns}  setCurrent={setCurrent} current={current} loader={loader}
             handleVoucherDeleted={handleVoucherDeleted} />
         
         {loading && <LoadingContainer><Spinner/></LoadingContainer> }

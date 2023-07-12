@@ -19,6 +19,7 @@ import ApplyTour from "./components/Instruction";
 import Draggable from 'react-draggable';
 import CheckinModal from "./CheckinModal";
 import RequestTable from "./RequestTable";
+import localStorageUtils from "../../utils/localStorageUtils";
 
 
 
@@ -85,10 +86,10 @@ const EmployeeTimetable = () => {
   const handleTimeSlotClick = (day, shift) => {
     // Handle time slot click event
   };
-
+const token=localStorageUtils.getItem("Authorization");
   async function fetchData() {
     try {
-      const response = await productApi.getUserShift(current);
+      const response = await productApi.getUserShift(current,token);
       
       const newArray = await response.data.data.userShifts.map((item) => {
         const timestamp = item.startTime;
@@ -132,7 +133,7 @@ const EmployeeTimetable = () => {
 
   useEffect(() => {
     fetchData();
-  }, [current,loaded]);
+  }, [current,loaded,token]);
   
 const handleColClick=(userShift)=>{
     const updatedDayUserShift = userShift.map((item, index) => ({

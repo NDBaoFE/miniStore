@@ -44,9 +44,9 @@ function AddVoucher() {
    setCount(productList.length);
   }, [productList]);
   const UpdateInfo = async () => {
-    
+    const token=localStorage.getItem("Authorization");
     dispatch(actions.getVoucherInfo());
-     const res= await productApi.addVoucher(info,productList);
+     const res= await productApi.addVoucher(info,productList,token);
     if(res.data.status == 200){
        
         setSuccess(true);

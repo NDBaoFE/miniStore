@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import { themes } from "../../utils/theme";
 export const Wrapper = styled.section`
     padding: 40px 0;
-    font-family: "Arvo", serif;
+    font-family: "Inter", serif;
     width: 100%;
     color: ${themes.colors.blackText};
     text-align: center;

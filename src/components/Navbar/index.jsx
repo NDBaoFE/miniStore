@@ -6,23 +6,21 @@ import { Menu, Avatar, Badge } from "antd";
 import { useState, useEffect } from "react";
 import { FiChevronLeft } from "react-icons/fi";
 import { Action, GoBack } from "./styled";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { WrapperNoti, StyledDropdown } from "./navbarstyle";
 import { BellFilled } from "@ant-design/icons";
 import notifyApi from "../../utils/api/notifyApi";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import selectors from "../../components/Notification/slice/selectors";
+
 
 function NavBar() {
-  const userNotificationId = useParams()
-  console.log(userNotificationId)
-  const [data, setData] = useState([]);
 
+  const [data, setData] = useState([]);
+  const token=localStorage.getItem("Authorization");
   useEffect(() => {
     // Fetch data from API
     notifyApi
-      .getNotify()
+      .getNotify(token)
       .then((response) => {
         setData(response.data.data);
         console.log(response.data.data);
@@ -30,7 +28,7 @@ function NavBar() {
       .catch((error) => {
         console.log("Error:", error);
       });
-  }, []);
+  }, [token]);
 
   const [hoveredItem, setHoveredItem] = useState(null);
 

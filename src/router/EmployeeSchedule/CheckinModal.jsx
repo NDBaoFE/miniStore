@@ -45,8 +45,9 @@ const CheckinModal = ({ openCheckin,setOpenCheckin,checkinShift}) => {
       console.log( checkinShift?.user?.rfid);
       console.log( input);
       event.target.value = ''; // Clear the input field
+      const token=localStorage.getItem("Authorization");
     if( checkinShift?.user?.rfid == input){
-      const res= await productApi.checkin(checkinShift.userShiftId);
+      const res= await productApi.checkin(Shift.userShiftId,token);
       if(res.data.status == 200){
         setTimeout(() => {
           setSuccess(true);

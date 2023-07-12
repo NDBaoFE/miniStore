@@ -42,9 +42,11 @@ export const Info = styled.div`
     border-radius: 0 0 8px 8px;
     h3 {
         margin: 0;
+        font-size: 18.5px;
     }
     h2 {
         margin: 0;
+        font-size: 16.5px;
         margin-bottom: 10px;
     }
 `;

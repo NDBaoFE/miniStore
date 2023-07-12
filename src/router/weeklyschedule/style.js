@@ -187,3 +187,9 @@ export const IconWrapper = styled.div`
         color: ${themes.colors.primary};
     }
 `;
+export const Header = styled.div`
+    width: 100%;
+    background-color: ${themes.colors.primary};
+    border-radius: 4px 4px 0 0;
+    height: 20px;
+`;

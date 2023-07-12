@@ -1247,30 +1247,25 @@ export const shiftStatus = {
             "not checked in and not checked out",
             "not checked in and checked out",
             "not checked in and not checked out",
+            "checked in and not checked out",
+            "checked in late and not checked out",
         ],
         color: "#ff9683",
     },
     warning: {
         data: [
             "checked in late",
-            "checked in late and not checked out",
             "checked in late and checked out",
-            "checked in late and not checked out",
-            "checked in and not checked out",
             "checked in and checked out late",
         ],
         color: "#ffee93",
     },
     success: {
-        data: ["checked in and checked out"],
+        data: ["checked in and checked out", "working"],
         color: "#adf7b6",
     },
     notYet: {
         data: ["not yet"],
         color: "#44cbcd",
-    },
-    working: {
-        data: ["working"],
-        color: "red",
     },
 };
