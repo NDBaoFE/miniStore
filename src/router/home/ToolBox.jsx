@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { StyledSearch, ToolBox } from "./style"
 
-import {Col,SearchBtn,Category,Action} from "./style"
+import {Col,SearchBtn,Action} from "./style"
 import { CiBarcode } from "react-icons/ci";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 
@@ -15,19 +15,7 @@ function ToolBoxSection({setSearchValue}) {
   
       setSearchValue(e.target.value);
     }
-    const handleChangeCategory = (value) => {
-      console.log(value)
-    }
-    const options = [
-      {
-        value: 'Ho',
-        label: 'Ho',
-      },
-      {
-        value: 'Hi',
-        label: 'Hi',
-      },
-    ];
+ 
     
     
   return (
@@ -36,11 +24,7 @@ function ToolBoxSection({setSearchValue}) {
         <SearchBtn> 
             <StyledSearch placeholder="input Product name, category.."  onChange={onSearch}   />
             </SearchBtn>
-        <Category 
-      options={options} 
-      onChange={handleChangeCategory}
-      placeholder="Please select"
-    />
+       
         </Col>
         <Col>
         <Action>

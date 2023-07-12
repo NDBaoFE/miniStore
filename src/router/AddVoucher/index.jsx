@@ -26,6 +26,7 @@ import InputQuantity from "./components/components/data-entry/InputQuantity";
 import SelectExpiredDate from "./components/components/data-entry/SelectExpiredDate";
 import InputDescription from "./components/components/data-entry/InputDescription";
 import ProductDrawer from "./components/ProductDrawer";
+import { useNavigate } from "react-router-dom";
 
 function AddVoucher() {
     const [success,setSuccess]=useState(false);
@@ -40,6 +41,7 @@ function AddVoucher() {
   const productList=useSelector(selector.productList);
   const [count,setCount]=useState(0);
   const dispatch=useDispatch();
+  const navigate=useNavigate();
   useEffect(() => {
    setCount(productList.length);
   }, [productList]);
@@ -50,7 +52,7 @@ function AddVoucher() {
     if(res.data.status == 200){
        
         setSuccess(true);
-        setTimeout(() => {setSuccess(false);  toastSuccess("Add product Successfully") },2000);
+        setTimeout(() => {setSuccess(false);  toastSuccess("Add Voucher Successfully");dispatch(actions.resetState());navigate(-1) },2000);
       
     }else{
         toastError(res.data.message);
@@ -70,11 +72,11 @@ const handleFinishFailed = () => {
 const confirm = () => {
     NotiModal.confirm({
         maskClosable: true,
-        title: 'Bạn có muốn thay đổi thông tin tài khoản?',
+        title: 'Are you sure you want to add this voucher ?',
         icon: <ExclamationCircleOutlined />,
-        content: 'Tài khoản sau khi đổi sẽ không còn còn lưu trữ thông tin trước đó được nữa.',
-        okText: 'Xác nhận',
-        cancelText: 'Huỷ',
+        content: 'After you press confirm, this voucher will be added to the system.',
+        okText: 'Confirm',
+        cancelText: 'Cancel',
         onOk: () => {
             form.submit();
             // openNotification();

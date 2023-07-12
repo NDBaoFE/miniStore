@@ -33,9 +33,9 @@ function ProductDrawer({onClose,openDrawer}) {
     async function fetchData() {
       try {
         setProducts([]);
-        const response = await productApi.getProduct(searchValue, current - 1,token);
+        const response = await productApi.getAllProduct(searchValue,token);
 
-        setProducts(response.data.data.content);
+        setProducts(response.data.data);
       } catch (error) {
         console.error(error);
       }
@@ -53,9 +53,7 @@ function ProductDrawer({onClose,openDrawer}) {
 
   return (
     <Drawer title="Product Drawer" placement="right" onClose={onClose} open={openDrawer} width={400}>
-      <Row style={{alignItems:"center",justifyContent:"space-around"}}> <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
-        Check all
-      </Checkbox> 
+      <Row style={{alignItems:"center",justifyContent:"space-around"}}>
       <SearchBtn> 
             <StyledSearch placeholder="input Product name, category.."  onChange={onSearch}   />
             </SearchBtn></Row>

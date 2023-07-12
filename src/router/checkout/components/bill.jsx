@@ -1,8 +1,14 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import React from "react"
 import './style.css';
+import { selector } from "../../home/components/slice/selector";
+import { useSelector } from "react-redux";
 
- export const ComponentToPrint = React.forwardRef(({change}, ref) => {
+ export const ComponentToPrint = React.forwardRef(({change,orderList}, ref) => {
+  const {paymentMethod} = useSelector(selector);
+  let total=0;
+  let totalQuanity=0;
   return (
     <div style={{display:"none"}} >
       <div className="bill"ref={ref}>
@@ -40,51 +46,46 @@ import './style.css';
               Amount
             </th>
           </tr>
-          <tr>
-            <td>Head and Shoulder</td>
-            <td>100</td>
-            <td>2</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>Britania</td>
-            <td>25</td>
-            <td>2</td>
-            <td>50</td>
-          </tr>
-          <tr>
-            <td>Tomatoes</td>
-            <td>40</td>
-            <td>1</td>
-            <td>40</td>
-          </tr>
-          <tr>
-            <td>Chocolates</td>
-            <td>5</td>
-            <td>12</td>
-            <td>60</td>
-          </tr>
+          { orderList.map((item,index) => {
+           total+=item.price * item.quantity;
+            return (
+              <tr key={index}>
+              <td>{item.name}</td>
+              <td>{item.price}</td>
+              <td>{item.quantity}</td>
+              <td>{ item.price * item.quantity}</td>
+            </tr>
+            )
+          })}
+         
+          
           <tr className="total">
             <td></td>
             <td>Total</td>
-            <td>17</td>
-            <td>350</td>
+            <td>{ totalQuanity}</td>
+            <td>{total}</td>
           </tr>
           <tr>
             <td></td>
             <td>VAT</td>
             
-            <td>10% </td>
-            <td>17.5</td>
+            <td>8% </td>
+            <td>{total*0.08}</td>
           </tr>
-          <tr className="net-amount">
+          <tr >
             <td></td>
-            <td>Net Amnt</td>
+            <td>Give </td>
             <td></td>
             <td>{change}</td>
           </tr>
+          <tr >
+            <td></td>
+            <td>Change </td>
+            <td></td>
+            <td>{total-change}</td>
+          </tr>
         </table>
-        Payment Method: Card<br />
+        Payment Method: {paymentMethod == 1 ? "Cash": "Card"}<br />
         Transaction ID: 082098082783
         <br />Username: Pradeep [Biller] <br />
         Thank You! Please visit again

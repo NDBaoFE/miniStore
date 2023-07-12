@@ -11,6 +11,15 @@ const productApi = {
         }
         return get(url, {}, { Authorization: token });
     },
+    getAllProduct: (search, token) => {
+        let url = "";
+        if (search !== "") {
+            url = `/product/all?search=${search}`;
+        } else {
+            url = `/product/all`;
+        }
+        return get(url, {}, { Authorization: token });
+    },
 
     getProductDetail: (id, token) => {
         let url = `/product/${id}`;

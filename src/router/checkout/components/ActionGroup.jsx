@@ -63,14 +63,14 @@ function ActionGroup({change}) {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
-
+  console.log(orderList);
   return (
     <GroupWrapper>
        
         <div>Discard Sale</div>
         <FinishButton onClick={()=>confirm()}>$ Finish Sale</FinishButton>
       
-        <ComponentToPrint ref={componentRef} change={change}/>
+        <ComponentToPrint ref={componentRef} change={change} orderList={orderList.data}/>
     </GroupWrapper>
   )
 }

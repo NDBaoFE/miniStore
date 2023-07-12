@@ -18,7 +18,7 @@ import selector from "./components/slice/selectors";
 import { actions } from "./components/slice";
 import productApi from "../../utils/api/productApi";
 import Success from "../../components/Success";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UploadImg from "./components/Upload";
 import { toastError, toastSuccess } from "../../components/Toast";
 import { useNavigate } from "react-router-dom";
@@ -34,6 +34,7 @@ function AddProduct() {
   const productTypeId=useSelector(selector.productTypeId);
   const quantity=useSelector(selector.quantity);
   const info=useSelector(selector.info);
+  
 
   const dispatch=useDispatch();
     const navigate=useNavigate()

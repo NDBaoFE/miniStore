@@ -13,7 +13,7 @@ export const initialState = {
     quantityAlert: 0,
     productCode: "",
     info: {},
-    types: ["Nước", "Thịt", "Nhu Yếu Phẩm"],
+    types: ["Nước", "Rau củ quả", "Nhu Yếu Phẩm"],
 };
 
 export const name = "UpdateProduct";

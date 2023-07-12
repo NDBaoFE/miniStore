@@ -46,7 +46,6 @@ export const Info = styled.div`
         margin: 0;
         line-height: 20px;
         font-size: 18.5px;
-        margin-bottom: 10px;
     }
 `;
 export const Row = styled.div`
