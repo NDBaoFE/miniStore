@@ -287,7 +287,7 @@ const token = localStorage.getItem('Authorization')
                 <Label level={5}>Password</Label>
               
                  <PasswordBtn  onClick={showModalPassword}>
-                  Open the password
+                  Change password
                 </PasswordBtn> 
   
               </Col>
