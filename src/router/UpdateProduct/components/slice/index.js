@@ -33,7 +33,7 @@ export const slice = createSlice({
             state.name = action.payload.name;
             state.productImg = action.payload.productImg;
             state.price = action.payload.price;
-            state.productTypeId = action.payload.typeid;
+            state.productTypeId = action.payload.productTypeId - 1;
             state.quantity = action.payload.quantity;
             state.productCode = action.payload.productCode;
         },

@@ -10,13 +10,13 @@ function ProductList({search,products,setProducts,columns,setCurrent,current,rel
   const navigate = useNavigate();
   const [max,setMax]=useState(0);
 
-  
-    useEffect(() => {
+  const token=localStorage.getItem("Authorization");
+  useEffect(() => {
 
         async function fetchData() {
             try {
               console.log(current);
-                const response = await productApi.getProduct(search,current-1);
+                const response = await productApi.getProduct(search,current-1,token);
                   setProducts(response.data.data.content);  
                   setMax(response.data.data.totalElements)  ;      
             } catch (error) {
@@ -24,7 +24,7 @@ function ProductList({search,products,setProducts,columns,setCurrent,current,rel
             }
         }
         fetchData();
-    }, [current,search,reload]);
+    }, [current,search,reload,token]);
     const handlePageChange=(page)=>{
       setCurrent(page);
       navigate(`/product/${page}`);

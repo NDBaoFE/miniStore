@@ -16,7 +16,7 @@ export const initialState = {
     types: ["Nước", "Thịt", "Nhu Yếu Phẩm"],
 };
 
-export const name = "AddProduct";
+export const name = "UpdateProduct";
 
 export const slice = createSlice({
     name,

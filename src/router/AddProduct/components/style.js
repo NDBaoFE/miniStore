@@ -28,7 +28,9 @@ export const AvatarInfo = styled.div`
         border-radius: 8px 8px 0 0;
     }
 `;
-export const Avatar = styled(Image)``;
+export const Avatar = styled(Image)`
+    margin-bottom: 10px;
+`;
 export const Info = styled.div`
     font-family: "Inter";
     font-style: normal;
@@ -42,9 +44,8 @@ export const Info = styled.div`
     border-radius: 0 0 8px 8px;
     h3 {
         margin: 0;
-    }
-    h2 {
-        margin: 0;
+        line-height: 20px;
+        font-size: 18.5px;
         margin-bottom: 10px;
     }
 `;

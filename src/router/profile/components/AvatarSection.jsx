@@ -11,11 +11,11 @@ function AvatarSection(){
     return (
         <AvatarWrapper>
             <AvatarInfo>
-                {/* <Avatar  src={userImg.startsWith("http") ? userImg : `data:image/jpeg;base64,${userImg}`} style={{width:150, height:150, marginLeft:25, marginTop:40, borderRadius:20}}  alt="avatar" onError={(e) => {
+                <Avatar  src={userImg.startsWith("http") ? userImg : `data:image/jpeg;base64,${userImg}`} style={{width:150, height:150, marginLeft:25, marginTop:40, borderRadius:20}}  alt="avatar" onError={(e) => {
               e.target.src = placeholder;
-            }}/> */}
+            }}/>
                 <Info>
-                    <h3>{name|| "Name"}</h3>
+                    <h2>{name|| "Name"}</h2>
                     <h2>{role|| "Your role"}</h2>
                 </Info>
             </AvatarInfo>

@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 
 import { GroupWrapper,FinishButton, NotiModal } from "./styled"
 import { useSelector } from "react-redux";
@@ -7,8 +9,14 @@ import { BsExclamationCircle } from "react-icons/Bs";
 import { toastError, toastSuccess } from "../../../components/Toast";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useReactToPrint } from 'react-to-print';
 import { clearOrder } from "../../home/components/slice";
-function ActionGroup() {
+import {ComponentToPrint} from "./bill"
+
+import  { useRef } from 'react';
+
+function ActionGroup({change}) {
+  const componentRef = useRef();
   const navigate=useNavigate();
   const dispatch=useDispatch();
   const {orderList} = useSelector(selector);
@@ -23,11 +31,12 @@ function ActionGroup() {
     };
     
     delete modifiedOrderList.percentDiscount;
-    
-    const res= await productApi.makeOrder(modifiedOrderList);
+    const token= localStorage.getItem("Authorization");
+    const res= await productApi.makeOrder(modifiedOrderList,token);
       if(res.data.status  ==200){
         toastSuccess("Make order Successfully");
         dispatch(clearOrder());
+        handlePrint();
         navigate(-1);
       }else{
         toastError("Make order Failed");
@@ -51,12 +60,17 @@ function ActionGroup() {
         },
     });
   };
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
   return (
     <GroupWrapper>
        
         <div>Discard Sale</div>
         <FinishButton onClick={()=>confirm()}>$ Finish Sale</FinishButton>
+      
+        <ComponentToPrint ref={componentRef} change={change}/>
     </GroupWrapper>
   )
 }

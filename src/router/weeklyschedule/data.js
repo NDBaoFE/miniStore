@@ -1271,6 +1271,6 @@ export const shiftStatus = {
     },
     working: {
         data: ["working"],
-        color: "red",
+        color: "#adf7b6",
     },
 };

@@ -39,7 +39,8 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setLoaded,loade
       okText: 'Confirm',
       cancelText: 'Cancel',
       onOk: async () => {
-        const res=await productApi.requestShift(id);
+        const token=localStorage.getItem("Authorization");
+        const res=await productApi.requestShift(id,token);
         if(res && res.status == 200){
           toastSuccess("You have successfully submitted your request");
           setLoaded(!loaded);

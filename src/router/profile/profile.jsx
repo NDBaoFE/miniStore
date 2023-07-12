@@ -1,4 +1,4 @@
-import { Col , Input} from "antd";
+import { Col } from "antd";
 
 import {
   FormAddUserSection,
@@ -97,13 +97,13 @@ const navigate = useNavigate()
     console.log(" Hãy nhập tất cả các field !!");
   };
 
-
+const token = localStorage.getItem('Authorization')
   const [salary, setSalary] = useState(1000);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await profileApi.getProfileDetail();
+        const response = await profileApi.getProfileDetail(token);
         dispatch(actions.setUser(response.data.data));
         dispatch(actions.getProfileInfo());
         setUpdated(true);
@@ -112,7 +112,7 @@ const navigate = useNavigate()
       }
     }
     fetchData();
-  }, [dispatch]);
+  }, [dispatch,token]);
 
 
   // useEffect(() => {
@@ -255,19 +255,19 @@ const navigate = useNavigate()
                 <Label level={5}>Phone</Label>
                 <InputPhone />
               </Col>
-              <Col span={8}>
+              <Col span={7}>
                 <Label level={5}>Gender</Label>
                 <SelectGender/>
               </Col>
             </Row>
 
             <Row>
-              <Col span={11}>
+              <Col span={6}>
                 <Label level={5}>Date of Birth</Label>
                 <SelectDateOfBirth />
               </Col>
 
-              <Col span={8}>
+              <Col span={7}>
                 <Label level={5}>Role</Label>
                 <SelectRole />
               </Col>
@@ -283,7 +283,7 @@ const navigate = useNavigate()
             </Row>
 
             <Row>
-              <Col span={13}>
+              <Col span={6}>
                 <Label level={5}>Password</Label>
               
                  <PasswordBtn  onClick={showModalPassword}>

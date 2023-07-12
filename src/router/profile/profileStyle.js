@@ -45,9 +45,11 @@ export const Title = styled.div`
   margin-left: 30px;
   margin-top: 20px;
   margin-bottom: 30px;
+  text-align: left;
 `;
 
 export const Label = styled.div`
+  text-align: left;
   margin-left: 5px;
   font-size: 15px;
   font-weight: 400;

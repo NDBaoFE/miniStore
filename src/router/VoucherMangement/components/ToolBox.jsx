@@ -30,12 +30,7 @@ const navigate = useNavigate();
     
   return (
     <ToolBox>
-        <Col className="action"> 
-        <SearchBtn> 
-            <StyledSearch placeholder="input Product name, category.."  onChange={onSearch}   />
-            </SearchBtn>
        
-        </Col>
         <Col>
     
         <Upload onClick={handleClick}><UploadOutlined  style={{marginRight: "10px", fontSize:"20px"}} /> Generate Report</Upload>

@@ -59,13 +59,7 @@ const columns = [
       <span>{record.type == false? "Work Request":"Holiday Request"}</span>
     ),
   },
-  {
-    title: 'Approved',
-    dataIndex: 'isApproved',
-    render: (_, record) => (
-      <span>True</span>
-    ),
-  },
+
   {
     title: 'Action',
     key: 'action',

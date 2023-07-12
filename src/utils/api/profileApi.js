@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { get, put } from "./ApiCaller";
 
-const token = localStorage.getItem('Authorization');
+
 const profileApi = {
 
-  getProfileDetail:() =>{
+  getProfileDetail:(token) =>{
     let url = `/user/profile`
     return get(url, {}, {Authorization:token})
 

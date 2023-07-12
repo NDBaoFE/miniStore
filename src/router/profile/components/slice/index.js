@@ -19,7 +19,7 @@ export const initialState = {
   payslip: 0
 };
 
-export const name = "editAccount";
+export const name = "editProfile";
 
 export const slice = createSlice({
   name,

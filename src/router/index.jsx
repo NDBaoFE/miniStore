@@ -120,7 +120,7 @@ const employeeRoute = [
     {
         
         index: true,
-        path: "user/details/:id",
+        path: "user/detail/:id",
         component: <ViewUser/>,
         exact: true,
         restrict: true,
@@ -208,10 +208,18 @@ const employeeRoute = [
     {
         index: true,
         path: "product/:id",
+        component: <ProductManagement/>,
+        exact: true,
+        restrict: true,
+    },
+    {
+        index: true,
+        path: "product/view/:id",
         component: <UpdateProduct/>,
         exact: true,
         restrict: true,
-    } , {
+    }
+     , {
         index: true,
         path: "product",
         component: <ProductManagement/>,

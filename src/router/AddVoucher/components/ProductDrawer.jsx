@@ -28,11 +28,12 @@ function ProductDrawer({onClose,openDrawer}) {
     setIndeterminate(false);
     setCheckAll(e.target.checked);
   };
+  const token=localStorage.getItem("Authorization");
   useEffect(() => {
     async function fetchData() {
       try {
         setProducts([]);
-        const response = await productApi.getProduct(searchValue, current - 1);
+        const response = await productApi.getProduct(searchValue, current - 1,token);
 
         setProducts(response.data.data.content);
       } catch (error) {
@@ -40,7 +41,7 @@ function ProductDrawer({onClose,openDrawer}) {
       }
     }
     fetchData();
-  }, [searchValue]);
+  }, [searchValue,token]);
    // }
    const onSearch = (e) => {
   

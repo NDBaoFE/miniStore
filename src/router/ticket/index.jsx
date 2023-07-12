@@ -18,11 +18,12 @@ function TicketPage() {
   const [tickets,setTickets]=useState([]);
   const [loaded,setLoaded]=useState(false);
   const [report,setReport]=useState(null);
+  const token=localStorage.getItem("Authorization");
   useEffect(() => {
 
     async function fetchData() {
         try {
-            const response = await productApi.getAllTicket();
+            const response = await productApi.getAllTicket(token);
             const processedTickets= await response.data.data.processedTickets;
 
             const unprocessedTickets= await response.data.data.unprocessedTickets;
@@ -48,7 +49,7 @@ function TicketPage() {
         }
     }
     fetchData();
-}, [loaded]);
+}, [loaded,token]);
   return (
     <Container>
       <Hero>DashBoard</Hero>

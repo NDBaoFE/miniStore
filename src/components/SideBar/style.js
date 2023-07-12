@@ -7,7 +7,7 @@ const { Sider } = Layout;
 export const Logo = styled.div`
     display: flex;
     align-items: center;
-    font-family: "Nunito Sans", sans-serif;
+    font-family: "Inter", sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 14px;
@@ -18,7 +18,7 @@ export const Logo = styled.div`
 `;
 
 export const Wrapper = styled.div`
-    font-family: "Nunito Sans", sans-serif;
+    font-family: "Inter", sans-serif;
     @media (max-width: 992px) {
         display: none;
     }
@@ -221,7 +221,7 @@ export const Wrapper = styled.div`
 `;
 export const SideBar = styled(Sider)`
     /* min-width: 200px; */
-    font-family: "Nunito Sans", sans-serif;
+    font-family: "Inter", sans-serif;
     position: fixed !important;
     min-height: 100vh;
     top: 0;
@@ -235,13 +235,13 @@ export const SideBar = styled(Sider)`
 export const SignOut = styled.button`
     display: flex;
     align-items: center;
-    font-family: "Nunito Sans", sans-serif;
+    font-family: "Inter", sans-serif;
     color: rgba(255, 255, 255, 0.85);
     position: absolute;
     bottom: 20px;
     padding-left: 24px;
     background-color: transparent;
-    color:green;
+    color: green;
     border: none;
     cursor: pointer;
 `;

@@ -73,11 +73,12 @@ const onChange = (pagination, filters, sorter, extra) => {
 
 function OrderTable() {
   const [orders,setOrders] = useState([]);
+  const token=localStorage.getItem("Authorization");
   useEffect(() => {
 
     async function fetchData() {
         try {
-            const response = await productApi.getAllOrder();
+            const response = await productApi.getAllOrder(token);
                 setOrders(response.data.data);
           
         } catch (error) {
@@ -85,7 +86,7 @@ function OrderTable() {
         }
     }
     fetchData();
-}, []);
+}, [token]);
  
 
   return (
