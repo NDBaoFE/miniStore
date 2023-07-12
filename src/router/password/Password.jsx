@@ -53,11 +53,11 @@ const Password = () => {
   };
 
 
- 
+ const token = localStorage.getItem('Authorization')
 
   const UpdatePassword = async () => {
     dispatch(actions.getPasswordInfo());
-    const res = await passwordApi.changePassword(info);
+    const res = await passwordApi.changePassword(info, token);
    
     if (res.data.status == 200) {
       setSuccess(true);

@@ -76,7 +76,7 @@ const navigate = useNavigate()
 
   const UpdateInfo = async () => {
     dispatch(actions.getProfileInfo());
-    const res = await profileApi.updateProfile(info, id);
+    const res = await profileApi.updateProfile(info, id,token);
 
     if (res.data.status == 200) {
       setSuccess(true);
@@ -262,10 +262,7 @@ const token = localStorage.getItem('Authorization')
             </Row>
 
             <Row>
-              <Col span={6}>
-                <Label level={5}>Date of Birth</Label>
-                <SelectDateOfBirth />
-              </Col>
+      
 
               <Col span={7}>
                 <Label level={5}>Role</Label>
@@ -287,7 +284,7 @@ const token = localStorage.getItem('Authorization')
                 <Label level={5}>Password</Label>
               
                  <PasswordBtn  onClick={showModalPassword}>
-                  Open the password
+                  Change password
                 </PasswordBtn> 
   
               </Col>
