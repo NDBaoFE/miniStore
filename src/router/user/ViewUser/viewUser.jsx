@@ -50,6 +50,9 @@ function ViewUser() {
   const info = useSelector(selectors.info);
   const dispatch = useDispatch();
 
+
+ 
+
   const { id } = useParams();
   const navigate = useNavigate()
   const UpdateInfo = async () => {
@@ -88,7 +91,7 @@ function ViewUser() {
       }
     }
     fetchData();
-  }, []);
+  }, [token]);
 
   const confirm = () => {
     

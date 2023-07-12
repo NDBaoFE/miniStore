@@ -49,7 +49,7 @@ function NavBar() {
 
   const menu = (
     <Menu style={{ marginTop: 10 }}>
-      {data &&
+      {data.length > 0 ?(
         data.map((option) => (
           <Menu.Item
           
@@ -80,7 +80,11 @@ function NavBar() {
 
             
           </Menu.Item>
-        ))}
+        ))
+      
+      ): (
+        <Menu.Item disabled>No notification</Menu.Item>
+      )}
     </Menu>
   );
 console.log();

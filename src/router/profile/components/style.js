@@ -11,7 +11,7 @@ export const AvatarWrapper = styled.div`
     position: relative;
     border-radius: 8px 8px 0 0;
     width: 100%;
-    height: 200px;
+    height: 240px;
     
     display: flex;
     align-items: center;
@@ -35,6 +35,8 @@ export const AvatarInfo = styled.div`
 `;
 export const Avatar = styled(Image)`
     width:100px;
+    margin-right:  15px;
+
 
 `
 export const ProfileIcon = styled(UserAddOutlined)`
@@ -66,6 +68,9 @@ export const Info = styled.div`
     h2 {
         margin: 0;
         margin-bottom: 10px;
+        padding: 5px;
+        font-size: 20px;
+        text-transform: uppercase;
     }
 `;
 

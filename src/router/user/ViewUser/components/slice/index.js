@@ -17,7 +17,7 @@ export const initialState = {
     info: {},
 };
 
-export const name = "editAccount";
+export const name = "viewProfile";
 
 export const slice = createSlice({
     name,

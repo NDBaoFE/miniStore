@@ -15,7 +15,7 @@ function BreadCrumbHeader() {
         '/product/:id':'Update Product',
         '/user': 'User',
         '/user/add': 'Add User',
-        '/user/details':'User Detail',
+        '/user/detail':'User Detail',
         '/user/update':'User Update',
         '/setting' : 'Setting',
         '/setting/general' : 'General',

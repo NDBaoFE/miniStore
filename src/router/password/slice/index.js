@@ -5,15 +5,16 @@ import { createSlice } from "@reduxjs/toolkit";
 export const initialState = {
 
 
-  password: 0,
-  newPassword:0,
+  password: '',
+  newPassword:'',
+  confirmPassword:'',
   info: {},
 
 
 
 };
 
-export const name = "changePassword1";
+export const name = "changePassword";
 
 export const slice = createSlice({
   name,
@@ -31,6 +32,7 @@ export const slice = createSlice({
 
         password: state.password,
         newPassword:state.newPassword,
+        confirmPassword: state.confirmPassword
 
       };
 

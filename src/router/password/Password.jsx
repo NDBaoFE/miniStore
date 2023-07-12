@@ -1,7 +1,7 @@
 import "./passwordStyle.css";
 import { Row, Label, StyleForm } from "./StyledPassword";
 import { SettingOutlined } from "@ant-design/icons";
-import { Col, Input } from "antd";
+import { Col, Form, Input } from "antd";
 import InputPassword from "./components/data-entry/InputPassword";
 import ActionGroup from "../profile/components/ActionGroup";
 import { useSelector } from "react-redux";
@@ -16,7 +16,7 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 import Success from "../../components/Success";
 import { useState } from "react";
 import InputNewPassword from "./components/data-entry/InputNewPassword";
-
+import ConfirmPassword from "./components/data-entry/ConfirmPassword";
 
 const Password = () => {
   const [updated, setUpdated] = useState(false);
@@ -24,29 +24,35 @@ const Password = () => {
   const info = useSelector(selectors.info);
   const password = useSelector(selectors.password);
   const newPassword = useSelector(selectors.newPassword)
-
+  const [confirmPassword,setConfirmPassword]=useState("");
+  const handleInputChange=(e)=>{
+    
+    setConfirmPassword(e.target.value);
+    console.log(confirmPassword);
+  }
   const [form] = StyleForm.useForm();
   const dispatch = useDispatch();
   
 
 
 
-  const handleFinish = async (values) => {
-    if (values.newPassword !== values.confirmNewPassword) {
+  const handleFinish = (values) => {
+    console.log(values);
+    if (values.newPassword !== values.confirmPassword) {
       toastError("New password and confirm password do not match");
       return;
     }
+     
     UpdatePassword()
+    
+   
   };
 
   const handleFinishFailed = () => {
     console.log(" Hãy nhập tất cả các field !!");
   };
 
-  const handleCancel = () => {
-    console.log("Clicked cancel button");
-    setOpenModal(false);
-  };
+
  
 
   const UpdatePassword = async () => {
@@ -99,7 +105,8 @@ const Password = () => {
           name="userForm"
           initialValues={{
             oldPassword: password,
-            newPassword: newPassword
+            newPassword: newPassword,
+            confirmPassword:confirmPassword
 
           }}
           onFinish={handleFinish}
@@ -120,16 +127,8 @@ const Password = () => {
 
           <Row>
             <Col span={13}>
-              <Label level={5}>Confirm New Password</Label>
-              <Input.Password
-                name="confirmNewPassword"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please confirm your new password",
-                  },
-                ]}
-              />
+              <Label level={5}>Confirm Password</Label>
+              <ConfirmPassword></ConfirmPassword>
             </Col>
           </Row>
 

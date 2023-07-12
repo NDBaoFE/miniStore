@@ -13,12 +13,12 @@ const SelectDateOfBirth = () => {
     const handleDobChange = (date) => {
         dispatch(actions.setDob(moment(date).format('YYYY/MM/DD')));
         dispatch(actions.getUserInfo());
-        console.log(date);
+     
     };
 
 
     return (
-        <DatePicker name='dob' onChange={handleDobChange} />
+        <DatePicker name='dob'  value={birthdate ? moment(birthdate) : null} onChange={handleDobChange} />
     );
 };
 

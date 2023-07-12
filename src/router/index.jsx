@@ -32,6 +32,9 @@ import Error403Page from "./403/Error403Page";
 import Profile from "./profile/profile";
 import Notification from "../components/Notification/Notification";
 import Password from "./password/Password";
+import Payroll from "./payroll";
+import PayrollByUser from "./payrollByUser";
+import OrderManagemntPage from "./OrderManagement";
 
 
 const publicRoute = [
@@ -117,7 +120,7 @@ const employeeRoute = [
     {
         
         index: true,
-        path: "user/details/:id",
+        path: "user/detail/:id",
         component: <ViewUser/>,
         exact: true,
         restrict: true,
@@ -169,6 +172,24 @@ const employeeRoute = [
         exact: true,
         restrict: true,
     },
+
+    {
+        
+        index: true,
+        path: "payroll",
+        component: <Payroll/>,
+        exact: true,
+        restrict: true,
+    }, 
+
+    {
+        
+        index: true,
+        path: "payroll/:id",
+        component: <PayrollByUser/>,
+        exact: true,
+        restrict: true,
+    }, 
     {
         index: true,
         path: "checkout",
@@ -238,6 +259,14 @@ const employeeRoute = [
         index: true,
         path: "employee-schedule",
         component: <EmployeeSchedule/>,
+        exact: true,
+        restrict: true,
+    },
+
+    {
+        index: true,
+        path: "orderManagement",
+        component: <OrderManagemntPage/>,
         exact: true,
         restrict: true,
     },

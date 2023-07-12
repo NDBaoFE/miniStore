@@ -87,7 +87,7 @@ function UserManagement(){
           dataIndex:'action',
           render: (_, record) => (
             <StyledSpace size="middle">
-              <Link to={`/user/details/${record.userId}`}>View </Link>
+              <Link to={`/user/detail/${record.userId}`}>View </Link>
               <div onClick={()=>confirm(record.userId)}>Delete</div>
             </StyledSpace>
           ),
