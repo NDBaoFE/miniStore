@@ -10,12 +10,12 @@ const price=useSelector(selector.price);
   return (
     <AvatarWrapper>
         <AvatarInfo>
-            <Avatar src={productImg.startsWith("http") ? productImg : `data:image/jpeg;base64,${productImg}`}   alt="avatar" onError={(e) => {
+            <Avatar src={productImg? productImg:placeholder}   alt="avatar" onError={(e) => {
           e.target.src = placeholder;
         }}/>
             <Info>
                 <h3>{name}</h3>
-                <h3>{price||"Your price"}</h3>
+                <h3>{`${price} VNĐ`||"Your price"}</h3>
             </Info>
         </AvatarInfo>
     </AvatarWrapper>

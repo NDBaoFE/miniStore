@@ -11,7 +11,7 @@ const SelectType = () => {
 
     const types = useSelector(selector.types);
     const productTypeId = useSelector(selector.productTypeId);
-
+    console.log(types);
     const handleGenderChange = (value) => {
         dispatch(actions.setProductTypeId(value));
         dispatch(actions.getProductInfo());
@@ -20,7 +20,7 @@ const SelectType = () => {
 
     return (
         <Select defaultValue={types[productTypeId]} onChange={handleGenderChange} style={{ width: "100%",marginBottom:"30px" }}>
-            {types.map((crew, index) => (
+            { types && types.map((crew, index) => (
                 <Option value={index} key={index}>
                     {crew}
                 </Option>

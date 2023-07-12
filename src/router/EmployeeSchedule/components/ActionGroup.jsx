@@ -15,7 +15,8 @@ function ActionGroup({setOpen ,positions,setLoaded}) {
       userShiftId: item.userShiftId,
       userId: item.user.userId
     }));
-      const res= await productApi.assignEmployee(adjustedArray);
+    const token=localStorage.getItem("Authorization");
+      const res= await productApi.assignEmployee(adjustedArray,token);
       if(res.data.status === 200 ){
         toastSuccess(res.data.message);
         setLoaded(true);

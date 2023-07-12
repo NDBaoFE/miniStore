@@ -39,7 +39,8 @@ function UpdateProduct() {
   const { id } = useParams();
   const UpdateInfo = async () => {
     dispatch(actions.getProductInfo());
-    const res = await productApi.addProduct(info);
+    const token=localStorage.getItem("Authorization");
+    const res = await productApi.updateProduct(info,id,token);
     if (res.data.status == 200) {
       setSuccess(true);
       setTimeout(() => {
@@ -57,11 +58,11 @@ function UpdateProduct() {
   const handleFinishFailed = () => {
     console.log(" Hãy nhập tất cả các field !!");
   };
-
+  const token = localStorage.getItem("Authorization");
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await productApi.getProductDetail(id);
+        const response = await productApi.getProductDetail(id,token);
         dispatch(actions.setProduct(response.data.data));
         dispatch(actions.getProductInfo());
         setUpdated(true);
@@ -70,17 +71,17 @@ function UpdateProduct() {
       }
     }
     fetchData();
-  }, []);
+  }, [token]);
 
   const confirm = () => {
     NotiModal.confirm({
       maskClosable: true,
-      title: "Bạn có muốn thay đổi thông tin tài khoản?",
+      title: "Are you sure you want to update the Product Info",
       icon: <ExclamationCircleOutlined />,
       content:
-        "Tài khoản sau khi đổi sẽ không còn còn lưu trữ thông tin trước đó được nữa.",
-      okText: "Xác nhận",
-      cancelText: "Huỷ",
+        "Please confirm Your Choice",
+      okText: "Confirm",
+      cancelText: "Cancel",
       onOk: () => {
         form.submit();
         // openNotification();

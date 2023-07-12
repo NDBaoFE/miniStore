@@ -13,7 +13,6 @@ const useAuth = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [userId, setUserId] = useState(null);
     const [profile, setProfile] = useState(null);
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const token = localStorageUtils.getToken();
     const checkTokenExpiration = useCallback(() => {
@@ -48,7 +47,6 @@ const useAuth = () => {
             setIsLoading(true);
             authApi.getUser(token).then((user) => {
                 const { data } = user.data;
-                console.log(data);
 
                 if (!user.data?.data?.roles) {
                     setUserRole(undefined);

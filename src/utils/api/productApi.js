@@ -1,9 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { get, post, put, remove } from "./ApiCaller";
-const token = localStorage.getItem("Authorization");
 
 const productApi = {
-    getProduct: (search, current) => {
+    getProduct: (search, current, token) => {
         let url = "";
         if (search !== "") {
             url = `/product/search?keyword=${search}&offset=${current}`;
@@ -12,67 +11,96 @@ const productApi = {
         }
         return get(url, {}, { Authorization: token });
     },
+    getAllProduct: (search, token) => {
+        let url = "";
+        if (search !== "") {
+            url = `/product/all?search=${search}`;
+        } else {
+            url = `/product/all`;
+        }
+        return get(url, {}, { Authorization: token });
+    },
 
-    getProductDetail: (id) => {
+    getProductDetail: (id, token) => {
         let url = `/product/${id}`;
         return get(url, {}, { Authorization: token });
     },
 
-    getAllVoucher: () => {
+    getAllVoucher: (token) => {
         const url = `/voucher`;
         return get(url, {}, { Authorization: token });
     },
-    getAllType: () => {
+    getAllType: (token) => {
         const url = `/productType`;
         return get(url, {}, { Authorization: token });
     },
-    makeOrder: (products) => {
+    makeOrder: (products, token) => {
         let url = "/orderDetail/create";
 
         return post(url, { ...products }, {}, { Authorization: token });
     },
-    addProduct: (product) => {
+    addProduct: (product, token) => {
         let url = "/product";
         return post(
             url,
-            {
-                ...product,
-                productTypeId: product.productTypeId + 1,
-                isDeleted: null,
-            },
+            [
+                {
+                    ...product,
+                    productTypeId: product.productTypeId + 1,
+                    isDeleted: null,
+                },
+            ],
             {},
             { Authorization: token }
         );
     },
-    getUserShift: (offset) => {
+    updateProduct: (product, id, token) => {
+        let url = "/product";
+        console.log(product.productTypeId);
+        return put(
+            url,
+
+            {
+                productId: id,
+                ...product,
+                productTypeId: product.productTypeId + 1,
+                isDeleted: null,
+                minimum: null,
+            },
+
+            {},
+            { Authorization: token }
+        );
+    },
+    getUserShift: (offset, token) => {
         const url = `/userShift?offset=${offset}`;
         return get(url, {}, { authorization: token });
     },
-    viewOwnShift: (offset) => {
+    viewOwnShift: (offset, token) => {
         const url = `/userShift/schedule?offset=${offset}`;
         return get(url, {}, { authorization: token });
     },
-    addVoucher: (voucher, productList) => {
-        console.log(voucher);
+    addVoucher: (voucher, productList, token) => {
         let url = "/applyVoucherToProducts";
         return post(
             url,
             {
-                productList: { ...voucher },
+                voucher: { ...voucher },
+                productList: [...productList],
             },
             {},
             { Authorization: token }
         );
     },
-    assignEmployee: (userShifts) => {
+    assignEmployee: (userShifts, token) => {
         let url = "/userShift/assign";
         return post(url, [...userShifts], {}, { authorization: token });
     },
-    importProduct: (productList) => {
+    importProduct: (productList, token) => {
         let url = "/product";
         return post(url, productList, {}, { authorization: token });
     },
-    login: (email, password) => {
+    login: (email, password, token) => {
         const url = `/auth/login`;
         return post(
             url,
@@ -85,89 +113,46 @@ const productApi = {
         );
     },
 
-    deleteVoucher: (id) => {
+    deleteVoucher: (id, token) => {
         const url = `/voucher/delete/${id}`;
         return remove(url, {}, {}, { Authorization: token });
     },
-    deleteProduct: (id) => {
+
+    deleteProduct: (id, token) => {
         const url = `/product/${id}`;
         return remove(url, {}, {}, { Authorization: token });
     },
-    getLeaderBoard: (token) => {
-        const url = `/auth/leaderboard`;
+
+    getVoucher: (type, id, count, token) => {
+        const url =
+            type == true
+                ? `/getAllVouchers?results=${count}`
+                : `/getVoucherByProductId?productId=${id}&results=${count}`;
+
         return get(url, {}, { Authorization: token });
     },
 
-    getPersonalAccount: (token) => {
-        const url = `/auth/profile`;
-        return get(url, {}, { Authorization: token });
-    },
-
-    updateOwnAccount: (info, token) => {
-        const url = `/auth/profile/edit`;
-        return put(
-            url,
-            {
-                image: info.avatar,
-                dateOfBirth: info.birthdate,
-                bio: info.bio,
-                facebook: info.facebook,
-                fullname: info.fullName,
-                email: info.email,
-                phone: info.phone,
-                id: info.id,
-                region: "VietNam",
-            },
-            {},
-            { Authorization: token }
-        );
-    },
-    signup: (value) => {
-        const url = `/auth/signup`;
-        return post(
-            url,
-            {
-                name: value.name,
-                email: value.email,
-                password: value.password,
-            },
-            {},
-            {}
-        );
-    },
-    getBalance: (token) => {
-        const url = `/auth/balance`;
-        return get(url, {}, { Authorization: token });
-    },
-    getblogs: (token, page) => {
-        const url = `/auth/allblog?page=${page}`;
-        return get(url, {}, { Authorization: token });
-    },
-    getBlogDetail: (token, id) => {
-        const url = `/auth/blog?id=${id}`;
-        return get(url, {}, { Authorization: token });
-    },
-    getAllTicket: () => {
+    getAllTicket: (token) => {
         const url = `/ticket`;
         return get(url, {}, { Authorization: token });
     },
-    getTicketType: () => {
+    getTicketType: (token) => {
         const url = `/ticketType`;
         return get(url, {}, { Authorization: token });
     },
-    getTicketDetail: (id) => {
+    getTicketDetail: (id, token) => {
         const url = `/ticket/${id}`;
         return get(url, {}, { Authorization: token });
     },
-    ticketApprove: (id, status) => {
+    ticketApprove: (id, status, token) => {
         const url = `/ticket/approve?ticketId=${id}&isApproved=${status}`;
         return get(url, {}, { Authorization: token });
     },
-    getAllOrder: (id, status) => {
+    getAllOrder: (token) => {
         const url = `/order`;
         return get(url, {}, { Authorization: token });
     },
-    addTicket: (ticket) => {
+    addTicket: (ticket, token) => {
         const url = `/ticket`;
         return post(
             url,
@@ -178,19 +163,24 @@ const productApi = {
             { Authorization: token }
         );
     },
-    requestShift: (userShiftId) => {
+    requestShift: (userShiftId, token) => {
         const url = `/shiftRequest?userShiftId=${userShiftId}`;
         return post(url, {}, {}, { Authorization: token });
     },
-    checkin: (shift) => {
+
+    checkin: (shift, token) => {
         const url = `/userShift/checkin?userShiftId=${shift}`;
         return get(url, {}, { Authorization: token });
     },
-    ticketApproval: (ticketId, status) => {
+    checkout: (shift, token) => {
+        const url = `/userShift/checkout?userShiftId=${shift}`;
+        return get(url, {}, { Authorization: token });
+    },
+    ticketApproval: (ticketId, status, token) => {
         const url = `/ticket/approve?ticketId=${ticketId}&isApproved=${status}`;
         return get(url, {}, { Authorization: token });
     },
-    dashboard: () => {
+    dashboard: (token) => {
         const url = `/dashboard`;
         return get(url, {}, { Authorization: token });
     },

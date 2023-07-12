@@ -16,9 +16,9 @@ function ActionGroup({confirm}) {
   const handleClose = () => {
     setIsModalOpen(false);
   };
-
+  const token = localStorage.getItem("Authorization");
   const handleOk = () => {
-    productApi.makeOrder(orderList);
+    productApi.makeOrder(orderList,token);
   }
 
   const handleConfirm = () => {
@@ -34,7 +34,7 @@ function ActionGroup({confirm}) {
          <p>Thank you for completing the sale.</p></>} title="Sale Confirmation"
           handleConfirm={handleConfirm} handleClose={handleClose} showModal={showModal}/>
         <div>Discard Change</div>
-        <FinishButton onClick={()=>confirm()}>Add Product</FinishButton>
+        <FinishButton onClick={()=>confirm()}>Add Voucher</FinishButton>
     </GroupWrapper>
   )
 }

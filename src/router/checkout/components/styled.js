@@ -89,7 +89,11 @@ export const StyledRadio = styled(Radio)`
     }
 `;
 
-export const StyledSpace = styled(Space)``;
+export const StyledSpace = styled(Space)`
+    .ant-space-item {
+        text-align: justify;
+    }
+`;
 export const ItemRow = styled(Row)`
     div {
         font-family: "Inter";

@@ -4,15 +4,15 @@
 import { AntdTable, ProductWrapper } from './style'
 import { useEffect } from 'react';
 import productApi from '../../../utils/api/productApi';
-  
+const token = localStorage.getItem("Authorization");
 function VoucherList({search,products,setProducts,columns,current,loader}) {
 
-   
+
     useEffect(() => {
 
         async function fetchData() {
             try {
-                const response = await productApi.getAllVoucher(search,current-1);
+                const response = await productApi.getAllVoucher(token);
                   setProducts(response.data);  
                 
             } catch (error) {
@@ -20,11 +20,12 @@ function VoucherList({search,products,setProducts,columns,current,loader}) {
             }
         }
         fetchData();
-    }, [search,current,loader]);
+    }, [search,current,loader,token]);
 
   return (
-    <ProductWrapper><AntdTable columns={columns} dataSource={products} 
-    /></ProductWrapper>
+    <ProductWrapper>
+      {products && <AntdTable columns={columns} dataSource={products} /> }
+  </ProductWrapper>
   )
 }
 

@@ -1,7 +1,8 @@
-import { Input } from "antd";
+import { Input, Dropdown, List  } from "antd";
 import { AiOutlineShopping } from "react-icons/ai";
 import { styled } from "styled-components";
 import { BsTelephoneFill } from "react-icons/Bs";
+import { BellFilled } from "@ant-design/icons";
 
 export const ContainerNavBarAll = styled.div`
     height: 140px;
@@ -100,3 +101,29 @@ export const NavLink = styled.div`
         background-color: #31353d;
     }
 `;
+export const WrapperNoti = styled.div`
+    border: none;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    height: 35px;
+    width: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+`;
+
+export const NotiIcon = styled(BellFilled )`
+
+font-size: 20px;
+text-align: center;
+`
+
+export const StyledDropdown = styled(Dropdown )`
+   margin-left: 370px;
+`
+
+export const StyleListItem = styled(List.Item)`
+
+    padding-left: 20px;
+`

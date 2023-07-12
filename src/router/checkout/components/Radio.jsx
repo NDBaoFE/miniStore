@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 
 import { RadioContainer, StyledSpace,StyledRadio } from "./styled"
 import { useState } from "react";
@@ -5,7 +6,7 @@ import { Input } from "antd";
 import { useDispatch,useSelector } from "react-redux";
 import { selector } from "../../home/components/slice/selector";
 import { updatePaymentMethod } from "../../home/components/slice";
-function Radio() {
+function Radio({change,setChange}) {
     const dispatch = useDispatch();
     const {paymentMethod} = useSelector(selector);
     const [value, setValue] = useState(paymentMethod);
@@ -13,12 +14,19 @@ function Radio() {
     setValue(e.target.value);
     dispatch(updatePaymentMethod(e.target.value));
   };
+  const handleChange = (e) => {
+    setChange(e.target.value);
+  }
   return (
     <RadioContainer> 
     <StyledRadio.Group onChange={onChange} value={value} >
     <StyledSpace direction="vertical">
       <StyledRadio value={1} >Cash {value === 1 ? (
             <Input
+            type="number"
+            name="name"
+            value={change}
+            onChange={handleChange}
             placeholder=" 💵 Enter Amount Received"
               style={{
                 width: 200,

@@ -2,10 +2,9 @@ import { AntdImage, Button, Container, Row, VoucherInfo, VoucherInfoWrapper } fr
 import { VoucherPlacement } from "./style"
 import ToolBox from "./components/ToolBox"
 import VoucherList from "./components/VoucherList"
-import { useDispatch,useSelector } from "react-redux"
-
-
-import { applyToAllVoucher, applyVoucher, getProductById} from "../home/components/slice/index"
+import { useDispatch } from "react-redux"
+import placeholder from "../../assets/image/placeholder.png"
+import { applyToAllVoucher, applyVoucher, } from "../home/components/slice/index"
 import { useNavigate, useParams } from "react-router-dom"
 import { useState } from "react"
 import { toastSuccess } from "../../components/Toast"
@@ -14,9 +13,7 @@ function VoucherApply() {
 const navigate=useNavigate();
   const dispatch = useDispatch();
   const {id} = useParams();
-  const product = useSelector(state => getProductById(state.orderList, id));
-  console.log(product);
-  const voucher="https://innhanhthanhdanh.com/wp-content/uploads/2013/08/orange-and-blue-marketing-gift-voucher-free-vector.jpg"
+
   const [currentVoucher,setCurrentVoucher]=useState();
 const handleApplyVoucher=()=>{
   if(id == "applyAll"){
@@ -28,10 +25,11 @@ const handleApplyVoucher=()=>{
   navigate(-1);
   toastSuccess("add Voucher Successfully !!")
 }
+
   return (
     <Container>
       <VoucherPlacement>
-        <AntdImage alt="voucher"  src={currentVoucher?.voucherImg.startsWith("http")||currentVoucher?.voucherImg.startsWith("data:image") ? currentVoucher?.voucherImg : `data:image/jpeg;base64,${currentVoucher?.voucherImg}`||voucher} />
+        <AntdImage alt="voucher"  src={ currentVoucher?.voucherImg ? currentVoucher?.voucherImg?.startsWith("http")||currentVoucher?.voucherImg?.startsWith("data:image") ? currentVoucher?.voucherImg : `data:image/jpeg;base64,${currentVoucher?.voucherImg}`: placeholder} />
        {currentVoucher&& <VoucherInfo>
         <h1 style={{marginRight:"30px"}}>Detail:</h1>
         <VoucherInfoWrapper>

@@ -12,8 +12,9 @@ import {
 
 import { useEffect } from "react";
 import userApi from "../../../utils/api/userApi";
-import { theme } from "antd";
+
 import { themes } from "../../../utils/theme";
+
 
 function UserList({ search, users, setUsers, columns, setCurrent, current, reload }) {
   const navigate = useNavigate();
@@ -25,11 +26,11 @@ function UserList({ search, users, setUsers, columns, setCurrent, current, reloa
     }
     return "";
   };
-
+  const token=localStorage.getItem("Authorization");
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await userApi.getUser(search, current - 1);
+        const response = await userApi.getUser(search, current - 1,token);
         setUsers(response.data.data.content);
         setMax(response.data.data.totalElement);
       } catch (error) {
@@ -37,7 +38,7 @@ function UserList({ search, users, setUsers, columns, setCurrent, current, reloa
       }
     }
     fetchData();
-  }, [search, current, reload]);
+  }, [search, current, reload,token]);
   const handlePageChange = (page) => {
     setCurrent(page);
     navigate(`/user/${page}`);
@@ -94,6 +95,7 @@ function UserList({ search, users, setUsers, columns, setCurrent, current, reloa
         <RevenueTitle>Revenue</RevenueTitle>
         <RevenueTitle>for last 30days</RevenueTitle>
       </RevenueDashboardContainer>
+      
       <UserWrapper>
         <AntdTable
           columns={columns}

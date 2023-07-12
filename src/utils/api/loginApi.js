@@ -1,5 +1,4 @@
-import {post } from "./ApiCaller";
-const token = localStorage.getItem("Authorization");
+import { post } from "./ApiCaller";
 
 const loginApi = {
     login: (email, password) => {
@@ -14,7 +13,6 @@ const loginApi = {
             {}
         );
     },
-}
+};
 
-
-export default loginApi
+export default loginApi;

@@ -63,6 +63,25 @@ export const slice = createSlice({
                 state.productList.push({ productId: item });
             }
         },
+        resetState: (state) => {
+            //make all the fields empty
+            state.voucherId = initialState.voucherId;
+            state.description = initialState.description;
+            state.name = initialState.name;
+            state.voucherImg = initialState.voucherImg;
+            state.minItem = initialState.minItem;
+            state.minTotal = initialState.minTotal;
+            state.quantity = initialState.quantity;
+            state.percentDiscount = initialState.percentDiscount;
+            state.maxPercent = initialState.maxPercent;
+            state.expiredDate = initialState.expiredDate;
+            state.isApplyAll = initialState.isApplyAll;
+            state.info = initialState.info;
+            state.productList = initialState.productList;
+
+            state.isDeleted = initialState.isDeleted;
+            state.types = initialState.types;
+        },
     },
 });
 

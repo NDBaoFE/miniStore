@@ -52,7 +52,8 @@ function ProductManagement() {
         okText: 'Xác nhận',
         cancelText: 'Huỷ',
         onOk: async() => {
-          const res= await productApi.deleteProduct(id);
+          const token=localStorage.getItem("Authorization");
+          const res= await productApi.deleteProduct(id,token);
           if(res.status===200){
             toastSuccess("Delete Product Succesfully");
              setSearch(search);
@@ -77,6 +78,7 @@ function ProductManagement() {
         dataIndex: 'details',
         key: 'details',
         render: (_, record) => (
+        
           <span className='detail'>
             <Image src={record.productImg} alt="Product Image" style={{ marginRight: 8,width:100}} />
             {record.name}
@@ -124,7 +126,7 @@ function ProductManagement() {
         dataIndex:'action',
         render: (_, record) => (
           <StyledSpace size="middle">
-            <Link to={`/product/${record.productId}`}>Edit </Link>
+            <Link to={`/product/view/${record.productId}`}>View</Link>
             <div onClick={()=>confirm(record.productId)}>Delete</div>
           </StyledSpace>
         ),

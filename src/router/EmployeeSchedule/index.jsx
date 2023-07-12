@@ -19,6 +19,8 @@ import ApplyTour from "./components/Instruction";
 import Draggable from 'react-draggable';
 import CheckinModal from "./CheckinModal";
 import RequestTable from "./RequestTable";
+import localStorageUtils from "../../utils/localStorageUtils";
+import WorkingShift from "./components/WorkingShift";
 
 
 
@@ -85,10 +87,10 @@ const EmployeeTimetable = () => {
   const handleTimeSlotClick = (day, shift) => {
     // Handle time slot click event
   };
-
+const token=localStorageUtils.getItem("Authorization");
   async function fetchData() {
     try {
-      const response = await productApi.getUserShift(current);
+      const response = await productApi.getUserShift(current,token);
       
       const newArray = await response.data.data.userShifts.map((item) => {
         const timestamp = item.startTime;
@@ -132,7 +134,7 @@ const EmployeeTimetable = () => {
 
   useEffect(() => {
     fetchData();
-  }, [current,loaded]);
+  }, [current,loaded,token]);
   
 const handleColClick=(userShift)=>{
     const updatedDayUserShift = userShift.map((item, index) => ({
@@ -257,6 +259,10 @@ const handleDrag = (e, data) => {
   </div>
 </Container>
 </div>
+      {/* <div style={{width:"100%",display:"flex",justifyContent:"center",background:"#fff",marginTop:"20px"}}>
+      <WorkingShift workingShift={workingShift}/>
+      </div> */}
+      
 {requests && <RequestTable requests={requests}  />}
 <ApplyTour openTour={openTour} setOpenTour={setOpenTour} ref1={ref1} ref2={ref2}  ref3={ref3} />
 
@@ -273,7 +279,7 @@ const applyStatus = (status) => {
   return "#ff9683"; // Default color if no matching status found
 };
 
-const TimeSlot = ({ shift, onClick,workingShift }) => {
+export const TimeSlot = ({ shift, onClick,workingShift }) => {
   let isNow=false;
    if(workingShift.filter((item ) => item.userShiftId == shift.userShiftId).length> 0){
    isNow=true;

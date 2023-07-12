@@ -18,9 +18,10 @@ import selector from "./components/slice/selectors";
 import { actions } from "./components/slice";
 import productApi from "../../utils/api/productApi";
 import Success from "../../components/Success";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UploadImg from "./components/Upload";
 import { toastError, toastSuccess } from "../../components/Toast";
+import { useNavigate } from "react-router-dom";
 
 function AddProduct() {
     const [success,setSuccess]=useState(false);
@@ -33,17 +34,20 @@ function AddProduct() {
   const productTypeId=useSelector(selector.productTypeId);
   const quantity=useSelector(selector.quantity);
   const info=useSelector(selector.info);
-  const dispatch=useDispatch();
+  
 
+  const dispatch=useDispatch();
+    const navigate=useNavigate()
   const UpdateInfo = async () => {
     
     dispatch(actions.getProductInfo());
-     const res= await productApi.addProduct(info);
+    const token=localStorage.getItem("Authorization");
+     const res= await productApi.addProduct(info,token);
     if(res.data.status == 200){
        
         setSuccess(true);
-        setTimeout(() => {setSuccess(false);  toastSuccess("Add product Successfully") },2000);
-      
+        setTimeout(() => {setSuccess(false);  toastSuccess("Add product Successfully");navigate(-1); },2000);
+        
     }else{
         toastError(res.data.message);
     }

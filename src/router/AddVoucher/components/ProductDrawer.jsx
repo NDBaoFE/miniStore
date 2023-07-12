@@ -28,19 +28,20 @@ function ProductDrawer({onClose,openDrawer}) {
     setIndeterminate(false);
     setCheckAll(e.target.checked);
   };
+  const token=localStorage.getItem("Authorization");
   useEffect(() => {
     async function fetchData() {
       try {
         setProducts([]);
-        const response = await productApi.getProduct(searchValue, current - 1);
+        const response = await productApi.getAllProduct(searchValue,token);
 
-        setProducts(response.data.data.content);
+        setProducts(response.data.data);
       } catch (error) {
         console.error(error);
       }
     }
     fetchData();
-  }, [searchValue]);
+  }, [searchValue,token]);
    // }
    const onSearch = (e) => {
   
@@ -52,9 +53,7 @@ function ProductDrawer({onClose,openDrawer}) {
 
   return (
     <Drawer title="Product Drawer" placement="right" onClose={onClose} open={openDrawer} width={400}>
-      <Row style={{alignItems:"center",justifyContent:"space-around"}}> <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
-        Check all
-      </Checkbox> 
+      <Row style={{alignItems:"center",justifyContent:"space-around"}}>
       <SearchBtn> 
             <StyledSearch placeholder="input Product name, category.."  onChange={onSearch}   />
             </SearchBtn></Row>

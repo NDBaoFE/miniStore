@@ -26,7 +26,7 @@ import { useState } from 'react';
 const ScheduleComponent = ({open,setOpen,selectedValue,positions,setLoaded,loaded,requests,openCheckin,setOpenCheckin}) => {
   const {userRole,userId}=useAuth();
   const [checkinShift,setCheckinShift]=useState();
-  
+  const [type,setType]=useState(true);
 
   const handleCancel = () => {
     setOpen(false);
@@ -39,7 +39,8 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setLoaded,loade
       okText: 'Confirm',
       cancelText: 'Cancel',
       onOk: async () => {
-        const res=await productApi.requestShift(id);
+        const token=localStorage.getItem("Authorization");
+        const res=await productApi.requestShift(id,token);
         if(res && res.status == 200){
           toastSuccess("You have successfully submitted your request");
           setLoaded(!loaded);
@@ -54,10 +55,10 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setLoaded,loade
       },
   });
   }
-    const handleCheckin=(shift)=>{
+    const handleCheckin=(shift,condition)=>{
       setOpenCheckin(true);
       setCheckinShift(shift);
-
+      setType(condition);
     }
   return (
     
@@ -70,10 +71,10 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setLoaded,loade
       width={1200}
       
     >
-      <CheckinModal openCheckin={openCheckin} setOpenCheckin={setOpenCheckin} checkinShift={checkinShift}  />
+      <CheckinModal openCheckin={openCheckin} setOpenCheckin={setOpenCheckin} checkinShift={checkinShift} type={type} />
       <ModalContainer> 
         <Left>{selectedValue ? selectedValue.slice(0,3).map((item,index)=>{
-        
+    
           return  <Card key={userShifts[index].id}  style={{height:170,margin: 20}}>
           <Img  alt="" src={userShifts[index].shiftImg} />
        <Info>
@@ -87,7 +88,8 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setLoaded,loade
      <span style={{marginLeft:20}}>{positions[index].user.name}</span>
      <Tag color={`${positions[index].user.role.name == "admin"? "red": positions[index].user.role.name == "saler" ?"green":"blue" }`}  style={{marginLeft:20}}>{positions[index].user.role.name}</Tag>
     </EmployeeCard> : (userRole == "saler"? (requests.find(request=> request.userShiftId == positions[index].userShiftId)? <h4>You already applied for this shift</h4>: <StyledButton onClick={()=>handleApply(positions[index].userShiftId)}>Apply</StyledButton>) : <h2>Empty</h2>)} 
-    {userId == positions[index]?.user?.userId &&<ButtonContainer> <StyledButton type='primary' onClick={()=>handleCheckin(selectedValue[index])}>Checkin</StyledButton> {selectedValue[index].status == "not yet" && <StyledButton type='primary'><Link  to="/ticket">I can't do it </Link></StyledButton>}</ButtonContainer>  }
+    {userId == positions[index]?.user?.userId && selectedValue[index]?.isCheckedIn !=true  ? <ButtonContainer> <StyledButton type='primary' onClick={()=>handleCheckin(selectedValue[index],true)}>Checkin</StyledButton> {selectedValue[index].status == "not yet" && <StyledButton type='primary'><Link  to="/ticket">I can't do it </Link></StyledButton>}</ButtonContainer>  :
+     userId == positions[index]?.user?.userId ? <ButtonContainer> <StyledButton type='primary' onClick={()=>handleCheckin(selectedValue[index],false)}>Checkout</StyledButton></ButtonContainer> : null  }
        </Team>
        
        </Card>
@@ -110,7 +112,7 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setLoaded,loade
      <Tag color={`${positions[index].user.role.name == "admin"? "red": positions[index].user.role.name == "saler" ?"green":"blue" }`}  style={{marginLeft:20}}>{positions[index].user.role.name}</Tag>
     </EmployeeCard>
       
-     : userRole == "guard" ? <StyledButton onClick={handleApply}>Apply</StyledButton> : <h2>Empty</h2>
+     : userRole == "guard" ? <StyledButton  onClick={()=>handleApply(positions[index].userShiftId)}>Apply</StyledButton> : <h2>Empty</h2>
     
     } 
    {userId == positions[index]?.user?.userId &&<ButtonContainer> <StyledButton type='primary'>Checkin</StyledButton> {selectedValue[index].status == "not yet" && <StyledButton type='primary'>I can't do it </StyledButton>}</ButtonContainer>  }

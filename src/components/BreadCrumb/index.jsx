@@ -10,15 +10,21 @@ function BreadCrumbHeader() {
         '/apps/2/detail': 'Detail',
         '/checkout': 'Checkout',
         '/voucher': 'Apply Voucher',
+        '/voucher/new': 'Add Voucher',
         '/product':'Product',
         '/product/new':'Add Product',
-        '/product/:id':'Update Product',
+        '/product/view':'View Product',
         '/user': 'User',
         '/user/add': 'Add User',
-        '/user/details':'User Detail',
+        '/user/detail':'User Detail',
         '/user/update':'User Update',
         '/setting' : 'Setting',
-        '/setting/general' : 'General'
+        '/setting/general' : 'General',
+        '/notify':'Notification',
+        '/notify/:id':'Detail',
+        '/schedule':'Schedule',
+        '/ticket': 'Ticket'
+        
       };
     const location = useLocation();
     

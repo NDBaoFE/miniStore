@@ -48,7 +48,8 @@ function UserManagement(){
           okText: 'Xác nhận',
           cancelText: 'Huỷ',
           onOk: async() => {
-            const res= await userApi.deleteUser(id);
+            const token=localStorage.getItem("Authorization");
+            const res= await userApi.deleteUser(id,token);
             if(res.status===200){
               toastSuccess("Delete User Succesfully");
                setSearch(search);
@@ -77,16 +78,22 @@ function UserManagement(){
 
         {
           title: 'RoleId',
-          dataIndex: 'roleId',
+          dataIndex: 'roles',
           key:`roleId`,            
       },
+
+      {
+        title: 'Phone',
+        dataIndex: 'phone',
+        key:`phone`,            
+    },
         {
           title: 'Action',
           key: 'action',
           dataIndex:'action',
           render: (_, record) => (
             <StyledSpace size="middle">
-              <Link to={`/user/details/${record.userId}`}>View </Link>
+              <Link to={`/user/detail/${record.userId}`}>View </Link>
               <div onClick={()=>confirm(record.userId)}>Delete</div>
             </StyledSpace>
           ),

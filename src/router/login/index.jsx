@@ -1,7 +1,7 @@
 import "./loginform.css";
-import { useState } from "react";
+
 import loginApi from "../../utils/api/loginApi";
-import Success from "../../components/Success";
+
 import {
   LoginButton,
   FormItem,
@@ -25,7 +25,7 @@ import { toastError, toastSuccess } from "../../components/Toast";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
-  const [success, setSuccess] = useState(false);
+
   const email = useSelector(selectors.email);
   const password = useSelector(selectors.password);
   const dispatch = useDispatch();
@@ -35,9 +35,9 @@ const LoginForm = () => {
     dispatch(actions.getLoginInfo());
     const res = await loginApi.login(email, password);
     
-    console.log(res);
+   
     if (res.data.status == 200) {
-      console.log(res.data.data['access token']);
+   
       let token = res.data.data['access token']
       localStorage.setItem("Authorization", token)
       navigate('/home')
@@ -96,7 +96,7 @@ const LoginForm = () => {
             </LoginButton>
           </FormItem>
         </LoginFormMain>
-        {success && <Success />}
+  
       </WrapForm>
 
       <WrapImg>

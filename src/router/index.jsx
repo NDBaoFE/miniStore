@@ -7,7 +7,7 @@ import PublicRoute from "./PublicRoute";
 import Home from "./home";
 import Login from "./login";
 import AboutUS from "./aboutus/aboutus";
-import Profile from "./profile";
+
 import Revenue from "./revenue";
 import Checkout from "./checkout";
 import VoucherApply from "./voucherApplying";
@@ -25,10 +25,15 @@ import UpdateProduct from "./UpdateProduct";
 import ViewUser from "./user/ViewUser/viewUser";
 import EmployeeSchedule from "./EmployeeSchedule";
 import Timetable from "./weeklyschedule";
-import EmployeeTimetable from "./EmployeeSchedule";
 import TicketPage from "./ticket";
 import TicketDetail from "./TicketDetail";
 import Error403Page from "./403/Error403Page";
+import Profile from "./profile/profile";
+import Notification from "../components/Notification/Notification";
+import Password from "./password/Password";
+import Payroll from "./payroll";
+import PayrollByUser from "./payrollByUser";
+import OrderManagemntPage from "./OrderManagement";
 
 
 const publicRoute = [
@@ -68,8 +73,8 @@ const adminRoute = [
 const employeeRoute = [
     {
         index: true,
-        path: "employee-schedule",
-        component: <EmployeeTimetable/>,
+        path: "schedule",
+        component: <Timetable/>,
         exact: true,
         restrict: true,
     },
@@ -114,7 +119,7 @@ const employeeRoute = [
     {
         
         index: true,
-        path: "user/details/:id",
+        path: "user/detail/:id",
         component: <ViewUser/>,
         exact: true,
         restrict: true,
@@ -135,10 +140,27 @@ const employeeRoute = [
         component: <AddUser/>,
         exact: true,
         restrict: true,
-    },{
+    }, 
+    {
+        
+        index: true,
+        path: "user/changePassword",
+        component: <Password/>,
+        exact: true,
+        restrict: true,
+    },
+    
+    {
         index: true,
         path: "profile",
         component: <Profile/>,
+        exact: true,
+        restrict: true,
+    },
+    {
+        index: true,
+        path: "notify/:id",
+        component: <Notification/>,
         exact: true,
         restrict: true,
     },
@@ -149,6 +171,24 @@ const employeeRoute = [
         exact: true,
         restrict: true,
     },
+
+    {
+        
+        index: true,
+        path: "payroll",
+        component: <Payroll/>,
+        exact: true,
+        restrict: true,
+    }, 
+
+    {
+        
+        index: true,
+        path: "payroll/:id",
+        component: <PayrollByUser/>,
+        exact: true,
+        restrict: true,
+    }, 
     {
         index: true,
         path: "checkout",
@@ -170,7 +210,15 @@ const employeeRoute = [
         component: <ProductManagement/>,
         exact: true,
         restrict: true,
-    } , {
+    },
+    {
+        index: true,
+        path: "product/view/:id",
+        component: <UpdateProduct/>,
+        exact: true,
+        restrict: true,
+    }
+     , {
         index: true,
         path: "product",
         component: <ProductManagement/>,
@@ -210,6 +258,14 @@ const employeeRoute = [
         index: true,
         path: "employee-schedule",
         component: <EmployeeSchedule/>,
+        exact: true,
+        restrict: true,
+    },
+
+    {
+        index: true,
+        path: "orderManagement",
+        component: <OrderManagemntPage/>,
         exact: true,
         restrict: true,
     },

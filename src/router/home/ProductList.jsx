@@ -13,11 +13,12 @@ function ProductList({search}) {
   const [max,setMax]=useState(0);
   const [current, setCurrent] = useState(parseInt(params.page, 9) || 1);
   const navigate = useNavigate();
+  const token=localStorage.getItem("Authorization");
   useEffect(() => {
 
     async function fetchData() {
         try {
-            const response = await productApi.getProduct(search,current-1);
+            const response = await productApi.getProduct(search,current-1,token);
            
               setProducts(response.data.data.content);
              
@@ -28,7 +29,7 @@ function ProductList({search}) {
         }
     }
     fetchData();
-}, [current,search]);
+}, [current,search,token]);
 
 
   const handlePageChange=(page)=>{

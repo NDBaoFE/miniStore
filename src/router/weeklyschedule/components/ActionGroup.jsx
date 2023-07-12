@@ -17,7 +17,8 @@ function ActionGroup({setOpen ,setOpenModal,positions,setLoaded}) {
     }));
     const filterArray=adjustedArray.filter(item=>item.userId!==null);
       console.log(adjustedArray);
-      const res= await productApi.assignEmployee(filterArray);
+      const token=localStorage.getItem("Authorization");
+      const res= await productApi.assignEmployee(filterArray,token);
       if(res.data.status === 200 ){
         toastSuccess(res.data.message);
         setLoaded(true);

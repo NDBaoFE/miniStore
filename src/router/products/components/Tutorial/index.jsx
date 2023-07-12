@@ -23,18 +23,19 @@ const steps=[
     setOpen(false);
   
   }
+  const token = localStorage.getItem("Authorization");
   useEffect(() => {
-
+   
     async function fetchData() {
         try {
-            const response = await productApi.getAllType();
+            const response = await productApi.getAllType(token);
             dispatch(setType(response.data.data))
         } catch (error) {
             console.error(error);
         }
     }
     fetchData();
-}, []);
+}, [token]);
 
   return (
     <Modal

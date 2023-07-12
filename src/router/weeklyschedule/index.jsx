@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import  { useState } from "react";
 import { instruction} from "./data";
-import { ActionHeader, Bar, ButtonContainer, Color, Container, DayCol, Daytime, EmployeeCard, IconWrapper, Info, Instruction, LeftButton, ParentContainer, RightButton, Row, TimeSlotWrapper, Value } from "./style";
+import { ActionHeader, Bar, ButtonContainer, Color, Container, DayCol, Daytime, EmployeeCard, Header, IconWrapper, Info, Instruction, LeftButton, ParentContainer, RightButton, Row, TimeSlotWrapper, Value } from "./style";
 import {shiftStatus} from "./data"
 
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
@@ -51,14 +51,18 @@ const daysOfWeek = [
     value1: "Guard",
   },
 ];
-
+import Draggable from 'react-draggable';
+import useAuth from "../../utils/useAuth";
+import EmployeeTimetable from "../EmployeeSchedule";
 const Timetable = () => {
+  const [position, setPosition] = useState({ x: 100, y: 100 });
   const [userShift, setUserShift] = useState([]);
   const [current, setCurrent ] = useState(0);
   const [workingShift, setWorkingShift ] = useState();
   const [loaded,setLoaded]=useState(false);
   const [selectedValue,setSelectedValue] = useState([]);
   const [open, setOpen] = useState(false);
+  const {userRole}=useAuth();
   const [positions,setPositions]=useState([]);
   const today=new Date();
   var day = String(today.getDate()).padStart(2, "0");
@@ -68,10 +72,10 @@ const Timetable = () => {
   const handleTimeSlotClick = (day, shift) => {
     // Handle time slot click event
   };
-
+const token=localStorage.getItem("Authorization");
   async function fetchData() {
     try {
-      const response = await productApi.getUserShift(current);
+      const response = await productApi.getUserShift(current,token);
       
       const newArray = await response.data.data.userShifts.map((item) => {
         const timestamp = item.startTime;
@@ -112,7 +116,7 @@ const Timetable = () => {
 
   useEffect(() => {
     fetchData();
-  }, [current,loaded]);
+  }, [current,loaded,token]);
   
   
 const handleColClick=(userShift)=>{
@@ -136,10 +140,14 @@ const handleColClick=(userShift)=>{
   setOpen(true);
 }
 
-
-  return  <> <div> <Container>
-  <Instruction>
-
+const handleDrag = (e, data) => {
+  setPosition({ x: data.lastX, y: data.lastY });
+};
+  return  <>
+  {userRole == "admin" ? <><div> <Container>
+  <Draggable  position={{x:position.x,y:position.y}} onDrag={handleDrag}>
+  <Instruction >
+      <Header></Header>
       {instruction.map((item)=>{
         return(
           <Row key={item.id}>
@@ -152,6 +160,7 @@ const handleColClick=(userShift)=>{
      
 
   </Instruction>
+  </Draggable>
   <div className="timetable" style={{ color: "black" }}>
     <ActionHeader>
       { userShift[0] && <Daytime>{userShift[userShift.length-1][0]?.date}-{userShift[0][0]?.date}</Daytime>}
@@ -227,7 +236,8 @@ const handleColClick=(userShift)=>{
   </div>
 </Container>
 </div>
-<ScheduleComponent open={open}  setOpen={setOpen} selectedValue={selectedValue} positions={positions} setPositions={setPositions}  setLoaded={setLoaded} /></> ;
+<ScheduleComponent open={open}  setOpen={setOpen} selectedValue={selectedValue} positions={positions} setPositions={setPositions}  setLoaded={setLoaded} /></> :<EmployeeTimetable/>}
+   </> ;
 };
 
 const applyStatus = (status) => {

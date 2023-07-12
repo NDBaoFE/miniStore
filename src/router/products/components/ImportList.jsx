@@ -156,7 +156,8 @@ const {importedList,isOpenTable,types}=useSelector(productSelector);
       dispatch(setOpenTable(false));
     }
     const handleConfirm = async () => {
-      const res= await productApi.importProduct(importedList);
+      const token=localStorage.getItem("Authorization");
+      const res= await productApi.importProduct(importedList,token);
         if(res.data.status===200){
           toastSuccess("Imported Successfully");
           dispatch(setOpenTable(false));

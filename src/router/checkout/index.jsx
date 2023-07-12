@@ -1,10 +1,15 @@
+import { useState } from 'react'
 import {Container,Left,RightContainer} from "./style"
 import Note from "./components/Note"
 import OrderSummary from "./components/OrderSummary"
 import PaymentMethod from "./components/PaymentMethod"
 import Menu from "./components/Menu"
 import ActionGroup from "./components/ActionGroup"
+
+
 function Checkout() {
+  const[change,setChange]=useState(0);
+ 
   return (
     <Container>
     <Left>
@@ -13,9 +18,12 @@ function Checkout() {
     </Left>
     <RightContainer>
       <OrderSummary/>
-      <PaymentMethod/>
+      <PaymentMethod change={change}  setChange={setChange}/>
     </RightContainer>
-    <ActionGroup/>
+    
+    <ActionGroup change={change} />
+  
+    
    </Container>
   )
 }

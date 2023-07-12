@@ -13,6 +13,7 @@ const SelectType = () => {
     const productTypeId = useSelector(selector.productTypeId);
 
     const handleGenderChange = (value) => {
+        console.log(value);
         dispatch(actions.setProductTypeId(value));
         dispatch(actions.getProductInfo());
         

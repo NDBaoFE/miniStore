@@ -1,25 +1,23 @@
 /* eslint-disable no-unused-vars */
 import { get, post, remove, put } from "./ApiCaller";
 
-const token = localStorage.getItem("Authorization");
 const userApi = {
-    getUser: (search, current) => {
-        console.log(token);
+    getUser: (search, current, token) => {
         let url = "";
         if (search !== "") {
             url = `/user/search?keyword=${search}&offset=${current}`;
         } else {
             url = `/user?offset=${current}`;
         }
-        return get(url, {}, { authorization: token });
-    },
-
-    getUserDetail: (id) => {
-        let url = `/user/details?id=${id}`;
         return get(url, {}, { Authorization: token });
     },
 
-    addUser: (user) => {
+    getUserDetail: (id, token) => {
+        let url = `/user/detail?id=${id}`;
+        return get(url, {}, { Authorization: token });
+    },
+
+    addUser: (user, token) => {
         let url = "/user/add";
         return post(
             url,
@@ -31,12 +29,12 @@ const userApi = {
         );
     },
 
-    deleteUser: (id) => {
+    deleteUser: (id, token) => {
         const url = `/user/${id}`;
-        return remove(url, {}, {}, { authorization: token });
+        return remove(url, {}, {}, { Authorization: token });
     },
 
-    updateUser: (info, id) => {
+    updateUser: (info, id, token) => {
         const url = `/user`;
         return put(
             url,

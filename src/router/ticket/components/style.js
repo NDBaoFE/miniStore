@@ -71,7 +71,9 @@ export const AddTicketWrapper = styled.div`
         background-color: ${themes.colors.primary600};
     }
 `;
-export const Title = styled.h3``;
+export const Title = styled.h3`
+text-align: left;
+`;
 export const Left = styled.div`
     width: 50%;
     display: flex;

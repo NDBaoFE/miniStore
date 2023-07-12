@@ -20,21 +20,22 @@ import DayTimeAnalytic from './DayTimeAnalytic'
 function Revenue() {
   const [data,setData]=useState(null);
   const [openAnalytic,setOpenAnalytic]=useState();
+  const token=localStorage.getItem("Authorization");
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await productApi.dashboard();
-    
+        const response = await productApi.dashboard(token);
+        console.log(response.data.data);
         setData(response.data.data);
       } catch (error) {
         console.error(error);
       }
     }
     fetchData();
-  }, []);
+  }, [token]);
   return (
     <Container>
-      {data &&<><Hero>DashBoard</Hero>
+      {data!=null &&<><Hero>DashBoard</Hero>
       <Wrapper>
         <Left>
         <Summary>
@@ -101,7 +102,7 @@ function Revenue() {
          <Action>Product sold</Action>
         </Card>
       </Summary>
-      <LineChart/>
+      <LineChart data={data}/>
       <Row style={{justifyContent:"space-between"}}>
       <EmployeeRank data={data}/>
       <TicketList/>

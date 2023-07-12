@@ -342,90 +342,6 @@ export const StyledModal = styled(Modal)`
         }
         color: ${themes.colors.primary};
     }
-    .cross {
-        stroke-width: 6.25;
-        stroke-linecap: round;
-        position: absolute;
-        top: 54px;
-        left: 54px;
-        width: 40px;
-        height: 40px;
-    }
-
-    .cross .first-line {
-        animation: 0.7s draw-first-line ease-out;
-    }
-
-    .cross .second-line {
-        animation: 0.7s draw-second-line ease-out;
-    }
-
-    @keyframes draw-first-line {
-        0% {
-            stroke-dasharray: 0, 56;
-            stroke-dashoffset: 0;
-        }
-
-        50% {
-            stroke-dasharray: 0, 56;
-            stroke-dashoffset: 0;
-        }
-
-        100% {
-            stroke-dasharray: 56, 330;
-            stroke-dashoffset: 0;
-        }
-    }
-
-    @keyframes draw-second-line {
-        0% {
-            stroke-dasharray: 0, 55;
-            stroke-dashoffset: 1;
-        }
-
-        50% {
-            stroke-dasharray: 0, 55;
-            stroke-dashoffset: 1;
-        }
-
-        100% {
-            stroke-dasharray: 55, 0;
-            stroke-dashoffset: 70;
-        }
-    }
-
-    .alert-sign {
-        stroke-width: 6.25;
-        stroke-linecap: round;
-        position: absolute;
-        top: 40px;
-        left: 68px;
-        width: 15px;
-        height: 70px;
-        animation: 0.5s alert-sign-bounce
-            cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .alert-sign .dot {
-        stroke: none;
-        fill: #ffc107;
-    }
-
-    @keyframes alert-sign-bounce {
-        0% {
-            transform: scale(0);
-            opacity: 0;
-        }
-
-        50% {
-            transform: scale(0);
-            opacity: 1;
-        }
-
-        100% {
-            transform: scale(1);
-        }
-    }
 `;
 
 const Column = styled.div`
@@ -566,6 +482,9 @@ export const StyledButton = styled(Button)`
     height: 30px;
     color: ${themes.colors.white};
     background-color: ${themes.colors.primary};
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 export const ButtonContainer = styled.div`
     display: flex;
@@ -574,4 +493,14 @@ export const ButtonContainer = styled.div`
     justify-content: space-around;
     position: absolute;
     bottom: 0;
+`;
+export const WorkingShiftContainer = styled.div`
+    height: 300px;
+    width: 100%;
+    padding: 0 200px;
+    background-color: ${themes.colors.white};
+    .time-slot {
+        width: 132px;
+        height: 100px;
+    }
 `;

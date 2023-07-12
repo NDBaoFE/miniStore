@@ -18,12 +18,12 @@ function TicketDetail() {
     console.log(userRole);
     console.log(profile);
         const [loaded, setLoaded] = useState(false);
-
+        const token=localStorage.getItem("Authorization");
     useEffect(() => {
 
         async function fetchData() {
             try {
-                const response = await productApi.getTicketDetail(parseInt(params.id));
+                const response = await productApi.getTicketDetail(parseInt(params.id),token);
                     console.log(response);
                 setDetail(response.data.data);
               
@@ -32,7 +32,7 @@ function TicketDetail() {
             }
         }
         fetchData();
-    }, [loaded]);
+    }, [loaded,token]);
     const handleApply=()=>{
         NotiModal.confirm({
           maskClosable: true,
@@ -41,7 +41,8 @@ function TicketDetail() {
           okText: 'Confirm',
           cancelText: 'Cancel',
           onOk: async  () => {
-            const res=await  productApi.ticketApproval(parseInt(params.id),true);
+            const token=localStorage.getItem("Authorization");
+            const res=await  productApi.ticketApproval(parseInt(params.id),true,token);
             if(res.data.status==200){
                 toastSuccess("Succesfully");
                 navigate("/ticket");
@@ -61,7 +62,8 @@ function TicketDetail() {
           cancelText: 'Cancel',
           
           onOk: async () => {
-            const response=await productApi.ticketApprove(parseInt(params.id),false);
+            const token=localStorage.getItem("Authorization");
+            const response=await productApi.ticketApprove(parseInt(params.id),false,token);
             if(response.data.status==200){
                 toastSuccess("Succesfully");
                 navigate("/ticket");
@@ -75,15 +77,15 @@ function TicketDetail() {
     <Container>
         <Header>
             <Row style={{marginBottom:'30px'}}>
-                Ministore
+            
             </Row>
-          { profile && <Row style={{alignItems:"center"}}>
-            <Image src={profile.userImg}/>
+          { detail && <Row style={{alignItems:"center"}}>
+            <Image src={detail.user.userImg}/>
              
                 <Employee>
                 <Row style={{alignItems:"center"}}>
-                <h4>{profile.name}</h4>
-                <div>{`<${profile.email}>`}</div>
+                <h4>{detail.user.name}</h4>
+                <div>{`<${detail.user.email}>`}</div>
                 </Row>
                 <Row style={{alignItems:"center",marginLeft:"14px"}}>
                 <div style={{fontSize:"10px"}}>from a while ago</div>

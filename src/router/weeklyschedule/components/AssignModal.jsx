@@ -58,14 +58,34 @@ const AssignModal = ({ openModal, setOpenModal,selectedValue,setPositions,positi
        <Slider  ref={sliderRef} prevArrow={<AiOutlineLeft style={{fontSize:"30px"}} scale={2}/>}
        nextArrow={<AiOutlineRight style={{fontSize:30}}/>} {...settings}>
   {selectedValue.map((pos,index)=>{
+
       return <div key={index}> <div className="container" >
         <Placeholder onDrop={handleDrop} position={positions[index].user} currentShift={pos} className="pos"  />
         <div className="employee-list">
-         <h2> Request List :</h2>
-          {pos.availableEmployees.map((employee, index) => (
-            <Employee key={index} employee={employee} />
+         
+         { pos.requestEmployees.length > 0 &&  <>
+          <h2> Request List :</h2>
+          {pos.requestEmployees.map((employee, index) => (
+            <Employee key={index} employee={employee}  draggable={true}/>
               ))}
+         </>
+          }
+          { pos.availableEmployees.length > 0 &&  <>
+               <h2>Available List :</h2>
+          {pos.availableEmployees.map((employee, index) => (
+            <Employee key={index} employee={employee}  draggable={true}/>
+              ))}
+              </>
+          }
+              { pos.leaveEmployees.length > 0 &&  <>
+          <h2> Unavailable :</h2>
+          {pos.leaveEmployees.map((employee, index) => (
+            <Employee key={index} employee={employee}  draggable={false}/>
+              ))}
+         </>
+          }
             </div>
+            
           </div></div>
      })}
        </Slider>

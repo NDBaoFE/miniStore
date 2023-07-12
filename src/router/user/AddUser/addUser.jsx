@@ -48,9 +48,9 @@ const AddUser = () => {
   const dispatch = useDispatch();
 
   const UpdateInfo = async () => {
-
+    const token=localStorage.getItem("Authorization");
     dispatch(actions.getUserInfo());
-    const res = await userApi.addUser(info);
+    const res = await userApi.addUser(info,token);
     if (res.data.status == 200) {
 
       setSuccess(true);
@@ -83,7 +83,7 @@ const AddUser = () => {
       onOk: () => {
 
           form.submit();
-          // openNotification();
+      
       },
     });
   };
