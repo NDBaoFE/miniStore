@@ -262,10 +262,7 @@ const token = localStorage.getItem('Authorization')
             </Row>
 
             <Row>
-              {/* <Col span={6}>
-                <Label level={5}>Date of Birth</Label>
-                <SelectDateOfBirth />
-              </Col> */}
+      
 
               <Col span={7}>
                 <Label level={5}>Role</Label>
