@@ -167,8 +167,13 @@ const productApi = {
         const url = `/shiftRequest?userShiftId=${userShiftId}`;
         return post(url, {}, {}, { Authorization: token });
     },
+
     checkin: (shift, token) => {
         const url = `/userShift/checkin?userShiftId=${shift}`;
+        return get(url, {}, { Authorization: token });
+    },
+    checkout: (shift, token) => {
+        const url = `/userShift/checkout?userShiftId=${shift}`;
         return get(url, {}, { Authorization: token });
     },
     ticketApproval: (ticketId, status, token) => {

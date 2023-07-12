@@ -12,7 +12,7 @@ function Card({product}) {
   return (
     <CardContainer>
     <CardWrapper>
-         <CardImg src={product.productImg.startsWith("http") ? product.productImg : `data:image/jpeg;base64,${product.productImg}`}   alt="avatar" onError={(e) => {
+         <CardImg src={product.productImg}   alt="avatar" onError={(e) => {
           e.target.src = placeholder;
         }}/>
         <CardHero>{product.name}</CardHero>

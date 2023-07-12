@@ -20,6 +20,7 @@ import Draggable from 'react-draggable';
 import CheckinModal from "./CheckinModal";
 import RequestTable from "./RequestTable";
 import localStorageUtils from "../../utils/localStorageUtils";
+import WorkingShift from "./components/WorkingShift";
 
 
 
@@ -258,6 +259,10 @@ const handleDrag = (e, data) => {
   </div>
 </Container>
 </div>
+      {/* <div style={{width:"100%",display:"flex",justifyContent:"center",background:"#fff",marginTop:"20px"}}>
+      <WorkingShift workingShift={workingShift}/>
+      </div> */}
+      
 {requests && <RequestTable requests={requests}  />}
 <ApplyTour openTour={openTour} setOpenTour={setOpenTour} ref1={ref1} ref2={ref2}  ref3={ref3} />
 
@@ -274,7 +279,7 @@ const applyStatus = (status) => {
   return "#ff9683"; // Default color if no matching status found
 };
 
-const TimeSlot = ({ shift, onClick,workingShift }) => {
+export const TimeSlot = ({ shift, onClick,workingShift }) => {
   let isNow=false;
    if(workingShift.filter((item ) => item.userShiftId == shift.userShiftId).length> 0){
    isNow=true;

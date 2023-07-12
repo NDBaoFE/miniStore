@@ -4,8 +4,10 @@ import React from "react"
 import './style.css';
 import { selector } from "../../home/components/slice/selector";
 import { useSelector } from "react-redux";
+import useAuth from "../../../utils/useAuth";
 
  export const ComponentToPrint = React.forwardRef(({change,orderList}, ref) => {
+  const {profile}=useAuth();
   const {paymentMethod} = useSelector(selector);
   let total=0;
   let totalQuanity=0;
@@ -16,7 +18,7 @@ import { useSelector } from "react-redux";
          Mini store grocery Store
         </div>
         <div className="address">
-          FLoor 2 Building No 34 India <br /> Phone No- 0192083910
+         FPT University <br /> Phone No- 0838631706
         </div>
         <div className="shop-details">
           PAN: AAKPS9298A TIN: 09820163701
@@ -82,12 +84,12 @@ import { useSelector } from "react-redux";
             <td></td>
             <td>Change </td>
             <td></td>
-            <td>{total-change}</td>
+            <td>{change-total}</td>
           </tr>
         </table>
         Payment Method: {paymentMethod == 1 ? "Cash": "Card"}<br />
-        Transaction ID: 082098082783
-        <br />Username: Pradeep [Biller] <br />
+        Transaction ID: {   Math.floor(Math.random() * 1000000000)}
+        <br />salerMan:{profile.name} <br />
         Thank You! Please visit again
       </div>
     </div>

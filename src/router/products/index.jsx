@@ -78,6 +78,7 @@ function ProductManagement() {
         dataIndex: 'details',
         key: 'details',
         render: (_, record) => (
+        
           <span className='detail'>
             <Image src={record.productImg} alt="Product Image" style={{ marginRight: 8,width:100}} />
             {record.name}

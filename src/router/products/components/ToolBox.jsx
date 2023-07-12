@@ -27,19 +27,7 @@ const navigate = useNavigate();
       setCurrent(1);
    
     }
-    const handleChangeCategory = (value) => {
-      console.log(value)
-    }
-    const options = [
-      {
-        value: 'Ho',
-        label: 'Ho',
-      },
-      {
-        value: 'Hi',
-        label: 'Hi',
-      },
-    ];
+
     
     
   return (
@@ -48,11 +36,6 @@ const navigate = useNavigate();
         <SearchBtn> 
             <StyledSearch placeholder="input Product name, category.."  onChange={onSearch}   />
             </SearchBtn>
-        <Category 
-      options={options} 
-      onChange={handleChangeCategory}
-      placeholder="Please select"
-    />
         </Col>
         <Col>
         <Type className="import"><FiFilter style={{marginRight: "10px", fontSize:"20px"}}/> Filter</Type>

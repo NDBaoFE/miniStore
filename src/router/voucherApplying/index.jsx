@@ -2,9 +2,9 @@ import { AntdImage, Button, Container, Row, VoucherInfo, VoucherInfoWrapper } fr
 import { VoucherPlacement } from "./style"
 import ToolBox from "./components/ToolBox"
 import VoucherList from "./components/VoucherList"
-import { useDispatch,useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import placeholder from "../../assets/image/placeholder.png"
-import { applyToAllVoucher, applyVoucher, getProductById} from "../home/components/slice/index"
+import { applyToAllVoucher, applyVoucher, } from "../home/components/slice/index"
 import { useNavigate, useParams } from "react-router-dom"
 import { useState } from "react"
 import { toastSuccess } from "../../components/Toast"
@@ -13,7 +13,7 @@ function VoucherApply() {
 const navigate=useNavigate();
   const dispatch = useDispatch();
   const {id} = useParams();
-  const voucher="https://www.pngmart.com/files/8/Voucher-Download-PNG-Image.png"
+
   const [currentVoucher,setCurrentVoucher]=useState();
 const handleApplyVoucher=()=>{
   if(id == "applyAll"){

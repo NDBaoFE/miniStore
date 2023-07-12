@@ -52,6 +52,8 @@ const daysOfWeek = [
   },
 ];
 import Draggable from 'react-draggable';
+import useAuth from "../../utils/useAuth";
+import EmployeeTimetable from "../EmployeeSchedule";
 const Timetable = () => {
   const [position, setPosition] = useState({ x: 100, y: 100 });
   const [userShift, setUserShift] = useState([]);
@@ -60,6 +62,7 @@ const Timetable = () => {
   const [loaded,setLoaded]=useState(false);
   const [selectedValue,setSelectedValue] = useState([]);
   const [open, setOpen] = useState(false);
+  const {userRole}=useAuth();
   const [positions,setPositions]=useState([]);
   const today=new Date();
   var day = String(today.getDate()).padStart(2, "0");
@@ -140,7 +143,8 @@ const handleColClick=(userShift)=>{
 const handleDrag = (e, data) => {
   setPosition({ x: data.lastX, y: data.lastY });
 };
-  return  <> <div> <Container>
+  return  <>
+  {userRole == "admin" ? <><div> <Container>
   <Draggable  position={{x:position.x,y:position.y}} onDrag={handleDrag}>
   <Instruction >
       <Header></Header>
@@ -232,7 +236,8 @@ const handleDrag = (e, data) => {
   </div>
 </Container>
 </div>
-<ScheduleComponent open={open}  setOpen={setOpen} selectedValue={selectedValue} positions={positions} setPositions={setPositions}  setLoaded={setLoaded} /></> ;
+<ScheduleComponent open={open}  setOpen={setOpen} selectedValue={selectedValue} positions={positions} setPositions={setPositions}  setLoaded={setLoaded} /></> :<EmployeeTimetable/>}
+   </> ;
 };
 
 const applyStatus = (status) => {

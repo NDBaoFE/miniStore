@@ -16,7 +16,7 @@ import { toastError, toastSuccess } from "../../components/Toast";
 
 import productApi from "../../utils/api/productApi";
 
-const CheckinModal = ({ openCheckin,setOpenCheckin,checkinShift}) => {
+const CheckinModal = ({ openCheckin,setOpenCheckin,checkinShift,type}) => {
     const inputRef = useRef(null);
     const [isFocus,setFocus] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -47,22 +47,42 @@ const CheckinModal = ({ openCheckin,setOpenCheckin,checkinShift}) => {
       event.target.value = ''; // Clear the input field
       const token=localStorage.getItem("Authorization");
     if( checkinShift?.user?.rfid == input){
-      const res= await productApi.checkin(Shift.userShiftId,token);
-      if(res.data.status == 200){
-        setTimeout(() => {
-          setSuccess(true);
-        setGreeny(true);
-        toastSuccess("You have successfully checked in");
-
-      }, 1000);
-      }else{
-        setTimeout( async () => {
-          setFocus(false);
-          setFail(true);
-          toastError(res.data.message);
+      if(type ==true ){
+        const res= await productApi.checkin(checkinShift.userShiftId,token);
+        if(res.data.status == 200){
+          setTimeout(() => {
+            setSuccess(true);
+          setGreeny(true);
+          toastSuccess("You have successfully checked in");
   
         }, 1000);
+        }else{
+          setTimeout( async () => {
+            setFocus(false);
+            setFail(true);
+            toastError(res.data.message);
+    
+          }, 1000);
+        }
+      }else{
+        const res= await productApi.checkout(checkinShift.userShiftId,token);
+        if(res.data.status == 200){
+          setTimeout(() => {
+            setSuccess(true);
+          setGreeny(true);
+          toastSuccess("You have successfully checked out");
+  
+        }, 1000);
+        }else{
+          setTimeout( async () => {
+            setFocus(false);
+            setFail(true);
+            toastError(res.data.message);
+    
+          }, 1000);
+        }
       }
+      
       
     }else{
       setTimeout(() => {
@@ -126,8 +146,9 @@ const CheckinModal = ({ openCheckin,setOpenCheckin,checkinShift}) => {
        nextArrow={<AiOutlineRight style={{fontSize:30}}/>} {...settings}>
         <Slide>
           { checkinShift && <h3>{checkinShift.shift.type}</h3>} 
-            <img src={Rfid} height={450} style={{marginBottom: "40px"}} />
-            <h5>One thing to remember, We use Rfid to Take Attendance !!</h5>
+            <img src={Rfid} height={400} style={{marginBottom: "40px"}} />
+            <h5>{type == true ? "Checkin Section" : "Checkout Section" }</h5>
+          
         </Slide>
         <Slide>
 

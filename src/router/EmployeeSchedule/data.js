@@ -1222,17 +1222,17 @@ export const instruction = [
     {
         id: 1,
         color: "#ff9683",
-        title: "Absent",
+        title: "Alert",
     },
     {
         id: 2,
         color: "#adf7b6",
-        title: "Present",
+        title: "Success",
     },
     {
         id: 3,
         color: "#ffee93",
-        title: "Late",
+        title: "Warning",
     },
     {
         id: 4,

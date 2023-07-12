@@ -1,5 +1,4 @@
 import { post } from "./ApiCaller";
-const token = localStorage.getItem("Authorization");
 
 const loginApi = {
     login: (email, password) => {

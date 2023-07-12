@@ -25,7 +25,6 @@ import UpdateProduct from "./UpdateProduct";
 import ViewUser from "./user/ViewUser/viewUser";
 import EmployeeSchedule from "./EmployeeSchedule";
 import Timetable from "./weeklyschedule";
-import EmployeeTimetable from "./EmployeeSchedule";
 import TicketPage from "./ticket";
 import TicketDetail from "./TicketDetail";
 import Error403Page from "./403/Error403Page";
@@ -74,8 +73,8 @@ const adminRoute = [
 const employeeRoute = [
     {
         index: true,
-        path: "employee-schedule",
-        component: <EmployeeTimetable/>,
+        path: "schedule",
+        component: <Timetable/>,
         exact: true,
         restrict: true,
     },
