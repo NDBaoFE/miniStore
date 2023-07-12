@@ -8,6 +8,26 @@ function AvatarSection(){
     const placeholder= UserProfile
     const userImg = useSelector(selectors.userImg)
 
+
+
+
+    let roleName;
+    switch (role) {
+      case 1:
+        roleName = 'Admin';
+        break;
+      case 2:
+        roleName = 'Employee';
+        break;
+      case 3:
+        roleName = 'Guard';
+        break;
+      default:
+        roleName = 'Your role';
+        break;
+    }
+
+
     return (
         <AvatarWrapper>
             <AvatarInfo>
@@ -16,7 +36,7 @@ function AvatarSection(){
             }}/> */}
                 <Info>
                     <h3>{name|| "Name"}</h3>
-                    <h2>{role|| "Your role"}</h2>
+                    <h2>{roleName|| "Your role"}</h2>
                 </Info>
             </AvatarInfo>
             

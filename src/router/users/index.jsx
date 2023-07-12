@@ -78,9 +78,15 @@ function UserManagement(){
 
         {
           title: 'RoleId',
-          dataIndex: 'roleId',
+          dataIndex: 'roles',
           key:`roleId`,            
       },
+
+      {
+        title: 'Phone',
+        dataIndex: 'phone',
+        key:`phone`,            
+    },
         {
           title: 'Action',
           key: 'action',

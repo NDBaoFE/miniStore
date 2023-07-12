@@ -14,7 +14,7 @@ const SelectRole = () => {
 
     const handleRoleChange = (value) => {
         dispatch(actions.setRole(value));
-        dispatch(actions.getAccount());
+        dispatch(actions.getUserInfo());
     };
 
     return (

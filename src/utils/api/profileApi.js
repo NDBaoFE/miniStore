@@ -13,7 +13,7 @@ const profileApi = {
 
 
 
-  updateProfile: (info,id)=>{
+  updateProfile: (info,id,token)=>{
     const url = `/user`;
     return put(url, {
         //user info to update
