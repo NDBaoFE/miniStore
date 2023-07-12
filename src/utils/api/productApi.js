@@ -10,27 +10,26 @@ const productApi = {
         } else {
             url = `/product?offset=${current}`;
         }
-        return get(url, {}, {Authorization: token });
+        return get(url, {}, { Authorization: token });
     },
 
-    getProductDetail:(id)=>{
-        let url = `/product/${id}`
-        return get(url, {}, {Authorization:token})
+    getProductDetail: (id) => {
+        let url = `/product/${id}`;
+        return get(url, {}, { Authorization: token });
     },
 
-    
     getAllVoucher: () => {
         const url = `/voucher`;
-        return get(url, {}, {Authorization: token });
+        return get(url, {}, { Authorization: token });
     },
     getAllType: () => {
         const url = `/productType`;
-        return get(url, {}, {Authorization: token });
+        return get(url, {}, { Authorization: token });
     },
     makeOrder: (products) => {
         let url = "/orderDetail/create";
 
-        return post(url, { ...products }, {}, {Authorization: token });
+        return post(url, { ...products }, {}, { Authorization: token });
     },
     addProduct: (product) => {
         let url = "/product";
@@ -45,21 +44,34 @@ const productApi = {
             { Authorization: token }
         );
     },
+    getUserShift: (offset) => {
+        const url = `/userShift?offset=${offset}`;
+        return get(url, {}, { authorization: token });
+    },
+    viewOwnShift: (offset) => {
+        const url = `/userShift/schedule?offset=${offset}`;
+        return get(url, {}, { authorization: token });
+    },
     addVoucher: (voucher, productList) => {
         console.log(voucher);
         let url = "/applyVoucherToProducts";
         return post(
             url,
             {
-                productList: { ...voucher },
+                ...voucher,
+                products: [...productList],
             },
             {},
             { Authorization: token }
         );
     },
+    assignEmployee: (userShifts) => {
+        let url = "/userShift/assign";
+        return post(url, [...userShifts], {}, { authorization: token });
+    },
     importProduct: (productList) => {
-        let url = "/productlist";
-        return post(url, productList, {}, { Authorization: token });
+        let url = "/product";
+        return post(url, productList, {}, { authorization: token });
     },
     login: (email, password) => {
         const url = `/auth/login`;
@@ -73,6 +85,7 @@ const productApi = {
             {}
         );
     },
+
     deleteVoucher: (id) => {
         const url = `/voucher/delete/${id}`;
         return remove(url, {}, {}, { Authorization: token });
@@ -133,6 +146,53 @@ const productApi = {
     },
     getBlogDetail: (token, id) => {
         const url = `/auth/blog?id=${id}`;
+        return get(url, {}, { Authorization: token });
+    },
+    getAllTicket: () => {
+        const url = `/ticket`;
+        return get(url, {}, { Authorization: token });
+    },
+    getTicketType: () => {
+        const url = `/ticketType`;
+        return get(url, {}, { Authorization: token });
+    },
+    getTicketDetail: (id) => {
+        const url = `/ticket/${id}`;
+        return get(url, {}, { Authorization: token });
+    },
+    ticketApprove: (id, status) => {
+        const url = `/ticket/approve?ticketId=${id}&isApproved=${status}`;
+        return get(url, {}, { Authorization: token });
+    },
+    getAllOrder: (id, status) => {
+        const url = `/order`;
+        return get(url, {}, { Authorization: token });
+    },
+    addTicket: (ticket) => {
+        const url = `/ticket`;
+        return post(
+            url,
+            {
+                ...ticket,
+            },
+            {},
+            { Authorization: token }
+        );
+    },
+    requestShift: (userShiftId) => {
+        const url = `/shiftRequest?userShiftId=${userShiftId}`;
+        return post(url, {}, {}, { Authorization: token });
+    },
+    checkin: (shift) => {
+        const url = `/userShift/checkin?userShiftId=${shift}`;
+        return get(url, {}, { Authorization: token });
+    },
+    ticketApproval: (ticketId, status) => {
+        const url = `/ticket/approve?ticketId=${ticketId}&isApproved=${status}`;
+        return get(url, {}, { Authorization: token });
+    },
+    dashboard: () => {
+        const url = `/dashboard`;
         return get(url, {}, { Authorization: token });
     },
 };

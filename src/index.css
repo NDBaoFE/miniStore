@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700&display=swap");
+
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
@@ -49,14 +50,22 @@ button {
     cursor: pointer;
     transition: border-color 0.25s;
 }
-button:hover {
-    border-color: #646cff;
-}
+
 button:focus,
 button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
 }
+.ant-btn-primary {
+    background-color: #2eb161;
+}
+.ant-btn-primary:not(:disabled):hover {
+    background-color: #2eb161;
+}
 
+.ant-btn-default:not(:disabled):hover {
+    color: #2eb161;
+    border-color: #2eb161;
+}
 @media (prefers-color-scheme: light) {
     :root {
         color: #213547;

@@ -6,10 +6,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import {IoIosArrowForward} from "react-icons/io"
 import SidebarLink from "../SideBarLink";
 import {  SideBar, Wrapper, SignOut, Button, Container } from "./style";
-
+import {FaRegPaperPlane}   from "react-icons/fa"
 
 import { BsGrid } from "react-icons/Bs";
-import { RiCoupon2Line, RiFileUserFill} from "react-icons/ri";
+import { RiCoupon2Line} from "react-icons/ri";
+import {LuUsers}  from "react-icons/lu";
 import {
     HomeOutlined,
     LogoutOutlined,
@@ -18,6 +19,7 @@ import {
 } from "@ant-design/icons";
 import localStorageUtils from "../../utils/localStorageUtils";
 import {ScheduleOutlined } from "@ant-design/icons"
+import useAuth from "../../utils/useAuth";
 
 function getItem(label, key, icon, children) {
     return {
@@ -63,14 +65,42 @@ const itemsAdmin = [
     ),
 
     getItem(
-        <SidebarLink to="/user " child="User" />,
+        <SidebarLink to="/user " child="Users" />,
         "/user",
-        <RiFileUserFill/>
+        <LuUsers/>
+    ),
+    getItem(
+        <SidebarLink to="/ticket " child="Ticket" />,
+        "/ticket",
+        <FaRegPaperPlane />
+    ),
+];
+const itemsEmployee = [
+    getItem(
+        <SidebarLink to="/home" child="Home" />,
+        "/home",
+        <HomeOutlined  />
+    ),
+    getItem(
+        <SidebarLink to="/schedule" child="Schedule" />,
+        "/schedule",
+        <ScheduleOutlined  />
+    ),
+    getItem(
+        <SidebarLink to="/profile " child="Profile" />,
+        "/profile",
+        <UserOutlined />
+    ),
+
+    getItem(
+        <SidebarLink to="/ticket " child="Ticket" />,
+        "/ticket",
+        <FaRegPaperPlane />
     ),
 ];
 
-
 const SidebarComponent = ({ collapsed, setCollapsed }) => {
+    const {userRole}=useAuth();
     const location = useLocation();
     const navigate = useNavigate();
     const [selectedKey, setSelectedKey] = useState(`${location.pathname}`);
@@ -107,7 +137,7 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
                         setSelectedKey(key);
                     }}
                     style={{background:'transparent',marginTop:"20px"}}
-                    items={itemsAdmin}
+                    items={userRole == "admin" ? itemsAdmin : itemsEmployee}
                 />
                 <SignOut onClick={handleSignOut} style={{width:"100%",textAlign:"center",display:"flex",justifyContent:"center"}}>
                     <LogoutOutlined

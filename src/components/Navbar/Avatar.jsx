@@ -4,10 +4,14 @@ import { UserOutlined } from '@ant-design/icons'
 import { InfoContainer,Right,StyledDropDown } from './styled';
 import { DownOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import useAuth from '../../utils/useAuth';
 function AvatarContainer() {
+  const {profile}=useAuth();
+  console.log(profile);
     const info={
-        fullName:"Nguyen Duc Bao",
-        email:"nguyenducbaodh3@gmail.com"
+        fullName:profile?.name||"User",
+        email:profile?.email||"user@gmail.com",
+        img:profile?.userImg||"https://rerollcdn.com/characters/Skin/9/Kayle.png",
     }
     const items = [
         {
@@ -30,7 +34,7 @@ function AvatarContainer() {
       ];
   return (
     <Space wrap size={16}>
-    <Avatar size="large" icon={<UserOutlined />} />
+    {profile && <><Avatar size="large" icon={<img src={info.img} alt="avatar"  />} />
     <Right>
     <InfoContainer style={{marginRight:"12px"}}>
     <h3>{info.fullName}</h3>
@@ -45,7 +49,7 @@ function AvatarContainer() {
         <DownOutlined />
       </Space>
     </a></StyledDropDown>
-    </Right>
+    </Right></>}
     </Space>
   )
 }

@@ -81,8 +81,9 @@ const AddUser = () => {
       okText: "Xác nhận",
       cancelText: "Huỷ",
       onOk: () => {
-        form.submit();
-        // openNotification();
+
+          form.submit();
+          // openNotification();
       },
     });
   };

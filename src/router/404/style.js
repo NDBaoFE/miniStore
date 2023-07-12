@@ -48,6 +48,7 @@ export const Box404 = styled.div`
     }
     h3,
     p {
+        width: 100%;
         margin: 20px 0;
     }
 `;

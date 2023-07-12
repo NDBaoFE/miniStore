@@ -1,6 +1,6 @@
 import { decodeToken, isExpired } from "react-jwt";
 
-import { get } from "../api/ApiCaller";
+// import { get } from "../api/ApiCaller";
 
 import { LOCAL_STORAGE_TOKEN } from "../../config/index";
 
@@ -27,7 +27,7 @@ class LocalStorageUtils {
     }
     getJWTUser() {
         if (typeof localStorage !== "undefined") {
-            const token = this.getItem(LOCAL_STORAGE_TOKEN || "token");
+            const token = this.getItem(LOCAL_STORAGE_TOKEN || "authorization");
             if (token) {
                 try {
                     const jwtUser = decodeToken(token);
@@ -55,16 +55,17 @@ class LocalStorageUtils {
             }
             if (token) {
                 try {
-                    const { sub } = decodeToken(token);
+                    // const { sub } = decodeToken(token);
 
-                    const pattern2 = /(se)+\d+/;
-                    const resulted = sub.match(pattern2);
-                    const memberId = resulted[0].toUpperCase();
-                    const fetchedMember = get(
-                        `/member/studentId/${memberId}`,
-                        {},
-                        { authorization: token }
-                    ).then((res) => res.data);
+                    // const pattern2 = /(se)+\d+/;
+                    // const resulted = sub.match(pattern2);
+                    // const memberId = resulted[0].toUpperCase();
+                    // const fetchedMember = get(
+                    //     `/member/studentId/${memberId}`,
+                    //     {},
+                    //     { authorization: token }
+                    // ).then((res) => res.data);
+                    const fetchedMember = {};
 
                     return fetchedMember;
                 } catch (err) {

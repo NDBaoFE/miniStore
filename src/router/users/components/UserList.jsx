@@ -15,6 +15,7 @@ import userApi from "../../../utils/api/userApi";
 
 import { themes } from "../../../utils/theme";
 
+
 function UserList({ search, users, setUsers, columns, setCurrent, current, reload }) {
   const navigate = useNavigate();
   const [max, setMax] = useState(0);

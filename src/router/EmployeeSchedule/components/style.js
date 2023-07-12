@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { themes } from "../../../utils/theme";
-import { Modal } from "antd";
+import { Button, Modal } from "antd";
 export const Container = styled.div`
     background-color: white;
     padding: 24px;
@@ -174,13 +174,21 @@ export const Wrapper = styled.div`
     align-items: center;
     justify-content: space-around;
     flex-direction: column;
+    .ant-carousel {
+        width: 1000px;
+        height: 300px;
+    }
 `;
 export const Card = styled.div`
     background-color: ${themes.colors.white};
-    min-height: 450px;
+    height: 450px;
     width: 300px;
     border-radius: 4px;
     position: relative;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 export const CardWrapper = styled.div`
     min-height: 400px;
@@ -193,6 +201,7 @@ export const Info = styled.div`
     position: absolute;
     top: 15px;
     left: 15px;
+    padding: 12px;
 `;
 export const Team = styled.div`
     padding: 0 15px;
@@ -267,6 +276,11 @@ export const Coefficient = styled.h1`
 export const ModalContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    position: relative;
+    .ant-btn-default:not(:disabled):hover {
+        color: ${themes.colors.white};
+        border-color: ${themes.colors.primary};
+    }
 `;
 export const UserList = styled.div``;
 export const List = styled.div`
@@ -283,6 +297,134 @@ export const User = styled.div`
 export const StyledModal = styled(Modal)`
     .ant-modal-content {
         background: ${themes.colors.background};
+    }
+    .container {
+        display: flex;
+        justify-content: space-around;
+        padding: 12px;
+    }
+    .pos {
+        flex-grow: 1;
+    }
+    .employee-list {
+        padding: 20px;
+        text-align: center;
+        background: ${themes.colors.white};
+    }
+    .placeholder {
+        border: 2px dashed gray;
+        padding: 20px;
+        text-align: center;
+        width: 200px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        .employee {
+            position: absolute;
+        }
+    }
+
+    .slick-track {
+        display: flex;
+    }
+    .slick-slider {
+        padding: 20px;
+        height: 600px;
+        background-color: ${themes.colors.background};
+    }
+    .slick-prev,
+    .slick-next {
+        background-color: transparent;
+        &:hover {
+            color: ${themes.colors.primary};
+        }
+        color: ${themes.colors.primary};
+    }
+    .cross {
+        stroke-width: 6.25;
+        stroke-linecap: round;
+        position: absolute;
+        top: 54px;
+        left: 54px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .cross .first-line {
+        animation: 0.7s draw-first-line ease-out;
+    }
+
+    .cross .second-line {
+        animation: 0.7s draw-second-line ease-out;
+    }
+
+    @keyframes draw-first-line {
+        0% {
+            stroke-dasharray: 0, 56;
+            stroke-dashoffset: 0;
+        }
+
+        50% {
+            stroke-dasharray: 0, 56;
+            stroke-dashoffset: 0;
+        }
+
+        100% {
+            stroke-dasharray: 56, 330;
+            stroke-dashoffset: 0;
+        }
+    }
+
+    @keyframes draw-second-line {
+        0% {
+            stroke-dasharray: 0, 55;
+            stroke-dashoffset: 1;
+        }
+
+        50% {
+            stroke-dasharray: 0, 55;
+            stroke-dashoffset: 1;
+        }
+
+        100% {
+            stroke-dasharray: 55, 0;
+            stroke-dashoffset: 70;
+        }
+    }
+
+    .alert-sign {
+        stroke-width: 6.25;
+        stroke-linecap: round;
+        position: absolute;
+        top: 40px;
+        left: 68px;
+        width: 15px;
+        height: 70px;
+        animation: 0.5s alert-sign-bounce
+            cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .alert-sign .dot {
+        stroke: none;
+        fill: #ffc107;
+    }
+
+    @keyframes alert-sign-bounce {
+        0% {
+            transform: scale(0);
+            opacity: 0;
+        }
+
+        50% {
+            transform: scale(0);
+            opacity: 1;
+        }
+
+        100% {
+            transform: scale(1);
+        }
     }
 `;
 
@@ -315,8 +457,10 @@ export const Title = styled.h3`
 export const EmployeeCard = styled.div`
     background: #fff;
     border-radius: 3px;
-    width: 100%;
-    padding: 8px;
+    width: 240px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     margin-bottom: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
@@ -329,7 +473,7 @@ export const PositionSlot = styled.div`
     display: flex;
     justify-content: space-between;
     svg {
-        display: ${({ employeeId }) => (employeeId ? "block" : "none")};
+        display: ${({ employeeid }) => (employeeid ? "block" : "none")};
         cursor: pointer;
         color: ${themes.colors.primary};
         &:hover {
@@ -337,4 +481,97 @@ export const PositionSlot = styled.div`
             background-color: ${themes.colors.gray};
         }
     }
+`;
+export const GroupWrapper = styled.div`
+    position: absolute;
+    right: 60px;
+    bottom: 20px;
+    z-index: 99;
+    width: 240px;
+    height: 20px;
+    background: ${themes.colors.blackText};
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: ${themes.colors.gray};
+    div {
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+`;
+export const FinishButton = styled.div`
+    padding: 8px 12px;
+    color: ${themes.colors.white};
+    background: ${themes.colors.primary};
+    border: 1px solid ${themes.colors.primary};
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover {
+        background: ${themes.colors.primaryDark};
+        color: ${themes.colors.white};
+        text-decoration: none !important;
+        border: 1px solid ${themes.colors.primaryDark};
+    }
+`;
+export const NotiModal = styled(Modal)`
+    .ant-modal-content {
+        border-radius: 2px;
+        background: #ffffff;
+        /* drop-shadow/0.12+0.8+0.5 */
+
+        box-shadow: 0px 3px 6px -4px rgba(0, 0, 0, 0.12),
+            0px 6px 16px rgba(0, 0, 0, 0.08),
+            0px 9px 28px 8px rgba(0, 0, 0, 0.05);
+        border-radius: 2px;
+        .ant-modal-confirm-btns {
+            .ant-btn-primary {
+                background-color: ${themes.colors.primary} !important;
+            }
+        }
+    }
+`;
+export const TabContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+export const ChooseContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+export const ModalWrapper = styled.div``;
+export const PageAction = styled.div`
+    display: flex;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    background-color: ${themes.colors.white};
+    cursor: pointer;
+    &:hover {
+        color: ${themes.colors.white};
+        background-color: ${themes.colors.primary};
+    }
+`;
+export const Left = styled.div``;
+export const Right = styled.div``;
+export const StyledButton = styled(Button)`
+    height: 30px;
+    color: ${themes.colors.white};
+    background-color: ${themes.colors.primary};
+`;
+export const ButtonContainer = styled.div`
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 0;
 `;

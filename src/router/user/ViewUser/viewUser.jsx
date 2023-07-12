@@ -52,7 +52,6 @@ function ViewUser() {
   const dispatch = useDispatch();
 
   const { id } = useParams();
-  console.log(id)
   const navigate = useNavigate()
   const UpdateInfo = async () => {
     dispatch(actions.getUserInfo());
