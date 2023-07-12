@@ -36,7 +36,7 @@ const Notification = () => {
     fetchData()
   }, [dispatch, id]);
 
-
+  
 
   return (
     <div className="wrapper-noti-detail">

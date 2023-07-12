@@ -26,6 +26,8 @@ import ViewUser from "./user/ViewUser/viewUser";
 import Profile from "./profile/profile";
 import Notification from "../components/Notification/Notification";
 import Password from "./password/Password";
+import Payroll from "./payroll";
+import PayrollByUser from "./payrollByUser";
 
 
 const publicRoute = [
@@ -109,6 +111,24 @@ const publicRoute = [
         exact: true,
         restrict: true,
     },
+
+    {
+        
+        index: true,
+        path: "payroll",
+        component: <Payroll/>,
+        exact: true,
+        restrict: true,
+    }, 
+
+    {
+        
+        index: true,
+        path: "payroll/:id",
+        component: <PayrollByUser/>,
+        exact: true,
+        restrict: true,
+    }, 
     {
         index: true,
         path: "checkout",
