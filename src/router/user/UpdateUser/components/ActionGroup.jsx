@@ -26,7 +26,7 @@ function ActionGroup({confirm}){
              <p>Transaction Successful!</p>
              <p>Thank you for completing the sale.</p></>} title="Sale Confirmation" handleClose={handleClose} showModal={showModal}/>
             <div>Discard Change</div>
-            <FinishButton onClick={()=>confirm()}>Add User</FinishButton>
+            <FinishButton onClick={()=>confirm()}>Update User</FinishButton>
         </GroupWrapper>
       )
 }

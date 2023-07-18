@@ -21,31 +21,30 @@ import { useSelector } from "react-redux";
 import selectors from "./components/slice/selectors";
 import { useDispatch } from "react-redux";
 import { actions } from "./components/slice";
-import { toastError, toastSuccess } from "../../components/Toast";
+import { toastError, toastSuccess, toastWarning } from "../../components/Toast";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
-
   const email = useSelector(selectors.email);
   const password = useSelector(selectors.password);
   const dispatch = useDispatch();
   const [form] = LoginFormMain.useForm();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+
+
   const LoginInfo = async () => {
     dispatch(actions.getLoginInfo());
     const res = await loginApi.login(email, password);
-    
-   
+    console.log(res.data.message);
+
     if (res.data.status == 200) {
-   
-      let token = res.data.data['access token']
-      localStorage.setItem("Authorization", token)
-      navigate('/home')
+      let token = res.data.data["access token"];
+      localStorage.setItem("Authorization", token);
+      navigate("/home");
       toastSuccess("Login Successfully");
-      
-    
-    } else {
-      toastError(res.data.message);
+    } else{
+      toastError("Login failed")
     }
   };
 
@@ -54,7 +53,7 @@ const LoginForm = () => {
   };
 
   const handleFinishFailed = () => {
-    console.log("Hãy nhập tất cả các field!!");
+    toastWarning("Hãy nhập tất cả các field!!")
   };
 
   return (
@@ -96,7 +95,6 @@ const LoginForm = () => {
             </LoginButton>
           </FormItem>
         </LoginFormMain>
-  
       </WrapForm>
 
       <WrapImg>

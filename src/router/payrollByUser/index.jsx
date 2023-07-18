@@ -7,26 +7,50 @@ import { useEffect } from "react";
 import payrollApi from "../../utils/api/payrollApi";
 import { actions } from "../profile/components/slice";
 import { useParams } from "react-router-dom";
+import profileApi from "../../utils/api/profileApi"
 
 const PayrollByUser = () => {
 
 
+const token = localStorage.getItem('Authorization')
 
-
-  const [test, setTest] = useState([]);
-
+  const [payrollByUser, setPayrollByUser] = useState([]);
+const {id} = useParams()
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await payrollApi.getPayrollByUser();
-        setTest(response.data.data);
+        const response = await payrollApi.getPayrollByUser(id, token);
+        setPayrollByUser(response.data.data);
         console.log(response.data.data);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-  }, []);
+  }, [token]);
+
+
+  const [profile, setProfile] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await profileApi.getProfileDetail(token);
+        setProfile(response.data.data);
+
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, [token]);
+
+  const name = payrollByUser.map((obj) => obj.name)[0];
+  const role = payrollByUser.map((obj) => obj.roleName)[0];
+  const userId = payrollByUser.map((obj) => obj.userId)[0];
+  const email = payrollByUser.map((obj) => obj.email)[0];
+console.log(name);
+ 
+
 
   const columns = [
     {
@@ -43,17 +67,25 @@ const PayrollByUser = () => {
       title: "Status",
       dataIndex: "isPaid",
       key: "isPaid",
-      render: (isPaid) => (
-        <div
-          style={{
-            color: isPaid === "paid" ? "green" : "red",
-            fontSize: 16,
-            textAlign: "left",
-          }}
-        >
-          {isPaid}
-        </div>
-      ),
+      render: (isPaid) =>{
+          if(isPaid === null){
+            return (
+              <div style={{
+                color: "red",
+                fontWeight: 600
+              }}>Not yet</div>
+            )
+          }else{
+            return (
+              <div style={{
+                color: "green",
+                fontWeight: 600
+              }}>Paid</div>
+            )
+          }
+        
+        
+      } 
     },
   ];
   return (
@@ -68,39 +100,23 @@ const PayrollByUser = () => {
           <div className="right">
             <Row>
               <Col span={10}>
-                <Label>User ID: </Label>
-                <Input
-                  value={test?.userId}
-                  style={{ color: "black" }}
-                  disabled
-                ></Input>
+                <Label>User ID: <span style={{color: "green", fontSize:20 ,fontFamily: "Inter, san-serif", fontWeight:600}}>{userId}</span></Label>
+            
               </Col>
               <Col span={10}>
-                <Label>Role: </Label>
-                <Input
-                  value={test?.roleName}
-                  disabled
-                  style={{ color: "black" }}
-                ></Input>
+                <Label>Role: <span style={{color: "green", fontSize:20,fontFamily: "Inter, san-serif", fontWeight:600}}>{role}</span></Label>
+              
               </Col>
             </Row>
 
             <Row>
               <Col span={10}>
-                <Label>Name: </Label>
-                <Input
-                  value={test?.name}
-                  style={{ color: "black" }}
-                  disabled
-                ></Input>
+                <Label>Name: <span style={{color: "green", fontSize:20,fontFamily: "Inter, san-serif", fontWeight:600}}>{name}</span></Label>
+           
               </Col>
               <Col span={10}>
-                <Label>Email: </Label>
-                <Input
-                  value={test?.email}
-                  style={{ color: "black" }}
-                  disabled
-                ></Input>
+                <Label>Email: <span style={{color: "green", fontSize:20,fontFamily: "Inter, san-serif", fontWeight:600}}>{email}</span></Label>
+              
               </Col>
             </Row>
           </div>
@@ -109,8 +125,8 @@ const PayrollByUser = () => {
 
       <div className="below">
         <PayrollListByUser
-          SetUserPayrollByUser={setTest}
-          userPayrollByUser={test}
+          SetUserPayrollByUser={setPayrollByUser}
+          userPayrollByUser={payrollByUser}
           columns={columns}
         />
       </div>

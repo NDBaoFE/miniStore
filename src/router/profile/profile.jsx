@@ -39,7 +39,7 @@ import profileApi from "../../utils/api/profileApi";
 import PayslipList from "./components/components/PayslipList";
 
 import { useNavigate } from "react-router-dom";
-import salaryApi from "../../utils/api/salaryApi";
+
 
 function Profile() {
   const [updated, setUpdated] = useState(false);
@@ -238,6 +238,7 @@ const token = localStorage.getItem('Authorization')
               <Col span={24}>
                 <Label level={5}>Name</Label>
                 <InputName />
+                
               </Col>
             </Row>
 
