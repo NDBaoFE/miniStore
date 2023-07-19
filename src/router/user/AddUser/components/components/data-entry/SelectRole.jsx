@@ -18,7 +18,9 @@ const SelectRole = () => {
     };
 
     return (
-        <Select defaultValue={roles[roleIdInput]} onChange={handleRoleChange} placeholder="Select your role">
+
+        <Select defaultValue={roles[roleIdInput]} onChange={handleRoleChange} placeholder="Select your role" id={"selectRole"}>
+
             {roles.map((role, index) => (
                 <Option value={index}  key={index}>
                     {role}

@@ -36,7 +36,6 @@ const LoginForm = () => {
   const LoginInfo = async () => {
     dispatch(actions.getLoginInfo());
     const res = await loginApi.login(email, password);
-    console.log(res.data.message);
 
     if (res.data.status == 200) {
       let token = res.data.data["access token"];
@@ -61,7 +60,7 @@ const LoginForm = () => {
       <WrapForm>
         <LoginFormMain
           form={form}
-          name="form1"
+          name="login-form"
           initialValues={{
             email: email,
             password: password,

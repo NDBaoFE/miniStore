@@ -1,12 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
-
-import { useDispatch } from "react-redux";
-
 import authApi from "./api/authApi";
 import localStorageUtils from "./localStorageUtils";
 import { useNavigate } from "react-router-dom";
 import { toastError } from "../components/Toast";
-import { setUser } from "../router/Auth/slice";
 
 const useAuth = () => {
     const [userRole, setUserRole] = useState(null);
@@ -23,7 +19,7 @@ const useAuth = () => {
             }
             if (decoded?.exp < Date.now() / 1000) {
                 setUserRole(undefined);
-                localStorage.removeItem("token");
+                localStorage.removeItem("Authorization");
                 navigate("/login");
                 toastError(
                     "Phiên đăng nhập đã hết hạn! Vui lòng đăng nhập lại"
@@ -46,9 +42,7 @@ const useAuth = () => {
         try {
             setIsLoading(true);
             authApi.getUser(token).then((user) => {
-                const { data } = user.data;
-
-                if (!user.data?.data?.roles) {
+                if (!user?.data?.data?.roles) {
                     setUserRole(undefined);
                 } else {
                     setProfile(user.data.data);

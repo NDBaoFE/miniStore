@@ -16,9 +16,10 @@ const InputName = () => {
     return (
         <Form.Item
             name="name"
-            rules={[{ required: true, message: "Tên không được để trống !!" }]}
+            rules={[{ required: true, message: "Product Name code cannot be empty" }]}
         >
             <Input
+            name="productName"
                 placeholder="Product name"
                 value={name}
                 onChange={handleFullNameChange}

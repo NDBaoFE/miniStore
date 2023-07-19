@@ -14,7 +14,6 @@ const LayoutComponent = () => {
     // if (!token) {
     //     navigate("/login");
     // }
-    console.log("gi")
     const [collapsed, setCollapsed] = useState(false);
     return (
         <StyledLayout collapsed={collapsed}>

@@ -16,9 +16,9 @@ const InputPrice = () => {
     return (
         <Form.Item
             name="price"
-            rules={[{ required: true, message: "Quantity can  not be empty" },
+            rules={[{ required: true, message: "Price can  not be empty" },
             {
-                message: 'Quantity must be larger than 0',
+                message: 'Price must be larger than 0',
                 validator: (_, value) => {
                     if (/^[1-9][0-9]*$/.test(value)) {
                         return Promise.resolve();
@@ -29,6 +29,7 @@ const InputPrice = () => {
             },]}
         >
             <Input
+              name="productPrice"
                 type="number"
                 placeholder="Price"
                 value={price}

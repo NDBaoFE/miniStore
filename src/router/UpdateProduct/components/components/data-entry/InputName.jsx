@@ -19,6 +19,7 @@ const InputName = () => {
             rules={[{ required: true, message: "Tên không được để trống !!" }]}
         >
             <Input
+            name="productName"
                 placeholder="Product name"
                 value={name}
                 onChange={handleFullNameChange}

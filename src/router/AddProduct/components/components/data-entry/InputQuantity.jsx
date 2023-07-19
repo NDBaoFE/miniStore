@@ -16,9 +16,10 @@ const InputQuantity = () => {
     return (
         <Form.Item
             name="quantity"
-            rules={[{ required: true, message: "quantity can  not be 0" }]}
+            rules={[{ required: true, message: "quantity can  not be Empty" }]}
         >
             <Input
+              name="productQuantity"
                 type="number"
                 placeholder="quantity"
                 value={quantity}

@@ -15,7 +15,7 @@ const price=useSelector(selector.price);
         }}/>
             <Info>
                 <h3>{name}</h3>
-                <h3>{`${price} VNĐ`||"Your price"}</h3>
+                <h3>{price!= null ? `${price} VNĐ`:"Your price"}</h3>
             </Info>
         </AvatarInfo>
     </AvatarWrapper>

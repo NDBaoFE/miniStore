@@ -29,6 +29,7 @@ const InputCost = () => {
             },]}
         >
             <Input
+            name="productCost"
                 type="number"
                 placeholder="Cost"
                 value={cost}

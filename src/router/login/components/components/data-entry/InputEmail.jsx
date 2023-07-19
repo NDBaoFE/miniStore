@@ -20,11 +20,12 @@ const InputEmail = () =>{
         rules={[{
             required:true, 
             type:"email",
-            message: "The input is not valid Email"
+            message: "Your input is not a valid Email"
         }]}
         >
 
             <InputStyled
+             name="email"
             placeholder="abc123@gmail.com"
             value={email}
             onChange={handleEmailChange}

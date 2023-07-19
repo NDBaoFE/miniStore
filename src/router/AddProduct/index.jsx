@@ -18,7 +18,7 @@ import selector from "./components/slice/selectors";
 import { actions } from "./components/slice";
 import productApi from "../../utils/api/productApi";
 import Success from "../../components/Success";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import UploadImg from "./components/Upload";
 import { toastError, toastSuccess } from "../../components/Toast";
 import { useNavigate } from "react-router-dom";
@@ -63,11 +63,11 @@ const handleFinishFailed = () => {
 const confirm = () => {
     NotiModal.confirm({
         maskClosable: true,
-        title: 'Bạn có muốn thay đổi thông tin tài khoản?',
+        title: 'Are You sure you want to add this Product',
         icon: <ExclamationCircleOutlined />,
-        content: 'Tài khoản sau khi đổi sẽ không còn còn lưu trữ thông tin trước đó được nữa.',
-        okText: 'Xác nhận',
-        cancelText: 'Huỷ',
+        content: 'Once You hit confirm , the product is created and the imported product will be count',
+        okText: 'Confirm',
+        cancelText: 'Cancel',
         onOk: () => {
             form.submit();
             // openNotification();

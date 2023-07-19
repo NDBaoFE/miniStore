@@ -59,14 +59,67 @@ const publicRoute = [
     
 ];
 const adminRoute = [
-    
     {
+        
         index: true,
-        path: "schedule",
-        component: <Timetable/>,
+        path: "user",
+        component: <UserManagement/>,
         exact: true,
         restrict: true,
     },
+
+    {
+        
+        index: true,
+        path: "user/detail/:id",
+        component: <ViewUser/>,
+        exact: true,
+        restrict: true,
+    },
+    {
+        index: true,
+        path: "product/:id",
+        component: <ProductManagement/>,
+        exact: true,
+        restrict: true,
+    },
+    {
+        index: true,
+        path: "product/view/:id",
+        component: <UpdateProduct/>,
+        exact: true,
+        restrict: true,
+    }
+     , {
+        index: true,
+        path: "product",
+        component: <ProductManagement/>,
+        exact: true,
+        restrict: true,
+    }
+    ,{
+        index: true,
+        path: "product/new",
+        component: <AddProduct/>,
+        exact: true,
+        restrict: true,
+    }
+
+    ,{
+        index: true,
+        path: "voucher",
+        component: <VoucherManagement/>,
+        exact: true,
+        restrict: true,
+    }
+    ,{
+        index: true,
+        path: "voucher/new",
+        component: <AddVoucher/>,
+        exact: true,
+        restrict: true,
+    }
+   
     
     
 ];
@@ -107,24 +160,7 @@ const employeeRoute = [
         restrict: true,
     },
 
-    {
-        
-        index: true,
-        path: "user",
-        component: <UserManagement/>,
-        exact: true,
-        restrict: true,
-    },
-
-    {
-        
-        index: true,
-        path: "user/detail/:id",
-        component: <ViewUser/>,
-        exact: true,
-        restrict: true,
-    },
-
+  
     {
         
         index: true,
@@ -203,50 +239,8 @@ const employeeRoute = [
         component: <VoucherApply/>,
         exact: true,
         restrict: true,
-    },
-    {
-        index: true,
-        path: "product/:id",
-        component: <ProductManagement/>,
-        exact: true,
-        restrict: true,
-    },
-    {
-        index: true,
-        path: "product/view/:id",
-        component: <UpdateProduct/>,
-        exact: true,
-        restrict: true,
     }
-     , {
-        index: true,
-        path: "product",
-        component: <ProductManagement/>,
-        exact: true,
-        restrict: true,
-    }
-    ,{
-        index: true,
-        path: "product/new",
-        component: <AddProduct/>,
-        exact: true,
-        restrict: true,
-    }
-
-    ,{
-        index: true,
-        path: "voucher",
-        component: <VoucherManagement/>,
-        exact: true,
-        restrict: true,
-    }
-    ,{
-        index: true,
-        path: "voucher/new",
-        component: <AddVoucher/>,
-        exact: true,
-        restrict: true,
-    }
+   
     ,{
         index: true,
         path: "setting/general",
