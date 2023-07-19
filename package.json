@@ -41,6 +41,7 @@
         "remixicon-react": "^1.0.0",
         "slick-carousel": "^1.8.1",
         "styled-components": "^6.0.1",
+        "testcafe": "^3.0.1",
         "uuid": "^9.0.0",
         "xlsx": "^0.18.5"
     },

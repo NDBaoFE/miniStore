@@ -13,7 +13,7 @@ const userApi = {
     },
 
     getUserDetail: (id, token) => {
-        let url = `/user/detail?id=${id}`;
+        let url = `/user/details?id=${id}`;
         return get(url, {}, { Authorization: token });
     },
 

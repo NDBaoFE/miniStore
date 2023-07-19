@@ -78,7 +78,6 @@ export const slice = createSlice({
             state.isApplyAll = initialState.isApplyAll;
             state.info = initialState.info;
             state.productList = initialState.productList;
-
             state.isDeleted = initialState.isDeleted;
             state.types = initialState.types;
         },

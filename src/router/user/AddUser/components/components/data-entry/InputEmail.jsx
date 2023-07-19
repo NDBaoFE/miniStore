@@ -25,6 +25,7 @@ const InputEmail = () =>{
         >
 
             <Input
+              name="userEmail"
             placeholder="abc123@gmail.com"
             value={email}
             onChange={handleEmailChange}

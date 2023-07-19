@@ -24,7 +24,7 @@ import SelectGender from "./components/components/data-entry/SelectGender";
 import SelectRole from "./components/components/data-entry/SelectRole";
 import AvatarSection from "./components/AvatarSection";
 import ActionGroup from "./components/ActionGroup";
-import Success from "../../../components/Success";
+
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import selectors from "./components/slice/selectors";
@@ -32,9 +32,11 @@ import userApi from "../../../utils/api/userApi";
 import { toastError, toastSuccess } from "../../../components/Toast";
 import Photo from "./components/Photo";
 import UploadImg from "./components/Upload";
+import { useNavigate } from "react-router-dom";
 
 const AddUser = () => {
-  const [success, setSuccess] = useState(false);
+  const navigate=useNavigate();
+
   const [open, setOpen] = useState("");
   const [form] = StyledForm.useForm();
   const name = useSelector(selectors.name);
@@ -53,11 +55,9 @@ const AddUser = () => {
     const res = await userApi.addUser(info,token);
     if (res.data.status == 200) {
 
-      setSuccess(true);
-      setTimeout(() => {
-        setSuccess(false);
+   
         toastSuccess("Add User Successfully");
-      }, 2000);
+        navigate(-1);
     } else {
       toastError(res.data.message);
     }
@@ -74,12 +74,12 @@ const AddUser = () => {
   const confirm = () => {
     NotiModal.confirm({
       maskClosable: true,
-      title: "Bạn có muốn thay đổi thông tin tài khoản?",
+      title: "Are you sure you want to add this new user ? ",
       icon: <ExclamationCircleOutlined />,
       content:
-        "Tài khoản sau khi đổi sẽ không còn còn lưu trữ thông tin trước đó được nữa.",
-      okText: "Xác nhận",
-      cancelText: "Huỷ",
+        "This account can access to the account , the password will normal remain = `1`",
+      okText: "Confirm",
+      cancelText: "Cancel",
       onOk: () => {
 
           form.submit();
@@ -165,7 +165,7 @@ const AddUser = () => {
 
           <ActionGroup confirm={confirm} />
         </StyledForm>
-        {success && <Success />}
+
         <UploadImg setOpen={setOpen} open={open} />
       </WrapperFormUser>
     </FormAddUserSection>

@@ -4,10 +4,10 @@ import React from "react"
 import './style.css';
 import { selector } from "../../home/components/slice/selector";
 import { useSelector } from "react-redux";
-import useAuth from "../../../utils/useAuth";
+
 
  export const ComponentToPrint = React.forwardRef(({change,orderList}, ref) => {
-  const {profile}=useAuth();
+
   const {paymentMethod} = useSelector(selector);
   let total=0;
   let totalQuanity=0;
@@ -89,7 +89,7 @@ import useAuth from "../../../utils/useAuth";
         </table>
         Payment Method: {paymentMethod == 1 ? "Cash": "Card"}<br />
         Transaction ID: {   Math.floor(Math.random() * 1000000000)}
-        <br />salerMan:{profile.name} <br />
+        <br />salerMan: saler <br />
         Thank You! Please visit again
       </div>
     </div>

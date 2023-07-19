@@ -89,17 +89,17 @@ function Revenue() {
          <Card>
           <Header>
           <IconWrapper><BsFillGridFill  fontSize={24}/></IconWrapper>
-         <Info>This Month Revenue</Info>
+         <Info>Remaining Product</Info>
           </Header>
          <Number>
          <AnimatedNumbers
-        animateToNumber={ 200000}
+        animateToNumber={ data.remainProductQuantity||"200"}
         fontStyle={{ fontSize: '32px' }}
         configs={(number, index) => {
           return { mass: 1, tension: 230 * (index + 1), friction: 140 };
         }}
       ></AnimatedNumbers></Number>
-         <Action>Product sold</Action>
+         <Action>Product </Action>
         </Card>
       </Summary>
       <LineChart data={data}/>

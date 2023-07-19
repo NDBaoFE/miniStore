@@ -21,7 +21,6 @@ function WorkingShift({workingShift}) {
       
        const TimeSlot = ({ shift, onClick }) => {
         
-        console.log(shift);
         return (
           <TimeSlotWrapper
           status={applyStatus(shift.status)}

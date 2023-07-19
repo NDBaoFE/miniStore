@@ -23,6 +23,7 @@ const InputAddress = () =>{
         >
 
             <Input
+            name="userAddress"
             placeholder="123 Abc"
             value={address}
             onChange={handleAddressChange}

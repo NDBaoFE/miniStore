@@ -21,6 +21,7 @@ const InputName = () => {
       ]}
     >
       <Input
+       name="userName"
         placeholder="Enter your name"
         value={name}
         onChange={handleFullNameChange}

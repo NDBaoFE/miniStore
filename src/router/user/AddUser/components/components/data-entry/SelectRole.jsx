@@ -13,12 +13,12 @@ const SelectRole = () => {
     const roleId = useSelector(selectors.roleId);
 
     const handleRoleChange = (value) => {
-        dispatch(actions.setRole(value));
+        dispatch(actions.setRoleId(value));
         dispatch(actions.getUserInfo());
     };
 
     return (
-        <Select defaultValue={roles[roleId]} onChange={handleRoleChange}>
+        <Select defaultValue={roles[roleId]} onChange={handleRoleChange} id={"selectRole"}>
             {roles.map((role, index) => (
                 <Option value={index} key={index}>
                     {role}
