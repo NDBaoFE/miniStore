@@ -10,7 +10,7 @@ const SelectRole = () => {
     const dispatch = useDispatch();
 
     const roles = useSelector(selectors.roles);
-    const roleId = useSelector(selectors.roleId);
+    const roleIdInput = useSelector(selectors.roleIdInput);
 
     const handleRoleChange = (value) => {
         dispatch(actions.setRoleId(value));
@@ -18,9 +18,11 @@ const SelectRole = () => {
     };
 
     return (
-        <Select defaultValue={roles[roleId]} onChange={handleRoleChange} id={"selectRole"}>
+
+        <Select defaultValue={roles[roleIdInput]} onChange={handleRoleChange} placeholder="Select your role" id={"selectRole"}>
+
             {roles.map((role, index) => (
-                <Option value={index} key={index}>
+                <Option value={index}  key={index}>
                     {role}
                 </Option>
             ))}

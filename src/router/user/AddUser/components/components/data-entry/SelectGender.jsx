@@ -17,7 +17,9 @@ const SelectGender = () => {
     };
 
     return (
-        <Select defaultValue={genders[gender]} onChange={handleGenderChange} id={"selectGender"}>
+
+        <Select defaultValue={genders[gender]} onChange={handleGenderChange} placeholder="Select your gender" id={"selectGender"}>
+
             {genders.map((gender, index) => (
                 <Option value={index} key={index}>
                     {gender}

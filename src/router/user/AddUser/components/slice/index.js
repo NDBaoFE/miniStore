@@ -10,8 +10,9 @@ export const initialState = {
     phone: "",
     userImg: "",
     address: "",
-    roles: ["Admin", "Employee", "Guard"],
-    roleId: 3,
+    roles: ["Select your role","Admin", "Employee", "Guard"],
+    roleId: 0,
+    roleIdInput: "",
     genders: ["Male", "Female"],
     gender: true,
     info: {},
@@ -39,6 +40,7 @@ export const slice = createSlice({
             state.address = action.payload.address;
             state.roles = action.payload.roles;
             state.roleId = action.payload.roleId;
+            state.roleIdInput = action.payload.roleIdInput;
             state.genders = action.payload.genders;
             state.genderTypeId = action.genderTypeId;
         },
@@ -53,6 +55,18 @@ export const slice = createSlice({
                 roleId: state.roleId,
                 gender: state.gender,
             };
+        },
+        setRoleId: (state, action) => {
+            state.roleId = action.payload;
+            state.roleIdInput = "";
+        },
+        disableSelectYourRole: (state) => {
+            const roles = state.roles;
+            let index = roles.indexOf("Select your role");
+            if (index !== -1) {
+                roles.splice(index, 1);
+            }
+            state.roles = roles;
         },
     },
 });
