@@ -42,9 +42,9 @@ function UserManagement(){
     const confirm = async(id) => {
       NotiModal.confirm({
           maskClosable: true,
-          title: 'Bạn có muốn thay đổi thông tin tài khoản?',
+          title: 'Bạn có muốn xóa nhân viên này không?',
           icon: <BsExclamationCircle />,
-          content: 'Tài khoản sau khi đổi sẽ không còn còn lưu trữ thông tin trước đó được nữa.',
+          content: 'Khi bạn nhấn đồng ý, nhân viên sẽ bị xóa vĩnh viễn',
           okText: 'Xác nhận',
           cancelText: 'Huỷ',
           onOk: async() => {

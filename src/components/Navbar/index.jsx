@@ -50,7 +50,7 @@ function NavBar() {
   const menu = (
     <Menu style={{ marginTop: 10 }}>
       {data.length > 0 ?(
-        data.map((option) => (
+        data.slice(0,5).map((option) => (
           <Menu.Item
           
             key={option.userNotificationId}

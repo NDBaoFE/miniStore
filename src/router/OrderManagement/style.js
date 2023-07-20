@@ -57,7 +57,8 @@ export const Left = styled.div`
     }
 `;
 export const Right = styled.div`
-    width: 70%;
+    margin-top: 50px;
+    width: 100%;
     align-items: center;
     justify-content: space-around;
     display: flex;
