@@ -7,11 +7,10 @@ import {  Card, Img, Info,
   ShiftName,
   ShiftTime,
   ShiftType,
-  
   Team
    } from './cardStyle';
-import {ModalContainer ,StyledModal, EmployeeCard, Left, Right, StyledButton, ButtonContainer} from "./style"
-
+import {ModalContainer ,StyledModal, EmployeeCard, Left, Right, StyledButton, ButtonContainer, Status} from "./style"
+import { shiftStatus } from '../data';
 
 import ActionGroup from "./ActionGroup"
 import AssignModal from './AssignModal';
@@ -29,7 +28,15 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setPositions,se
   const handleCancel = () => {
     setOpen(false);
   }
-    
+  const applyStatus = (status) => {
+    const matchedItem = Object.values(shiftStatus).find((item) =>
+      item.data.includes(status)
+    );
+    if (matchedItem) {
+      return matchedItem.color;
+    }
+    return "#ff9683"; // Default color if no matching status found
+  };
   return (
     
       <StyledModal
@@ -53,12 +60,16 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setPositions,se
        </Info>
        <Team>
        <ShiftType>{userShifts[index].shiftType}</ShiftType>
-      { positions[index].user? <EmployeeCard >
+      { positions[index].user? 
+      <>
+      <EmployeeCard >
      <Image src={positions[index].user.userImg} alt=""  style={{width:50,height:50,borderRadius:50}}  />
      <span style={{marginLeft:20}}>{positions[index].user.name}</span>
      <Tag color={`${positions[index].user.role.name == "admin"? "red": positions[index].user.role.name == "saler" ?"green":"blue" }`}  style={{marginLeft:20}}>{positions[index].user.role.name}</Tag>
-    </EmployeeCard> : <h2>Empty</h2>} 
-    {userRole == positions[index]?.user?.role?.name &&<ButtonContainer> <StyledButton type='primary'>Checkin</StyledButton> <StyledButton type='primary'>I can't do it </StyledButton></ButtonContainer>  }
+    </EmployeeCard>
+     <Status color={applyStatus(selectedValue[index].status)}>Status:{selectedValue[index].status}</Status>
+      </> : <h2>Empty</h2>} 
+   
        </Team>
        
        </Card>

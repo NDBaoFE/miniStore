@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { themes } from "../../utils/theme";
 export const LateModal = styled.div`
     height: 600px;
 
@@ -8,6 +9,7 @@ export const LateModal = styled.div`
     justify-content: center;
     font-family: "Inter", sans-serif;
     position: relative;
+    background: ${themes.colors.white};
     img {
         width: 350px;
     }

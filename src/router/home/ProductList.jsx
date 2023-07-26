@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import productApi from "../../utils/api/productApi";
 import { useNavigate } from "react-router-dom";
+import notFound from "../../assets/image/404.svg"
 function ProductList({search}) {
   const params = useParams();
   const [products,setProducts]=useState([]);
@@ -41,7 +42,12 @@ function ProductList({search}) {
   return (
     
     <ProductWrapper>
-       {products.map((product,index)=>{
+      {products.length===0 && <div style={{width:"100%",display:"flex",justifyContent:"center",alignItems:"center",marginTop:"50px",marginBottom:"50px",flexDirection:"column"}}>
+        <h1 style={{margin:0}}>No product Found</h1>
+        <img src={notFound} alt="not found"  style={{width:"80%"}}/>
+        </div>}
+        {products.length>0  && <>
+          {products.map((product,index)=>{
        return(  
        <Card  key={index} product={product}/>
        );
@@ -63,6 +69,8 @@ function ProductList({search}) {
                     pageSize={9}
                 />}
             </div>
+        </>}
+      
     </ProductWrapper>
   )
 }

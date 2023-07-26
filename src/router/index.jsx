@@ -118,8 +118,23 @@ const adminRoute = [
         component: <AddVoucher/>,
         exact: true,
         restrict: true,
-    }
-   
+    },
+    {
+        
+        index: true,
+        path: "payroll/:id",
+        component: <PayrollByUser/>,
+        exact: true,
+        restrict: true,
+    }, 
+    {
+        index: true,
+        path: "order",
+        component: <OrderManagemntPage/>,
+        exact: true,
+        restrict: true,
+    },
+    
     
     
 ];
@@ -217,14 +232,7 @@ const employeeRoute = [
         restrict: true,
     }, 
 
-    {
-        
-        index: true,
-        path: "payroll/:id",
-        component: <PayrollByUser/>,
-        exact: true,
-        restrict: true,
-    }, 
+   
     {
         index: true,
         path: "checkout",
@@ -256,13 +264,6 @@ const employeeRoute = [
         restrict: true,
     },
 
-    {
-        index: true,
-        path: "orderManagement",
-        component: <OrderManagemntPage/>,
-        exact: true,
-        restrict: true,
-    },
     
     
 ];

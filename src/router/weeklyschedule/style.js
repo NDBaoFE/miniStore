@@ -84,7 +84,7 @@ export const Bar = styled.div`
     align-items: center;
     justify-content: center;
     transform: rotate(-90deg);
-
+    color: ${themes.colors.white};
     width: 200px;
     height: 40px; /* Adjust the height to fill the available space */
 `;
@@ -94,6 +94,7 @@ export const ParentContainer = styled.div`
     width: 40px; /* Set the desired width for the parent container */
     overflow: hidden;
     align-items: center;
+    border-radius: 4px;
 `;
 export const ActionHeader = styled.div`
     height: 40px;
@@ -192,4 +193,10 @@ export const Header = styled.div`
     background-color: ${themes.colors.primary};
     border-radius: 4px 4px 0 0;
     height: 20px;
+`;
+export const Hero = styled.h1`
+    text-align: start;
+    color: ${themes.colors.primary};
+    width: 100%;
+    margin: 40px 0 0 40px;
 `;

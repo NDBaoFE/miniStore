@@ -21,7 +21,7 @@ function Menu() {
                     <div className='name'>{item.name}</div>
                 </Left>
                 <Right>
-                    <div className='price'>{item.finalPrice}đ</div>
+                    <div className='price'>{item.finalPrice*item.quantity}đ</div>
                     <div className='originalPrice'>{item.price*item.quantity}đ</div>
                 </Right>
             </ItemRow>

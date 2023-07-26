@@ -130,6 +130,13 @@ export const CardWrapper = styled.div`
     align-items: center;
     margin-top: 20px;
     width: 100%;
+    position: relative;
+    padding-bottom: 40px;
+    h3 {
+        position: absolute;
+        bottom: 10px;
+        color: ${themes.colors.primary};
+    }
 `;
 export const CardHero = styled.div`
     font-style: normal;
@@ -153,8 +160,8 @@ export const CardImg = styled.img`
 `;
 export const CardPrice = styled.div`
     font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
+    font-weight: 600;
+    font-size: 15px;
     line-height: 140%;
     /* identical to box height, or 20px */
 

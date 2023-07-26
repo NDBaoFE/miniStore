@@ -229,6 +229,20 @@ export const SideBar = styled(Sider)`
     left: 0;
     .ant-menu {
         font-size: 16px;
+        position: relative;
+        overflow-y: scroll;
+        margin-bottom: 80px;
+        height: 80%;
+    }
+    .ant-menu::-webkit-scrollbar-track {
+        background-color: #fafafa;
+    }
+    .ant-menu::-webkit-scrollbar-thumb {
+        background-image: linear-gradient(-45deg, #3edf7c, #2eb161);
+        border-radius: 50px;
+    }
+    .ant-menu::-webkit-scrollbar {
+        width: 10px;
     }
 `;
 

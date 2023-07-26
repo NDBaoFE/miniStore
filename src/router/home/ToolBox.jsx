@@ -5,7 +5,7 @@ import {Col,SearchBtn,Action} from "./style"
 import { CiBarcode } from "react-icons/ci";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 
-function ToolBoxSection({setSearchValue}) {
+function ToolBoxSection({setSearchValue,openScanner,setOpenScanner}) {
 
     // const onSearch = (e) => { 
     //   console.log(e.target.value);
@@ -28,7 +28,7 @@ function ToolBoxSection({setSearchValue}) {
         </Col>
         <Col>
         <Action>
-        <CiBarcode style={{color:"black", fontSize:"25px"}}/>
+        <CiBarcode style={{color:"black", fontSize:"25px"}} onClick={()=>setOpenScanner(true)}/>
         <AiOutlineUnorderedList style={{color:"black", fontSize:"25px",marginLeft:"20px"}}/>
         </Action>
         </Col>

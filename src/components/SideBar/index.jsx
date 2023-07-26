@@ -74,6 +74,16 @@ const itemsAdmin = [
         "/ticket",
         <FaRegPaperPlane />
     ),
+    getItem(
+        <SidebarLink to="/payroll " child="PayRoll" />,
+        "/payroll",
+        <LuUsers/>
+    ),
+    getItem(
+        <SidebarLink to="/order " child="Order " />,
+        "/order",
+        <FaRegPaperPlane />
+    ),
 ];
 const itemsEmployee = [
     getItem(
