@@ -20,6 +20,7 @@ import DayTimeAnalytic from './DayTimeAnalytic'
 function Revenue() {
   const [data,setData]=useState(null);
   const [openAnalytic,setOpenAnalytic]=useState();
+  
   const token=localStorage.getItem("Authorization");
   useEffect(() => {
     async function fetchData() {

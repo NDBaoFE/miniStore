@@ -63,15 +63,17 @@ const handleFinishFailed = () => {
 const confirm = () => {
     NotiModal.confirm({
         maskClosable: true,
-        title: 'Are You sure you want to add this Product',
+        title: 'Bạn có muốn thêm sản phẩm này vào cửa hàng ?',
         icon: <ExclamationCircleOutlined />,
-        content: 'Once You hit confirm , the product is created and the imported product will be count',
+        content: 'Khi bạn nhấn "Confirm", sản phẩm này sẽ được thêm vào cửa hàng',
         okText: 'Confirm',
+        centered: true,
         cancelText: 'Cancel',
         onOk: () => {
             form.submit();
             // openNotification();
         },
+       
     });
 };
   return (

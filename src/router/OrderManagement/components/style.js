@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { themes } from "../../../utils/theme";
-import { Button } from "antd";
+import { Button, Modal } from "antd";
 
 export const ActionWrapper = styled.div`
     margin-top: 20px;
@@ -84,4 +84,21 @@ export const Row = styled.div`
     display: flex;
     width: 100%;
     justify-content: space-between;
+`;
+
+
+export const NotiModalOrder = styled(Modal)`
+    .ant-modal-content {
+        border-radius: 2px;
+        background: #ffffff;
+    
+        box-shadow: 0px 3px 6px -4px rgba(0, 0, 0, 0.12),
+            0px 6px 16px rgba(0, 0, 0, 0.08),
+            0px 9px 28px 8px rgba(0, 0, 0, 0.05);
+       
+        
+    }
+    .ant-btn-primary {
+        background-color: ${themes.colors.primary};
+    }
 `;
