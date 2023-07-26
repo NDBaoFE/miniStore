@@ -74,10 +74,11 @@ const AddUser = () => {
   const confirm = () => {
     NotiModal.confirm({
       maskClosable: true,
-      title: "Are you sure you want to add this new user ? ",
+      title: "Bạn có muốn thêm nhân viên này ? ",
       icon: <ExclamationCircleOutlined />,
+      centered: true,
       content:
-        "This account can access to the account , the password will normal remain = `1`",
+        "Khi bạn nhấn 'Confirm', nhân viên này sẽ được thêm vào danh sách nhân viên",
       okText: "Confirm",
       cancelText: "Cancel",
       onOk: () => {

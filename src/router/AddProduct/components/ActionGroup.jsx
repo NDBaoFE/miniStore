@@ -3,6 +3,7 @@
 import ConfirmModal from "../../../components/ConfirmModal";
 import { GroupWrapper,FinishButton } from "./style"
 import { useState } from "react";
+
 function ActionGroup({confirm}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 

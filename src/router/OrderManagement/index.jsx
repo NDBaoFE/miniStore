@@ -11,7 +11,7 @@ import productApi from '../../utils/api/productApi';
 import AnimatedNumbers from "react-animated-numbers";
 import useAuth from '../../utils/useAuth';
 import orderManagementApi from '../../utils/api/orderManagementApi';
-import { NotiModal } from '../products/style';
+import { NotiModalOrder } from '../OrderManagement/components/style';
 import { toastError, toastSuccess } from '../../components/Toast';
 import { BsExclamationCircle } from 'react-icons/Bs';
 function OrderManagemntPage() { 
@@ -33,7 +33,7 @@ function OrderManagemntPage() {
   };
 
   const confirm = async(id) => {
-    NotiModal.confirm({
+    NotiModalOrder.confirm({
         maskClosable: true,
         title: 'Bạn có muốn xóa nhân viên này không?',
         icon: <BsExclamationCircle />,
