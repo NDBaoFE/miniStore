@@ -33,7 +33,7 @@ export const Container = styled.div`
 `;
 
 export const StyledButton = styled(Button)``;
-export const Hero = styled.h1`
+export const Hero = styled.h2`
     margin: 0 0 15px 0;
     text-align: left;
 `;
@@ -57,7 +57,8 @@ export const Left = styled.div`
     }
 `;
 export const Right = styled.div`
-    width: 70%;
+    margin-top: 50px;
+    width: 100%;
     align-items: center;
     justify-content: space-around;
     display: flex;

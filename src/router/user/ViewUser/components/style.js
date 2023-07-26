@@ -7,30 +7,39 @@ export const AvatarWrapper = styled.div`
     position: relative;
     border-radius: 8px 8px 0 0;
     width: 100%;
-    height: 200px;
-    
+
+    height: 300px;
+
     display: flex;
     align-items: center;
     justify-content: center;
 `;
 export const AvatarInfo = styled.div`
-    margin-top:40px;
-   
     display: flex;
     flex-direction: column;
     .ant-image {
-        width: 200px;
+        width: 180px;
         img {
             border-radius: 8px 8px 0 0;
             object-fit: cover;
+          
         }
+
+       
     }
     .ant-image-mask {
-        border-radius: 8px 8px 0 0;
+        border-radius: 8px 8px 8px 8px;
+        height: 165px;
+        margin-top: 34px;
+        margin-left: 24px;
+
+    
     }
 `;
 export const Avatar = styled(Image)`
     width:100px;
+
+    
 
 `
 export const ProfileIcon = styled(UserAddOutlined)`

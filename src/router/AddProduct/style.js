@@ -91,6 +91,8 @@ export const NotiModal = styled(Modal)`
     .ant-btn-primary {
         background-color: ${themes.colors.primary};
     }
+
+   
 `;
 export const Label = styled(Title)`
     font-family: "Roboto";

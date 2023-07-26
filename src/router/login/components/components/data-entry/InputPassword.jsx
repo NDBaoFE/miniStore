@@ -20,10 +20,19 @@ const InputPassword = () =>{
         name="password"
         rules={[{
             required:true, message: "Password can not be empty"
-        }]}
+        },
+        {
+            min: 8,
+            message: "Password must be at least 8 characters long",
+          },
+          {
+            pattern: /^(?=.*[A-Z]).+$/,
+            message: "Password must contain at least one uppercase letter",
+          },]}
         >
 
             <InputStyled
+             name="password"
             type="password"
             placeholder="Enter your password"
             value={password}

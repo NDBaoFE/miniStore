@@ -1,13 +1,13 @@
 import {get} from './ApiCaller'
-const token = localStorage.getItem("Authorization");
+
 const payrollApi = {
-    getPayrollAll: () =>{
+    getPayrollAll: (token) =>{
         const url ="/payslip";
         return get(url, {}, {Authorization: token})
     },
 
-    getPayrollByUser: () => {
-        const url = "/payslip/viewHistory?userId=3";
+    getPayrollByUser: (id,token) => {
+        const url = `/payslip/viewHistory?userId=${id}`;
         return get(url, {}, {Authorization: token})
     }
 }

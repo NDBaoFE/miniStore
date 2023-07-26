@@ -18,6 +18,7 @@ const InputQuantityAlert = () => {
             name="quantityAlert"
         >
             <Input
+                name="productQuantity"
                 type="number"
                 placeholder="Quantity"
                 value={quantityAlert}

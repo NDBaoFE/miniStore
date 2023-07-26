@@ -23,7 +23,9 @@ function BreadCrumbHeader() {
         '/notify':'Notification',
         '/notify/:id':'Detail',
         '/schedule':'Schedule',
-        '/ticket': 'Ticket'
+        '/ticket': 'Ticket',
+        '/payroll': 'Payroll List',
+        '/payroll/:id': 'History'
         
       };
     const location = useLocation();

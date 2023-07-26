@@ -16,13 +16,14 @@ const InputProductCode = () => {
 
     return (
         <Form.Item
+       
             name="productCode"
             rules={[
                 { required: true, message: "Product code cannot be empty" },
             ]}
         >
             <Input
-               
+                name="productCode"
                 placeholder="8934588873553"
                 value={productCode}
                 onChange={handleProductCodeChange}

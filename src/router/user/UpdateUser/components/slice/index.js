@@ -13,11 +13,11 @@ export const initialState = {
     roles: ["Admin", "Employee", "Guard"],
     roleId: 1,
     genders: ["Male", "Female"],
-    gender: true,
+    gender: true, 
     info: {},
 };
 
-export const name = "editAccount";
+export const name = "editUser";
 
 export const slice = createSlice({
     name,

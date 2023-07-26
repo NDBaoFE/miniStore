@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import PayrollList from "../payroll/components/payrollList";
 import {
   WrapperPayroll,
@@ -7,14 +7,39 @@ import {
   Title,
   WrapperSum,
 } from "./payrollStyled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "antd";
+import payrollApi from "../../utils/api/payrollApi";
 
 const Payroll = () => {
+
+  const token = localStorage.getItem('Authorization')
+
+  const [userPayroll, setUserPayroll] = useState([])
+
+  useEffect(()=>{
+    async function fetchData(){
+      try{
+        const response = await payrollApi.getPayrollAll(token)
+        console.log(response.data.data)
+        setUserPayroll(response.data.data)
+      
+      }catch(error){
+      console.error(error);
+      }
+    }
+    fetchData()
+
+
+  }, [token])
+
+
+
+
   const columns = [
     {
       title: "User ID",
-      dataIndex: "userid",
+      dataIndex: "userId",
       key: "userid",
     },
     {
@@ -24,12 +49,12 @@ const Payroll = () => {
     },
     {
       title: "Role",
-      dataIndex: "role",
+      dataIndex: "roleName",
       key: "role",
     },
     {
       title: "Salary This Month",
-      dataIndex: "salaryThisMonth",
+      dataIndex: "salary",
       key: "salaryThisMonth",
     },
     {
@@ -38,7 +63,7 @@ const Payroll = () => {
       key: "action",
       render: (_, record) => (
         <StyledSpace>
-          <Link to={'/payroll/:id'}>
+          <Link to={`/payroll/${record.userId}`}>
             <Button>History</Button>
           </Link>
         </StyledSpace>
@@ -46,36 +71,37 @@ const Payroll = () => {
     },
   ];
 
-  const [userPayroll, setUserPayroll] = useState([
-    {
-      userid: 1,
-      name: "Nguyen Huynh Minh Khoi",
-      role: "Employee",
-      salaryThisMonth: 180.0,
-    },
-    {
-      userid: 2,
-      name: "Nguyen Duc Bao",
-      role: "Employee",
-      salaryThisMonth: 180.0,
-    },
-    { userid: 3, name: "Nguyen Phi", role: "Employee", salaryThisMonth: 180.0 },
-    {
-      userid: 4,
-      name: "Tran Minh Dat",
-      role: "Employee",
-      salaryThisMonth: 180.0,
-    },
-    {
-      userid: 5,
-      name: "Do Nguyen Bao Tam",
-      role: "Guard",
-      salaryThisMonth: 180.0,
-    },
-  ]);
+  // const [userPayroll, setUserPayroll] = useState([
+  //   {
+  //     userid: 1,
+  //     name: "Nguyen Huynh Minh Khoi",
+  //     role: "Employee",
+  //     salaryThisMonth: 180.0,
+  //   },
+  //   {
+  //     userid: 2,
+  //     name: "Nguyen Duc Bao",
+  //     role: "Employee",
+  //     salaryThisMonth: 180.0,
+  //   },
+  //   { userid: 3, name: "Nguyen Phi", role: "Employee", salaryThisMonth: 180.0 },
+  //   {
+  //     userid: 4,
+  //     name: "Tran Minh Dat",
+  //     role: "Employee",
+  //     salaryThisMonth: 180.0,
+  //   },
+  //   {
+  //     userid: 5,
+  //     name: "Do Nguyen Bao Tam",
+  //     role: "Guard",
+  //     salaryThisMonth: 180.0,
+  //   },
+  // ]);
 
+  const { id } = useParams();
   const totalSalaryThisMonth = userPayroll.reduce(
-    (total, user) => total + user.salaryThisMonth,
+    (total, user) => total + user.salary,
     0
   );
   return (

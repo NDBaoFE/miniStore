@@ -10,7 +10,7 @@ import {
   Row,
   NotiModal,
   PasswordBtn,
-  WrapperSalary
+  WrapperSalary,
 } from "./profileStyle";
 import { actions } from "./components/slice";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
@@ -39,7 +39,6 @@ import profileApi from "../../utils/api/profileApi";
 import PayslipList from "./components/components/PayslipList";
 
 import { useNavigate } from "react-router-dom";
-import salaryApi from "../../utils/api/salaryApi";
 
 function Profile() {
   const [updated, setUpdated] = useState(false);
@@ -57,26 +56,23 @@ function Profile() {
   const payslip = useSelector(selectors.payslip);
   const info = useSelector(selectors.info);
   const dispatch = useDispatch();
-const navigate = useNavigate()
+  const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
 
-  
-  
-
   const showModalPassword = () => {
-    navigate('/user/changePassword')
+    navigate("/user/changePassword");
   };
 
   const handleCancel = () => {
-    console.log("Clicked cancel button"); 
+    console.log("Clicked cancel button");
     setOpenModal(false);
   };
   const { id } = useParams();
 
   const UpdateInfo = async () => {
     dispatch(actions.getProfileInfo());
-    const res = await profileApi.updateProfile(info, id,token);
+    const res = await profileApi.updateProfile(info, id, token);
 
     if (res.data.status == 200) {
       setSuccess(true);
@@ -97,7 +93,7 @@ const navigate = useNavigate()
     console.log(" Hãy nhập tất cả các field !!");
   };
 
-const token = localStorage.getItem('Authorization')
+  const token = localStorage.getItem("Authorization");
   const [salary, setSalary] = useState(1000);
 
   useEffect(() => {
@@ -112,8 +108,7 @@ const token = localStorage.getItem('Authorization')
       }
     }
     fetchData();
-  }, [dispatch,token]);
-
+  }, [dispatch, token]);
 
   // useEffect(() => {
   //   async function fetchSalaryData() {
@@ -129,15 +124,24 @@ const token = localStorage.getItem('Authorization')
   //   fetchSalaryData();
   // }, []);
 
-  
-  
   const confirm = () => {
+    const modalContentStyle = {
+      paddingRight: "2px",
+      paddingTop: "10px"
+      // Adjust the value as per your requirement
+    };
+
     NotiModal.confirm({
       maskClosable: true,
       title: "Bạn có muốn thay đổi thông tin tài khoản?",
       icon: <ExclamationCircleOutlined />,
-      content:
-        "Tài khoản sau khi đổi sẽ không còn còn lưu trữ thông tin trước đó được nữa.",
+      content: (
+        <div style={modalContentStyle}>
+          Tài khoản sau khi đổi sẽ không còn còn lưu trữ thông tin trước đó được
+          nữa.
+        </div>
+      ),
+      centered: true,
       okText: "Xác nhận",
       cancelText: "Huỷ",
       onOk: () => {
@@ -191,7 +195,9 @@ const token = localStorage.getItem('Authorization')
       dataIndex: "isPaid",
       key: `isPaid`,
       render: (_, record) => (
-        <span>{record.isPaid? 'Yes' : record.isPaid== 'No'? 'No': 'Not yet'}</span>
+        <span>
+          {record.isPaid ? "Yes" : record.isPaid == "No" ? "No" : "Not yet"}
+        </span>
       ),
     },
   ];
@@ -248,8 +254,6 @@ const token = localStorage.getItem('Authorization')
               </Col>
             </Row>
 
- 
-
             <Row>
               <Col span={13}>
                 <Label level={5}>Phone</Label>
@@ -257,13 +261,11 @@ const token = localStorage.getItem('Authorization')
               </Col>
               <Col span={7}>
                 <Label level={5}>Gender</Label>
-                <SelectGender/>
+                <SelectGender />
               </Col>
             </Row>
 
             <Row>
-      
-
               <Col span={7}>
                 <Label level={5}>Role</Label>
                 <SelectRole />
@@ -275,28 +277,29 @@ const token = localStorage.getItem('Authorization')
                 <Label level={5}>Address</Label>
                 <InputAddress />
               </Col>
-
-              
             </Row>
 
             <Row>
               <Col span={6}>
                 <Label level={5}>Password</Label>
-              
-                 <PasswordBtn  onClick={showModalPassword}>
+
+                <PasswordBtn onClick={showModalPassword}>
                   Change password
-                </PasswordBtn> 
-  
+                </PasswordBtn>
               </Col>
-              
-            
-      
             </Row>
 
-            <Row style={{marginBottom: 15}}>
-            <WrapperSalary>
-              <div style={{fontSize: 20}}>Salary: <span style={{color: "green", fontWeight: 600}}>  {salary}</span></div></WrapperSalary>
-            </Row >
+            <Row style={{ marginBottom: 15 }}>
+              <WrapperSalary>
+                <div style={{ fontSize: 20 }}>
+                  Salary:{" "}
+                  <span style={{ color: "green", fontWeight: 600 }}>
+                    {" "}
+                    {salary}
+                  </span>
+                </div>
+              </WrapperSalary>
+            </Row>
             <Row>
               <Col span={24}>
                 <Label level={5}>Payslip List</Label>
@@ -311,7 +314,7 @@ const token = localStorage.getItem('Authorization')
                 />
               </Col>
             </Row>
-            
+
             <ActionGroup confirm={confirm} />
           </StyledForm>
           {success && <Success />}

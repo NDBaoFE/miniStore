@@ -14,4 +14,6 @@ export const ModalWrapper = styled(Modal)`
         color: ${themes.colors.primary};
         border-color: ${themes.colors.primary};
     }
+
+   
 `;

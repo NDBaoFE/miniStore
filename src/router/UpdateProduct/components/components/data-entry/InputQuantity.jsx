@@ -19,6 +19,7 @@ const InputQuantity = () => {
             rules={[{ required: true, message: "quantity can  not be 0" }]}
         >
             <Input
+                name="productQuantity"
                 type="number"
                 placeholder="quantity"
                 value={quantity}

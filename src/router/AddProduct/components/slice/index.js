@@ -4,12 +4,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
     productId: 0,
-    cost: 0,
+    cost: null,
     name: "",
     productImg: "",
-    price: 0,
+    price: null,
     productTypeId: 0,
-    quantity: 0,
+    quantity: null,
     quantityAlert: 0,
     productCode: "",
     info: {},

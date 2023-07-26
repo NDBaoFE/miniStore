@@ -21,6 +21,7 @@ import CheckinModal from "./CheckinModal";
 import RequestTable from "./RequestTable";
 import localStorageUtils from "../../utils/localStorageUtils";
 import WorkingShift from "./components/WorkingShift";
+import Banner from "./Banner";
 
 
 
@@ -74,7 +75,7 @@ const EmployeeTimetable = () => {
   const [openTour,setOpenTour] = useState(false);
   const [openCheckin,setOpenCheckin]=useState(false);
   const [requests,setRequests]=useState([]);
-
+  const [openInstruction,setOpenInstruction]=useState(true);
   const ref1=useRef(null);
   const ref2=useRef(null);
   const ref3=useRef(null);
@@ -180,13 +181,13 @@ const handleDrag = (e, data) => {
   </Instruction>
   </Draggable>
 
-  
+      <Banner openInstruction={openInstruction}  setOpenInstruction={setOpenInstruction}/>
   <div className="timetable" style={{ color: "black" }} ref={ref3} >
     <ActionHeader ref={ref2}>
 
       { userShift[0] && <Daytime>{userShift[userShift.length-1][0]?.date}-{userShift[0][0]?.date}</Daytime>}
       <ButtonContainer>
-     
+      
         <StyledButton type="primary" onClick={()=>setOpenTour(true)}>How ?</StyledButton>
         <LeftButton type="primary" onClick={()=>setCurrent(current-1)}>
           <AiOutlineLeft />

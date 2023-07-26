@@ -16,6 +16,7 @@
         "axios": "^1.4.0",
         "cdbreact": "^1.5.16",
         "chart.js": "^4.3.0",
+        "date-fns": "^2.30.0",
         "daypilot-pro-react": "^0.0.0",
         "exceljs": "^4.3.0",
         "file-saver": "^2.0.5",
@@ -41,6 +42,7 @@
         "remixicon-react": "^1.0.0",
         "slick-carousel": "^1.8.1",
         "styled-components": "^6.0.1",
+        "testcafe": "^3.0.1",
         "uuid": "^9.0.0",
         "xlsx": "^0.18.5"
     },

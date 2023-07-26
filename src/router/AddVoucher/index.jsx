@@ -72,9 +72,10 @@ const handleFinishFailed = () => {
 const confirm = () => {
     NotiModal.confirm({
         maskClosable: true,
-        title: 'Are you sure you want to add this voucher ?',
+        title: 'Bạn có muốn thêm voucher này ?',
         icon: <ExclamationCircleOutlined />,
-        content: 'After you press confirm, this voucher will be added to the system.',
+        centered: true,
+        content: 'Nếu bạn nhấn "Confirm", voucher sẽ được thêm vào ',
         okText: 'Confirm',
         cancelText: 'Cancel',
         onOk: () => {
