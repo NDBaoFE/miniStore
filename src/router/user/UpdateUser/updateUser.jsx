@@ -96,8 +96,9 @@ const token=localStorage.getItem("Authorization");
       maskClosable: true,
       title: "Bạn có muốn thay đổi thông tin tài khoản?",
       icon: <ExclamationCircleOutlined />,
+      centered: true,
       content:
-        "Tài khoản sau khi đổi sẽ không còn còn lưu trữ thông tin trước đó được nữa.",
+        "Khi bạn nhấn 'Xác nhận', các thông tin trên sẽ được thay đổi",
       okText: "Xác nhận",
       cancelText: "Huỷ",
       onOk: () => {

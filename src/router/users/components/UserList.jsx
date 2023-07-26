@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import userApi from "../../../utils/api/userApi";
 
 import { themes } from "../../../utils/theme";
+import productApi from "../../../utils/api/productApi";
 
 
 function UserList({ search, users, setUsers, columns, setCurrent, current, reload }) {
@@ -45,34 +46,37 @@ function UserList({ search, users, setUsers, columns, setCurrent, current, reloa
   };
 
 
-  useEffect(() => {
+
+
+  const setData = (revenue) => {
     const ctx = document.getElementById('myChart').getContext('2d');
+    const data = {
+      labels: ['AdminTest', 'Admin', 'Saler','Guard'],
+      datasets: [{
+        label: '# of Votes',
+        data: [revenue, 50],
+        backgroundColor: [
+          `${themes.colors.primary200}`,
+          `${themes.colors.primary300}`,
+          `${themes.colors.primary400}`,
+          `${themes.colors.primary}`,
+         
+  
+        ],
+        borderColor: [
+          `${themes.colors.primary200}`,
+          `${themes.colors.primary300}`,
+          `${themes.colors.primary400}`,
+          `${themes.colors.primary}`,
+       
+        ],
+        borderWidth: 1
+      }]
+    };
   
     new Chart(ctx, {
       type: 'pie',
-      data: {
-        labels: ['AdminTest', 'Admin', 'Saler','Guard'],
-        datasets: [{
-          label: '# of Votes',
-          data: [40,20, 20, 20],
-          backgroundColor: [
-            `${themes.colors.primary200}`,
-            `${themes.colors.primary300}`,
-            `${themes.colors.primary400}`,
-            `${themes.colors.primary}`,
-       
-
-          ],
-          borderColor: [
-            `${themes.colors.primary200}`,
-            `${themes.colors.primary300}`,
-            `${themes.colors.primary400}`,
-            `${themes.colors.primary}`,
-     
-          ],
-          borderWidth: 1
-        }]
-      },
+      data: data,
       options: {
         scales: {
           yAxes: [{
@@ -83,8 +87,21 @@ function UserList({ search, users, setUsers, columns, setCurrent, current, reloa
         }
       }
     });
-  }, []);
-
+  };
+  
+  useEffect(() => {
+      async function fetchDataRevenue() {
+        try {
+          const response = await productApi.dashboard(token);
+          console.log(response.data.data.userRank[0][1].totalRevenue);
+          setData(response.data.data.userRank[0][1].totalRevenue);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      fetchDataRevenue();
+    }, [token]);
+    
   return (
     <WrapperUserManagement>
       <RevenueDashboardContainer>

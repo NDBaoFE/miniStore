@@ -1,15 +1,14 @@
 /* eslint-disable react/prop-types */
 
+import { NotiModalOrder } from '../components/style';
+import { Table, Button,Modal } from 'antd';
 
-import { Table, Button } from 'antd';
+import './style.css'
 
-import { Link } from 'react-router-dom';
-import { NotiModal } from '../../products/style';
 import { BsExclamationCircle } from 'react-icons/Bs';
 import orderManagementApi from '../../../utils/api/orderManagementApi';
 import { toastError, toastSuccess } from '../../../components/Toast';
 import { useState } from 'react';
-
 
 
 
@@ -36,17 +35,7 @@ function OrderTable({tickets}) {
       title: 'Date',
       dataIndex: 'date',
       defaultSortOrder: 'descend',
-      // sorter: (a, b) => a.startTime - b.startTime,
-      // render: (_, record) => (
-      //   <span>{new Date(record.startTime * 1000).toLocaleString('en-GB', {
-      //     day: '2-digit',
-      //     month: '2-digit',
-      //     year: 'numeric',
-      //     hour: '2-digit',
-      //     minute: '2-digit',
-      //     hour12: true,
-      //   })}</span>
-      // ),
+    
     },
     
     {
@@ -70,7 +59,7 @@ function OrderTable({tickets}) {
       render: (_, record) => (
         <span>
           <Button>View </Button>
-          <Button danger style={{marginLeft: 20}} onClick={()=>confirm(record.orderId)}>Delete </Button>
+          <Button danger style={{marginLeft: 20}} onClick={()=>confirm(record.orderId)}>Roll Back </Button>
        </span>
       ),
     },
@@ -87,28 +76,41 @@ function OrderTable({tickets}) {
     SetReload(!reload);
   };
   
-  const confirm = async(id) => {
-    NotiModal.confirm({
-        maskClosable: true,
-        title: 'Bạn có muốn xóa order này không?',
-        icon: <BsExclamationCircle />,
-        content: 'Khi bạn nhấn đồng ý, order này sẽ bị xóa vĩnh viễn',
-        okText: 'Xác nhận',
-        cancelText: 'Huỷ',
-        onOk: async() => {
-          const token=localStorage.getItem("Authorization");
-          const res= await orderManagementApi.deleteOrder(id,token);
-          if(res.status===200){
-            toastSuccess("Delete Order Succesfully");
-             setSearch(search);
-          }else{
-            toastError("Delete Order Failed");
-          }
-          handleOrderDeleted()
-        },
+  const confirm = async (id) => {
+    const modalContentStyle = {
+      // paddingTop: '30px',
+       // Adjust the value as per your requirement
+    };
+  
+    const styleTitle = {
+      paddingTop: 10
+    }
+
+    NotiModalOrder.confirm({
+      maskClosable: true,
+      title: (<div style={styleTitle}>Bạn có muốn xóa order này không?</div>),
+      icon: <BsExclamationCircle />,
+      content: (
+        <div style={modalContentStyle}>
+          Khi bạn nhấn đồng ý, order này sẽ bị xóa vĩnh viễn khỏi danh sách
+        </div>
+      ),
+      okText: 'Xác nhận',
+      centered: true,
+      cancelText: 'Huỷ',
+      onOk: async () => {
+        const token = localStorage.getItem('Authorization');
+        const res = await orderManagementApi.deleteOrder(id, token);
+        if (res.status === 200) {
+          toastSuccess('Delete Order Succesfully');
+          setSearch(search);
+        } else {
+          toastError('Delete Order Failed');
+        }
+        handleOrderDeleted();
+      },
     });
   };
-
   return (
     <Table columns={columns} dataSource={tickets} onChange={onChange} />
   )
