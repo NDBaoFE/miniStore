@@ -9,6 +9,7 @@ import {  SideBar, Wrapper, SignOut, Button, Container } from "./style";
 import {FaRegPaperPlane}   from "react-icons/fa"
 
 import { BsGrid, BsBookmarkFill } from "react-icons/Bs";
+import { MdPaid} from "react-icons/Md";
 
 import { RiCoupon2Line} from "react-icons/ri";
 import {LuUsers}  from "react-icons/lu";
@@ -86,7 +87,7 @@ const itemsAdmin = [
     getItem(
         <SidebarLink to="/payroll " child="Payslip" />,
         "/payroll",
-        <BsBookmarkFill/>
+        <MdPaid/>
     ),
 ];
 const itemsEmployee = [
