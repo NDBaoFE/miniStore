@@ -8,7 +8,8 @@ import SidebarLink from "../SideBarLink";
 import {  SideBar, Wrapper, SignOut, Button, Container } from "./style";
 import {FaRegPaperPlane}   from "react-icons/fa"
 
-import { BsGrid } from "react-icons/Bs";
+import { BsGrid, BsBookmarkFill } from "react-icons/Bs";
+
 import { RiCoupon2Line} from "react-icons/ri";
 import {LuUsers}  from "react-icons/lu";
 import {
@@ -17,6 +18,8 @@ import {
     UserOutlined ,
     PieChartOutlined 
 } from "@ant-design/icons";
+
+
 import localStorageUtils from "../../utils/localStorageUtils";
 import {ScheduleOutlined } from "@ant-design/icons"
 import useAuth from "../../utils/useAuth";
@@ -74,6 +77,17 @@ const itemsAdmin = [
         "/ticket",
         <FaRegPaperPlane />
     ),
+    getItem(
+        <SidebarLink to="/orderManagement " child="Order" />,
+        "/orderManagement",
+        <BsBookmarkFill/>
+    ),
+
+    getItem(
+        <SidebarLink to="/payroll " child="Payslip" />,
+        "/payroll",
+        <BsBookmarkFill/>
+    ),
 ];
 const itemsEmployee = [
     getItem(
@@ -97,6 +111,8 @@ const itemsEmployee = [
         "/ticket",
         <FaRegPaperPlane />
     ),
+
+    
 ];
 
 const SidebarComponent = ({ collapsed, setCollapsed }) => {
@@ -113,7 +129,7 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
     
     return (
         <Wrapper>
-            <SideBar width="240px" collapsed={collapsed}>
+            <SideBar width="250px" collapsed={collapsed}>
                 <Container>
                     {/* {" "}
                     <Logo>Hii</Logo> */}
@@ -127,18 +143,20 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
                     </Button>
                 </Container>
 
-                <Menu
-                    defaultSelectedKeys={[selectedKey]}
-                    defaultOpenKeys={["blog", "account"]}
-                    // openKeys={[selectedKey]}
-                    mode="inline"
-                    onSelect={({ key }) => {
-                        console.log(key);
-                        setSelectedKey(key);
-                    }}
-                    style={{background:'transparent',marginTop:"20px"}}
-                    items={userRole == "admin" ? itemsAdmin : itemsEmployee}
-                />
+                <div style={{ overflowY: "scroll" , maxHeight: "500px"}}>
+                    <Menu
+                        defaultSelectedKeys={[selectedKey]}
+                        defaultOpenKeys={["blog", "account"]}
+                        // openKeys={[selectedKey]}
+                        mode="inline"
+                        onSelect={({ key }) => {
+                            console.log(key);
+                            setSelectedKey(key);
+                        }}
+                        style={{background:'transparent',marginTop:"20px"}}
+                        items={userRole == "admin" ? itemsAdmin : itemsEmployee}
+                    />
+                </div>
                 <SignOut onClick={handleSignOut} style={{width:"100%",textAlign:"center",display:"flex",justifyContent:"center"}}>
                     <LogoutOutlined
                         style={{ paddingRight: 10, fontSize: "24px", color:"green" }}

@@ -71,43 +71,16 @@ const Payroll = () => {
     },
   ];
 
-  // const [userPayroll, setUserPayroll] = useState([
-  //   {
-  //     userid: 1,
-  //     name: "Nguyen Huynh Minh Khoi",
-  //     role: "Employee",
-  //     salaryThisMonth: 180.0,
-  //   },
-  //   {
-  //     userid: 2,
-  //     name: "Nguyen Duc Bao",
-  //     role: "Employee",
-  //     salaryThisMonth: 180.0,
-  //   },
-  //   { userid: 3, name: "Nguyen Phi", role: "Employee", salaryThisMonth: 180.0 },
-  //   {
-  //     userid: 4,
-  //     name: "Tran Minh Dat",
-  //     role: "Employee",
-  //     salaryThisMonth: 180.0,
-  //   },
-  //   {
-  //     userid: 5,
-  //     name: "Do Nguyen Bao Tam",
-  //     role: "Guard",
-  //     salaryThisMonth: 180.0,
-  //   },
-  // ]);
 
   const { id } = useParams();
-  const totalSalaryThisMonth = userPayroll.reduce(
-    (total, user) => total + user.salary,
-    0
-  );
+  // const totalSalaryThisMonth = userPayroll.reduce(
+  //   (total, user) => total + user.salary,
+  //   0
+  // );
   return (
     <WrapperPayroll>
       <WrapperSum>
-        <Title>Total Salary This Month: {totalSalaryThisMonth}</Title>
+        <Title>Total Salary This Month: </Title>
         <ButtonStyled>Paid</ButtonStyled>
       </WrapperSum>
 
