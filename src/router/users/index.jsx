@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import UserList from "./components/UserList";
 import ToolBoxSection from "./components/ToolBox";
 import { Container, LoadingContainer, StyledSpace } from "./style";
@@ -9,7 +9,7 @@ import userApi from "../../utils/api/userApi";
 import { toastError, toastSuccess } from "../../components/Toast";
 import { NotiModal } from "../products/style";
 import { BsExclamationCircle } from "react-icons/Bs";
-import productApi from "../../utils/api/productApi";
+
 
 function UserManagement() {
   const [loading, setLoading] = useState(false);
@@ -107,8 +107,7 @@ function UserManagement() {
 
   const [search, setSearch] = useState("");
   const [users, setUsers] = useState([]);
-  console.log(users);
-  console.log(users[3]);
+
 
 
 

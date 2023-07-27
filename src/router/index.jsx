@@ -34,6 +34,7 @@ import Password from "./password/Password";
 import Payroll from "./payroll";
 import PayrollByUser from "./payrollByUser";
 import OrderManagemntPage from "./OrderManagement";
+import OrderDetailTable from "./OrderManagement/components/OrderDetailTable";
 
 
 const publicRoute = [
@@ -260,6 +261,14 @@ const employeeRoute = [
         index: true,
         path: "orderManagement",
         component: <OrderManagemntPage/>,
+        exact: true,
+        restrict: true,
+    },
+
+    {
+        index: true,
+        path: "orderDetail/:id",
+        component: <OrderDetailTable/>,
         exact: true,
         restrict: true,
     },
