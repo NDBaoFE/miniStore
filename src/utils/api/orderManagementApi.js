@@ -10,6 +10,12 @@ const orderManagementApi = {
     const url = `/cancelOrder/${id}`;
     return remove(url, {}, {}, { Authorization: token });
   },
+
+
+  getOrderDetail: (id, token) =>{
+    const url = `/orderDetail/searchByOrderId?id=${id}`;
+    return get(url, {},{Authorization: token});
+  }
 };
 
 export default orderManagementApi;

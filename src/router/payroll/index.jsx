@@ -1,4 +1,6 @@
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Button, Modal } from "antd";
 import PayrollList from "../payroll/components/payrollList";
 import {
   WrapperPayroll,
@@ -7,34 +9,30 @@ import {
   Title,
   WrapperSum,
 } from "./payrollStyled";
-import { useEffect, useState } from "react";
-import { Button } from "antd";
 import payrollApi from "../../utils/api/payrollApi";
+import payslip from "../../utils/api/payslipApi";
+import { toastError, toastSuccess } from "../../components/Toast";
 
 const Payroll = () => {
+  const token = localStorage.getItem("Authorization");
+  const [reload, setReload] = useState(false);
+  const [userPayroll, setUserPayroll] = useState([]);
 
-  const token = localStorage.getItem('Authorization')
-
-  const [userPayroll, setUserPayroll] = useState([])
-
-  useEffect(()=>{
-    async function fetchData(){
-      try{
-        const response = await payrollApi.getPayrollAll(token)
-        console.log(response.data.data)
-        setUserPayroll(response.data.data)
-      
-      }catch(error){
-      console.error(error);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await payrollApi.getPayrollAll(token);
+        setUserPayroll(response.data.data);
+      } catch (error) {
+        console.error(error);
       }
     }
-    fetchData()
+    fetchData();
+  }, [token, reload]);
 
-
-  }, [token])
-
-
-
+  const handlePayslipPaid = () => {
+    setReload(!reload);
+  };
 
   const columns = [
     {
@@ -71,49 +69,48 @@ const Payroll = () => {
     },
   ];
 
-  // const [userPayroll, setUserPayroll] = useState([
-  //   {
-  //     userid: 1,
-  //     name: "Nguyen Huynh Minh Khoi",
-  //     role: "Employee",
-  //     salaryThisMonth: 180.0,
-  //   },
-  //   {
-  //     userid: 2,
-  //     name: "Nguyen Duc Bao",
-  //     role: "Employee",
-  //     salaryThisMonth: 180.0,
-  //   },
-  //   { userid: 3, name: "Nguyen Phi", role: "Employee", salaryThisMonth: 180.0 },
-  //   {
-  //     userid: 4,
-  //     name: "Tran Minh Dat",
-  //     role: "Employee",
-  //     salaryThisMonth: 180.0,
-  //   },
-  //   {
-  //     userid: 5,
-  //     name: "Do Nguyen Bao Tam",
-  //     role: "Guard",
-  //     salaryThisMonth: 180.0,
-  //   },
-  // ]);
+  const confirm = async () => {
+    Modal.confirm({
+      maskClosable: true,
+      title: "Bạn có muốn trả số lương này không?",
+      content: "Khi bạn nhấn đồng ý, lương sẽ được trả cho các nhân viên",
+      okText: "Xác nhận",
+      cancelText: "Huỷ",
+      onOk: async () => {
+        const token = localStorage.getItem("Authorization");
+        const res = await payslip.getPay(token);
+        if (res.status === 200) {
+          toastSuccess("Paid Successfully");
+        } else {
+          toastError("Paid Failed");
+        }
+        handlePayslipPaid();
+      },
+    });
+  };
 
-  const { id } = useParams();
-  const totalSalaryThisMonth = userPayroll.reduce(
-    (total, user) => total + user.salary,
-    0
-  );
+  let totalSalary = 0
+
+  if(userPayroll !== ""){
+    totalSalary = userPayroll.reduce((total, user) => {
+
+        return total + (+user.salary || 0);
+    }, 0);
+  }
+
+
+  console.log(userPayroll);
+
   return (
     <WrapperPayroll>
       <WrapperSum>
-        <Title>Total Salary This Month: {totalSalaryThisMonth}</Title>
-        <ButtonStyled>Paid</ButtonStyled>
+        <Title>Total Salary This Month: {totalSalary}</Title>
+        <ButtonStyled onClick={() => confirm()}>Paid</ButtonStyled>
       </WrapperSum>
-
       <PayrollList
         setUserPayroll={setUserPayroll}
         userPayroll={userPayroll}
+        reload={reload}
         columns={columns}
       ></PayrollList>
     </WrapperPayroll>

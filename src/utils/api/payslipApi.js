@@ -1,9 +1,14 @@
 import { get } from "./ApiCaller"; 
-const token = localStorage.getItem('Authorization');
+
 
 const payslip = {
-    getPayslip: () =>{
+    getPayslip: (token) =>{
         let url = `/payslip`
+        return get(url, {}, {Authorization:token})
+    },
+
+    getPay: (token) =>{
+        let url = `/salary/pay`
         return get(url, {}, {Authorization:token})
     }
 }

@@ -25,7 +25,10 @@ function BreadCrumbHeader() {
         '/schedule':'Schedule',
         '/ticket': 'Ticket',
         '/payroll': 'Payroll List',
-        '/payroll/:id': 'History'
+        '/payroll/:id': 'History',
+        '/orderManagement': 'Order List',
+        '/orderDetail': 'Order Detail'
+
         
       };
     const location = useLocation();
