@@ -34,11 +34,8 @@ import Password from "./password/Password";
 import Payroll from "./payroll";
 import PayrollByUser from "./payrollByUser";
 import OrderManagemntPage from "./OrderManagement";
-<<<<<<< HEAD
 import OrderDetailTable from "./OrderManagement/components/OrderDetailTable";
-=======
 import Payment from "./payment";
->>>>>>> f2d26e09e441e0d7905313b9ff8f1ce4c1be2c20
 
 
 const publicRoute = [
@@ -268,9 +265,6 @@ const employeeRoute = [
         exact: true,
         restrict: true,
     },
-  
-
-<<<<<<< HEAD
     {
         index: true,
         path: "orderManagement",
@@ -286,9 +280,6 @@ const employeeRoute = [
         exact: true,
         restrict: true,
     },
-=======
->>>>>>> f2d26e09e441e0d7905313b9ff8f1ce4c1be2c20
-    
     
 ];
 

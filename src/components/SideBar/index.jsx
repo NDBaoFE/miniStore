@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import {BiMoney} from "react-icons/bi"
 import {BsBoxSeam,} from "react-icons/Bs"
 import { Menu } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -9,14 +8,8 @@ import SidebarLink from "../SideBarLink";
 import {  SideBar, Wrapper, SignOut, Button, Container } from "./style";
 import {FaRegPaperPlane}   from "react-icons/fa"
 
-<<<<<<< HEAD
-import { BsGrid, BsBookmarkFill } from "react-icons/Bs";
-import { MdPaid} from "react-icons/Md";
-
-=======
-
-import { BsGrid } from "react-icons/Bs";
->>>>>>> f2d26e09e441e0d7905313b9ff8f1ce4c1be2c20
+import { BsGrid,  } from "react-icons/Bs";
+import { MdPaid} from "react-icons/md";
 import { RiCoupon2Line} from "react-icons/ri";
 import {LuUsers}  from "react-icons/lu";
 import {
@@ -84,27 +77,16 @@ const itemsAdmin = [
         "/ticket",
         <FaRegPaperPlane />
     ),
+   
     getItem(
-<<<<<<< HEAD
-        <SidebarLink to="/orderManagement " child="Order" />,
-        "/orderManagement",
-        <BsBookmarkFill/>
-    ),
-
-    getItem(
-        <SidebarLink to="/payroll " child="Payslip" />,
-        "/payroll",
-        <MdPaid/>
-=======
         <SidebarLink to="/payroll " child="PayRoll" />,
         "/payroll",
-        <BiMoney/>
+        <MdPaid/>
     ),
     getItem(
         <SidebarLink to="/order " child="Order " />,
         "/order",   
         <BsBoxSeam />
->>>>>>> f2d26e09e441e0d7905313b9ff8f1ce4c1be2c20
     ),
 ];
 const itemsEmployee = [
@@ -161,7 +143,7 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
                     </Button>
                 </Container>
 
-                <div style={{ overflowY: "scroll" , maxHeight: "500px"}}>
+                <div style={{ overflowY: "scroll" , maxHeight: "600px"}} className="menu">
                     <Menu
                         defaultSelectedKeys={[selectedKey]}
                         defaultOpenKeys={["blog", "account"]}
