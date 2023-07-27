@@ -98,12 +98,6 @@ const Payroll = () => {
     }, 0);
   }
 
-  // Calculate the sum of all salary values in the userPayroll array
-  // const totalSalary = userPayroll.reduce((total, user) => {
-  //   // The "+" before user.salary converts the salary to a number
-  //   // If salary is not a number or undefined, it will be converted to 0
-  //   return total + (+user.salary || 0);
-  // }, 0);
 
   console.log(userPayroll);
 
