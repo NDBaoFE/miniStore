@@ -16,6 +16,7 @@ export const initialState = {
     paymentArray: ["Cash", "Credit Card"],
     selectedVoucher: {},
     vouchers: [],
+    totalPrice: "",
 };
 export const name = "orderList";
 const slice = createSlice({
@@ -118,6 +119,9 @@ const slice = createSlice({
             state.orderList.voucherId = action.payload.voucherId;
             state.orderList.percentDiscount = action.payload.percentDiscount;
         },
+        setTotalPrice: (state, action) => {
+            state.totalPrice = action.payload;
+        },
     },
 });
 
@@ -136,4 +140,5 @@ export const {
     getProductById,
     applyToAllVoucher,
     clearOrder,
+    setTotalPrice,
 } = slice.actions;
