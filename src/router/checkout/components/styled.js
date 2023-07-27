@@ -75,8 +75,12 @@ export const Line = styled.div`
 `;
 export const RadioContainer = styled.div``;
 export const StyledRadio = styled(Radio)`
+    width: 100%;
     text-align: center;
     font-size: 16px;
+    .ant-radio-group {
+        width: 100%;
+    }
     .radio {
         align-items: center;
     }

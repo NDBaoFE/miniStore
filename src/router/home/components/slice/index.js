@@ -11,7 +11,7 @@ export const initialState = {
         voucherId: null,
         percentDiscount: 0,
     },
-    note: "hi",
+    note: "",
     paymentMethod: 1,
     paymentArray: ["Cash", "Credit Card"],
     selectedVoucher: {},

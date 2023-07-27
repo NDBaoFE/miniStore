@@ -5,17 +5,19 @@ import { selector } from "./slice/selector";
 import OrderDetail from "./OrderDetail";
 import { Link } from "react-router-dom";
 import { themes } from "../../../utils/theme";
-
+import { clearOrder } from "./slice";
 import { CartWrapper } from "./style";
 
-
+import { useDispatch } from "react-redux";
 function Cart() {
   let subTotal = 0;
   let totalQuantity = 0;
   const { orderList } = useSelector(selector);
-
+  const dispatch = useDispatch();
   const isDiscount = orderList.voucherId !== null;
-
+  const handleClearCart=()=>{
+    dispatch(clearOrder());
+  }
   return (
     <CartWrapper>
       <OrderList>
@@ -32,7 +34,7 @@ function Cart() {
           <Total>
             <Row>
               <div>{`${totalQuantity} items`}</div>
-              <div>{`SubTotal : ${subTotal}  đ`}</div>
+              <div>{`SubTotal : ${subTotal}  VNĐ`}</div>
             </Row>
             <Row>
               <div>Discount</div>
@@ -48,7 +50,7 @@ function Cart() {
                 justifyContent: "center",
               }}
             >
-              <DeleteButton style={{ marginRight: "20px" }}>
+              <DeleteButton style={{ marginRight: "20px" }} onClick={handleClearCart}>
                 <DeleteOutlined />
               </DeleteButton>
               <Link to="/checkout" style={{ color: `${themes.colors.white}` }}>

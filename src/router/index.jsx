@@ -34,6 +34,7 @@ import Password from "./password/Password";
 import Payroll from "./payroll";
 import PayrollByUser from "./payrollByUser";
 import OrderManagemntPage from "./OrderManagement";
+import Payment from "./payment";
 
 
 const publicRoute = [
@@ -263,6 +264,7 @@ const employeeRoute = [
         exact: true,
         restrict: true,
     },
+  
 
     
     
@@ -316,6 +318,8 @@ const employeeRoute = [
                         ))}
                     </Route>
                 </Route>
+                <Route path="/payment/result" element={<Payment />} />
+ 
                 <Route path="/404" element={<ErrorPage />} />
                  <Route path="/403" element={<Error403Page />} /> 
                 <Route path="*" element={<ErrorPage />} /> 

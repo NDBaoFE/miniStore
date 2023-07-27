@@ -20,7 +20,7 @@ function Radio({change,setChange}) {
   return (
     <RadioContainer> 
     <StyledRadio.Group onChange={onChange} value={value} >
-    <StyledSpace direction="vertical">
+    <StyledSpace direction="vertical" style={{width:"100%"}}>
       <StyledRadio value={1} >Cash {value === 1 ? (
             <Input
             type="number"

@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-
+import {BiMoney} from "react-icons/bi"
+import {BsBoxSeam,} from "react-icons/Bs"
 import { Menu } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
 import {IoIosArrowForward} from "react-icons/io"
 import SidebarLink from "../SideBarLink";
 import {  SideBar, Wrapper, SignOut, Button, Container } from "./style";
 import {FaRegPaperPlane}   from "react-icons/fa"
+
 
 import { BsGrid } from "react-icons/Bs";
 import { RiCoupon2Line} from "react-icons/ri";
@@ -77,12 +79,12 @@ const itemsAdmin = [
     getItem(
         <SidebarLink to="/payroll " child="PayRoll" />,
         "/payroll",
-        <LuUsers/>
+        <BiMoney/>
     ),
     getItem(
         <SidebarLink to="/order " child="Order " />,
-        "/order",
-        <FaRegPaperPlane />
+        "/order",   
+        <BsBoxSeam />
     ),
 ];
 const itemsEmployee = [

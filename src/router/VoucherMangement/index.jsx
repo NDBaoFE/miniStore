@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 
 import ToolBoxSection from './components/ToolBox'
-import { Container, LoadingContainer, NotiModal, StyledSpace } from './style'
+import { Container, NotiModal, StyledSpace } from './style'
 import { exportToExcel } from '../../utils/ToExcel';
 import Spinner from '../../components/Spinnner';
 import {  useParams } from 'react-router-dom';
@@ -168,8 +168,8 @@ function VoucherManagement() {
         <ToolBoxSection  setSearch={setSearch} handleSave={handleExportToExcel} setCurrent={setCurrent}/>
         <VoucherList search={search} setProducts={setProducts} products={products} columns={columns}  setCurrent={setCurrent} current={current} loader={loader}
             handleVoucherDeleted={handleVoucherDeleted} />
-        
-        {loading && <LoadingContainer><Spinner/></LoadingContainer> }
+      
+        {loading && <Spinner/> }
     </Container>  
   )
 }

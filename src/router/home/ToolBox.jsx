@@ -5,7 +5,7 @@ import {Col,SearchBtn,Action} from "./style"
 import { CiBarcode } from "react-icons/ci";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 
-function ToolBoxSection({setSearchValue,openScanner,setOpenScanner}) {
+function ToolBoxSection({setSearchValue,setOpenScanner}) {
 
     // const onSearch = (e) => { 
     //   console.log(e.target.value);
@@ -16,7 +16,6 @@ function ToolBoxSection({setSearchValue,openScanner,setOpenScanner}) {
       setSearchValue(e.target.value);
     }
  
-    
     
   return (
     <ToolBox>
