@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { themes } from "../../../utils/theme";
+import { Modal } from "antd";
 // import Voucher from "../../../assets/image/Voucher.svg";
 export const Total = styled.div`
     border-top: 1px solid #e8e9ea;
@@ -7,7 +8,7 @@ export const Total = styled.div`
 `;
 export const OrderList = styled.div`
     color: ${themes.colors.blackText};
-    max-height: calc(100vh - 400px);
+    min-height: calc(100vh - 300px);
     overflow-y: auto;
     /* background-image: url("/Voucher.svg");
     background-position: center; /* Center the image */
@@ -147,3 +148,36 @@ export const OldPrice = styled(Price)`
     text-decoration: line-through;
 `;
 export const CartWrapper = styled.div``;
+export const StyledModal = styled(Modal)`
+    .ant-modal-content {
+        background: ${themes.colors.background};
+    }
+    .info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+`;
+export const ProductCard = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: ${themes.colors.white};
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px 20px;
+    border-radius: 8px;
+    img {
+        width: 150px;
+    }
+    h3,
+    h2 {
+        margin: 5px 5px;
+    }
+    .quantity {
+        color: ${themes.colors.primary};
+    }
+`;

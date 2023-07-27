@@ -296,7 +296,7 @@ export const User = styled.div`
 `;
 export const StyledModal = styled(Modal)`
     .ant-modal-content {
-        background: ${themes.colors.background};
+        background: ${themes.colors.white};
     }
     .container {
         display: flex;

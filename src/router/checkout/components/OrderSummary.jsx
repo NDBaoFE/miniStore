@@ -2,9 +2,14 @@ import { useSelector } from "react-redux"
 import { Wrapper,Row,Line,TotalRow} from "./styled"
 import { selector } from "../../home/components/slice/selector"
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {setTotalPrice} from "../../home/components/slice/index"
 function OrderSummary() {
-  const {orderList}=useSelector(selector);
+  const {orderList,}=useSelector(selector);
+ 
   const total=orderList.data.reduce((acc,item)=>acc+item.finalPrice*item.quantity,0);
+  const dispatch=useDispatch();
+  dispatch(setTotalPrice(total*(1-orderList.percentDiscount)));
   return (
     <Wrapper> 
         <h3>Order Summary</h3>
@@ -20,7 +25,7 @@ function OrderSummary() {
         <Line/>
         <TotalRow>
             <div>Total</div>
-            <div>{total*(1-orderList.percentDiscount)}đ</div>
+            <div>{total*(1-orderList.percentDiscount)} VNĐ</div>
         </TotalRow>
         </Wrapper>
    

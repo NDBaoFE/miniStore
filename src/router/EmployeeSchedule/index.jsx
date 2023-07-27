@@ -67,7 +67,7 @@ const EmployeeTimetable = () => {
   const [userShift, setUserShift] = useState([]);
   const [current, setCurrent ] = useState(0);
   const [workingShift, setWorkingShift ] = useState();
-  const {userRole}=useAuth();
+  const {userRole,profile}=useAuth();
   const [loaded,setLoaded]=useState(false);
   const [selectedValue,setSelectedValue] = useState([]);
   const [open, setOpen] = useState(false);
@@ -181,7 +181,10 @@ const handleDrag = (e, data) => {
   </Instruction>
   </Draggable>
 
-      <Banner openInstruction={openInstruction}  setOpenInstruction={setOpenInstruction}/>
+     {workingShift && 
+     <Banner openInstruction={openInstruction}  setOpenInstruction={setOpenInstruction} 
+     workingShift={workingShift} profile={profile} />
+     } 
   <div className="timetable" style={{ color: "black" }} ref={ref3} >
     <ActionHeader ref={ref2}>
 
@@ -220,9 +223,9 @@ const handleDrag = (e, data) => {
           );
         } else {
           return (
-            <ParentContainer key={day.id}>
-              <Bar>{day.value0}</Bar>
-            </ParentContainer>
+            <ParentContainer key={day.id} style={{backgroundColor:'#2eb161',height:'280px',marginTop:'50px'}}>
+            <Bar >{day.value0}</Bar>
+          </ParentContainer>
           );
         }
       })}
@@ -250,9 +253,9 @@ const handleDrag = (e, data) => {
           );
         } else {
           return (
-            <ParentContainer key={day.id}>
-              <Bar>{day.value1}</Bar>
-            </ParentContainer>
+            <ParentContainer key={day.id} style={{backgroundColor:'#2eb161',height:'180px',marginTop:'10px'}}>
+            <Bar>{day.value1}</Bar>
+          </ParentContainer>
           );
         }
       })}

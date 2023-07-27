@@ -484,3 +484,6 @@ export const ButtonContainer = styled.div`
     position: absolute;
     bottom: 0;
 `;
+export const Status = styled.h4`
+    color: ${(props) => props.color};
+`;

@@ -31,6 +31,37 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setLoaded,loade
   const handleCancel = () => {
     setOpen(false);
   }
+  const renderCheckinCheckoutButtons = (index) => {
+    const hasUser = positions[index].user && positions[index].user.userId === userId;
+    const isCheckedIn = selectedValue[index]?.isCheckedIn === true;
+    const isCheckedOut= selectedValue[index]?.isCheckedOut === true;
+    if (hasUser && !isCheckedIn) {
+      return (
+        <ButtonContainer>
+          <StyledButton type="primary" onClick={() => handleCheckin(selectedValue[index], true)}>
+            Checkin
+          </StyledButton>
+          {selectedValue[index].status === "not yet" && (
+            <StyledButton type="primary">
+              <Link to="/ticket">I can't do it</Link>
+            </StyledButton>
+          )}
+        </ButtonContainer>
+      );
+    }
+  
+    if (hasUser && isCheckedIn && !isCheckedOut) {
+      return (
+        <ButtonContainer>
+          <StyledButton type="primary" onClick={() => handleCheckin(selectedValue[index], false)}>
+            Checkout
+          </StyledButton>
+        </ButtonContainer>
+      );
+    }
+  
+    return null;
+  };
   const handleApply=(id)=>{
     NotiModal.confirm({
       maskClosable: true,
@@ -88,8 +119,7 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setLoaded,loade
      <span style={{marginLeft:20}}>{positions[index].user.name}</span>
      <Tag color={`${positions[index].user.role.name == "admin"? "red": positions[index].user.role.name == "saler" ?"green":"blue" }`}  style={{marginLeft:20}}>{positions[index].user.role.name}</Tag>
     </EmployeeCard> : (userRole == "saler"? (requests.find(request=> request.userShiftId == positions[index].userShiftId)? <h4>You already applied for this shift</h4>: <StyledButton onClick={()=>handleApply(positions[index].userShiftId)}>Apply</StyledButton>) : <h2>Empty</h2>)} 
-    {userId == positions[index]?.user?.userId && selectedValue[index]?.isCheckedIn !=true  ? <ButtonContainer> <StyledButton type='primary' onClick={()=>handleCheckin(selectedValue[index],true)}>Checkin</StyledButton> {selectedValue[index].status == "not yet" && <StyledButton type='primary'><Link  to="/ticket">I can't do it </Link></StyledButton>}</ButtonContainer>  :
-     userId == positions[index]?.user?.userId ? <ButtonContainer> <StyledButton type='primary' onClick={()=>handleCheckin(selectedValue[index],false)}>Checkout</StyledButton></ButtonContainer> : null  }
+    {positions[index].user && renderCheckinCheckoutButtons(index)}
        </Team>
        
        </Card>

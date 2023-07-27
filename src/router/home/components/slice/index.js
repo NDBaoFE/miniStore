@@ -1,19 +1,22 @@
 import { injectReducer } from "../../../../store";
 import { createSlice } from "@reduxjs/toolkit";
 import { calculateFinalPrice } from "../../../../utils/price";
+import { toastError } from "../../../../components/Toast";
 
 export const initialState = {
     productId: 0,
+    products: [],
     orderList: {
         data: [],
         voucherId: null,
         percentDiscount: 0,
     },
-    note: "hi",
+    note: "",
     paymentMethod: 1,
     paymentArray: ["Cash", "Credit Card"],
     selectedVoucher: {},
     vouchers: [],
+    totalPrice: "",
 };
 export const name = "orderList";
 const slice = createSlice({
@@ -21,14 +24,23 @@ const slice = createSlice({
     initialState,
     reducers: {
         addProduct: (state, action) => {
+            const { productId, quantity, addQuantity } = action.payload;
+
             for (let product of state.orderList.data) {
-                if (product.productId == action.payload.productId) {
-                    product.quantity += action.payload.quantity;
+                if (product.productId == productId) {
+                    if (product.quantity < quantity) {
+                        product.quantity += addQuantity;
+                    } else {
+                        toastError("Not enough Quantity");
+                    }
+
                     return;
                 }
             }
+
             const newProduct = {
                 ...action.payload,
+                quantity: addQuantity,
                 voucherId: null,
                 finalPrice: action.payload.price,
             };
@@ -107,6 +119,9 @@ const slice = createSlice({
             state.orderList.voucherId = action.payload.voucherId;
             state.orderList.percentDiscount = action.payload.percentDiscount;
         },
+        setTotalPrice: (state, action) => {
+            state.totalPrice = action.payload;
+        },
     },
 });
 
@@ -125,4 +140,5 @@ export const {
     getProductById,
     applyToAllVoucher,
     clearOrder,
+    setTotalPrice,
 } = slice.actions;

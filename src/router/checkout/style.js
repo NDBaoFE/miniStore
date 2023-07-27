@@ -22,4 +22,7 @@ export const RightContainer = styled.div`
     width: 35%;
     height: 100%;
     margin-left: 36px;
+    .ant-radio-group {
+        width: 100%;
+    }
 `;

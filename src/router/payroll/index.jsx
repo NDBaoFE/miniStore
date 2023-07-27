@@ -1,4 +1,6 @@
-import { Link, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Button, Modal } from "antd";
 import PayrollList from "../payroll/components/payrollList";
 import {
   WrapperPayroll,
@@ -7,40 +9,30 @@ import {
   Title,
   WrapperSum,
 } from "./payrollStyled";
-import { useEffect, useState } from "react";
-import { Button, Modal } from "antd";
 import payrollApi from "../../utils/api/payrollApi";
-import orderManagementApi from "../../utils/api/orderManagementApi";
 import payslip from "../../utils/api/payslipApi";
 import { toastError, toastSuccess } from "../../components/Toast";
 
 const Payroll = () => {
   const token = localStorage.getItem("Authorization");
-  const [reload, SetReload] = useState(false);
+  const [reload, setReload] = useState(false);
   const [userPayroll, setUserPayroll] = useState([]);
-
-
-
 
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await payrollApi.getPayrollAll(token);
-        console.log(response.data.data);
         setUserPayroll(response.data.data);
       } catch (error) {
         console.error(error);
       }
     }
     fetchData();
-  }, [token, reload, token]);
+  }, [token, reload]);
 
   const handlePayslipPaid = () => {
-    // Refresh the vouchers by triggering a re-render of the VoucherList component
-    // This can be done by incrementing the current page number or any other way to indicate a change
-    SetReload(!reload);
+    setReload(!reload);
   };
-
 
   const columns = [
     {
@@ -88,34 +80,47 @@ const Payroll = () => {
         const token = localStorage.getItem("Authorization");
         const res = await payslip.getPay(token);
         if (res.status === 200) {
-          toastSuccess("Paid Succesfully");
+          toastSuccess("Paid Successfully");
         } else {
           toastError("Paid Failed");
         }
-
-        handlePayslipPaid()
+        handlePayslipPaid();
       },
-      
     });
   };
 
- 
-  return  (
-      <WrapperPayroll>
-        <WrapperSum>
-          <Title>Total Salary This Month:  </Title>
-          <ButtonStyled onClick={() => confirm()}>Paid</ButtonStyled>
-        </WrapperSum>
+  let totalSalary = 0
 
-        <PayrollList
-          setUserPayroll={setUserPayroll}
-          userPayroll={userPayroll}
-          reload={reload}
-          columns={columns}
-        ></PayrollList>
-      </WrapperPayroll>
-    )
-  
+  if(userPayroll !== ""){
+    totalSalary = userPayroll.reduce((total, user) => {
+
+        return total + (+user.salary || 0);
+    }, 0);
+  }
+
+  // Calculate the sum of all salary values in the userPayroll array
+  // const totalSalary = userPayroll.reduce((total, user) => {
+  //   // The "+" before user.salary converts the salary to a number
+  //   // If salary is not a number or undefined, it will be converted to 0
+  //   return total + (+user.salary || 0);
+  // }, 0);
+
+  console.log(userPayroll);
+
+  return (
+    <WrapperPayroll>
+      <WrapperSum>
+        <Title>Total Salary This Month: {totalSalary}</Title>
+        <ButtonStyled onClick={() => confirm()}>Paid</ButtonStyled>
+      </WrapperSum>
+      <PayrollList
+        setUserPayroll={setUserPayroll}
+        userPayroll={userPayroll}
+        reload={reload}
+        columns={columns}
+      ></PayrollList>
+    </WrapperPayroll>
+  );
 };
 
 export default Payroll;

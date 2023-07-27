@@ -1,10 +1,11 @@
 /* eslint-disable react/no-unknown-property */
 
-import { Loader } from "./style"
+import { Loader, LoadingContainer } from "./style"
 
 
 function Spinner() {
   return (
+    <LoadingContainer>
     <Loader className="loader loader--style3" title="2">
     <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
        width="80px" height="80px" viewBox="0 0 50 50" style={{enableBackground: 'new 0 0 50 50'}} xmlSpace="preserve">
@@ -19,6 +20,7 @@ function Spinner() {
       </path>
     </svg>
   </Loader>
+  </LoadingContainer>
   )
 }
 

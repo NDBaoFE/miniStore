@@ -14,12 +14,13 @@ import { clearOrder } from "../../home/components/slice";
 import {ComponentToPrint} from "./bill"
 
 import  { useRef } from 'react';
+import { paymentApi } from "../../../utils/api/paymentApi";
 
 function ActionGroup({change}) {
   const componentRef = useRef();
   const navigate=useNavigate();
   const dispatch=useDispatch();
-  const {orderList} = useSelector(selector);
+  const {orderList,paymentMethod,totalPrice} = useSelector(selector);
   const handleOk = async () => {
     const modifiedOrderList = {
       ...orderList,
@@ -32,15 +33,26 @@ function ActionGroup({change}) {
     
     delete modifiedOrderList.percentDiscount;
     const token= localStorage.getItem("Authorization");
-    const res= await productApi.makeOrder(modifiedOrderList,token);
-      if(res.data.status  ==200){
-        toastSuccess("Make order Successfully");
-        dispatch(clearOrder());
-        handlePrint();
-        navigate(-1);
-      }else{
-        toastError("Make order Failed");
-      }
+    if(paymentMethod == 2){
+    localStorage.setItem("cart",JSON.stringify(modifiedOrderList));
+    // console.log(JSON.parse(localStorage.getItem("cart")));
+    const res= await paymentApi.vnPay(totalPrice,token);
+    if(res.data.status  ==200){
+      window.location.href=res.data.data;
+    }
+    }else{
+   
+      const res= await productApi.makeOrder(modifiedOrderList,token)  ;
+        if(res.data.status  ==200){
+          toastSuccess("Make order Successfully");
+          dispatch(clearOrder());
+          handlePrint();
+          navigate(-1);
+        }else{
+          toastError("Make order Failed");
+        }
+    }
+   
   }
 
   const handleConfirm = () => {
@@ -63,7 +75,6 @@ function ActionGroup({change}) {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
-  console.log(orderList);
   return (
     <GroupWrapper>
        

@@ -8,7 +8,7 @@ import ActionGroup from "./components/ActionGroup"
 
 
 function Checkout() {
-  const[change,setChange]=useState(0);
+  const[change,setChange]=useState("");
  
   return (
     <Container>

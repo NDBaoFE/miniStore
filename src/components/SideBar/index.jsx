@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-
+import {BiMoney} from "react-icons/bi"
+import {BsBoxSeam,} from "react-icons/Bs"
 import { Menu } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
 import {IoIosArrowForward} from "react-icons/io"
@@ -8,9 +9,14 @@ import SidebarLink from "../SideBarLink";
 import {  SideBar, Wrapper, SignOut, Button, Container } from "./style";
 import {FaRegPaperPlane}   from "react-icons/fa"
 
+<<<<<<< HEAD
 import { BsGrid, BsBookmarkFill } from "react-icons/Bs";
 import { MdPaid} from "react-icons/Md";
 
+=======
+
+import { BsGrid } from "react-icons/Bs";
+>>>>>>> f2d26e09e441e0d7905313b9ff8f1ce4c1be2c20
 import { RiCoupon2Line} from "react-icons/ri";
 import {LuUsers}  from "react-icons/lu";
 import {
@@ -79,6 +85,7 @@ const itemsAdmin = [
         <FaRegPaperPlane />
     ),
     getItem(
+<<<<<<< HEAD
         <SidebarLink to="/orderManagement " child="Order" />,
         "/orderManagement",
         <BsBookmarkFill/>
@@ -88,6 +95,16 @@ const itemsAdmin = [
         <SidebarLink to="/payroll " child="Payslip" />,
         "/payroll",
         <MdPaid/>
+=======
+        <SidebarLink to="/payroll " child="PayRoll" />,
+        "/payroll",
+        <BiMoney/>
+    ),
+    getItem(
+        <SidebarLink to="/order " child="Order " />,
+        "/order",   
+        <BsBoxSeam />
+>>>>>>> f2d26e09e441e0d7905313b9ff8f1ce4c1be2c20
     ),
 ];
 const itemsEmployee = [

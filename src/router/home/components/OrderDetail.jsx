@@ -24,10 +24,10 @@ function  OrderDetail({product}) {
           {// only render if there is new price 
           product.finalPrice != product.price &&  
            <Col>  
-           <OldPrice>  {`${product.price*product.quantity} đ`}</OldPrice> <Price>  {`${product.finalPrice} đ`}</Price>
+           <OldPrice>  {`${product.price*product.quantity} VNĐ`}</OldPrice> <Price>  {`${product.finalPrice} VNĐ`}</Price>
            </Col> }
            {product.finalPrice == product.price &&  
-           <Price>  {`${product.price*product.quantity} đ`}</Price> }
+           <Price>  {`${product.price*product.quantity} VNĐ`}</Price> }
          
             <CloseButton onClick={() => dispatch(deleteProduct(product.productId))}><ImCross/></CloseButton>
           </OrderDetailRow> 
