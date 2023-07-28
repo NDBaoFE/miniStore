@@ -37,14 +37,17 @@ const slice = createSlice({
                     return;
                 }
             }
-
-            const newProduct = {
-                ...action.payload,
-                quantity: addQuantity,
-                voucherId: null,
-                finalPrice: action.payload.price,
-            };
-            state.orderList.data.push(newProduct);
+            if (action.payload.quantity == 0) {
+                toastError("Can not add 0 quantity product");
+            } else {
+                const newProduct = {
+                    ...action.payload,
+                    quantity: addQuantity,
+                    voucherId: null,
+                    finalPrice: action.payload.price,
+                };
+                state.orderList.data.push(newProduct);
+            }
         },
         deleteProduct: (state, action) => {
             for (let i = 0; i < state.orderList.data.length; i++) {

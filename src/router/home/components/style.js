@@ -13,6 +13,16 @@ export const OrderList = styled.div`
     /* background-image: url("/Voucher.svg");
     background-position: center; /* Center the image */
     /* background-repeat: no-repeat;  */
+    .cart::-webkit-scrollbar-track {
+        background-color: #fafafa;
+    }
+    .cart::-webkit-scrollbar-thumb {
+        background-image: linear-gradient(-45deg, #3edf7c, #2eb161);
+        border-radius: 50px;
+    }
+    .cart::-webkit-scrollbar {
+        width: 10px;
+    }
 `;
 export const Row = styled.div`
     display: flex;

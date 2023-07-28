@@ -21,7 +21,8 @@ function Cart() {
   return (
     <CartWrapper>
       <OrderList>
-          {orderList.data.map((product) => {
+        <div style={{maxHeight:"400px",overflowY:"scroll",overflowX:"hidden"}} className="cart">
+        {orderList.data.map((product) => {
             subTotal += product.finalPrice * product.quantity;
             totalQuantity += product.quantity;
             return (
@@ -31,6 +32,8 @@ function Cart() {
               ></OrderDetail>
             );
           })}
+        </div>
+         
           <Total>
             <Row>
               <div>{`${totalQuantity} items`}</div>
