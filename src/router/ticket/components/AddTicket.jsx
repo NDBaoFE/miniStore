@@ -55,7 +55,6 @@ useEffect(() => {
     fetchData();
 }, [token]);
   const [type,setType]=useState("");
-
   const onSearch = (value) => {
     console.log('search:', value);
   };
@@ -108,7 +107,7 @@ useEffect(() => {
     placeholder="Select ticket type"
     optionFilterProp="children"
     onChange={(value) => {
-      console.log(`selected ${value}`);
+      
       setType(value.name);
     }}
     onSearch={onSearch}
@@ -124,18 +123,19 @@ useEffect(() => {
 
     })}
   />
-
       </Form.Item>
 }
  </Left>
       <Right>
       <Title>Start Time and End Time</Title>
-      <Form.Item
-     name="startEndTime"
-    >
-      
-      <RangePicker />
-      </Form.Item>
+      { type == "Nghỉ Phép" &&
+        <Form.Item
+        name="startEndTime"
+       >
+         
+         <RangePicker />
+         </Form.Item>
+      }
       <Title>Description</Title>
       <Form.Item
     style={{

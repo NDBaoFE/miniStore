@@ -46,7 +46,7 @@ function ProductList({search}) {
   return (
     
     <ProductWrapper>
-      {products.length===0 && <div style={{width:"100%",display:"flex",justifyContent:"center",alignItems:"center",marginTop:"50px",marginBottom:"50px",flexDirection:"column"}}>
+      {products.length===0 && <div style={{width:"100%",display:"flex",justifyContent:"flex-start",alignItems:"center",marginTop:"50px",marginBottom:"50px",flexDirection:"column"}}>
         <h1 style={{margin:0}}>No product Found</h1>
         {loading && <Spinner/> }
         <img src={notFound} alt="not found"  style={{width:"80%"}}/>
