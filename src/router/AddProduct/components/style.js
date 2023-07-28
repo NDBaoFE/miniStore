@@ -78,7 +78,7 @@ export const GroupWrapper = styled.div`
         }
     }
 `;
-export const FinishButton = styled.button`
+export const FinishButton = styled.div`
     padding: 8px 12px;
     color: ${themes.colors.white};
     background: ${themes.colors.primary};

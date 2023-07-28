@@ -3,7 +3,7 @@
 import {Wrapper,OrderDetailRow,Quantity,Name,Price,CloseButton,ActionRow, BadgeContainer, OldPrice} from "./style"
 import { ImCross } from "react-icons/im";
 import { useDispatch } from "react-redux";
-import { deleteProduct, } from "./slice";
+import { deleteProduct, updateProductQuantity, } from "./slice";
 import { useState } from "react";
 import { EditOutlined ,TagOutlined} from "@ant-design/icons";
 import { themes } from "../../../utils/theme";
@@ -14,11 +14,14 @@ import { RiCoupon2Line } from "react-icons/ri";
 function  OrderDetail({product}) {
     const [showActions, setShowActions] = useState(false);
     const dispatch = useDispatch();
+    const handleChangeQuantity = (e) => {
+      dispatch(updateProductQuantity({productId: product.productId, quantity: parseInt( e.target.value)}))
+    }
   return (
     <Wrapper key={product.productId} style={{backgroundColor: showActions ?`${themes.colors.gray}` : "transparent"}}>  
           <OrderDetailRow key={product.id} onClick={()=>setShowActions(!showActions)}>
             {product.voucherId? <Badge count={<BadgeContainer><RiCoupon2Line style={{color:`${themes.colors.white}`}}/></BadgeContainer>}><Quantity>{`${product.quantity}`}</Quantity></Badge> :
-           <Quantity>{`${product.quantity}`}</Quantity> }
+           <Quantity value={product.quantity} onChange={handleChangeQuantity} type="number" min={1}/> }
             <Name>{product.name}</Name>
          
           {// only render if there is new price 

@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { themes } from "../../../utils/theme";
-import { Modal } from "antd";
+import { Input, Modal } from "antd";
 // import Voucher from "../../../assets/image/Voucher.svg";
 export const Total = styled.div`
     border-top: 1px solid #e8e9ea;
@@ -113,7 +113,7 @@ export const Name = styled.div`
     width: 120px;
     text-align: start;
 `;
-export const Quantity = styled.div`
+export const Quantity = styled(Input)`
     border: 1px solid #d9dce2;
     border-radius: 8px;
     height: 33.75px;

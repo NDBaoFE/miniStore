@@ -17,6 +17,7 @@ const { RangePicker } = DatePicker;
 function AddTicket({setLoaded}) {
   const{userId}=useAuth();
   const [options,setOptions]=useState();
+  const [shifts,setShifts]=useState();
   const [form] = Form.useForm();
   const onFinish = async  (values) => {
     const newArray={
@@ -53,6 +54,17 @@ useEffect(() => {
         }
     }
     fetchData();
+    
+    async function getShift() {
+      try {
+          const response = await productApi.getOwnShift(token);
+          setShifts(response.data.data);
+        console.log(response.data.data);
+      } catch (error) {
+          console.error(error);
+      }
+  }
+  getShift();
 }, [token]);
   const [type,setType]=useState("");
   const onSearch = (value) => {
@@ -107,8 +119,8 @@ useEffect(() => {
     placeholder="Select ticket type"
     optionFilterProp="children"
     onChange={(value) => {
-      
-      setType(value.name);
+      console.log(value);
+      setType(value);
     }}
     onSearch={onSearch}
     filterOption={(input, option) =>
@@ -127,14 +139,17 @@ useEffect(() => {
 }
  </Left>
       <Right>
+      
+      { type == "Nghỉ phép" &&
+      <>
       <Title>Start Time and End Time</Title>
-      { type == "Nghỉ Phép" &&
-        <Form.Item
+      <Form.Item
         name="startEndTime"
        >
-         
          <RangePicker />
          </Form.Item>
+      </>
+        
       }
       <Title>Description</Title>
       <Form.Item
