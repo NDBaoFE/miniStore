@@ -1,4 +1,4 @@
-import { Input, Dropdown, List  } from "antd";
+import { Input, Dropdown, List, Avatar } from "antd";
 import { AiOutlineShopping } from "react-icons/ai";
 import { styled } from "styled-components";
 import { BsTelephoneFill } from "react-icons/Bs";
@@ -26,7 +26,7 @@ export const BrandName = styled.p`
     padding-left: 20px;
     line-height: 25px;
     font-weight: 500;
-    color:black;
+    color: black;
 `;
 
 export const ColorName = styled.span`
@@ -39,7 +39,7 @@ export const BrandIcon = styled(AiOutlineShopping)`
     width: 50px;
     margin-left: 20px;
     margin-top: 10px;
-    color:black;
+    color: black;
 `;
 
 export const WrapSearchBar = styled.div`
@@ -65,7 +65,7 @@ export const WrapContactPhone = styled.div`
 
 export const HotlineIcon = styled(BsTelephoneFill)`
     padding-top: 40px;
-    color:red;
+    color: red;
 `;
 
 export const Hotline = styled.p`
@@ -73,7 +73,7 @@ export const Hotline = styled.p`
     line-height: 20px;
     padding-top: 78px;
     font-weight: 500;
-    color:black;
+    color: black;
 `;
 
 export const ContainerNavBelow = styled.div`
@@ -110,20 +110,24 @@ export const WrapperNoti = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-
 `;
 
-export const NotiIcon = styled(BellFilled )`
+export const NotiIcon = styled(BellFilled)`
+    font-size: 20px;
+    text-align: center;
+`;
 
-font-size: 20px;
-text-align: center;
-`
-
-export const StyledDropdown = styled(Dropdown )`
-   margin-left: 370px;
-`
+export const StyledDropdown = styled(Dropdown)`
+    margin-left: 370px;
+`;
 
 export const StyleListItem = styled(List.Item)`
-
     padding-left: 20px;
-`
+`;
+export const StyledAvatar = styled(Avatar)`
+    img {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+    }
+`;

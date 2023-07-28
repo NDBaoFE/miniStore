@@ -204,7 +204,7 @@ const handleDrag = (e, data) => {
         }
       })}
     </div>
-    <div className="col">
+    <div className="col"   >
       {daysOfWeek.map((day) => {
         if (day.id !== 7) {
           const shifts = userShift[day.id]?.slice(3) || [];
@@ -228,7 +228,13 @@ const handleDrag = (e, data) => {
         } else {
           return (
             <ParentContainer key={day.id} style={{backgroundColor:'#2eb161',height:'180px',marginTop:'10px'}}>
-              <Bar>{day.value1}</Bar>
+              <Bar>
+              <div>{day.value1}</div>
+              <div className="time-table">
+                <div>hi</div>
+                <div>hi</div>
+              </div>
+              </Bar>
             </ParentContainer>
           );
         }

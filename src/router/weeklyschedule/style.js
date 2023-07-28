@@ -21,7 +21,31 @@ export const Container = styled.div`
         flex-direction: row-reverse;
         justify-content: space-around;
     }
+    .shift-column {
+        position: relative;
+        cursor: pointer;
+        padding: 2px;
+    }
 
+    .shift-column::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 2px solid transparent;
+        pointer-events: none; /* Prevent the overlay from capturing mouse events */
+        z-index: 1; /* Make sure the overlay is above the content but below any other overlay */
+    }
+
+    .shift-column:hover::before {
+        border: 2px solid ${themes.colors.primary}; /* Change to your desired border style */
+        border-radius: 4px;
+    }
+    .shift-column:hover {
+        background: ${themes.colors.background};
+    }
     .time {
         font-weight: bold;
     }
@@ -87,6 +111,12 @@ export const Bar = styled.div`
     color: ${themes.colors.white};
     width: 200px;
     height: 40px; /* Adjust the height to fill the available space */
+    flex-direction: column;
+    .time-table {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
 `;
 export const ParentContainer = styled.div`
     display: flex;

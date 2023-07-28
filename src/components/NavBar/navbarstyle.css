@@ -1,100 +1,109 @@
 .container-navbar {
-  height: 140px;
+    height: 140px;
 }
 
 .container-navbar-above {
-  background-color: white;
-  height: 100px;
+    background-color: white;
+    height: 100px;
 }
 
 .wrap-brand {
-  width: 200px;
-  height: 80px;
-  margin-left: 120px;
-  padding-top: 10px;
+    width: 200px;
+    height: 80px;
+    margin-left: 120px;
+    padding-top: 10px;
 }
 
 p {
-  font-size: 25px;
-  margin-left: 50px;
-  margin-top: -70px;
-  text-align: center;
-  width: 90px;
-  line-height: 28px;
-  font-weight: 400;
+    font-size: 25px;
+    margin-left: 50px;
+    margin-top: -70px;
+    text-align: center;
+    width: 90px;
+    line-height: 28px;
+    font-weight: 400;
 }
 
 .wrap-search-bar {
-  text-align: center;
-  margin-top: -50px;
+    text-align: center;
+    margin-top: -50px;
 }
 
 .wrap-search-bar input {
-  width: 700px;
-  height: 42px;
-  border: none;
-  margin-left: 10px;
-  padding-left: 10px;
-  background-color: #bfbfbf;
+    width: 700px;
+    height: 42px;
+    border: none;
+    margin-left: 10px;
+    padding-left: 10px;
+    background-color: #bfbfbf;
 }
 
 .wrap-phone-contact {
-  width: 100px;
-  height: 100px;
-  margin-left: 1250px;
-  font-size: 12px;
-  margin-top: -30px;
+    width: 100px;
+    height: 100px;
+    margin-left: 1250px;
+    font-size: 12px;
+    margin-top: -30px;
 }
 
 .wrap-phone-contact p {
-  font-size: 14px;
-  line-height: 13px;
-  margin-top: -30px;
+    font-size: 14px;
+    line-height: 13px;
+    margin-top: -30px;
 }
 
 .phone-contact-icon {
-  margin-left: 25px;
+    margin-left: 25px;
 }
 
 .container-navbar-below {
-  height: 40px;
-  font-weight: 400;
-  background-color: #011e2f;
+    height: 40px;
+    font-weight: 400;
+    background-color: #011e2f;
 }
 
 .container-navbar-below {
-  display: flex;
-  justify-content: space-around;
-  padding: 0 400px;
-  font-size: 12px;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 400px;
+    font-size: 12px;
 }
 
 .nav-link {
-  width: 145px;
-  height: 40px;
-  text-align: center;
-  line-height: 40px;
-  color: white;
-  font-weight: 500;
-  cursor: pointer;
+    width: 145px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 .nav-link:hover {
-  background-color: #31353d;
-  transition: 0.3s;
+    background-color: #31353d;
+    transition: 0.3s;
 }
 
 .message-item {
-  background-color: #f0f0f0;
-  border-bottom: 1px solid #ccc;
-  width: 200px;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+    width: 200px;
 }
 
 .dropdown-trigger {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .dropdown-trigger:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
-
+.ant-dropdown-menu::-webkit-scrollbar-track {
+    background-color: #fafafa;
+}
+.ant-dropdown-menu::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(-45deg, #3edf7c, #2eb161);
+    border-radius: 50px;
+}
+.ant-dropdown-menu::-webkit-scrollbar {
+    width: 10px;
+}

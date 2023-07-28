@@ -143,7 +143,7 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
                     </Button>
                 </Container>
 
-                <div style={{ overflowY: "scroll" , maxHeight: "600px"}} className="menu">
+                <div style={{ overflowY: "scroll" , maxHeight: "80%"}} className="menu">
                     <Menu
                         defaultSelectedKeys={[selectedKey]}
                         defaultOpenKeys={["blog", "account"]}

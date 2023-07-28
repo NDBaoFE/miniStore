@@ -229,7 +229,7 @@ export const SideBar = styled(Sider)`
     left: 0;
 
     .menu::-webkit-scrollbar-track {
-        background-color: #fafafa;
+        background-color: #fff;
     }
     .menu::-webkit-scrollbar-thumb {
         background-image: linear-gradient(-45deg, #3edf7c, #2eb161);
