@@ -25,7 +25,7 @@ function ProductManagement() {
   const handleExportToExcel = () => {
     setLoading(true);
     // Call the export function from another component
-    exportToExcel(products, columns, 'table_data')
+    exportToExcel( columns, 'table_data')
       .then(() => {
         // Delay hiding the loading screen for a short time to give the user visual feedback
         setTimeout(() => {

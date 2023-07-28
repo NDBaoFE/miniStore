@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { Badge, Col } from "antd";
 
 import { RiCoupon2Line } from "react-icons/ri";
+import { formatNumberWithDecoration } from "../../../utils";
 function  OrderDetail({product}) {
     const [showActions, setShowActions] = useState(false);
     const dispatch = useDispatch();
@@ -20,17 +21,17 @@ function  OrderDetail({product}) {
   return (
     <Wrapper key={product.productId} style={{backgroundColor: showActions ?`${themes.colors.gray}` : "transparent"}}>  
           <OrderDetailRow key={product.id} onClick={()=>setShowActions(!showActions)}>
-            {product.voucherId? <Badge count={<BadgeContainer><RiCoupon2Line style={{color:`${themes.colors.white}`}}/></BadgeContainer>}><Quantity>{`${product.quantity}`}</Quantity></Badge> :
+            {product.voucherId? <Badge count={<BadgeContainer><RiCoupon2Line style={{color:`${themes.colors.white}`}}/></BadgeContainer>}><Quantity value={product.quantity} onChange={handleChangeQuantity} type="number" min={1}/></Badge> :
            <Quantity value={product.quantity} onChange={handleChangeQuantity} type="number" min={1}/> }
             <Name>{product.name}</Name>
          
           {// only render if there is new price 
           product.finalPrice != product.price &&  
            <Col>  
-           <OldPrice>  {`${product.price*product.quantity} VNĐ`}</OldPrice> <Price>  {`${product.finalPrice} VNĐ`}</Price>
+           <OldPrice>  {`${formatNumberWithDecoration( product.price*product.quantity)} VNĐ`}</OldPrice> <Price>  {`${ formatNumberWithDecoration(product.finalPrice) } VNĐ`}</Price>
            </Col> }
            {product.finalPrice == product.price &&  
-           <Price>  {`${product.price*product.quantity} VNĐ`}</Price> }
+           <Price>  {`${formatNumberWithDecoration(product.price*product.quantity)} VNĐ`}</Price> }
          
             <CloseButton onClick={() => dispatch(deleteProduct(product.productId))}><ImCross/></CloseButton>
           </OrderDetailRow> 

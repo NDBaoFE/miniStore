@@ -1,9 +1,13 @@
 import { saveAs } from "file-saver";
 import ExcelJS from "exceljs";
+import productApi from "../api/productApi";
 
-export const exportToExcel = (data, columns, filename) => {
+export const exportToExcel = async (columns, filename) => {
     // Split the "Product Details" column into separate columns for "Product Img" and "Name"
     const removedCols = ["productId", "details", "action"];
+    const token = localStorage.getItem("Authorization");
+    const res = await productApi.getAllProduct("", token);
+    const data = res.data.data;
     const updatedColumns = [
         ...columns,
         {

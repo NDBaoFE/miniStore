@@ -15,8 +15,9 @@ function Radio({change,setChange}) {
     dispatch(updatePaymentMethod(e.target.value));
   };
   const handleChange = (e) => {
-    setChange(e.target.value);
+      setChange(e.target.value);
   }
+ 
   return (
     <RadioContainer> 
     <StyledRadio.Group onChange={onChange} value={value} >

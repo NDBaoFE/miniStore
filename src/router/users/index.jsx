@@ -16,23 +16,7 @@ function UserManagement() {
   const params = useParams();
   const [reload, SetReload] = useState(false);
   const [current, setCurrent] = useState(parseInt(params.page, 9) || 1);
-  const handleExportToExcel = () => {
-    setLoading(true);
-    // Call the export function from another component
-    exportToExcel(users, columns, "table_data")
-      .then(() => {
-        // Delay hiding the loading screen for a short time to give the user visual feedback
-        setTimeout(() => {
-          setLoading(false);
-        }, 500);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-        // Handle any export errors here
-      });
-  };
-
+ 
   const handleUserDeleted = () => {
     // Refresh the vouchers by triggering a re-render of the VoucherList component
     // This can be done by incrementing the current page number or any other way to indicate a change
@@ -116,7 +100,6 @@ function UserManagement() {
     <Container>
       <ToolBoxSection
         setSearch={setSearch}
-        handleSave={handleExportToExcel}
         setCurrent={setCurrent}
       />
       <UserList

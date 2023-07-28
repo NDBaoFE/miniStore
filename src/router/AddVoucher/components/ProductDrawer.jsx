@@ -23,11 +23,7 @@ function ProductDrawer({onClose,openDrawer}) {
     setIndeterminate(!!list.length && list.length < products.length);
     setCheckAll(list.length === products.length);
   };
-  const onCheckAllChange = (e) => {
-    setCheckedList(e.target.checked ? products : []);
-    setIndeterminate(false);
-    setCheckAll(e.target.checked);
-  };
+
   const token=localStorage.getItem("Authorization");
   useEffect(() => {
     async function fetchData() {

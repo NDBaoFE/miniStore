@@ -60,6 +60,9 @@ const slice = createSlice({
         },
         clearOrder: (state) => {
             state.orderList.data = [];
+            state.selectedVoucher = {};
+            state.note = "";
+            state.paymentMethod = 1;
         },
 
         updateProductQuantity: (state, action) => {
@@ -97,7 +100,6 @@ const slice = createSlice({
 
             return null;
         },
-
         selectVoucher: (state, action) => {
             state.selectedVoucher = action.payload;
         },

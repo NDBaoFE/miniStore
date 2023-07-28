@@ -1,18 +1,16 @@
 /* eslint-disable react/prop-types */
-import { Button, ToolBox,  Upload } from "./style"
+import { Button, ToolBox } from "./style"
 
 import {Col} from "./style"
 
 import { PlusOutlined } from "@ant-design/icons";
 import { BiImport } from "react-icons/bi";
-import { UploadOutlined } from "@ant-design/icons";
+
 import { Link } from "react-router-dom";
 
-function ToolBoxSection({handleSave}) {
+function ToolBoxSection() {
 
-    const handleClick = () => { 
-      console.log("click");
-    handleSave()}
+
    
 
     
@@ -23,7 +21,7 @@ function ToolBoxSection({handleSave}) {
        
         <Col>
     
-        <Upload onClick={handleClick}><UploadOutlined  style={{marginRight: "10px", fontSize:"20px"}} /> Generate Report</Upload>
+
         </Col>
         <Col>
         </Col>

@@ -98,30 +98,34 @@ function TicketDetail() {
             
             <Title>{detail.title}</Title>
             
-            <Description style={{textAlign:"justify"}}>
-            <Row style={{justifyContent:"space-between"}}>
-            <h3>
-                Start-time :{new Date(detail.startTime*1000).toLocaleString('en-GB', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-     
-      })}
-            </h3>
-            <h3>
-                End-time : {new Date(detail.endTime*1000).toLocaleString('en-GB', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-       
-      })}
-            </h3>
-            </Row>
-               {detail.description} 
+            <Description style={{textAlign:"center"}}>
+            {detail.ticketTypeId == 1 &&
+             <Row style={{justifyContent:"space-between"}}>
+           
+             <h3>
+                 Start-time :{new Date(detail.startTime*1000).toLocaleString('en-GB', {
+         day: '2-digit',
+         month: '2-digit',
+         year: 'numeric',
+         hour: '2-digit',
+         minute: '2-digit',
+      
+       })}
+             </h3>
+             <h3>
+                 End-time : {new Date(detail.endTime*1000).toLocaleString('en-GB', {
+         day: '2-digit',
+         month: '2-digit',
+         year: 'numeric',
+         hour: '2-digit',
+         minute: '2-digit',
+        
+       })}
+             </h3>
+             </Row>
+            }
+           
+               Description : {detail.description} 
             </Description>
             {userRole == 'admin' && detail.isApproved == null && <Row style={{justifyContent:"space-around",marginTop:"60px" ,padding: "0 150px"}}>
                 <StyledButton onClick={handleDecline} >Decline</StyledButton>
