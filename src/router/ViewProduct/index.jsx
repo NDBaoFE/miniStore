@@ -58,11 +58,14 @@ function UpdateProduct() {
     console.log(" Hãy nhập tất cả các field !!");
   };
   const token = localStorage.getItem("Authorization");
+
+  
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await productApi.getProductDetail(id,token);
         dispatch(actions.setProduct(response.data.data));
+        console.log(response.data.data);
         dispatch(actions.getProductInfo());
         setUpdated(true);
       } catch (error) {

@@ -1,31 +1,57 @@
-import { Select } from 'antd';
-import { useSelector, useDispatch } from 'react-redux';
+import { Select,Input, Form } from "antd";
+import { useSelector, useDispatch } from "react-redux";
 
-import { actions } from '../../slice';
-import selectors from '../../slice/selectors';
+import { actions } from "../../slice";
 
-const { Option } = Select;
+import { useEffect, useState } from "react";
+import userApi from "../../../../../../utils/api/userApi";
+import { useNavigate, useParams } from "react-router-dom";
+
+
 
 const SelectRole = () => {
-    const dispatch = useDispatch();
+  const [roleImg, setRoleImg] = useState("");
+  const { id } = useParams();
 
-    const roles = useSelector(selectors.roles);
-    const roleId = useSelector(selectors.roleId);
+  const token = localStorage.getItem("Authorization");
+  const [updated, setUpdated] = useState(false);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await userApi.getUserDetail(id, token);
+        dispatch(actions.setUser(response.data.data));
 
-    const handleRoleChange = (value) => {
-        dispatch(actions.setRole(value));
-        dispatch(actions.getAccount());
-    };
+        setRoleImg(response.data.data.roles);
+        dispatch(actions.getUserInfo());
+        setUpdated(true);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, [token]);
 
-    return (
-        <Select disabled defaultValue={roles[roleId]} onChange={handleRoleChange}>
-            {roles.map((role, index) => (
-                <Option value={index} key={index}>
-                    {role}
-                </Option>
-            ))}
-        </Select>
-    );
+  const dispatch = useDispatch();
+
+
+
+  return (
+    <Form.Item
+   
+      name="roles"
+      rules={[{ required: true, message: "Tên không được để trống !!" }]}
+    >
+      {" "}
+      <Input
+        placeholder="Enter your name"
+        disabled
+        value={roleImg}
+        style={{width: 150, marginRight: 100}}
+    
+   
+      />
+    </Form.Item>
+  );
 };
 
 export default SelectRole;

@@ -1,12 +1,12 @@
-import selectors from "./slice/selectors";
+import selectors from "./components/slice/selectors";
 import { AvatarWrapper, AvatarInfo, Avatar, Info } from "./style";
 import { useSelector } from "react-redux";
-import UserProfile from '../../../../assets/image/user_profile.png'
+import UserProfile from '../../../src/assets/image/user_profile.png'
 import { useEffect, useState } from "react";
-import userApi from "../../../../utils/api/userApi";
+import userApi from "../../utils/api/userApi";
 import { useParams } from "react-router-dom";
 import {  useDispatch } from "react-redux";
-import { actions } from "./slice";
+import { actions } from "./components/slice";
 function AvatarSection() {
   const name = useSelector(selectors.name);
   const role = useSelector(selectors.roles);
@@ -18,21 +18,6 @@ function AvatarSection() {
 
 
 
-  let roleName =""
-  switch (role) {
-    case "admin":
-      roleName = "Admin";
-      break;
-    case 'saler':
-      roleName = "Saler";
-      break;
-    case 'guard':
-      roleName = "Guard";
-      break;
-    default:
-      roleName = "Your role";
-      break;
-  }
   const [roleImg, setRoleImg] = useState("")
 
   useEffect(() => {
@@ -68,10 +53,7 @@ function AvatarSection() {
             e.target.src = placeholder;
           }}
         />
-        <Info>
-          <h2>{name || "Name"}</h2>
-          <h3>{roleImg || "Your role"}</h3>
-        </Info>
+  
       </AvatarInfo>
     </AvatarWrapper>
   );

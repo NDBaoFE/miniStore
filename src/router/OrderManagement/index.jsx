@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Divider, Button, Modal, Table } from "antd";
+import { Divider, Button } from "antd";
 import { Card, Container, DashBoard, Hero, Icon, Right, Title } from "./style";
-import { ticketTypes } from "./components/dataOrder";
+import { orderTypes } from "./components/dataOrder";
 import { IconContext } from "react-icons";
 import Action from "./components/Action";
 import OrderTable from "./components/TicketTable";
@@ -16,6 +16,14 @@ import { toastError, toastSuccess } from "../../components/Toast";
 import { BsExclamationCircle } from "react-icons/Bs";
 import OrderDetailTable from "./components/OrderDetailTable";
 import { render } from "react-dom";
+import { calculateFinalPrice } from "../../utils/price";
+import { useRef } from "react";
+import { formatNumberWithDecoration } from "../../utils";
+
+
+
+
+
 
 const OrderManagemntPage = () => {
   const params = useParams();
@@ -42,7 +50,7 @@ const OrderManagemntPage = () => {
   };
 
 
-
+  const [loopOrder, setLoopOrder] = useState([])
   const [order, setOrder] = useState([]);
 
 
@@ -51,26 +59,12 @@ const OrderManagemntPage = () => {
       try {
         const response = await productApi.getAllOrder(token);
         setOrder(response.data.data);
-  
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    fetchData();
-  }, [current, reload, token]);
+        const processedTickets = await response.data.data.length;
 
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await productApi.getAllTicket(token);
-        console.log(response.data.data);
-        const processedTickets = await response.data.data.processedTickets;
-
-        const unprocessedTickets = await response.data.data.unprocessedTickets;
+        const unprocessedTickets = await response.data.data.length;
         setReport({
-          numberOfProcessedTickets: processedTickets.length,
-          numberOfUnprocessedTickets: unprocessedTickets.length,
+          numberOfProcessedTickets: processedTickets,
+          numberOfUnprocessedTickets: unprocessedTickets,
         });
         if (processedTickets == [] && unprocessedTickets == []) {
           setTickets([]);
@@ -78,15 +72,21 @@ const OrderManagemntPage = () => {
           setTickets(unprocessedTickets);
         } else if (unprocessedTickets == []) {
           setTickets(processedTickets);
-        } else {
-          setTickets([...processedTickets, ...unprocessedTickets]);
-        }
+        } 
       } catch (error) {
         console.error(error);
       }
     }
     fetchData();
-  }, [loaded]);
+  }, [loaded, current, reload, token]);
+
+  console.log(order);
+    let total = 0
+    for(let item of order ){
+      total += item.total;
+    }
+
+let totalFormated = formatNumberWithDecoration(total) + "VND" 
 
   const columns = [
     {
@@ -115,16 +115,12 @@ const OrderManagemntPage = () => {
     {
       title: "Total",
       dataIndex: "total",
-      // render: (_, record) => (
-      //   <span>{record.ticketType.name}</span>
-      // ),
+      render: (_, record) => <span style={{color:"green", fontWeight:600}}>{formatNumberWithDecoration(record.total)} VND</span>,
     },
     {
       title: "Payment Method",
       dataIndex: "paymentMethod",
-      // render: (_, record) => (
-      //   <span>{record.isApproved? 'Yes' : record.isApproved== false? 'No': 'Pending'}</span>
-      // ),
+
     },
     {
       title: "Action",
@@ -144,6 +140,7 @@ const OrderManagemntPage = () => {
       ),
     },
   ];
+
 
   const handleOrderDeleted = () => {
     // Refresh the vouchers by triggering a re-render of the VoucherList component
@@ -173,6 +170,7 @@ const OrderManagemntPage = () => {
     });
   };
 
+
   return (
     <Container>
       <Hero>Order Management</Hero>
@@ -180,7 +178,7 @@ const OrderManagemntPage = () => {
       <DashBoard>
         <Right>
           {report &&
-            ticketTypes.map((ticket, index) => {
+            orderTypes.map((ticket, index) => {
               const IconComponent = ticket.icon;
               return (
                 <IconContext.Provider key={index} value={{ size: "1.5em" }}>
@@ -194,11 +192,10 @@ const OrderManagemntPage = () => {
                     <AnimatedNumbers
                       animateToNumber={
                         index == 0
-                          ? report.numberOfProcessedTickets +
-                            report.numberOfUnprocessedTickets
+                          ? report.numberOfProcessedTickets 
                           : index == 1
-                          ? report.numberOfUnprocessedTickets
-                          : report.numberOfProcessedTickets
+                          ? total
+                          : 0
                       }
                       fontStyle={{ fontSize: 32 }}
                       configs={(number, index) => {

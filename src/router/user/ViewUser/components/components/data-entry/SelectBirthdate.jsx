@@ -18,7 +18,7 @@ const SelectDateOfBirth = () => {
 
 
     return (
-        <DatePicker disabled  value={birthdate ? moment(birthdate) : null} onChange={handleDobChange} />
+        <DatePicker style={{marginRight: 200}} disabled  value={birthdate ? moment(birthdate) : null} onChange={handleDobChange} />
     );
 };
 

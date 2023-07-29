@@ -17,8 +17,9 @@ function UploadImg({setOpen,open}) {
       
         reader.onload = (e) => {
           const base64String = btoa(e.target.result);
-        
-          dispatch(actions.setUserImg(base64String));
+          console.log(base64String);
+          console.log(`data:image/jpeg;base64,${base64String}`);
+          dispatch(actions.setUserImg(`data:image/jpeg;base64,${base64String}`));
         };
       
         reader.readAsBinaryString(file);
@@ -28,7 +29,7 @@ function UploadImg({setOpen,open}) {
   return (
     <Modal
             open={open} 
-            title="Upload Or drag any of your Voucher Img here"
+            title="Upload Or drag any of your User Img here"
             footer={false}
             onCancel={() => handleCancel()}
             closable={true}
