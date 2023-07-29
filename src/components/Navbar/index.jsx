@@ -74,13 +74,7 @@ function NavBar() {
             <div style={{ paddingLeft: 45, fontSize: 11 }}>
               {truncateTitle(option.description, 40)}
             </div>
-            <hrs
-              style={{
-                height: 0.2,
-                backgroundColor: "#9E9E9E",
-                border: "none",
-              }}
-            />
+
 
             
           </Menu.Item>

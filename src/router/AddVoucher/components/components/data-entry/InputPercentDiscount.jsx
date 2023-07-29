@@ -9,7 +9,7 @@ const InputPercentDiscount = () => {
 
     const percentDiscount = useSelector(selector.percentDiscount);
     const handlePercentDiscountChange = (e) => {
-        dispatch(actions.setPercentDiscount(parseInt(e.target.value*100)/100));
+        dispatch(actions.setPercentDiscount(parseInt(e.target.value)/100));
         dispatch(actions.getVoucherInfo());
     };
 

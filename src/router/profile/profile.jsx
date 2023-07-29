@@ -60,7 +60,6 @@ function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
 
   const showModalPassword = () => {
     navigate("/user/changePassword");
@@ -228,7 +227,6 @@ function Profile() {
     },
   ];
 
-  const [search, setSearch] = useState("");
   const [payslips, setPayslips] = useState([]);
 
   return (

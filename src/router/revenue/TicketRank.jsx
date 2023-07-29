@@ -28,11 +28,11 @@ function TicketList
         <Body style={{background:"#fff",padding:"0 20px"}}>
             {data.unprocessedTickets.slice(0,5).map(item =>{
             
-            return(<EmployeeCard key={item.ticketId}>
-                <div style={{display:'flex',justifyContent:'space-between'}}><Image src={item.user.userImg} />
+            return(<EmployeeCard key={item.ticket.ticketId}>
+                <div style={{display:'flex',justifyContent:'space-between'}}><Image src={item.ticket.user.userImg} />
                     <div>
-                        <Name>{item.title}</Name>
-                        <Email>{item.user.name}</Email>
+                        <Name>{item.ticket.title}</Name>
+                        <Email>{item.ticket.user.name}</Email>
                     </div></div>
                     <div>View</div>
                     

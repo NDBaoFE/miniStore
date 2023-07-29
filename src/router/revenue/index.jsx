@@ -16,7 +16,6 @@ import { useEffect } from "react"
 import productApi from "../../utils/api/productApi"
 import AnimatedNumbers from 'react-animated-numbers'
 import DayTimeAnalytic from './DayTimeAnalytic'
-import { formatNumberWithDecoration } from '../../utils'
 
 function Revenue() {
   const [data,setData]=useState(null);

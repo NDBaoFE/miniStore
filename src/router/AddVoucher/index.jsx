@@ -23,7 +23,6 @@ import InputMinItem from "./components/components/data-entry/InputMinItem";
 import InputPercentDiscount from "./components/components/data-entry/InputPercentDiscount";
 import SelectApplyAll from "./components/components/data-entry/SelectApplyAll";
 import InputQuantity from "./components/components/data-entry/InputQuantity";
-import SelectExpiredDate from "./components/components/data-entry/SelectExpiredDate";
 import InputDescription from "./components/components/data-entry/InputDescription";
 import ProductDrawer from "./components/ProductDrawer";
 import { useNavigate } from "react-router-dom";
