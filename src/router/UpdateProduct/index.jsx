@@ -56,7 +56,7 @@ function UpdateProduct() {
   };
 
   const handleFinishFailed = () => {
-    console.log(" Hãy nhập tất cả các field !!");
+    console.log(" Please enter all the information");
   };
   const token = localStorage.getItem("Authorization");
   useEffect(() => {

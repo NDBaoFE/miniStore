@@ -22,7 +22,7 @@ const useAuth = () => {
                 localStorage.removeItem("Authorization");
                 navigate("/login");
                 toastError(
-                    "Phiên đăng nhập đã hết hạn! Vui lòng đăng nhập lại"
+                    "Your session is over! Please login again!!!"
                 );
                 return;
             }

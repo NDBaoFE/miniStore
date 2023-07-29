@@ -73,12 +73,12 @@ const Password = () => {
   const confirm = () => {
     NotiModal.confirm({
       maskClosable: true,
-      title: "Bạn có muốn thay đổi thông tin tài khoản?",
+      title: "Do you want to change password ?",
       icon: <ExclamationCircleOutlined />,
       content:
-        "Tài khoản sau khi đổi sẽ không còn còn lưu trữ thông tin trước đó được nữa.",
-      okText: "Xác nhận",
-      cancelText: "Huỷ",
+        "Click 'Confirm' to change password",
+      okText: "Confirm",
+      cancelText: "Cancel",
       onOk: () => {
         form.submit();
         // openNotification();

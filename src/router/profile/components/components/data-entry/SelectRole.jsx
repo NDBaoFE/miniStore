@@ -18,7 +18,7 @@ const SelectRole = () => {
     };
 
     return (
-        <Select defaultValue={roles[roleId]} onChange={handleRoleChange}>
+        <Select defaultValue={roles[roleId]} disabled onChange={handleRoleChange}>
             {roles.map((role, index) => (
                 <Option value={index} key={index}>
                     {role}

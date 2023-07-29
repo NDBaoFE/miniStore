@@ -55,7 +55,7 @@ function UpdateProduct() {
   };
 
   const handleFinishFailed = () => {
-    console.log(" Hãy nhập tất cả các field !!");
+    console.log("Please enter all of the information");
   };
   const token = localStorage.getItem("Authorization");
 
@@ -78,12 +78,12 @@ function UpdateProduct() {
   const confirm = () => {
     NotiModal.confirm({
       maskClosable: true,
-      title: "Bạn có muốn thay đổi thông tin tài khoản?",
+      title: "Do you want to edit the product information",
       icon: <ExclamationCircleOutlined />,
       content:
-        "Tài khoản sau khi đổi sẽ không còn còn lưu trữ thông tin trước đó được nữa.",
-      okText: "Xác nhận",
-      cancelText: "Huỷ",
+        "Click 'Confirm' to edit this product information ",
+      okText: "Confirm",
+      cancelText: "Cancel",
       onOk: () => {
         form.submit();
         // openNotification();
