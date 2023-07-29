@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { actions } from '../../slice';
 import selectors from '../../slice/selectors';
-
 const { Option } = Select;
 
 const SelectGender = () => {
@@ -15,6 +14,7 @@ const SelectGender = () => {
     console.log(gender);
     const handleGenderChange = (value) => {
         dispatch(actions.setGender(value));
+        dispatch(actions.getUserInfo());
     };
 
     return (

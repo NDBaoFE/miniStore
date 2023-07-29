@@ -37,7 +37,7 @@ export const slice = createSlice({
             state.userImg = action.payload.userImg;
             state.phone = action.payload.phone;
             state.address = action.payload.address;
-            state.gender = action.gender == true ? 1 : 0;
+            state.gender = action.payload.gender == true ? 1 : 0;
         },
         getUserInfo: (state) => {
             state.info = {
