@@ -15,7 +15,7 @@
         "antd": "^5.6.3",
         "axios": "^1.4.0",
         "cdbreact": "^1.5.16",
-        "chart.js": "^4.3.0",
+        "chart.js": "^4.3.2",
         "date-fns": "^2.30.0",
         "daypilot-pro-react": "^0.0.0",
         "exceljs": "^4.3.0",

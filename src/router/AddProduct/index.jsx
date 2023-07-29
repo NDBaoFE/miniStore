@@ -46,7 +46,8 @@ function AddProduct() {
     if(res.data.status == 200){
        
         setSuccess(true);
-        setTimeout(() => {setSuccess(false);  toastSuccess("Add product Successfully");navigate(-1); },2000);
+        setTimeout(() => {setSuccess(false);  
+        toastSuccess("Add product Successfully");navigate(-1); },2000);
         
     }else{
         toastError(res.data.message);

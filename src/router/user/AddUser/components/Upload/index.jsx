@@ -18,7 +18,7 @@ function UploadImg({setOpen,open}) {
         reader.onload = (e) => {
           const base64String = btoa(e.target.result);
         
-          dispatch(actions.setUserImg(base64String));
+          dispatch(actions.setUserImg(`data:image/jpeg;base64,${base64String}`));
         };
       
         reader.readAsBinaryString(file);

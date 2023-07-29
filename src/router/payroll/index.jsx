@@ -12,6 +12,7 @@ import {
 import payrollApi from "../../utils/api/payrollApi";
 import payslip from "../../utils/api/payslipApi";
 import { toastError, toastSuccess } from "../../components/Toast";
+import { formatNumberWithDecoration } from "../../utils";
 
 const Payroll = () => {
   const token = localStorage.getItem("Authorization");
@@ -47,13 +48,14 @@ const Payroll = () => {
     },
     {
       title: "Role",
-      dataIndex: "roleName",
+      dataIndex: "role",
       key: "role",
     },
     {
       title: "Salary This Month",
       dataIndex: "salary",
       key: "salaryThisMonth",
+      render: (_, record) => <span style={{color:"green", fontWeight:600}}>{formatNumberWithDecoration(record.salary)} VND</span>
     },
     {
       title: "History Paid",
@@ -72,10 +74,10 @@ const Payroll = () => {
   const confirm = async () => {
     Modal.confirm({
       maskClosable: true,
-      title: "Bạn có muốn trả số lương này không?",
-      content: "Khi bạn nhấn đồng ý, lương sẽ được trả cho các nhân viên",
-      okText: "Xác nhận",
-      cancelText: "Huỷ",
+      title: "Are you sure want to pay all this salary?",
+      content: "Click 'Confirm' to pay all the salary for user",
+      okText: "Confirm",
+      cancelText: "Cancel",
       onOk: async () => {
         const token = localStorage.getItem("Authorization");
         const res = await payslip.getPay(token);
@@ -99,12 +101,12 @@ const Payroll = () => {
   }
 
 
-  console.log(userPayroll);
+  const totalSalaryFormatted = formatNumberWithDecoration(totalSalary)
 
   return (
     <WrapperPayroll>
       <WrapperSum>
-        <Title>Total Salary This Month: {totalSalary}</Title>
+        <Title>Total Salary This Month: {totalSalaryFormatted} VND</Title>
         <ButtonStyled onClick={() => confirm()}>Paid</ButtonStyled>
       </WrapperSum>
       <PayrollList

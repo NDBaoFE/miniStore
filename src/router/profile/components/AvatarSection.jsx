@@ -5,8 +5,8 @@ import UserProfile from '../../../assets/image/user_profile.png'
 function AvatarSection(){
     const name=useSelector(selectors.name);
     const role = useSelector(selectors.roleId)
-    const placeholder= UserProfile
     const userImg = useSelector(selectors.userImg)
+    const placeholder =""
 
     let roleName;
     switch (role) {
@@ -25,11 +25,11 @@ function AvatarSection(){
     }
 
     return (
-        <AvatarWrapper>
-            <AvatarInfo>
-                <Avatar  src={userImg.startsWith("http") ? userImg : `data:image/jpeg;base64,${userImg}`} style={{width:150, height:150, marginLeft:25, marginTop:40, borderRadius:20}}  alt="avatar" onError={(e) => {
-              e.target.src = placeholder;
-            }}/>
+      <AvatarWrapper>
+      <AvatarInfo>
+          <Avatar  src={userImg ? userImg : UserProfile} style={{width:150, height:150, marginLeft:6, marginTop:40, borderRadius:20}}  alt="avatar" onError={(e) => {
+        e.target.src = placeholder;
+      }}/>
                 <Info>
                     <h2>{name|| "Name"}</h2>
                     <h3>{roleName|| "Your role"}</h3>

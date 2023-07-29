@@ -48,7 +48,7 @@ const AddUser = () => {
   const gender = useSelector(selectors.gender);
   const info = useSelector(selectors.info);
   const dispatch = useDispatch();
-
+  const [success,setSuccess]=useState(false);
   const UpdateInfo = async () => {
     const token=localStorage.getItem("Authorization");
     dispatch(actions.getUserInfo());
@@ -56,8 +56,10 @@ const AddUser = () => {
     if (res.data.status == 200) {
 
    
-        toastSuccess("Add User Successfully");
-        navigate(-1);
+      setSuccess(true);
+      setTimeout(() => {setSuccess(false);  
+      toastSuccess("Add User Successfully");
+      navigate('/user'); },2000);
     } else {
       toastError(res.data.message);
     }
@@ -74,17 +76,17 @@ const AddUser = () => {
   const confirm = () => {
     NotiModal.confirm({
       maskClosable: true,
-      title: "Bạn có muốn thêm nhân viên này ? ",
+      title: "Are you want add this user ? ",
       icon: <ExclamationCircleOutlined />,
       centered: true,
       content:
-        "Khi bạn nhấn 'Confirm', nhân viên này sẽ được thêm vào danh sách nhân viên",
+        "Click to 'Comfirm' to  add user",
       okText: "Confirm",
       cancelText: "Cancel",
       onOk: () => {
 
           form.submit();
-      
+          
       },
     });
   };

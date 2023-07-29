@@ -1,5 +1,5 @@
-import { injectReducer } from "../../../../../store/index";
-import generateActions from "../../../../../utils/generateActions";
+import { injectReducer } from "../../../../store/index";
+import generateActions from "../../../../utils/generateActions";
 import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {

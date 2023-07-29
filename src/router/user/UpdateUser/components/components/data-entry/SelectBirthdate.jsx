@@ -18,7 +18,7 @@ const SelectDateOfBirth = () => {
 
 
     return (
-        <DatePicker onChange={handleDobChange} />
+        <DatePicker style={{marginRight: 200}} onChange={handleDobChange} />
     );
 };
 

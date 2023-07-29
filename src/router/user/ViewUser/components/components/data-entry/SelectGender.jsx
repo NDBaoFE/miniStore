@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { actions } from '../../slice';
 import selectors from '../../slice/selectors';
+import { Left } from '../../../viewUserStyle';
 
 const { Option } = Select;
 
@@ -18,7 +19,7 @@ const SelectGender = () => {
     };
 
     return (
-        <Select disabled defaultValue={genders[gender]} onChange={handleGenderChange}>
+        <Select disabled defaultValue={genders[gender]}  onChange={handleGenderChange}>
             {genders.map((gender, index) => (
                 <Option value={index} key={index}>
                     {gender}

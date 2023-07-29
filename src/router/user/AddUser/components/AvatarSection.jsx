@@ -11,7 +11,7 @@ function AvatarSection(){
     return (
         <AvatarWrapper>
             <AvatarInfo>
-                <Avatar  src={userImg.startsWith("http") ? userImg : `data:image/jpeg;base64,${userImg}`} style={{width:150, height:150, marginLeft:25, marginTop:40, borderRadius:20}}  alt="avatar" onError={(e) => {
+                <Avatar  src={userImg ? userImg : UserProfile} style={{width:150, height:150, marginLeft:25, marginTop:40, borderRadius:20}}  alt="avatar" onError={(e) => {
               e.target.src = placeholder;
             }}/>
                 <Info>

@@ -1,4 +1,4 @@
-import {  Form , Modal} from "antd";
+ import {  Form , Modal} from "antd";
 
 import { styled } from "styled-components";
 import { themes } from "../../../utils/theme";
@@ -30,7 +30,7 @@ border-radius: 10px;
 
   
 export const WrapperFormUser = styled.div`
-height:630px;
+height:650px;
 width:65%;
 background-color: white;
 box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 3px 1px rgba(0, 0, 0, 0.12), 0px 1px 5px rgba(0, 0, 0, 0.2);
@@ -45,7 +45,8 @@ export const Title = styled.div`
   width: 400px;
   font-size: 20px;
   font-weight: 500;
-  margin-left: 30px;
+  text-align:left;
+  margin-left: 20px;
   margin-top: 20px;
   margin-bottom: 30px;
 `
@@ -54,6 +55,8 @@ export const Label = styled.div`
   margin-left: 5px;
   font-size:15px;
   font-weight: 400;
+  text-align:left;
+  margin-bottom: 5px;
 `
 
 export const Item = styled(Form.Item)`
@@ -68,7 +71,7 @@ export const Row = styled.div`
     width: 100%;
     display: flex;
    margin-top: 10px;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     h2 {
         font-size: 24px;
@@ -103,6 +106,12 @@ export const StyledForm = styled(Form)`
         height: 50px;
         
     }
+
+    .ant-select{
+      margin-right: 80px;
+      margin-top: 7px;
+    }
+
 `;
 
 export const NotiModal = styled(Modal)`

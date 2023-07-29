@@ -42,11 +42,12 @@ function VoucherManagement() {
   const confirm = async(id) => {
     NotiModal.confirm({
         maskClosable: true,
-        title: 'Bạn có muốn thay đổi thông tin tài khoản?',
+        title: 'Are you sure want to delete this Voucher?',
+        centered: true,
         icon: <ExclamationCircleOutlined />,
-        content: 'Tài khoản sau khi đổi sẽ không còn còn lưu trữ thông tin trước đó được nữa.',
-        okText: 'Xác nhận',
-        cancelText: 'Huỷ',
+        content: 'Click "Confirm" to delete voucher permantly',
+        okText: 'Confirm',
+        cancelText: 'Cancel',
         onOk: async() => {
           const token= localStorage.getItem("Authorization");
           const res= await productApi.deleteVoucher(id,token);

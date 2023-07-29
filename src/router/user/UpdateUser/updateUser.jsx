@@ -32,7 +32,7 @@ import userApi from "../../../utils/api/userApi";
 import { toastError, toastSuccess } from "../../../components/Toast";
 import Photo from "./components/Photo";
 import UploadImg from "./components/Upload";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useEffect } from "react";
 
@@ -49,8 +49,9 @@ function UpdateUser() {
   const roleId = useSelector(selectors.roleId);
   const gender = useSelector(selectors.gender);
   const info = useSelector(selectors.info);
+  const userImg = useSelector(selectors.userImg)
   const dispatch = useDispatch();
-
+  const navigate = useNavigate()
   const { id } = useParams();
 
   const UpdateInfo = async () => {
@@ -63,6 +64,7 @@ function UpdateUser() {
       setTimeout(() => {
         setSuccess(false);
         toastSuccess("Update user Successfully");
+        navigate(`/user/detail/${id}`)
       }, 2000);
     } else {
       toastError(res.data.message || "Update failed, please try again");
@@ -82,6 +84,7 @@ const token=localStorage.getItem("Authorization");
       try {
         const response = await userApi.getUserDetail(id,token);
         dispatch(actions.setUser(response.data.data));
+       
         dispatch(actions.getUserInfo());
         setUpdated(true);
       } catch (error) {
@@ -89,18 +92,18 @@ const token=localStorage.getItem("Authorization");
       }
     }
     fetchData();
-  }, []);
+  }, [token]);
 
   const confirm = () => {
     NotiModal.confirm({
       maskClosable: true,
-      title: "Bạn có muốn thay đổi thông tin tài khoản?",
+      title: "Are you sure you want to update the User Info",
       icon: <ExclamationCircleOutlined />,
       centered: true,
       content:
-        "Khi bạn nhấn 'Xác nhận', các thông tin trên sẽ được thay đổi",
-      okText: "Xác nhận",
-      cancelText: "Huỷ",
+        "Please confirm Your Choice",
+      okText: "Confirm",
+      cancelText: "Cancel",
       onOk: () => {
         form.submit();
         // openNotification();
@@ -129,6 +132,7 @@ const token=localStorage.getItem("Authorization");
               roleId: roleId,
               address: address,
               dob: dob,
+              userImg: userImg
             }}
             onFinish={handleFinish}
             onFinishFailed={handleFinishFailed}
@@ -160,23 +164,26 @@ const token=localStorage.getItem("Authorization");
                 <Label level={5}>Phone</Label>
                 <InputPhone />
               </Col>
-              <Col span={8}>
-                <Label level={5}>Gender</Label>
-                <SelectGender />
+         
+              <Col span={10}>
+                <Label level={5} style={{marginTop:'-20px', marginLeft:15}}>Gender</Label>
+                <SelectGender></SelectGender>
               </Col>
+           
             </Row>
 
             <Row>
-              <Col span={11}>
+              <Col span={13}>
                 <Label level={5}>Date of Birth</Label>
                 <SelectDateOfBirth />
               </Col>
 
-              <Col span={8}>
-                <Label level={5}>Role</Label>
-                <SelectRole />
+              <Col span={10}>
+                <Label style={{marginTop:'-20px', marginLeft:15}} level={5}>Role</Label>
+                <SelectRole/>
               </Col>
             </Row>
+
 
             <Row>
               <Col span={24}>
