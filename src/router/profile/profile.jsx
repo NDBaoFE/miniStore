@@ -73,7 +73,7 @@ function Profile() {
 
   const UpdateInfo = async () => {
     dispatch(actions.getProfileInfo());
-    const res = await profileApi.updateProfile(info, id, token);
+    const res = await profileApi.updateProfile({...info,gender: gender == 1? true :false }, id, token);
 
     if (res.data.status == 200) {
       setSuccess(true);

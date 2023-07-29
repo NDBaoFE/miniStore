@@ -203,15 +203,15 @@ const handleDrag = (e, data) => {
         </RightButton>
       </ButtonContainer>
     </ActionHeader>
-    <div className="col">
+    <div className="col" >
       {daysOfWeek.map((day) => {
         if (day.id !== 7) {
         
           const shifts = userShift[day.id]?.slice(0,3) || [];
           return (
-            <DayCol key={day.id} className="day-column" onClick={()=>handleColClick(userShift[day.id])}>
+            <DayCol key={day.id} className="day-column" onClick={()=>handleColClick(userShift[day.id])} >
               <div className="day-cell">{day.value}</div>
-              <div className="shift-column">
+              <div className="shift-column" style={{marginBottom:'20px'}}>
                 {shifts.map((slot) => (
                   <TimeSlot
                   workingShift={workingShift}

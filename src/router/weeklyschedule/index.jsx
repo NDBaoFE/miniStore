@@ -181,7 +181,7 @@ const handleDrag = (e, data) => {
           return (
             <DayCol key={day.id} className="day-column" onClick={()=>handleColClick(userShift[day.id])}>
               <div className="day-cell">{day.value}</div>
-              <div className="shift-column">
+              <div className="shift-column" style={{marginBottom:"20px"}}>
                 {shifts.map((slot) => (
                   <TimeSlot
                     key={slot.userShiftId}
