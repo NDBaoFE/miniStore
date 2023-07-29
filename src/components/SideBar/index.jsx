@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-
+import {BiMoney} from "react-icons/bi"
+import {BsBoxSeam,} from "react-icons/Bs"
 import { Menu } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
 import {IoIosArrowForward} from "react-icons/io"
@@ -9,7 +10,7 @@ import {  SideBar, Wrapper, SignOut, Button, Container } from "./style";
 import {FaRegPaperPlane}   from "react-icons/fa"
 
 import { BsGrid, BsBookmarkFill } from "react-icons/Bs";
-import { MdPaid} from "react-icons/Md";
+
 
 import { RiCoupon2Line} from "react-icons/ri";
 import {LuUsers}  from "react-icons/lu";
@@ -87,7 +88,7 @@ const itemsAdmin = [
     getItem(
         <SidebarLink to="/payroll " child="Payslip" />,
         "/payroll",
-        <MdPaid/>
+      
     ),
 ];
 const itemsEmployee = [

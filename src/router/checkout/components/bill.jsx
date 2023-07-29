@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
  export const ComponentToPrint = React.forwardRef(({change,orderList}, ref) => {
 
-  const {paymentMethod} = useSelector(selector);
+  const {paymentMethod,note} = useSelector(selector);
   let total=0;
   let totalQuanity=0;
   return (
@@ -88,6 +88,7 @@ import { useSelector } from "react-redux";
           </tr>
         </table>
         Payment Method: {paymentMethod == 1 ? "Cash": "Card"}<br />
+        Note: {note} <br />
         Transaction ID: {   Math.floor(Math.random() * 1000000000)}
         <br />salerMan: saler <br />
         Thank You! Please visit again

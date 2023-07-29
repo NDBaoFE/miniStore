@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import  { useState } from "react";
 import { instruction} from "./data";
-import { ActionHeader, Bar, ButtonContainer, Color, Container, DayCol, Daytime, EmployeeCard, Header, IconWrapper, Info, Instruction, LeftButton, ParentContainer, RightButton, Row, TimeSlotWrapper, Value } from "./style";
+import { ActionHeader, Bar, ButtonContainer, Color, Container, DayCol, Daytime, EmployeeCard, Header, Hero, IconWrapper, Info, Instruction, LeftButton, ParentContainer, RightButton, Row, TimeSlotWrapper, Value } from "./style";
 import {shiftStatus} from "./data"
 
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
@@ -62,7 +62,7 @@ const Timetable = () => {
   const [loaded,setLoaded]=useState(false);
   const [selectedValue,setSelectedValue] = useState([]);
   const [open, setOpen] = useState(false);
-  const {userRole}=useAuth();
+  const {userRole,profile}=useAuth();
   const [positions,setPositions]=useState([]);
   const today=new Date();
   var day = String(today.getDate()).padStart(2, "0");
@@ -161,6 +161,7 @@ const handleDrag = (e, data) => {
 
   </Instruction>
   </Draggable>
+  <Hero>Schedule</Hero>
   <div className="timetable" style={{ color: "black" }}>
     <ActionHeader>
       { userShift[0] && <Daytime>{userShift[userShift.length-1][0]?.date}-{userShift[0][0]?.date}</Daytime>}
@@ -196,8 +197,8 @@ const handleDrag = (e, data) => {
           );
         } else {
           return (
-            <ParentContainer key={day.id}>
-              <Bar>{day.value0}</Bar>
+            <ParentContainer key={day.id} style={{backgroundColor:'#2eb161',height:'280px',marginTop:'50px'}}>
+              <Bar >{day.value0}</Bar>
             </ParentContainer>
           );
         }
@@ -226,7 +227,7 @@ const handleDrag = (e, data) => {
           );
         } else {
           return (
-            <ParentContainer key={day.id}>
+            <ParentContainer key={day.id} style={{backgroundColor:'#2eb161',height:'180px',marginTop:'10px'}}>
               <Bar>{day.value1}</Bar>
             </ParentContainer>
           );

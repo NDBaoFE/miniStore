@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import ProductList from './components/ProductList'
 import ToolBoxSection from './components/ToolBox'
-import { Container, LoadingContainer, NotiModal, StyledSpace } from './style'
+import { Container, NotiModal, StyledSpace } from './style'
 import { exportToExcel } from '../../utils/ToExcel';
 import Spinner from '../../components/Spinnner';
 import { Link, useParams } from 'react-router-dom';
@@ -142,7 +142,7 @@ function ProductManagement() {
         <ToolBoxSection  setSearch={setSearch} handleSave={handleExportToExcel} setCurrent={setCurrent} setOpen={setOpen} open={open}/>
         <ProductList search={search} setProducts={setProducts} products={products} columns={columns}  setCurrent={setCurrent} current={current} handleVoucherDeleted={handleVoucherDeleted} reload={reload}/>
         
-        {loading && <LoadingContainer><Spinner/></LoadingContainer> }
+        {loading && <Spinner/>}
         <CustomModal open={open} setOpen={setOpen}  setOpenImportList={setOpenImportList} columns={columns}/>
         <ImportList openImportList={openImportList} setOpenImportList={setOpenImportList}  setProducts={setProducts} products={products} columns={columns} setReload={SetReload} reload={reload}/>
     </Container>  

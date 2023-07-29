@@ -9,7 +9,7 @@
 .above{
     background-color: white;
     width: 100%;
-    height: 160px;
+    height: 180px;
     margin-bottom: 20px;
     border-radius: 20px;;
 }
@@ -25,7 +25,7 @@
 }
 
 .IMG{
-    margin-top: 20px;
+    margin-top: 30px;
     height: 120px;
     width: 90px;
     box-shadow: 2px 4px 3px 1px rgba(128, 0, 0, 0.54);

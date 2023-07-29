@@ -14,3 +14,15 @@ export const Loader = styled.div`
         fill: ${themes.colors.primary};
     }
 `;
+export const LoadingContainer = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+`;

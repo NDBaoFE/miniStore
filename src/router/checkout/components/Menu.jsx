@@ -4,10 +4,12 @@ import { Wrapper ,ItemRow,DetailWrapper,Left,Right,Img} from './styled'
 import {IoIosArrowDown,IoIosArrowUp}   from 'react-icons/io'
 import { useSelector } from 'react-redux';
 import { selector } from '../../home/components/slice/selector';
+import {useNavigate} from 'react-router-dom';
 function Menu() {
+    const navigate=useNavigate();
     const[open,setOpen]=useState(false);
     const {orderList}=useSelector(selector);
- 
+    if(orderList.data.length===0){navigate("/home");}
   return (
     <Wrapper style={{padding:"20px",}} onClick={()=>setOpen(!open)}>
         <ItemRow>  <div>{orderList.data.length +" "}{ orderList.data.length>1 ? "items": "item"} </div>
@@ -21,7 +23,7 @@ function Menu() {
                     <div className='name'>{item.name}</div>
                 </Left>
                 <Right>
-                    <div className='price'>{item.finalPrice}đ</div>
+                    <div className='price'>{item.finalPrice*item.quantity}đ</div>
                     <div className='originalPrice'>{item.price*item.quantity}đ</div>
                 </Right>
             </ItemRow>

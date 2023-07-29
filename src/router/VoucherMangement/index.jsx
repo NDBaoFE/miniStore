@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 
 import ToolBoxSection from './components/ToolBox'
-import { Container, LoadingContainer, NotiModal, StyledSpace } from './style'
+import { Container, NotiModal, StyledSpace } from './style'
 import { exportToExcel } from '../../utils/ToExcel';
 import Spinner from '../../components/Spinnner';
 import {  useParams } from 'react-router-dom';
@@ -42,11 +42,12 @@ function VoucherManagement() {
   const confirm = async(id) => {
     NotiModal.confirm({
         maskClosable: true,
-        title: 'Bạn có muốn thay đổi thông tin tài khoản?',
+        title: 'Are you sure want to delete this Voucher?',
+        centered: true,
         icon: <ExclamationCircleOutlined />,
-        content: 'Tài khoản sau khi đổi sẽ không còn còn lưu trữ thông tin trước đó được nữa.',
-        okText: 'Xác nhận',
-        cancelText: 'Huỷ',
+        content: 'Click "Confirm" to delete voucher permantly',
+        okText: 'Confirm',
+        cancelText: 'Cancel',
         onOk: async() => {
           const token= localStorage.getItem("Authorization");
           const res= await productApi.deleteVoucher(id,token);
@@ -168,8 +169,8 @@ function VoucherManagement() {
         <ToolBoxSection  setSearch={setSearch} handleSave={handleExportToExcel} setCurrent={setCurrent}/>
         <VoucherList search={search} setProducts={setProducts} products={products} columns={columns}  setCurrent={setCurrent} current={current} loader={loader}
             handleVoucherDeleted={handleVoucherDeleted} />
-        
-        {loading && <LoadingContainer><Spinner/></LoadingContainer> }
+      
+        {loading && <Spinner/> }
     </Container>  
   )
 }

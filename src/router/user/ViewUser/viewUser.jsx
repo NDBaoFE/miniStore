@@ -79,11 +79,15 @@ function ViewUser() {
     console.log(" Hãy nhập tất cả các field !!");
   };
   const token=localStorage.getItem("Authorization");
+  const [roleImg, setRoleImg] = useState("")
+
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await userApi.getUserDetail(id,token);
         dispatch(actions.setUser(response.data.data));
+        
+        setRoleImg(response.data.data.roles)
         dispatch(actions.getUserInfo());
         setUpdated(true);
       } catch (error) {
@@ -92,17 +96,19 @@ function ViewUser() {
     }
     fetchData();
   }, [token]);
+console.log(roleImg);
 
   const confirm = () => {
     
     NotiModal.confirm({
       maskClosable: true,
-      title: "Bạn có muốn thay đổi thông tin cá nhân?",
+      title: "Are you sure want to change this user information?",
       icon: <ExclamationCircleOutlined />,
+      centered: true,
       content:
-        "Bấm vào nút xác nhận để vào trang chỉnh sửa",
-      okText: "Xác nhận",
-      cancelText: "Huỷ",
+        "Click 'Confirm' to direct to Edit Page",
+      okText: "Confirm",
+      cancelText: "Cancel",
       onOk: () => {
         navigate(`/user/update/${id}`)
         // openNotification();
@@ -114,6 +120,7 @@ function ViewUser() {
     <FormAddUserSection>
       <Left>
         <AvatarSection></AvatarSection>
+        
       </Left>
 
       {updated && 
@@ -135,15 +142,6 @@ function ViewUser() {
             onFinish={handleFinish}
             onFinishFailed={handleFinishFailed}
           >
-            {/* <Row
-              onClick={() => {
-                setOpen(true);
-              }}
-              style={{ justifyContent: "center" }}
-            >
-              <Photo />
-            </Row> */}
-
             <Row>
               <Col span={24}>
                 <Label level={5}>Name</Label>
@@ -163,27 +161,29 @@ function ViewUser() {
                 <Label level={5}>Phone</Label>
                 <InputPhone />
               </Col>
-              <Col span={8}>
-                <Label level={5}>Gender</Label>
-                <SelectGender />
+         
+              <Col span={10}>
+                <Label level={5} style={{marginTop:'-20px', marginLeft:15}}>Gender</Label>
+                <SelectGender></SelectGender>
               </Col>
+           
             </Row>
 
             <Row>
-              <Col span={11}>
+              <Col span={13}>
                 <Label level={5}>Date of Birth</Label>
                 <SelectDateOfBirth />
               </Col>
 
-              <Col span={8}>
-                <Label level={5}>Role</Label>
+              <Col span={10}>
+                <Label style={{marginTop: 45, marginLeft:15}} level={5}>Role</Label>
                 <SelectRole />
               </Col>
             </Row>
 
             <Row>
               <Col span={24}>
-                <Label level={5}>Address</Label>
+                <Label  level={5}>Address</Label>
                 <InputAddress />
               </Col>
             </Row>

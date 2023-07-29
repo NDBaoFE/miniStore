@@ -12,7 +12,7 @@ function EmployeeRank({data}) {
             {data.userRank.map(item =>{
             
             return(<EmployeeCard key={item[0].user.userId}>
-                <div style={{display:'flex',justifyContent:'space-between'}}><Image src={item[0].user.userImg} />
+                <div style={{display:'flex',justifyContent:'space-between'}}><Image src={item[0]?.user?.userImg} />
                     <div>
                         <Name>{item[0].user.name}</Name>
                         <Email>{item[0].user.email}</Email>

@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import orderManagementApi from "../../../utils/api/orderManagementApi";
 import { useState } from "react";
+import { formatNumberWithDecoration } from "../../../utils";
 const columns = [
   {
     title: "Product ID",
@@ -24,7 +25,7 @@ const columns = [
   {
     title: "Price",
     dataIndex: "price",
-    key: "price",
+    render: (_, record) => <span style={{color:"green", fontWeight:600}}>{formatNumberWithDecoration(record.price)} VND</span>,
   },
 
   {
@@ -35,7 +36,8 @@ const columns = [
   {
     title: "Total",
     dataIndex: "total",
-    key: "quantity",
+    key: "total",
+    render: (_, record) => <span style={{color:"green", fontWeight:600}}>{formatNumberWithDecoration(record.total)} VND</span>
   },
 ];
 

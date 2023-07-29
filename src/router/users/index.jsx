@@ -46,12 +46,12 @@ function UserManagement() {
 
     NotiModal.confirm({
       maskClosable: true,
-      title: <div style={styleTitle}>Bạn có muốn xóa nhân viên này không?</div>,
+      title: <div style={styleTitle}>Are you sure to delete this user?</div>,
       icon: <BsExclamationCircle />,
-      content: "Khi bạn nhấn đồng ý, nhân viên sẽ bị xóa vĩnh viễn",
-      okText: "Xác nhận",
+      content: "Click 'Confirm' to delete user permantly",
+      okText: "Confirm",
       centered: true,
-      cancelText: "Huỷ",
+      cancelText: "Cancel",
       onOk: async () => {
         const token = localStorage.getItem("Authorization");
         const res = await userApi.deleteUser(id, token);
@@ -91,6 +91,37 @@ function UserManagement() {
       title: "Phone",
       dataIndex: "phone",
       key: `phone`,
+    },
+
+    {
+      title: "Status",
+      dataIndex: "onLeave",
+      key: `phone`,
+      render: (onLeave) => {
+        if (onLeave === false) {
+          return (
+            <div
+              style={{
+                color: "green",
+                fontWeight: 600,
+              }}
+            >
+              Active
+            </div>
+          );
+        } else {
+          return (
+            <div
+              style={{
+                color: "red",
+                fontWeight: 600,
+              }}
+            >
+              Leave
+            </div>
+          );
+        }
+      },
     },
     {
       title: "Action",

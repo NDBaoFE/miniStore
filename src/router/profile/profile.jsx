@@ -39,6 +39,8 @@ import profileApi from "../../utils/api/profileApi";
 import PayslipList from "./components/components/PayslipList";
 
 import { useNavigate } from "react-router-dom";
+import payrollApi from "../../utils/api/payrollApi";
+import { formatNumberWithDecoration } from "../../utils";
 
 function Profile() {
   const [updated, setUpdated] = useState(false);
@@ -78,7 +80,7 @@ function Profile() {
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
-        toastSuccess("Update user Successfully");
+        toastSuccess("Update profile Successfully");
       }, 2000);
     } else {
       toastError(res.data.message || "Update failed, please try again");
@@ -95,13 +97,14 @@ function Profile() {
 
   const token = localStorage.getItem("Authorization");
   const [salary, setSalary] = useState(1000);
-
+  const [idUser, setIdUser] = useState(0)
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await profileApi.getProfileDetail(token);
         dispatch(actions.setUser(response.data.data));
         dispatch(actions.getProfileInfo());
+        setIdUser(response.data.data.userId)
         setUpdated(true);
       } catch (error) {
         console.error(error);
@@ -110,19 +113,22 @@ function Profile() {
     fetchData();
   }, [dispatch, token]);
 
-  // useEffect(() => {
-  //   async function fetchSalaryData() {
-  //     try {
-  //       const response = await salaryApi.getSalaryOfUser();
-  //       setSalary(response.data.data.salary);
-  //       console.log(response.data.data.salary); // Assuming the salary data is directly available in the response
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
 
-  //   fetchSalaryData();
-  // }, []);
+
+  useEffect(() => {
+    async function fetchSalaryData() {
+      try {
+        const response = await payrollApi.getPayrollByUser(idUser, token);
+        setPayslips(response.data.data);
+        setSalary(formatNumberWithDecoration(response.data.data[0].salary))
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchSalaryData();
+  }, [token, idUser]);
+
 
   const confirm = () => {
     const modalContentStyle = {
@@ -133,17 +139,16 @@ function Profile() {
 
     NotiModal.confirm({
       maskClosable: true,
-      title: "Bạn có muốn thay đổi thông tin tài khoản?",
+      title: "Are you sure want to change your information?",
       icon: <ExclamationCircleOutlined />,
       content: (
         <div style={modalContentStyle}>
-          Tài khoản sau khi đổi sẽ không còn còn lưu trữ thông tin trước đó được
-          nữa.
+          When you click Confirm, all the information would change ?
         </div>
       ),
       centered: true,
-      okText: "Xác nhận",
-      cancelText: "Huỷ",
+      okText: "Confirm",
+      cancelText: "Cancel",
       onOk: () => {
         form.submit();
         // openNotification();
@@ -156,16 +161,17 @@ function Profile() {
   const [current, setCurrent] = useState(parseInt(params.page, 9) || 1);
 
   const columns = [
-    {
-      title: "userId",
-      dataIndex: "userId",
-      key: `userId`,
-    },
+ 
 
     {
       title: "Salary",
       dataIndex: "salary",
       key: `salary`,
+      render: (_, record) => (
+        <span style={{fontWeight:600, color: "green"}}>
+          {formatNumberWithDecoration(record.salary)} VND
+        </span>
+      ),
     },
 
     {
@@ -194,11 +200,31 @@ function Profile() {
       title: "isPaid",
       dataIndex: "isPaid",
       key: `isPaid`,
-      render: (_, record) => (
-        <span>
-          {record.isPaid ? "Yes" : record.isPaid == "No" ? "No" : "Not yet"}
-        </span>
-      ),
+      render: (isPaid) => {
+        if (isPaid === false) {
+          return (
+            <div
+              style={{
+                color: "red",
+                fontWeight: 600,
+              }}
+            >
+              Not yet
+            </div>
+          );
+        } else {
+          return (
+            <div
+              style={{
+                color: "green",
+                fontWeight: 600,
+              }}
+            >
+              Paid
+            </div>
+          );
+        }
+      },
     },
   ];
 
@@ -292,19 +318,19 @@ function Profile() {
             <Row style={{ marginBottom: 15 }}>
               <WrapperSalary>
                 <div style={{ fontSize: 20 }}>
-                  Salary:{" "}
-                  <span style={{ color: "green", fontWeight: 600 }}>
-                    {" "}
-                    {salary}
+                  Salary:
+                  <span style={{ color: "green", fontWeight: 600, marginLeft: 10 }}>
+             
+                    {salary} VND
                   </span>
                 </div>
               </WrapperSalary>
             </Row>
             <Row>
               <Col span={24}>
-                <Label level={5}>Payslip List</Label>
+                <Label level={5} style={{fontWeight: 600, marginTop: 20, fontSize: 20}}>Payslip List</Label>
                 <PayslipList
-                  search={search}
+             
                   setPayslips={setPayslips}
                   payslips={payslips}
                   columns={columns}

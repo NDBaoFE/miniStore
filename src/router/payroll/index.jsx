@@ -1,4 +1,6 @@
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Button, Modal } from "antd";
 import PayrollList from "../payroll/components/payrollList";
 import {
   WrapperPayroll,
@@ -7,40 +9,31 @@ import {
   Title,
   WrapperSum,
 } from "./payrollStyled";
-import { useEffect, useState } from "react";
-import { Button, Modal } from "antd";
 import payrollApi from "../../utils/api/payrollApi";
-import orderManagementApi from "../../utils/api/orderManagementApi";
 import payslip from "../../utils/api/payslipApi";
 import { toastError, toastSuccess } from "../../components/Toast";
+import { formatNumberWithDecoration } from "../../utils";
 
 const Payroll = () => {
   const token = localStorage.getItem("Authorization");
-  const [reload, SetReload] = useState(false);
+  const [reload, setReload] = useState(false);
   const [userPayroll, setUserPayroll] = useState([]);
-
-
-
 
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await payrollApi.getPayrollAll(token);
-        console.log(response.data.data);
         setUserPayroll(response.data.data);
       } catch (error) {
         console.error(error);
       }
     }
     fetchData();
-  }, [token, reload, token]);
+  }, [token, reload]);
 
   const handlePayslipPaid = () => {
-    // Refresh the vouchers by triggering a re-render of the VoucherList component
-    // This can be done by incrementing the current page number or any other way to indicate a change
-    SetReload(!reload);
+    setReload(!reload);
   };
-
 
   const columns = [
     {
@@ -55,13 +48,14 @@ const Payroll = () => {
     },
     {
       title: "Role",
-      dataIndex: "roleName",
+      dataIndex: "role",
       key: "role",
     },
     {
       title: "Salary This Month",
       dataIndex: "salary",
       key: "salaryThisMonth",
+      render: (_, record) => <span style={{color:"green", fontWeight:600}}>{formatNumberWithDecoration(record.salary)} VND</span>
     },
     {
       title: "History Paid",
@@ -80,42 +74,49 @@ const Payroll = () => {
   const confirm = async () => {
     Modal.confirm({
       maskClosable: true,
-      title: "Bạn có muốn trả số lương này không?",
-      content: "Khi bạn nhấn đồng ý, lương sẽ được trả cho các nhân viên",
-      okText: "Xác nhận",
-      cancelText: "Huỷ",
+      title: "Are you sure want to pay all this salary?",
+      content: "Click 'Confirm' to pay all the salary for user",
+      okText: "Confirm",
+      cancelText: "Cancel",
       onOk: async () => {
         const token = localStorage.getItem("Authorization");
         const res = await payslip.getPay(token);
         if (res.status === 200) {
-          toastSuccess("Paid Succesfully");
+          toastSuccess("Paid Successfully");
         } else {
           toastError("Paid Failed");
         }
-
-        handlePayslipPaid()
+        handlePayslipPaid();
       },
-      
     });
   };
 
- 
-  return  (
-      <WrapperPayroll>
-        <WrapperSum>
-          <Title>Total Salary This Month:  </Title>
-          <ButtonStyled onClick={() => confirm()}>Paid</ButtonStyled>
-        </WrapperSum>
+  let totalSalary = 0
 
-        <PayrollList
-          setUserPayroll={setUserPayroll}
-          userPayroll={userPayroll}
-          reload={reload}
-          columns={columns}
-        ></PayrollList>
-      </WrapperPayroll>
-    )
-  
+  if(userPayroll !== ""){
+    totalSalary = userPayroll.reduce((total, user) => {
+
+        return total + (+user.salary || 0);
+    }, 0);
+  }
+
+
+  const totalSalaryFormatted = formatNumberWithDecoration(totalSalary)
+
+  return (
+    <WrapperPayroll>
+      <WrapperSum>
+        <Title>Total Salary This Month: {totalSalaryFormatted} VND</Title>
+        <ButtonStyled onClick={() => confirm()}>Paid</ButtonStyled>
+      </WrapperSum>
+      <PayrollList
+        setUserPayroll={setUserPayroll}
+        userPayroll={userPayroll}
+        reload={reload}
+        columns={columns}
+      ></PayrollList>
+    </WrapperPayroll>
+  );
 };
 
 export default Payroll;

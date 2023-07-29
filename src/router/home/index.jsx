@@ -3,13 +3,17 @@ import ToolBoxSection from "./ToolBox"
 import { HomeSection, Left, Right ,RightContainer} from "./style"
 import Cart from "./components/Cart"
 import { useState } from "react"
+import Scanner from "./components/Scanner"
+
 function Home() {
 const [searchValue,setSearchValue]=useState("");
+const [openScanner,setOpenScanner]=useState(false);
   return (
    <HomeSection>
     <Left>
-      <ToolBoxSection setSearchValue={setSearchValue} searchValue={searchValue}/>
+      <ToolBoxSection setSearchValue={setSearchValue} openScanner={openScanner} setOpenScanner={setOpenScanner}/>
     <ProductList search={searchValue}/>
+  <Scanner openScanner={openScanner} setOpenScanner={setOpenScanner}/>
     </Left>
     
     <RightContainer>
@@ -17,7 +21,6 @@ const [searchValue,setSearchValue]=useState("");
       <Cart/>
     </Right>
     </RightContainer>
-    
    </HomeSection>
   )
 }

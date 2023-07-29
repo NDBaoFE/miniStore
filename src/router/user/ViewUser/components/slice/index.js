@@ -11,13 +11,13 @@ export const initialState = {
     userImg: "",
     address: "",
     roles: ["Admin", "Employee", "Guard"],
-    roleId: 1,
+    roleId: 0,
     genders: ["Male", "Female"],
     gender: true,
     info: {},
 };
 
-export const name = "viewProfile";
+export const name = "viewUser";
 
 export const slice = createSlice({
     name,

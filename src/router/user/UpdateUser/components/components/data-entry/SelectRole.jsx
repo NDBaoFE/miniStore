@@ -11,10 +11,10 @@ const SelectRole = () => {
 
     const roles = useSelector(selectors.roles);
     const roleId = useSelector(selectors.roleId);
-
+    console.log(roleId);
     const handleRoleChange = (value) => {
         dispatch(actions.setRole(value));
-        dispatch(actions.getAccount());
+        dispatch(actions.getUserInfo());
     };
 
     return (

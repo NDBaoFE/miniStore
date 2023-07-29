@@ -16,7 +16,7 @@ const InputName = () => {
     <Form.Item
       name="name"
       rules={[
-        { required: true, message: "Tên không được để trống !!" },
+        { required: true, message: "User name cannot be empty !!" },
         { max: 100, message: "Name should be shoter than 10 numbers" },
       ]}
     >
@@ -25,7 +25,7 @@ const InputName = () => {
         placeholder="Enter your name"
         value={name}
         onChange={handleFullNameChange}
-        size="large"
+    
       />
     </Form.Item>
   );

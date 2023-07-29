@@ -34,7 +34,10 @@ import Password from "./password/Password";
 import Payroll from "./payroll";
 import PayrollByUser from "./payrollByUser";
 import OrderManagemntPage from "./OrderManagement";
+
 import OrderDetailTable from "./OrderManagement/components/OrderDetailTable";
+
+import Payment from "./payment";
 
 
 const publicRoute = [
@@ -119,8 +122,23 @@ const adminRoute = [
         component: <AddVoucher/>,
         exact: true,
         restrict: true,
-    }
-   
+    },
+    {
+        
+        index: true,
+        path: "payroll/:id",
+        component: <PayrollByUser/>,
+        exact: true,
+        restrict: true,
+    }, 
+    {
+        index: true,
+        path: "order",
+        component: <OrderManagemntPage/>,
+        exact: true,
+        restrict: true,
+    },
+    
     
     
 ];
@@ -218,14 +236,7 @@ const employeeRoute = [
         restrict: true,
     }, 
 
-    {
-        
-        index: true,
-        path: "payroll/:id",
-        component: <PayrollByUser/>,
-        exact: true,
-        restrict: true,
-    }, 
+   
     {
         index: true,
         path: "checkout",
@@ -256,6 +267,7 @@ const employeeRoute = [
         exact: true,
         restrict: true,
     },
+  
 
     {
         index: true,
@@ -324,6 +336,8 @@ const employeeRoute = [
                         ))}
                     </Route>
                 </Route>
+                <Route path="/payment/result" element={<Payment />} />
+ 
                 <Route path="/404" element={<ErrorPage />} />
                  <Route path="/403" element={<Error403Page />} /> 
                 <Route path="*" element={<ErrorPage />} /> 

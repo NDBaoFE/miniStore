@@ -11,7 +11,7 @@ export const initialState = {
     userImg: "",
     address: "",
     roles: ["Admin", "Employee", "Guard"],
-    roleId: 1,
+    roleId: 2,
     genders: ["Male", "Female"],
     gender: true, 
     info: {},
@@ -51,6 +51,7 @@ export const slice = createSlice({
                 gender: state.gender,
             };
         },
+       
     },
 });
 
