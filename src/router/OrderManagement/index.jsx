@@ -151,11 +151,11 @@ let totalFormated = formatNumberWithDecoration(total) + "VND"
   const confirm = async (id) => {
     NotiModalOrder.confirm({
       maskClosable: true,
-      title: "Bạn có muốn xóa nhân viên này không?",
+      title: "Do you want to rollback this order",
       icon: <BsExclamationCircle />,
-      content: "Khi bạn nhấn đồng ý, nhân viên sẽ bị xóa vĩnh viễn",
-      okText: "Xác nhận",
-      cancelText: "Huỷ",
+      content: "Click 'Confirm' to rollback this order",
+      okText: "Confirm",
+      cancelText: "Cancel",
       onOk: async () => {
         const token = localStorage.getItem("Authorization");
         const res = await orderManagementApi.deleteOrder(id, token);

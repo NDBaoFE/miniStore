@@ -77,7 +77,7 @@ function UpdateUser() {
   };
 
   const handleFinishFailed = () => {
-    console.log(" Hãy nhập tất cả các field !!");
+    console.log("Please enter all of the information");
   };
 const token=localStorage.getItem("Authorization");
   useEffect(() => {
