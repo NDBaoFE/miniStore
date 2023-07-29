@@ -39,7 +39,7 @@ function TicketDetail() {
     const handleApply=()=>{
         NotiModal.confirm({
           maskClosable: true,
-          title: 'You sure you want to decline for this ticket ?',
+          title: 'You sure you want to approve for this ticket ?',
           content: 'Remember , once you submit , you have to deal with the changes in the application',
           okText: 'Confirm',
           cancelText: 'Cancel',

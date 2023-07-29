@@ -301,7 +301,7 @@ export const TimeSlot = ({ shift, onClick,workingShift }) => {
       <Image src={shift.user.userImg} alt=""  style={{width:30,height:30,borderRadius:50}}  />
       <span >{shift.user.name} </span>
      
-      <div>6am-12am </div>
+      <div>{`${shift.shift.startWorkHour}:00 - ${shift.shift.endWorkHour}:00`}</div>
     
      </EmployeeCard> : <div className="time-slot"> </div> }
      
