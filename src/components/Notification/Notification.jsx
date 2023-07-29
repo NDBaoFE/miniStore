@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import notifyApi from "../../utils/api/notifyApi";
 import "./notifistyle.css";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch} from "react-redux";
 import { actions } from "./slice";
 
@@ -49,7 +49,7 @@ const Notification = () => {
         <div className="content-content">{content}</div>
       </div>
 
-      <button className="back-to-home-btn">Back to home</button>
+      <button className="back-to-home-btn" > <Link to={`/home`} style={{color: "white"}}>  Back to home</Link></button>
     </div>
   );
 };
