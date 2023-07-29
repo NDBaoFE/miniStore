@@ -9,7 +9,7 @@ function EmployeeRank({data}) {
     totalShift+=data.userRank[i][1].totalShiftCount;
   }
   return (
-    <Wrapper style={{marginTop: '50px', marginBottom: '50px',flexDirection:'column',width:'49%',justifyContent:"flex-start"}}>
+    <Wrapper style={{marginTop: '50px', marginBottom: '50px',flexDirection:'column',width:'49%',justifyContent:" flex-start"}}>
         <HeroWrapper> <h2>Our Top Employees
         </h2></HeroWrapper>
        {data &&  <Body style={{background:"#fff",padding:"0 20px",height:"100%"}}>

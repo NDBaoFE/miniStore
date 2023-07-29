@@ -4,9 +4,9 @@ import {  StyledModal } from "./components/style"
 import Late from "../../assets/image/late.svg"
 import { LateModal } from "./Banner-style"
 import Button from "../../components/Button"
-function Banner({openInstruction,setOpenInstruction,workingShift,profile}) {
-  const NeededToCheckIn=workingShift.find((shift)=>shift.userId===profile.userId);
-  console.log(NeededToCheckIn);
+function Banner({openInstruction,setOpenInstruction,workingShift,profile,setCheckinShift,setOpenCheckin}) {
+  const checkinShift=workingShift.find((shift)=>shift.userId===profile.userId);
+  setCheckinShift(checkinShift);
     
   return (
     <StyledModal visible={openInstruction} onCancel={()=>{setOpenInstruction(false)}} 
@@ -25,7 +25,7 @@ function Banner({openInstruction,setOpenInstruction,workingShift,profile}) {
       <h2>
         Ready to checkin ? 
       </h2>
-     <Button title="Checkin" onClick={()=>{console.log("si")}} style={{width:"100px",height:"40px",fontSize:"20px"}}/>
+     <Button title="Checkin" onClick={()=>{setOpenCheckin(true)}} style={{width:"100px",height:"40px",fontSize:"20px"}}/>
     
       </div>
       

@@ -15,19 +15,25 @@ const InputPercentDiscount = () => {
 
     return (
         <Form.Item
-            name="percentDiscount"
-            rules={[{ required: true, message: "Discount can  not be empty" },
-            {
-                message: 'Discount must be larger than 0',
-                validator: (_, value) => {
-                    if (/^(0\.[0-9]+|[0-9]*\.[0-9]+)$/.test(value)) {
-                        return Promise.resolve();
-                    } else {
-                        return Promise.reject('Some message here');
-                    }
-                },
-            },]}
-        >
+        name="percentDiscount"
+        rules={[
+          { required: true, message: "Discount cannot be empty" },
+          {
+            message: 'Discount must be a number between 0 and 100',
+            validator: (_, value) => {
+              const numericValue = parseFloat(value);
+              if (isNaN(numericValue)) {
+                return Promise.reject('Discount must be a number');
+              } else if (numericValue < 0 || numericValue > 100) {
+                return Promise.reject('Discount must be between 0 and 100');
+              } else {
+                return Promise.resolve();
+              }
+            },
+          },
+        ]}
+      >
+      
             <Input
                 type="number"
                 placeholder="percentDiscount"

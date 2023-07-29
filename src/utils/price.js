@@ -16,9 +16,8 @@ export function calculateFinalPrice(order, voucher) {
 
     // Calculate the discount amount based on the voucher
     const discountAmount = totalPrice * percentDiscount;
-    console.log(discountAmount);
+
     // Calculate the final price
     const finalPrice = totalPrice - discountAmount;
-    console.log(finalPrice);
     return finalPrice;
 }

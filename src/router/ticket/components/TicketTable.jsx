@@ -28,14 +28,16 @@ const columns = [
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.startTime - b.startTime,
     render: (_, record) => (
-      <span>{new Date(record.startTime * 1000).toLocaleString('en-GB', {
+      <>
+       {record.ticketType.ticketTypeId === 2 ? 'None' : new Date(record.startTime * 1000).toLocaleString('en-GB', {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric',
         hour: '2-digit',
         minute: '2-digit',
         hour12: true,
-      })}</span>
+      })}</>
+     
     ),
   },
   {
@@ -44,14 +46,28 @@ const columns = [
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.endTime - b.endTime,
     render: (_, record) => (
-      <span>{new Date(record.endTime * 1000).toLocaleString('en-GB', {
+      <>
+       {record.ticketType.ticketTypeId === 2 ? 'None' : new Date(record.endTime * 1000).toLocaleString('en-GB', {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric',
         hour: '2-digit',
         minute: '2-digit',
         hour12: true,
-      })}</span>
+      })}
+      </>
+     
+    ),
+  },
+  {
+    title: 'Shift',
+    dataIndex: 'shift',
+
+    render: (_, record) => (
+      <>
+       {record.ticketType.ticketTypeId === 1 ? 'None' : <span>record.</span>}
+      </>
+     
     ),
   },
   {

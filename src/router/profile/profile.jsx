@@ -270,6 +270,10 @@ function Profile() {
                 <Label level={5}>Role</Label>
                 <SelectRole />
               </Col>
+              <Col span={7}>
+                <Label level={5}>Date of birth</Label>
+                <SelectDateOfBirth />
+              </Col>
             </Row>
 
             <Row>
@@ -278,6 +282,7 @@ function Profile() {
                 <InputAddress />
               </Col>
             </Row>
+
 
             <Row>
               <Col span={6}>

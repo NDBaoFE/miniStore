@@ -102,6 +102,12 @@ export const TimeSlotWrapper = styled.div`
     height: 80px;
     background-color: ${(props) => props.status};
     position: relative;
+    box-sizing: border-box;
+    border: ${(props) =>
+        props.isNow ? `4px solid ${themes.colors.primary} ` : "none"};
+    background-clip: ${(props) => (props.isNow ? "content-box" : "border-box")};
+    border-color: ${(props) => (props.isNow ? `${themes.colors.primary}` : "")};
+    padding: ${(props) => (props.isNow ? `4px 4px` : "")};
 `;
 export const Bar = styled.div`
     display: flex;

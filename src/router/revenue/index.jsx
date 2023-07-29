@@ -16,6 +16,7 @@ import { useEffect } from "react"
 import productApi from "../../utils/api/productApi"
 import AnimatedNumbers from 'react-animated-numbers'
 import DayTimeAnalytic from './DayTimeAnalytic'
+import { formatNumberWithDecoration } from '../../utils'
 
 function Revenue() {
   const [data,setData]=useState(null);
@@ -63,7 +64,7 @@ function Revenue() {
           </Header>
          <Number>
          <AnimatedNumbers
-        animateToNumber={ data.allTimeRevenue[1].profit||"100000"}
+        animateToNumber={ (data.allTimeRevenue[1].profit) ||"100000"}
         fontStyle={{ fontSize: '32px' }}
         configs={(number, index) => {
           return { mass: 1, tension: 230 * (index + 1), friction: 140 };
@@ -79,7 +80,7 @@ function Revenue() {
           </Header>
          <Number>
          <AnimatedNumbers
-        animateToNumber={ data.totalProduct||"200"}
+        animateToNumber={ (data.totalProduct)||"200"}
         fontStyle={{ fontSize: '32px' }}
         configs={(number, index) => {
           return { mass: 1, tension: 230 * (index + 1), friction: 140 };
@@ -94,7 +95,7 @@ function Revenue() {
           </Header>
          <Number>
          <AnimatedNumbers
-        animateToNumber={ data.remainProductQuantity||"200"}
+        animateToNumber={data.remainProductQuantity ||"200"}
         fontStyle={{ fontSize: '32px' }}
         configs={(number, index) => {
           return { mass: 1, tension: 230 * (index + 1), friction: 140 };

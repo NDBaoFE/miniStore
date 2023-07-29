@@ -127,6 +127,18 @@ const slice = createSlice({
         setTotalPrice: (state, action) => {
             state.totalPrice = action.payload;
         },
+        removeVoucher: (state, action) => {
+            for (let product of state.orderList.data) {
+                if (product.productId == action.payload.productId) {
+                    product.voucherId = null;
+                    product.finalPrice = product.price;
+                }
+            }
+        },
+        removeApplyAllVoucher: (state) => {
+            state.orderList.voucherId = null;
+            state.orderList.percentDiscount = 0;
+        },
     },
 });
 
@@ -146,4 +158,6 @@ export const {
     applyToAllVoucher,
     clearOrder,
     setTotalPrice,
+    removeVoucher,
+    removeApplyAllVoucher,
 } = slice.actions;

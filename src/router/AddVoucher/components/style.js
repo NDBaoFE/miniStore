@@ -102,6 +102,7 @@ export const FinishButton = styled.div`
 export const StyledCheckGroupBox = styled(CheckboxGroup)`
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     .ant-checkbox-group-item {
         margin: 15px 30px;
     }

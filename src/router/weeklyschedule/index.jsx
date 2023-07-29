@@ -161,7 +161,6 @@ const handleDrag = (e, data) => {
 
   </Instruction>
   </Draggable>
-  <Hero>Schedule</Hero>
   <div className="timetable" style={{ color: "black" }}>
     <ActionHeader>
       { userShift[0] && <Daytime>{userShift[userShift.length-1][0]?.date}-{userShift[0][0]?.date}</Daytime>}
@@ -267,13 +266,14 @@ const TimeSlot = ({ shift, onClick,workingShift }) => {
     status={applyStatus(shift.status)}
       className={`time-slot `}
       onClick={onClick}
+      isNow={isNow}
     >{shift.user ?  <EmployeeCard >
       <Image src={shift.user.userImg} alt=""  style={{width:30,height:30,borderRadius:50}}  />
       <span >{shift.user.name} </span>
       <div>6am-12am </div>
      </EmployeeCard> : <div className="time-slot"> </div> }
      
-     {isNow  && <IconWrapper> <AiFillStar/></IconWrapper>}
+   
     </TimeSlotWrapper>
   );
 };

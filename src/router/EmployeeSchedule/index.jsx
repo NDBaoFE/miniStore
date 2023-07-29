@@ -20,7 +20,6 @@ import Draggable from 'react-draggable';
 import CheckinModal from "./CheckinModal";
 import RequestTable from "./RequestTable";
 import localStorageUtils from "../../utils/localStorageUtils";
-import WorkingShift from "./components/WorkingShift";
 import Banner from "./Banner";
 
 
@@ -73,6 +72,7 @@ const EmployeeTimetable = () => {
   const [open, setOpen] = useState(false);
   const [positions,setPositions]=useState([]);
   const [openTour,setOpenTour] = useState(false);
+  const [checkinShift,setCheckinShift]=useState();
   const [openCheckin,setOpenCheckin]=useState(false);
   const [requests,setRequests]=useState([]);
   const [openInstruction,setOpenInstruction]=useState(true);
@@ -157,6 +157,7 @@ const handleColClick=(userShift)=>{
 
   setOpen(true);
 }
+
 const handleDrag = (e, data) => {
   setPosition({ x: data.lastX, y: data.lastY });
 };
@@ -181,10 +182,12 @@ const handleDrag = (e, data) => {
   </Instruction>
   </Draggable>
 
-     {workingShift && 
+     { workingShift && workingShift.find((item)=>item.userId==profile.userId) && 
      <Banner openInstruction={openInstruction}  setOpenInstruction={setOpenInstruction} 
-     workingShift={workingShift} profile={profile} />
+     workingShift={workingShift} profile={profile}  setCheckinShift={setCheckinShift} setOpenCheckin={setOpenCheckin}/>
+    
      } 
+      <CheckinModal openCheckin={openCheckin} setOpenCheckin={setOpenCheckin} checkinShift={checkinShift} type={true} />
   <div className="timetable" style={{ color: "black" }} ref={ref3} >
     <ActionHeader ref={ref2}>
 
@@ -291,6 +294,7 @@ export const TimeSlot = ({ shift, onClick,workingShift }) => {
   return (
     <TimeSlotWrapper
     status={applyStatus(shift.status)}
+    isNow={isNow}
       className={`time-slot `}
       onClick={onClick}
     >{shift.user ?  <EmployeeCard >
@@ -301,7 +305,7 @@ export const TimeSlot = ({ shift, onClick,workingShift }) => {
     
      </EmployeeCard> : <div className="time-slot"> </div> }
      
-     {isNow  && <IconWrapper> <AiFillStar/></IconWrapper>}
+ 
     </TimeSlotWrapper>
   );
 };

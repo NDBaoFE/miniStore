@@ -124,7 +124,7 @@ const confirm = () => {
             </Row>
             <Row >
                 <Col span={11}>
-                <Label level={5}>Discount </Label>
+                <Label level={5}>Discount (%) </Label>
                 <InputPercentDiscount />
                  </Col>
                  <Col span={11}>
@@ -147,10 +147,6 @@ const confirm = () => {
                 <Label level={5}>Is Apply to All</Label>
                 <SelectApplyAll
                  />
-                 </Col>
-                 <Col span={11}>
-                <Label level={5}>Expired Date</Label>
-                <SelectExpiredDate />
                  </Col>
             </Row>
             </ActionWrapper>

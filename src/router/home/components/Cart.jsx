@@ -1,14 +1,15 @@
-import { Total, OrderList, Row, DeleteButton, PaymentButton } from "./style";
+import { Total, OrderList, Row, DeleteButton, PaymentButton, CloseButton } from "./style";
 import { DeleteOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import { selector } from "./slice/selector";
 import OrderDetail from "./OrderDetail";
 import { Link } from "react-router-dom";
 import { themes } from "../../../utils/theme";
-import { clearOrder } from "./slice";
+import { clearOrder, removeApplyAllVoucher } from "./slice";
 import { CartWrapper } from "./style";
 
 import { useDispatch } from "react-redux";
+import { ImCross } from "react-icons/im";
 function Cart() {
   let subTotal = 0;
   let totalQuantity = 0;
@@ -18,6 +19,10 @@ function Cart() {
   const handleClearCart=()=>{
     dispatch(clearOrder());
   }
+  const handleDeleteVoucher=()=>{
+    dispatch(removeApplyAllVoucher());
+  }
+   
   return (
     <CartWrapper>
       <OrderList>
@@ -41,7 +46,11 @@ function Cart() {
             </Row>
             <Row>
               <div>Discount</div>
-             {isDiscount && <div className="discount"> {`${orderList.percentDiscount*100}%`}</div>}
+             {isDiscount && 
+             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",width:"80px"}}>
+             <div className="discount"> {`${orderList.percentDiscount*100}%`}</div>
+            <CloseButton onClick={handleDeleteVoucher}><ImCross/></CloseButton>
+             </div>}
               {!isDiscount &&<div className="discount">
                 <Link to="/apply-voucher/applyAll">Add Voucher</Link>
               </div>}

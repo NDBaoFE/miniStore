@@ -185,7 +185,7 @@ useEffect(() => {
         return {
           ...option,
           value: `${option.userShiftId}`,
-          label: `${option.userShiftId}`,
+          label: `${option.shift.type} ${new Date(option.startTime * 1000).toLocaleString()}`,
         };
       })}
     />
