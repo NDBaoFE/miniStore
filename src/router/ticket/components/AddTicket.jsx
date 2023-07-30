@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 
 
-
+import './style.css'
 import { AddTicketWrapper, Left, Right, Row, Title } from './style'
 import { Button, Form, Input ,DatePicker} from 'antd';
 import { Select } from 'antd';
@@ -158,7 +158,7 @@ useEffect(() => {
       <Form.Item
         name="startEndTime"
        >
-         <RangePicker />
+         <RangePicker style={{color: "green"}} />
          </Form.Item>
       </>
         
