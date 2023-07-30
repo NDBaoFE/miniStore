@@ -14,10 +14,7 @@ import orderManagementApi from "../../utils/api/orderManagementApi";
 import { NotiModalOrder } from "../OrderManagement/components/style";
 import { toastError, toastSuccess } from "../../components/Toast";
 import { BsExclamationCircle } from "react-icons/Bs";
-import OrderDetailTable from "./components/OrderDetailTable";
-import { render } from "react-dom";
-import { calculateFinalPrice } from "../../utils/price";
-import { useRef } from "react";
+
 import { formatNumberWithDecoration } from "../../utils";
 
 
@@ -80,13 +77,15 @@ const OrderManagemntPage = () => {
     fetchData();
   }, [loaded, current, reload, token]);
 
-  console.log(order);
+
+
+
     let total = 0
     for(let item of order ){
       total += item.total;
     }
 
-let totalFormated = formatNumberWithDecoration(total) + "VND" 
+
 
   const columns = [
     {
@@ -160,7 +159,7 @@ let totalFormated = formatNumberWithDecoration(total) + "VND"
         const token = localStorage.getItem("Authorization");
         const res = await orderManagementApi.deleteOrder(id, token);
         if (res.status === 200) {
-          toastSuccess("Delete Order Succesfully");
+          toastSuccess(res.data.message);
           setSearch(search);
         } else {
           toastError("Delete Order Failed");

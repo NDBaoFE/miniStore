@@ -4,6 +4,8 @@ import { selector } from "../../home/components/slice/selector"
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {setTotalPrice} from "../../home/components/slice/index"
+import { formatNumberWithDecoration } from "../../../utils";
+
 function OrderSummary() {
   const {orderList,}=useSelector(selector);
  
@@ -15,7 +17,7 @@ function OrderSummary() {
         <h3>Order Summary</h3>
         <Row>
             <div>Products subtotal</div>
-            <div>{total}đ</div>
+            <div>{formatNumberWithDecoration(total)} VNĐ</div>
         </Row>
         <Row>
         <div>Discount</div>
@@ -25,7 +27,7 @@ function OrderSummary() {
         <Line/>
         <TotalRow>
             <div>Total</div>
-            <div>{total*(1-orderList.percentDiscount)} VNĐ</div>
+            <div>{formatNumberWithDecoration(total*(1-orderList.percentDiscount) )} VNĐ</div>
         </TotalRow>
         </Wrapper>
    

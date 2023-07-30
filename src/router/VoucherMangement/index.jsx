@@ -36,7 +36,7 @@ function VoucherManagement() {
           const token= localStorage.getItem("Authorization");
           const res= await productApi.deleteVoucher(id,token);
           if(res.status===200){
-            toastSuccess("Delete Voucher Succesfully");
+            toastSuccess(res.data.message);
             setLoader(!loader);
           }else{
             toastError("Delete Voucher Failed");
@@ -77,7 +77,34 @@ function VoucherManagement() {
        
        
       },
-   
+
+      {
+        title: 'Is Apply to All',
+        dataIndex: 'isApplyAll',
+        key: 'isApplyAll',
+        render: (isApplyAll) => {
+          if (isApplyAll === true) {
+            return (
+              <div
+       
+              >
+                Yes
+              </div>
+            );
+          } else {
+            return (
+              <div
+          
+              >
+                No
+              </div>
+            );
+          }
+        },
+      },
+       
+       
+     
     {
       title: 'Quantity',
       dataIndex: 'quantity',
