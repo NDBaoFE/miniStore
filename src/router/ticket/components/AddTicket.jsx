@@ -152,7 +152,7 @@ useEffect(() => {
 }
  </Left>
       <Right>
-      { type == "Nghỉ phép" &&
+      { type == "Leave" &&
       <>
       <Title>Start Time and End Time</Title>
       <Form.Item
@@ -163,7 +163,7 @@ useEffect(() => {
       </>
         
       }
-{shifts && type === "Chuyển ca" && (
+{shifts && type === "Cancel Shift" && (
   <>
   <Title>Your shift</Title>
   <Form.Item name="userShift" value={choosedShift}>

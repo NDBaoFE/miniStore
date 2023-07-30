@@ -57,7 +57,8 @@ function UpdateUser() {
   const UpdateInfo = async () => {
     dispatch(actions.getUserInfo());
     const token=localStorage.getItem("Authorization");
-    const res = await userApi.updateUser(info, id,token);
+    console.log(info.gender);
+    const res = await userApi.updateUser({...info, roleId: info.roleId+1,gender: info.gender  == 1 ? true: false}, id,token);
 
     if (res.data.status == 200) {
       setSuccess(true);

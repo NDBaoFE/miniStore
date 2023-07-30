@@ -43,7 +43,7 @@ const LoginForm = () => {
       navigate("/home");
       toastSuccess("Login Successfully");
     } else{
-      toastError("Login failed")
+      toastError(res.data.message);
     }
   };
 
