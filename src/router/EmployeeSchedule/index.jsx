@@ -20,7 +20,6 @@ import Draggable from 'react-draggable';
 import CheckinModal from "./CheckinModal";
 import RequestTable from "./RequestTable";
 import localStorageUtils from "../../utils/localStorageUtils";
-import WorkingShift from "./components/WorkingShift";
 import Banner from "./Banner";
 
 
@@ -73,6 +72,7 @@ const EmployeeTimetable = () => {
   const [open, setOpen] = useState(false);
   const [positions,setPositions]=useState([]);
   const [openTour,setOpenTour] = useState(false);
+  const [checkinShift,setCheckinShift]=useState();
   const [openCheckin,setOpenCheckin]=useState(false);
   const [requests,setRequests]=useState([]);
   const [openInstruction,setOpenInstruction]=useState(true);
@@ -157,6 +157,7 @@ const handleColClick=(userShift)=>{
 
   setOpen(true);
 }
+
 const handleDrag = (e, data) => {
   setPosition({ x: data.lastX, y: data.lastY });
 };
@@ -181,10 +182,12 @@ const handleDrag = (e, data) => {
   </Instruction>
   </Draggable>
 
-     {workingShift && 
+     { workingShift && workingShift.find((item)=>item.userId==profile.userId) && 
      <Banner openInstruction={openInstruction}  setOpenInstruction={setOpenInstruction} 
-     workingShift={workingShift} profile={profile} />
+     workingShift={workingShift} profile={profile}  setCheckinShift={setCheckinShift} setOpenCheckin={setOpenCheckin}/>
+    
      } 
+      <CheckinModal openCheckin={openCheckin} setOpenCheckin={setOpenCheckin} checkinShift={checkinShift} type={true} />
   <div className="timetable" style={{ color: "black" }} ref={ref3} >
     <ActionHeader ref={ref2}>
 
@@ -200,15 +203,15 @@ const handleDrag = (e, data) => {
         </RightButton>
       </ButtonContainer>
     </ActionHeader>
-    <div className="col">
+    <div className="col" >
       {daysOfWeek.map((day) => {
         if (day.id !== 7) {
         
           const shifts = userShift[day.id]?.slice(0,3) || [];
           return (
-            <DayCol key={day.id} className="day-column" onClick={()=>handleColClick(userShift[day.id])}>
+            <DayCol key={day.id} className="day-column" onClick={()=>handleColClick(userShift[day.id])} >
               <div className="day-cell">{day.value}</div>
-              <div className="shift-column">
+              <div className="shift-column" style={{marginBottom:'20px'}}>
                 {shifts.map((slot) => (
                   <TimeSlot
                   workingShift={workingShift}
@@ -291,17 +294,18 @@ export const TimeSlot = ({ shift, onClick,workingShift }) => {
   return (
     <TimeSlotWrapper
     status={applyStatus(shift.status)}
+    isNow={isNow}
       className={`time-slot `}
       onClick={onClick}
     >{shift.user ?  <EmployeeCard >
       <Image src={shift.user.userImg} alt=""  style={{width:30,height:30,borderRadius:50}}  />
       <span >{shift.user.name} </span>
      
-      <div>6am-12am </div>
+      <div>{`${shift.shift.startWorkHour}:00 - ${shift.shift.endWorkHour}:00`}</div>
     
      </EmployeeCard> : <div className="time-slot"> </div> }
      
-     {isNow  && <IconWrapper> <AiFillStar/></IconWrapper>}
+ 
     </TimeSlotWrapper>
   );
 };

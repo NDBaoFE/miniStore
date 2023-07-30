@@ -70,7 +70,7 @@ const AddUser = () => {
   };
 
   const handleFinishFailed = () => {
-    console.log(" Hãy nhập tất cả các field !!");
+    console.log("Please enter all of the information");
   };
 
   const confirm = () => {
@@ -141,20 +141,20 @@ const AddUser = () => {
               <Label level={5}>Phone</Label>
               <InputPhone />
             </Col>
-            <Col span={8}>
-              <Label level={5}>Gender</Label>
+            <Col span={10}>
+              <Label level={5} style={{marginTop:'-20px', marginLeft:15}}>Gender</Label>
               <SelectGender />
             </Col>
           </Row>
 
           <Row>
-            <Col span={11}>
+            <Col span={6}>
               <Label level={5}>Date of Birth</Label>
               <SelectDateOfBirth />
             </Col>
 
-            <Col span={8}>
-              <Label level={5}>Role</Label>
+            <Col span={10} style={{marginLeft:200}}>
+              <Label level={5} style={{marginTop: 45, marginLeft:15}}>Role</Label>
               <SelectRole />
             </Col>
           </Row>

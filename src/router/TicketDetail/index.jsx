@@ -8,16 +8,18 @@ import { toastError, toastSuccess } from '../../components/Toast';
 
 import useAuth from '../../utils/useAuth';
 import { Body, Container, Description, Employee, Header, NotiModal, Row, StyledButton, Title } from './style'
-import { Image } from 'antd'
+import { Image, Tag } from 'antd'
 import { useNavigate } from 'react-router-dom';
 import productApi from '../../utils/api/productApi';
+import { Card, Img, Info, ShiftName, ShiftTime, ShiftType, Team } from './cardStyle';
+import { EmployeeCard } from '../weeklyschedule/style';
+import { Status } from '../weeklyschedule/components/style';
 function TicketDetail() {
     const navigate=useNavigate();
     const params=useParams();
     const [detail,setDetail]=useState();
     const {profile,userRole}=useAuth();
-    console.log(userRole);
-    console.log(profile);
+
         const [loaded, setLoaded] = useState(false);
         const token=localStorage.getItem("Authorization");
     useEffect(() => {
@@ -37,7 +39,7 @@ function TicketDetail() {
     const handleApply=()=>{
         NotiModal.confirm({
           maskClosable: true,
-          title: 'You sure you want to decline for this ticket ?',
+          title: 'You sure you want to approve for this ticket ?',
           content: 'Remember , once you submit , you have to deal with the changes in the application',
           okText: 'Confirm',
           cancelText: 'Cancel',
@@ -81,12 +83,12 @@ function TicketDetail() {
             
             </Row>
           { detail && <Row style={{alignItems:"center"}}>
-            <Image src={detail.user.userImg}/>
+            <Image src={detail.ticket.user.userImg}/>
              
                 <Employee>
                 <Row style={{alignItems:"center"}}>
-                <h4>{detail.user.name}</h4>
-                <div>{`<${detail.user.email}>`}</div>
+                <h4>{detail.ticket.user.name}</h4>
+                <div>{`<${detail.ticket.user.email}>`}</div>
                 </Row>
                 <Row style={{alignItems:"center",marginLeft:"14px"}}>
                 <div style={{fontSize:"10px"}}>from a while ago</div>
@@ -94,36 +96,62 @@ function TicketDetail() {
                 </Employee>
             </Row>}  
         </Header>
-        {  detail && <Body>
+        {   detail && <Body>
+            <Title>{detail.ticket.ticketTypeId == 1 ? `${detail.ticket.user.name} wanted to Request for a leave`: `${detail.ticket.user.name} had request for  a replacement on the following shift`}</Title>
+           <div> <strong>Title</strong>:  {detail.ticket.title}</div>
+           <div> <strong>Description</strong>:  {detail.ticket.description}</div>
+            <Description style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
+            {detail.ticket.ticketTypeId == 1 &&
+             <Row style={{justifyContent:"space-between"}}>
+           
+             <h3>
+                 Start-time :{new Date(detail.ticket.startTime*1000).toLocaleString('en-GB', {
+         day: '2-digit',
+         month: '2-digit',
+         year: 'numeric',
+         hour: '2-digit',
+         minute: '2-digit',
+      
+       })}
+             </h3>
+             <h3>
+                 End-time : {new Date(detail.ticket.endTime*1000).toLocaleString('en-GB', {
+         day: '2-digit',
+         month: '2-digit',
+         year: 'numeric',
+         hour: '2-digit',
+         minute: '2-digit',
+        
+       })}
+             </h3>
+             </Row>
+            }
+            {detail.ticket.ticketTypeId == 2 && 
             
-            <Title>{detail.title}</Title>
-            
-            <Description style={{textAlign:"justify"}}>
-            <Row style={{justifyContent:"space-between"}}>
-            <h3>
-                Start-time :{new Date(detail.startTime*1000).toLocaleString('en-GB', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-     
-      })}
-            </h3>
-            <h3>
-                End-time : {new Date(detail.endTime*1000).toLocaleString('en-GB', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
+            <Card  style={{height:170,margin: 20}}>
+          <Img  alt="" src={"https://i.imgur.com/eHkCrmR_d.webp?maxwidth=520&shape=thumb&fidelity=high"} />
+       <Info>
+         <ShiftName style={{color: `${detail.userShift.shift.type == ("saler-night" || "guard-night")? "white":"inherit"}`}}>{detail.userShift.shift.type}</ShiftName>
+         <ShiftTime style={{color: `${detail.userShift.shift.type ==("saler-night" || "guard-night")? "white":"inherit"}`}}>{`${detail.userShift.shift.startWorkHour}:00-${detail.userShift.shift.endWorkHour}:00`}</ShiftTime>
+       </Info>
+       <Team>
+      { detail.userShift.user? 
+      <>
+      <EmployeeCard >
+     <Image src={detail.userShift.user.userImg} alt=""  style={{width:50,height:50,borderRadius:50}}  />
+     <span style={{marginLeft:20,fontSize:"20px",marginBottom:"10px"}}>{detail.userShift.user.name}</span>
+     <Tag color={`${detail.userShift.user.role.name == "admin"? "red": detail.userShift.user.role.name == "saler" ?"green":"blue" }`}  style={{marginLeft:20 ,width:80}}>{detail.userShift.user.role.name}</Tag>
+    </EmployeeCard>
+      </> : <h2>Empty</h2>} 
+   
+       </Team>
        
-      })}
-            </h3>
-            </Row>
-               {detail.description} 
+       </Card>
+            }
+           
+              
             </Description>
-            {userRole == 'admin' && detail.isApproved == null && <Row style={{justifyContent:"space-around",marginTop:"60px" ,padding: "0 150px"}}>
+            {userRole == 'admin' && detail.ticket.isApproved == null && <Row style={{justifyContent:"space-around",marginTop:"60px" ,padding: "0 150px"}}>
                 <StyledButton onClick={handleDecline} >Decline</StyledButton>
                 <StyledButton type="primary" onClick={handleApply}>Approve</StyledButton>
             </Row>}

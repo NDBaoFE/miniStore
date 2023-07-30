@@ -59,14 +59,14 @@ const handleFinish = () => {
 };
 
 const handleFinishFailed = () => {
-    console.log(' Hãy nhập tất cả các field !!');
+    console.log(' Please enter all the information !!');
 };
 const confirm = () => {
     NotiModal.confirm({
         maskClosable: true,
-        title: 'Bạn có muốn thêm sản phẩm này vào cửa hàng ?',
+        title: 'Do you want to add this product ?',
         icon: <ExclamationCircleOutlined />,
-        content: 'Khi bạn nhấn "Confirm", sản phẩm này sẽ được thêm vào cửa hàng',
+        content: 'Click "Confirm" to add this product',
         okText: 'Confirm',
         centered: true,
         cancelText: 'Cancel',

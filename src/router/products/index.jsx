@@ -25,7 +25,7 @@ function ProductManagement() {
   const handleExportToExcel = () => {
     setLoading(true);
     // Call the export function from another component
-    exportToExcel(products, columns, 'table_data')
+    exportToExcel( columns, 'table_data')
       .then(() => {
         // Delay hiding the loading screen for a short time to give the user visual feedback
         setTimeout(() => {
@@ -46,11 +46,11 @@ function ProductManagement() {
   const confirm = async(id) => {
     NotiModal.confirm({
         maskClosable: true,
-        title: 'Bạn có muốn thay đổi thông tin tài khoản?',
+        title: 'Do you want to delete this product ?',
         icon: <BsExclamationCircle />,
-        content: 'Tài khoản sau khi đổi sẽ không còn còn lưu trữ thông tin trước đó được nữa.',
-        okText: 'Xác nhận',
-        cancelText: 'Huỷ',
+        content: 'Click "Confirm" to delete this user permantly ',
+        okText: 'Confirm',
+        cancelText: 'Cancel',
         onOk: async() => {
           const token=localStorage.getItem("Authorization");
           const res= await productApi.deleteProduct(id,token);

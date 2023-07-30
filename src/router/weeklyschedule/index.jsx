@@ -161,7 +161,6 @@ const handleDrag = (e, data) => {
 
   </Instruction>
   </Draggable>
-  <Hero>Schedule</Hero>
   <div className="timetable" style={{ color: "black" }}>
     <ActionHeader>
       { userShift[0] && <Daytime>{userShift[userShift.length-1][0]?.date}-{userShift[0][0]?.date}</Daytime>}
@@ -182,7 +181,7 @@ const handleDrag = (e, data) => {
           return (
             <DayCol key={day.id} className="day-column" onClick={()=>handleColClick(userShift[day.id])}>
               <div className="day-cell">{day.value}</div>
-              <div className="shift-column">
+              <div className="shift-column" style={{marginBottom:"20px"}}>
                 {shifts.map((slot) => (
                   <TimeSlot
                     key={slot.userShiftId}
@@ -204,7 +203,7 @@ const handleDrag = (e, data) => {
         }
       })}
     </div>
-    <div className="col">
+    <div className="col"   >
       {daysOfWeek.map((day) => {
         if (day.id !== 7) {
           const shifts = userShift[day.id]?.slice(3) || [];
@@ -228,7 +227,7 @@ const handleDrag = (e, data) => {
         } else {
           return (
             <ParentContainer key={day.id} style={{backgroundColor:'#2eb161',height:'180px',marginTop:'10px'}}>
-              <Bar>{day.value1}</Bar>
+                 <Bar >{day.value0}</Bar>
             </ParentContainer>
           );
         }
@@ -261,13 +260,14 @@ const TimeSlot = ({ shift, onClick,workingShift }) => {
     status={applyStatus(shift.status)}
       className={`time-slot `}
       onClick={onClick}
+      isNow={isNow}
     >{shift.user ?  <EmployeeCard >
       <Image src={shift.user.userImg} alt=""  style={{width:30,height:30,borderRadius:50}}  />
       <span >{shift.user.name} </span>
-      <div>6am-12am </div>
+      <div>{`${shift.shift.startWorkHour}:00 - ${shift.shift.endWorkHour}:00`}</div>
      </EmployeeCard> : <div className="time-slot"> </div> }
      
-     {isNow  && <IconWrapper> <AiFillStar/></IconWrapper>}
+   
     </TimeSlotWrapper>
   );
 };

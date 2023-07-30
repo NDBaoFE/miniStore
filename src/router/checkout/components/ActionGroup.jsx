@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
-import { GroupWrapper,FinishButton, NotiModal } from "./styled"
+import { GroupWrapper,FinishButton, NotiModal, CancelButton } from "./styled"
 import { useSelector } from "react-redux";
 import { selector } from "../../home/components/slice/selector";
 import productApi from "../../../utils/api/productApi";
@@ -17,6 +17,7 @@ import  { useRef } from 'react';
 import { paymentApi } from "../../../utils/api/paymentApi";
 
 function ActionGroup({change}) {
+  
   const componentRef = useRef();
   const navigate=useNavigate();
   const dispatch=useDispatch();
@@ -41,20 +42,26 @@ function ActionGroup({change}) {
       window.location.href=res.data.data;
     }
     }else{
-   
-      const res= await productApi.makeOrder(modifiedOrderList,token)  ;
+      if(totalPrice > parseInt(change)){
+        toastError("Change is not enough");
+      }else{
+        const res= await productApi.makeOrder(modifiedOrderList,token)  ;
         if(res.data.status  ==200){
           toastSuccess("Make order Successfully");
           dispatch(clearOrder());
           handlePrint();
           navigate(-1);
         }else{
-          toastError("Make order Failed");
+          toastError(res.data.message);
         }
+      }
+     
     }
    
   }
 
+
+  
   const handleConfirm = () => {
     handleOk(); // Call the handleOk function passed as prop
    
@@ -62,11 +69,11 @@ function ActionGroup({change}) {
   const confirm = async() => {
     NotiModal.confirm({
         maskClosable: true,
-        title: 'Bạn có muốn thay đổi thông tin tài khoản?',
+        title: 'Are you sure you want to make an order ?',
         icon: <BsExclamationCircle />,
-        content: 'Tài khoản sau khi đổi sẽ không còn còn lưu trữ thông tin trước đó được nữa.',
-        okText: 'Xác nhận',
-        cancelText: 'Huỷ',
+        content: 'Make sure you have enough products for the customer',
+        okText: 'Confirm',
+        cancelText: 'Cancel',
         onOk: async() => {
           handleConfirm();
         },
@@ -75,11 +82,17 @@ function ActionGroup({change}) {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
+
+
+  const backToPrevious = () => {
+    navigate('/home')
+  }
+
   return (
     <GroupWrapper>
        
-        <div>Discard Sale</div>
-        <FinishButton onClick={()=>confirm()}>$ Finish Sale</FinishButton>
+       <CancelButton onClick={() => backToPrevious()}>Discard Order</CancelButton>
+        <FinishButton onClick={()=>confirm()}>Finish Sale</FinishButton>
       
         <ComponentToPrint ref={componentRef} change={change} orderList={orderList.data}/>
     </GroupWrapper>

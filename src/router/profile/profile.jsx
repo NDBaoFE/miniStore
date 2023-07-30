@@ -60,7 +60,6 @@ function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
 
   const showModalPassword = () => {
     navigate("/user/changePassword");
@@ -74,7 +73,7 @@ function Profile() {
 
   const UpdateInfo = async () => {
     dispatch(actions.getProfileInfo());
-    const res = await profileApi.updateProfile(info, id, token);
+    const res = await profileApi.updateProfile({...info,gender: gender == 1? true :false }, id, token);
 
     if (res.data.status == 200) {
       setSuccess(true);
@@ -96,7 +95,7 @@ function Profile() {
   };
 
   const token = localStorage.getItem("Authorization");
-  const [salary, setSalary] = useState(1000);
+  const [salary, setSalary] = useState(0);
   const [idUser, setIdUser] = useState(0)
   useEffect(() => {
     async function fetchData() {
@@ -228,7 +227,6 @@ function Profile() {
     },
   ];
 
-  const [search, setSearch] = useState("");
   const [payslips, setPayslips] = useState([]);
 
   return (
@@ -296,6 +294,10 @@ function Profile() {
                 <Label level={5}>Role</Label>
                 <SelectRole />
               </Col>
+              <Col span={7}>
+                <Label level={5}>Date of birth</Label>
+                <SelectDateOfBirth />
+              </Col>
             </Row>
 
             <Row>
@@ -304,6 +306,7 @@ function Profile() {
                 <InputAddress />
               </Col>
             </Row>
+
 
             <Row>
               <Col span={6}>

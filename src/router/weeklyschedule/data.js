@@ -1222,7 +1222,7 @@ export const instruction = [
     {
         id: 1,
         color: "#ff9683",
-        title: "Alert",
+        title: "Absent",
     },
     {
         id: 2,
@@ -1232,7 +1232,7 @@ export const instruction = [
     {
         id: 3,
         color: "#ffee93",
-        title: "Warning",
+        title: "Late",
     },
     {
         id: 4,
@@ -1268,6 +1268,41 @@ export const shiftStatus = {
     notYet: {
         data: ["not yet"],
         color: "#44cbcd",
+    },
+    working: {
+        data: ["working"],
+        color: "#adf7b6",
+    },
+};
+
+export const shiftStatus1 = {
+    alert: {
+        data: [
+            "not checked in",
+            "not checked in and not checked out",
+            "not checked in and checked out",
+            "not checked in and not checked out",
+        ],
+        color: "#ff9683",
+    },
+    warning: {
+        data: [
+            "checked in late",
+            "checked in late and not checked out",
+            "checked in late and checked out",
+            "checked in late and not checked out",
+            "checked in and not checked out",
+            "checked in and checked out late",
+        ],
+        color: "#588f27",
+    },
+    success: {
+        data: ["checked in and checked out"],
+        color: "#588f27",
+    },
+    notYet: {
+        data: ["not yet"],
+        color: "#b9121b",
     },
     working: {
         data: ["working"],

@@ -14,10 +14,7 @@ import orderManagementApi from "../../utils/api/orderManagementApi";
 import { NotiModalOrder } from "../OrderManagement/components/style";
 import { toastError, toastSuccess } from "../../components/Toast";
 import { BsExclamationCircle } from "react-icons/Bs";
-import OrderDetailTable from "./components/OrderDetailTable";
-import { render } from "react-dom";
-import { calculateFinalPrice } from "../../utils/price";
-import { useRef } from "react";
+
 import { formatNumberWithDecoration } from "../../utils";
 
 
@@ -80,13 +77,20 @@ const OrderManagemntPage = () => {
     fetchData();
   }, [loaded, current, reload, token]);
 
-  console.log(order);
-    let total = 0
+
+
+
+    let totalSale = 0
+    let totalImport = 0
     for(let item of order ){
-      total += item.total;
+      if(item.type === false){
+        totalSale += item.total;
+      }else{
+        totalImport += item.total
+      }
     }
 
-let totalFormated = formatNumberWithDecoration(total) + "VND" 
+
 
   const columns = [
     {
@@ -118,8 +122,33 @@ let totalFormated = formatNumberWithDecoration(total) + "VND"
       render: (_, record) => <span style={{color:"green", fontWeight:600}}>{formatNumberWithDecoration(record.total)} VND</span>,
     },
     {
-      title: "Payment Method",
-      dataIndex: "paymentMethod",
+      title: "Type",
+      dataIndex: "type",
+      render: (type) => {
+        if (type === false || type ===null) {
+          return (
+            <div
+              style={{
+                color: "green",
+                fontWeight: 600,
+              }}
+            >
+              Sale
+            </div>
+          );
+        } else {
+          return (
+            <div
+              style={{
+                color: "red",
+                fontWeight: 600,
+              }}
+            >
+              Import
+            </div>
+          );
+        }
+      },
 
     },
     {
@@ -151,16 +180,16 @@ let totalFormated = formatNumberWithDecoration(total) + "VND"
   const confirm = async (id) => {
     NotiModalOrder.confirm({
       maskClosable: true,
-      title: "Bạn có muốn xóa nhân viên này không?",
+      title: "Do you want to rollback this order",
       icon: <BsExclamationCircle />,
-      content: "Khi bạn nhấn đồng ý, nhân viên sẽ bị xóa vĩnh viễn",
-      okText: "Xác nhận",
-      cancelText: "Huỷ",
+      content: "Click 'Confirm' to rollback this order",
+      okText: "Confirm",
+      cancelText: "Cancel",
       onOk: async () => {
         const token = localStorage.getItem("Authorization");
         const res = await orderManagementApi.deleteOrder(id, token);
         if (res.status === 200) {
-          toastSuccess("Delete Order Succesfully");
+          toastSuccess(res.data.message);
           setSearch(search);
         } else {
           toastError("Delete Order Failed");
@@ -194,8 +223,8 @@ let totalFormated = formatNumberWithDecoration(total) + "VND"
                         index == 0
                           ? report.numberOfProcessedTickets 
                           : index == 1
-                          ? total
-                          : 0
+                          ? totalSale
+                          : totalImport
                       }
                       fontStyle={{ fontSize: 32 }}
                       configs={(number, index) => {

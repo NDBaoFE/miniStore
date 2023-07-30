@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 
 
-
+import './style.css'
 import { AddTicketWrapper, Left, Right, Row, Title } from './style'
 import { Button, Form, Input ,DatePicker} from 'antd';
 import { Select } from 'antd';
@@ -17,16 +17,30 @@ const { RangePicker } = DatePicker;
 function AddTicket({setLoaded}) {
   const{userId}=useAuth();
   const [options,setOptions]=useState();
+  const [shifts,setShifts]=useState();
   const [form] = Form.useForm();
   const onFinish = async  (values) => {
-    const newArray={
-      startTime: new Date(values.startEndTime[0]).getTime() / 1000,
-      endTime: new Date(values.startEndTime[1]).getTime() / 1000,
-      userId:userId,
-      title:values.title,
-      description :values.description,
-      ticketTypeId: options.find((option)=>option.name===values.type).ticketTypeId
+    console.log(values);
+    let newArray={};
+    if(values.userShift){
+      newArray={
+        userShiftId: parseInt(values.userShift),
+        userId:userId,
+        title:values.title,
+        description :values.description,
+        ticketTypeId: options.find((option)=>option.name===values.type).ticketTypeId
+      }
+    }else{
+       newArray={
+        startTime: new Date(values.startEndTime[0]).getTime() / 1000,
+        endTime: new Date(values.startEndTime[1]).getTime() / 1000,
+        userId:userId,
+        title:values.title,
+        description :values.description,
+        ticketTypeId: options.find((option)=>option.name===values.type).ticketTypeId
+      }
     }
+   
     const token=localStorage.getItem("Authorization");
    const response = await productApi.addTicket(newArray,token);
    if(response.data.status===200){
@@ -53,9 +67,19 @@ useEffect(() => {
         }
     }
     fetchData();
+    
+    async function getShift() {
+      try {
+          const response = await productApi.getOwnShift(token);
+          setShifts(response.data.data);
+      } catch (error) {
+          console.error(error);
+      }
+  }
+  getShift();
 }, [token]);
   const [type,setType]=useState("");
-
+  const [choosedShift, setChoosedShift] = useState("");
   const onSearch = (value) => {
     console.log('search:', value);
   };
@@ -108,8 +132,8 @@ useEffect(() => {
     placeholder="Select ticket type"
     optionFilterProp="children"
     onChange={(value) => {
-      console.log(`selected ${value}`);
-      setType(value.name);
+      console.log(value);
+      setType(value);
     }}
     onSearch={onSearch}
     filterOption={(input, option) =>
@@ -124,18 +148,52 @@ useEffect(() => {
 
     })}
   />
-
       </Form.Item>
 }
  </Left>
       <Right>
+      { type == "Leave" &&
+      <>
       <Title>Start Time and End Time</Title>
       <Form.Item
-     name="startEndTime"
-    >
-      
-      <RangePicker />
-      </Form.Item>
+        name="startEndTime"
+       >
+         <RangePicker style={{color: "green"}} />
+         </Form.Item>
+      </>
+        
+      }
+{shifts && type === "Cancel Shift" && (
+  <>
+  <Title>Your shift</Title>
+  <Form.Item name="userShift" value={choosedShift}>
+    
+    <Select
+      showSearch
+      value={choosedShift}
+      placeholder="Select Your shift"
+      optionFilterProp="children"
+      onChange={(value) => {
+        console.log(value);
+        setChoosedShift(value);
+      }}
+      onSearch={onSearch}
+      filterOption={(input, option) =>
+        (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+      }
+      options={shifts.map((option) => {
+        return {
+          ...option,
+          value: `${option.userShiftId}`,
+          label: `${option.shift.type} ${new Date(option.startTime * 1000).toLocaleString()}`,
+        };
+      })}
+    />
+  </Form.Item>
+  </>
+)}
+
+
       <Title>Description</Title>
       <Form.Item
     style={{

@@ -56,7 +56,7 @@ function UpdateProduct() {
   };
 
   const handleFinishFailed = () => {
-    console.log(" Hãy nhập tất cả các field !!");
+    console.log(" Please enter all the information");
   };
   const token = localStorage.getItem("Authorization");
   useEffect(() => {
@@ -122,7 +122,7 @@ function UpdateProduct() {
             >
               <Photo />
             </Row>
-            <Row>
+            <Row  style={{marginTop: 30}}>
               <Col span={24}>
                 <Label level={5}>Product name</Label>
                 <InputName />

@@ -23,7 +23,6 @@ import InputMinItem from "./components/components/data-entry/InputMinItem";
 import InputPercentDiscount from "./components/components/data-entry/InputPercentDiscount";
 import SelectApplyAll from "./components/components/data-entry/SelectApplyAll";
 import InputQuantity from "./components/components/data-entry/InputQuantity";
-import SelectExpiredDate from "./components/components/data-entry/SelectExpiredDate";
 import InputDescription from "./components/components/data-entry/InputDescription";
 import ProductDrawer from "./components/ProductDrawer";
 import { useNavigate } from "react-router-dom";
@@ -124,7 +123,7 @@ const confirm = () => {
             </Row>
             <Row >
                 <Col span={11}>
-                <Label level={5}>Discount </Label>
+                <Label level={5}>Discount (%) </Label>
                 <InputPercentDiscount />
                  </Col>
                  <Col span={11}>
@@ -147,10 +146,6 @@ const confirm = () => {
                 <Label level={5}>Is Apply to All</Label>
                 <SelectApplyAll
                  />
-                 </Col>
-                 <Col span={11}>
-                <Label level={5}>Expired Date</Label>
-                <SelectExpiredDate />
                  </Col>
             </Row>
             </ActionWrapper>

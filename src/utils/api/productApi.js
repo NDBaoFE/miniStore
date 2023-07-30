@@ -184,6 +184,10 @@ const productApi = {
         const url = `/dashboard`;
         return get(url, {}, { Authorization: token });
     },
+    getOwnShift: (token) => {
+        const url = `/userShift/all`;
+        return get(url, {}, { Authorization: token });
+    },
 };
 
 export default productApi;

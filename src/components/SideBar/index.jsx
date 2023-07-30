@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import {BiMoney} from "react-icons/bi"
 import {BsBoxSeam,} from "react-icons/Bs"
 import { Menu } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -9,9 +8,8 @@ import SidebarLink from "../SideBarLink";
 import {  SideBar, Wrapper, SignOut, Button, Container } from "./style";
 import {FaRegPaperPlane}   from "react-icons/fa"
 
-import { BsGrid, BsBookmarkFill } from "react-icons/Bs";
-
-
+import { BsGrid,  } from "react-icons/Bs";
+import { MdPaid} from "react-icons/md";
 import { RiCoupon2Line} from "react-icons/ri";
 import {LuUsers}  from "react-icons/lu";
 import {
@@ -79,16 +77,16 @@ const itemsAdmin = [
         "/ticket",
         <FaRegPaperPlane />
     ),
+   
     getItem(
-        <SidebarLink to="/orderManagement " child="Order" />,
-        "/orderManagement",
-        <BsBookmarkFill/>
-    ),
-
-    getItem(
-        <SidebarLink to="/payroll " child="Payslip" />,
+        <SidebarLink to="/payroll " child="PayRoll" />,
         "/payroll",
-      
+        <MdPaid/>
+    ),
+    getItem(
+        <SidebarLink to="/order " child="Order " />,
+        "/order",   
+        <BsBoxSeam />
     ),
 ];
 const itemsEmployee = [
@@ -145,7 +143,7 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
                     </Button>
                 </Container>
 
-                <div style={{ overflowY: "scroll" , maxHeight: "500px"}}>
+                <div style={{ overflowY: "scroll" , maxHeight: "80%"}} className="menu">
                     <Menu
                         defaultSelectedKeys={[selectedKey]}
                         defaultOpenKeys={["blog", "account"]}

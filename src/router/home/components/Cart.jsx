@@ -1,14 +1,16 @@
-import { Total, OrderList, Row, DeleteButton, PaymentButton } from "./style";
+import { Total, OrderList, Row, DeleteButton, PaymentButton, CloseButton } from "./style";
 import { DeleteOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import { selector } from "./slice/selector";
 import OrderDetail from "./OrderDetail";
 import { Link } from "react-router-dom";
 import { themes } from "../../../utils/theme";
-import { clearOrder } from "./slice";
+import { clearOrder, removeApplyAllVoucher } from "./slice";
 import { CartWrapper } from "./style";
 
 import { useDispatch } from "react-redux";
+import { ImCross } from "react-icons/im";
+import { formatNumberWithDecoration } from "../../../utils";
 function Cart() {
   let subTotal = 0;
   let totalQuantity = 0;
@@ -18,10 +20,15 @@ function Cart() {
   const handleClearCart=()=>{
     dispatch(clearOrder());
   }
+  const handleDeleteVoucher=()=>{
+    dispatch(removeApplyAllVoucher());
+  }
+   
   return (
     <CartWrapper>
       <OrderList>
-          {orderList.data.map((product) => {
+        <div style={{maxHeight:"400px",overflowY:"scroll",overflowX:"hidden"}} className="cart">
+        {orderList.data.map((product) => {
             subTotal += product.finalPrice * product.quantity;
             totalQuantity += product.quantity;
             return (
@@ -31,14 +38,20 @@ function Cart() {
               ></OrderDetail>
             );
           })}
+        </div>
+         
           <Total>
             <Row>
               <div>{`${totalQuantity} items`}</div>
-              <div>{`SubTotal : ${subTotal}  VNĐ`}</div>
+              <div>{`SubTotal : ${formatNumberWithDecoration(subTotal)}  VNĐ`}</div>
             </Row>
             <Row>
               <div>Discount</div>
-             {isDiscount && <div className="discount"> {`${orderList.percentDiscount*100}%`}</div>}
+             {isDiscount && 
+             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",width:"80px"}}>
+             <div className="discount"> {`${orderList.percentDiscount*100}%`}</div>
+            <CloseButton onClick={handleDeleteVoucher}><ImCross/></CloseButton>
+             </div>}
               {!isDiscount &&<div className="discount">
                 <Link to="/apply-voucher/applyAll">Add Voucher</Link>
               </div>}

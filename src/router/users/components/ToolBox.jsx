@@ -1,15 +1,12 @@
 /* eslint-disable react/prop-types */
-import { Button, StyledSearch, ToolBox, Type, Upload } from "./style"
+import { Button, ToolBox } from "./style"
 
-import {Col,SearchBtn,Category,Action} from "./style"
-import { CiBarcode } from "react-icons/ci";
-import { FiFilter } from "react-icons/fi";
+import {Col} from "./style"
+
 import { PlusOutlined } from "@ant-design/icons";
-import { BiImport } from "react-icons/bi";
-import { UploadOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
-function ToolBoxSection({setSearch,handleSave,setCurrent}) {
+function ToolBoxSection({setSearch,setCurrent}) {
 // const navigate = useNavigate();
     // const onSearch = (e) => { 
     //   console.log(e.target.value);

@@ -10,24 +10,14 @@ import productApi from '../../../utils/api/productApi';
 import { actions } from './slice';
 function ProductDrawer({onClose,openDrawer}) {
   const dispatch=useDispatch();
-  const [checkedList, setCheckedList] = useState();
-  const [indeterminate, setIndeterminate] = useState(true);
+
   const [searchValue, setSearchValue] = useState("");
   const [products,setProducts] = useState([]);
- let current=1;
-  const [checkAll, setCheckAll] = useState(false);
+
   const onChange = (list) => {
-    console.log(list);
     dispatch(actions.applyProductToVoucher(list));
-    setCheckedList(list);
-    setIndeterminate(!!list.length && list.length < products.length);
-    setCheckAll(list.length === products.length);
   };
-  const onCheckAllChange = (e) => {
-    setCheckedList(e.target.checked ? products : []);
-    setIndeterminate(false);
-    setCheckAll(e.target.checked);
-  };
+
   const token=localStorage.getItem("Authorization");
   useEffect(() => {
     async function fetchData() {

@@ -42,8 +42,6 @@ const CheckinModal = ({ openCheckin,setOpenCheckin,checkinShift,type}) => {
     setInput(input);
     
     if (input.length === 8) {
-      console.log( checkinShift?.user?.rfid);
-      console.log( input);
       event.target.value = ''; // Clear the input field
       const token=localStorage.getItem("Authorization");
     if( checkinShift?.user?.rfid == input){

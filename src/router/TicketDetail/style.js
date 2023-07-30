@@ -26,7 +26,7 @@ export const Header = styled.div`
 `;
 export const Body = styled.div`
     margin-top: 20px;
-    text-align: center;
+    text-align: start;
     .ant-btn-primary {
         background-color: ${themes.colors.primary};
     }
@@ -54,7 +54,10 @@ export const Employee = styled.div`
 export const Row = styled.div`
     display: flex;
 `;
-export const Title = styled.h1``;
+export const Title = styled.h2`
+    width: 100%;
+    text-align: center;
+`;
 export const Description = styled.div`
     padding: 0 80px;
 `;

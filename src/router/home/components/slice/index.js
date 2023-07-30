@@ -37,14 +37,17 @@ const slice = createSlice({
                     return;
                 }
             }
-
-            const newProduct = {
-                ...action.payload,
-                quantity: addQuantity,
-                voucherId: null,
-                finalPrice: action.payload.price,
-            };
-            state.orderList.data.push(newProduct);
+            if (action.payload.quantity == 0) {
+                toastError("Can not add 0 quantity product");
+            } else {
+                const newProduct = {
+                    ...action.payload,
+                    quantity: addQuantity,
+                    voucherId: null,
+                    finalPrice: action.payload.price,
+                };
+                state.orderList.data.push(newProduct);
+            }
         },
         deleteProduct: (state, action) => {
             for (let i = 0; i < state.orderList.data.length; i++) {
@@ -57,6 +60,9 @@ const slice = createSlice({
         },
         clearOrder: (state) => {
             state.orderList.data = [];
+            state.selectedVoucher = {};
+            state.note = "";
+            state.paymentMethod = 1;
         },
 
         updateProductQuantity: (state, action) => {
@@ -94,7 +100,6 @@ const slice = createSlice({
 
             return null;
         },
-
         selectVoucher: (state, action) => {
             state.selectedVoucher = action.payload;
         },
@@ -122,6 +127,18 @@ const slice = createSlice({
         setTotalPrice: (state, action) => {
             state.totalPrice = action.payload;
         },
+        removeVoucher: (state, action) => {
+            for (let product of state.orderList.data) {
+                if (product.productId == action.payload.productId) {
+                    product.voucherId = null;
+                    product.finalPrice = product.price;
+                }
+            }
+        },
+        removeApplyAllVoucher: (state) => {
+            state.orderList.voucherId = null;
+            state.orderList.percentDiscount = 0;
+        },
     },
 });
 
@@ -141,4 +158,6 @@ export const {
     applyToAllVoucher,
     clearOrder,
     setTotalPrice,
+    removeVoucher,
+    removeApplyAllVoucher,
 } = slice.actions;

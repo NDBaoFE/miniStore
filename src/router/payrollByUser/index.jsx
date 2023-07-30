@@ -84,7 +84,7 @@ const PayrollByUser = () => {
       dataIndex: "isPaid",
       key: "isPaid",
       render: (isPaid) => {
-        if (isPaid === false) {
+        if (isPaid === false || isPaid === null) {
           return (
             <div
               style={{

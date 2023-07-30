@@ -19,6 +19,7 @@ import userApi from "../../../utils/api/userApi";
 
 import productApi from "../../../utils/api/productApi";
 import PieChart from "./PieChart";
+import { themes } from "../../../utils/theme";
 
 
 function UserList({
@@ -77,31 +78,70 @@ function UserList({
   console.log(dataCount);
 
 
-  Chart.register(CategoryScale);
-  const totalShiftCount = dataCount.map(item =>{
-    return item[1]
-  })
-  console.log(totalShiftCount);
+  // Chart.register(CategoryScale);
+  // const totalShiftCount = dataCount.map(item =>{
+  //   return item[1]
+  // })
+  // console.log(totalShiftCount);
  
-  totalShiftCount.map((shift) => console.log(shift.totalShiftCount))
+  // totalShiftCount.map((shift) => console.log(shift.totalShiftCount))
 
-  const [chartData, setChartData] = useState({
-    labels: ["Admin", "Test"], 
-    datasets: [
-      {
-        label: "Revenue",
-        data: [50,50],
-        backgroundColor: [
-          "#50AF95",
-          "#f3ba2f",
+  // const [chartData, setChartData] = useState({
+  //   labels: ["Admin", "Test"], 
+  //   datasets: [
+  //     {
+  //       label: "Revenue",
+  //       data: [50,50],
+  //       backgroundColor: [
+  //         "#50AF95",
+  //         "#f3ba2f",
       
-        ],
-        borderColor: "black",
-        borderWidth: 1
-      }
-    ]
-  });
+  //       ],
+  //       borderColor: "black",
+  //       borderWidth: 1
+  //     }
+  //   ]
+  // });
 
+  useEffect(() => {
+    const ctx = document.getElementById('myChart').getContext('2d');
+  
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['AdminTest', 'Admin', 'Saler','Guard'],
+        datasets: [{
+          label: '# of Votes',
+          data: [40,20, 20, 20],
+          backgroundColor: [
+            `${themes.colors.primary200}`,
+            `${themes.colors.primary300}`,
+            `${themes.colors.primary400}`,
+            `${themes.colors.primary}`,
+       
+
+          ],
+          borderColor: [
+            `${themes.colors.primary200}`,
+            `${themes.colors.primary300}`,
+            `${themes.colors.primary400}`,
+            `${themes.colors.primary}`,
+     
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  }, []);
 
 
 
@@ -109,7 +149,9 @@ function UserList({
     <WrapperUserManagement>
       <RevenueDashboardContainer>
          <div>
-         <PieChart chartData={chartData} />
+         <canvas id="myChart" width="400" height="400"></canvas>
+         <RevenueTitle>Revenue</RevenueTitle>
+        <RevenueTitle>for last 30days</RevenueTitle>
         </div>
 
 

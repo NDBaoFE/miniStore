@@ -1,0 +1,20 @@
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner{
+    color: white;
+    background: #2eb161;
+    border: #2eb161;
+}
+
+.ant-picker-dropdown .ant-picker-header{
+    background: #2eb161;
+    color: white;
+}
+
+
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+    border: #2eb161;
+}
+
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
+    background: #2eb161;
+    color: white;
+}

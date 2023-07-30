@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 
 import ToolBoxSection from './components/ToolBox'
 import { Container, NotiModal, StyledSpace } from './style'
-import { exportToExcel } from '../../utils/ToExcel';
 import Spinner from '../../components/Spinnner';
 import {  useParams } from 'react-router-dom';
 import VoucherList from './components/VoucherList';
@@ -18,22 +17,7 @@ function VoucherManagement() {
   const params = useParams();
   const [current, setCurrent] = useState(parseInt(params.page, 9) || 1);
   const [loader,setLoader]=useState(false);
-  const handleExportToExcel = () => {
-    setLoading(true);
-    // Call the export function from another component
-    exportToExcel(products, columns, 'table_data')
-      .then(() => {
-        // Delay hiding the loading screen for a short time to give the user visual feedback
-        setTimeout(() => {
-          setLoading(false);
-        }, 500);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-        // Handle any export errors here
-      });
-  };
+
   const handleVoucherDeleted = () => {
     // Refresh the vouchers by triggering a re-render of the VoucherList component
     // This can be done by incrementing the current page number or any other way to indicate a change
@@ -52,7 +36,7 @@ function VoucherManagement() {
           const token= localStorage.getItem("Authorization");
           const res= await productApi.deleteVoucher(id,token);
           if(res.status===200){
-            toastSuccess("Delete Voucher Succesfully");
+            toastSuccess(res.data.message);
             setLoader(!loader);
           }else{
             toastError("Delete Voucher Failed");
@@ -93,7 +77,34 @@ function VoucherManagement() {
        
        
       },
-   
+
+      {
+        title: 'Is Apply to All',
+        dataIndex: 'isApplyAll',
+        key: 'isApplyAll',
+        render: (isApplyAll) => {
+          if (isApplyAll === true) {
+            return (
+              <div
+       
+              >
+                Yes
+              </div>
+            );
+          } else {
+            return (
+              <div
+          
+              >
+                No
+              </div>
+            );
+          }
+        },
+      },
+       
+       
+     
     {
       title: 'Quantity',
       dataIndex: 'quantity',
@@ -166,7 +177,7 @@ function VoucherManagement() {
 
   return (
     <Container>
-        <ToolBoxSection  setSearch={setSearch} handleSave={handleExportToExcel} setCurrent={setCurrent}/>
+        <ToolBoxSection  setSearch={setSearch} setCurrent={setCurrent}/>
         <VoucherList search={search} setProducts={setProducts} products={products} columns={columns}  setCurrent={setCurrent} current={current} loader={loader}
             handleVoucherDeleted={handleVoucherDeleted} />
       

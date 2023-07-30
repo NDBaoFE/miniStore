@@ -34,9 +34,7 @@ import Password from "./password/Password";
 import Payroll from "./payroll";
 import PayrollByUser from "./payrollByUser";
 import OrderManagemntPage from "./OrderManagement";
-
 import OrderDetailTable from "./OrderManagement/components/OrderDetailTable";
-
 import Payment from "./payment";
 
 
@@ -267,8 +265,6 @@ const employeeRoute = [
         exact: true,
         restrict: true,
     },
-  
-
     {
         index: true,
         path: "orderManagement",
@@ -284,7 +280,6 @@ const employeeRoute = [
         exact: true,
         restrict: true,
     },
-    
     
 ];
 

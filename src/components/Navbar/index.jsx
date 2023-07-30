@@ -2,16 +2,16 @@ import BreadCrumbHeader from "../BreadCrumb";
 import StyledDrawer from "../Drawer";
 import AvatarContainer from "./Avatar";
 import { Wrapper } from "./styled";
-import { Menu, Avatar, Badge } from "antd";
+import { Menu, Badge } from "antd";
 import { useState, useEffect } from "react";
 import { FiChevronLeft } from "react-icons/fi";
 import { Action, GoBack } from "./styled";
 import { useNavigate, useLocation } from "react-router-dom";
-import { WrapperNoti, StyledDropdown } from "./navbarstyle";
+import { WrapperNoti, StyledDropdown, StyledAvatar } from "./navbarstyle";
 import { BellFilled } from "@ant-design/icons";
 import notifyApi from "../../utils/api/notifyApi";
 import { Link } from "react-router-dom";
-
+import ava from "../../assets/image/Store.png"
 
 function NavBar() {
 
@@ -22,8 +22,9 @@ function NavBar() {
     notifyApi
       .getNotify(token)
       .then((response) => {
-        setData(response.data.data);
-        console.log(response.data.data);
+         let notification=response.data.data.reverse();
+         console.log(notification);
+        setData(notification);
       })
       .catch((error) => {
         console.log("Error:", error);
@@ -48,9 +49,9 @@ function NavBar() {
   };
 
   const menu = (
-    <Menu style={{ marginTop: 10 }}>
+    <Menu style={{ marginTop: 10 ,maxHeight:"520px",overFlowY:"scroll",overflowX:"hidden"}}>
       {data.length > 0 ?(
-        data.slice(0,5).map((option) => (
+        data.map((option) => (
           <Menu.Item
           
             key={option.userNotificationId}
@@ -64,19 +65,16 @@ function NavBar() {
             }}
           >
             <Link to={`/notify/${option.userNotificationId}`} style={{ display: "contents" }}></Link>
-            <Avatar src={option.avatar} style={{ marginRight: 12 }} />
-            <span style={{ fontWeight: "bold" }}>{option.title}</span>
+            <div style={{ display: "flex", alignItems: "center",justifyContent:"space-between" }}>
+            <StyledAvatar src={ava} style={{ marginRight: 12,width:"80px",height:"80px" }} width={80}  height={80}/>
+            <div style={{ fontWeight: "bold",lineHeight:"10px"}}>{option.title}</div>
+            </div>
+          
             <br />
-            <span style={{ paddingLeft: 45, fontSize: 11 }}>
+            <div style={{ paddingLeft: 45, fontSize: 11 }}>
               {truncateTitle(option.description, 40)}
-            </span>
-            <hr
-              style={{
-                height: 0.2,
-                backgroundColor: "#9E9E9E",
-                border: "none",
-              }}
-            />
+            </div>
+
 
             
           </Menu.Item>
@@ -87,7 +85,6 @@ function NavBar() {
       )}
     </Menu>
   );
-console.log();
   const navigate = useNavigate();
   const location = useLocation();
 
