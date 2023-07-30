@@ -41,7 +41,9 @@ function TicketPage() {
                 setTickets(processedTickets);
             
             }else{
-              setTickets([...processedTickets,...unprocessedTickets]);
+
+              let array=[...processedTickets,...unprocessedTickets];
+              setTickets(array);
             }
           
         } catch (error) {

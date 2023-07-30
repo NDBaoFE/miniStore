@@ -188,6 +188,10 @@ const productApi = {
         const url = `/userShift/all`;
         return get(url, {}, { Authorization: token });
     },
+    widthDrawShift: (id, token) => {
+        const url = `/shiftRequest?shiftRequestId=${id}`;
+        return remove(url, {}, {}, { Authorization: token });
+    },
 };
 
 export default productApi;
