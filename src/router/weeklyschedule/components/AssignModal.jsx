@@ -8,8 +8,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
-import { useRef } from 'react';
-const AssignModal = ({ openModal, setOpenModal,selectedValue,setPositions,positions, }) => {
+import { useEffect, useRef } from 'react';
+const AssignModal = ({ openModal, setOpenModal,selectedValue,setPositions,positions,selectedIndex }) => {
   const sliderRef = useRef(null);
   const handleDrop = (employee,currentShift) => {
 
@@ -21,12 +21,18 @@ const AssignModal = ({ openModal, setOpenModal,selectedValue,setPositions,positi
     }
     ));
    // Check if all positions are full
- 
+    
   
     sliderRef.current.slickNext();
    
    
   };
+  useEffect(() => {
+    // Update the slider to show the card with the selected index
+    if (sliderRef.current && selectedIndex !== null) {
+      sliderRef.current.slickGoTo(selectedIndex);
+    }
+  }, [selectedIndex]);
 
 
   const handleCancel = () => {

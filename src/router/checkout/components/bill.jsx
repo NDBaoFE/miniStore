@@ -67,14 +67,8 @@ import { useSelector } from "react-redux";
             <td>{ totalQuanity}</td>
             <td>{total}</td>
           </tr>
-          <tr>
-            <td></td>
-            <td>VAT</td>
-            
-            <td>8% </td>
-            <td>{total*0.08}</td>
-          </tr>
-          <tr >
+          {change != 0 && <>
+            <tr >
             <td></td>
             <td>Give </td>
             <td></td>
@@ -86,6 +80,8 @@ import { useSelector } from "react-redux";
             <td></td>
             <td>{change-total}</td>
           </tr>
+          </>  }
+        
         </table>
         Payment Method: {paymentMethod == 1 ? "Cash": "Card"}<br />
         Note: {note} <br />

@@ -67,7 +67,7 @@ const slice = createSlice({
 
         updateProductQuantity: (state, action) => {
             for (let product of state.orderList.data) {
-                if (product.id == action.payload.id) {
+                if (product.productId == action.payload.productId) {
                     product.quantity = action.payload.quantity;
                     return;
                 }

@@ -5,7 +5,7 @@ import { toastError } from "../components/Toast";
 const AdminRoute = () => {
     const { userRole } = useAuth();
     if (userRole === undefined) {
-        toastError("PLease Login First");
+        toastError("Please Login First");
         return <Navigate to="/login" replace />;
     } else if (userRole === null) {
         return <Outlet />;

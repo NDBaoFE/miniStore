@@ -21,8 +21,8 @@ function OrderSummary() {
         </Row>
         <Row>
         <div>Discount</div>
-       {!orderList.voucherId && <Link to="/voucher/applyAll" style={{textDecoration:"none"}}>  <div className="discount">Add Discount</div></Link>} 
-      {orderList.voucherId &&<Link to="/voucher/applyAll" style={{textDecoration:"none"}}> <div className="discount">{orderList.percentDiscount*100}%</div></Link>}
+       {!orderList.voucherId && <Link to="/apply-voucher/applyAll" style={{textDecoration:"none"}}>  <div className="discount">Add Discount</div></Link>} 
+      {orderList.voucherId &&<Link to="/apply-voucher/applyAll" style={{textDecoration:"none"}}> <div className="discount">{orderList.percentDiscount*100}%</div></Link>}
         </Row>
         <Line/>
         <TotalRow>

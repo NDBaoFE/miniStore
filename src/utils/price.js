@@ -3,7 +3,7 @@ export function calculateFinalPrice(order, voucher) {
     const { minItem, minTotal, percentDiscount } = voucher;
 
     // Calculate the total price of the order
-    const totalPrice = order.price * order.quantity;
+    const totalPrice = order.price;
 
     // Check if the voucher is applicable
     if (

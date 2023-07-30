@@ -1,10 +1,20 @@
 /* eslint-disable react/prop-types */
 
 
-import { Table } from 'antd';
+import { Button, Table } from 'antd';
 
-import { Link } from 'react-router-dom';
 import { RequestWrapper } from './style';
+import productApi from '../../utils/api/productApi';
+import { toastSuccess } from '../../components/Toast';
+const handleWithDraw=async (id)=>{
+  const token=localStorage.getItem('Authorization');
+  const res=await productApi.widthDrawShift(id,token);
+  if(res.data.status == 200){
+      toastSuccess(res.data.message);
+  }else{
+    toastSuccess(res.data.message);
+  }
+}
 const columns = [
   {
     title: 'Shift',
@@ -65,10 +75,9 @@ const columns = [
     key: 'action',
     dataIndex:'action',
     render: (_, record) => (
-      <span>
-        <Link to={`/ticket/${record.ticketId}`}>WithDraw </Link>
+   
+        <Button type="primary" onClick={()=>handleWithDraw(record.shiftRequestId)}>WithDraw</Button>
        
-     </span>
     ),
   },
 ];

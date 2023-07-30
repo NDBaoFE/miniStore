@@ -163,7 +163,7 @@ useEffect(() => {
       </>
         
       }
-{shifts && type === "Cancel Shift" && (
+{shifts && type == "Cancel Shift" && (
   <>
   <Title>Your shift</Title>
   <Form.Item name="userShift" value={choosedShift}>
