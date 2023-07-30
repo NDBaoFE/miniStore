@@ -1,12 +1,13 @@
 import ConfirmModal from "../../../components/ConfirmModal";
 import { useState } from "react";
 import { GroupWrapper,FinishButton, CancelButton } from "./style"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 /* eslint-disable react/prop-types */
 
 function ActionGroup({confirm}){
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const navigate  = useNavigate()
     const showModal = () =>{
         setIsModalOpen(true);
     }

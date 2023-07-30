@@ -28,6 +28,21 @@ export const AvatarInfo = styled.div`
         border-radius: 8px 8px 0 0;
     }
 `;
+export const CancelButton = styled.div`
+    padding: 8px 12px;
+    color: ${themes.colors.white};
+    background: red;
+    border: 1px solid ${themes.colors.primary};
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover {
+        background: ${themes.colors.primaryDark};
+        color: ${themes.colors.white};
+        text-decoration: none !important;
+        border: 1px solid ${themes.colors.primaryDark};
+    }
+`
 export const Avatar = styled(Image)``;
 export const Info = styled.div`
     font-family: "Inter";

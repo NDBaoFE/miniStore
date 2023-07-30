@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 
 import ConfirmModal from "../../../components/ConfirmModal";
-import { GroupWrapper,FinishButton } from "./style"
+import { GroupWrapper,FinishButton,  CancelButton } from "./style"
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selector } from "../../home/components/slice/selector";
 import productApi from "../../../utils/api/productApi";
+import { useNavigate } from "react-router-dom";
 function ActionGroup({confirm}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const {orderList} = useSelector(selector);
@@ -25,6 +26,11 @@ function ActionGroup({confirm}) {
     handleOk(); // Call the handleOk function passed as prop
     handleClose(); // Close the modal
   };
+  const navigate = useNavigate()
+  const backToPrevious = () => {
+    navigate('/voucher')
+  }
+
 
   return (
     <GroupWrapper>
@@ -33,7 +39,7 @@ function ActionGroup({confirm}) {
          <p>Transaction Successful!</p>
          <p>Thank you for completing the sale.</p></>} title="Sale Confirmation"
           handleConfirm={handleConfirm} handleClose={handleClose} showModal={showModal}/>
-        <div>Discard Change</div>
+        <CancelButton onClick={() => backToPrevious()}>Discard Add</CancelButton>
         <FinishButton onClick={()=>confirm()}>Add Voucher</FinishButton>
     </GroupWrapper>
   )

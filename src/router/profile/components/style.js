@@ -97,7 +97,7 @@ export const GroupWrapper = styled.div`
     right: 10px;
     bottom: 10px;
     z-index: 99;
-    width: 300px;
+    width: 230px;
     height: 50px;
     background: ${themes.colors.blackText};
     border-radius: 8px;
@@ -117,7 +117,7 @@ export const GroupWrapper = styled.div`
 export const CancelButton = styled.div`
     padding: 8px 12px;
     color: ${themes.colors.white};
-    background: ${themes.colors.primary};
+    background: red;
     border: 1px solid ${themes.colors.primary};
     border-radius: 6px;
     cursor: pointer;

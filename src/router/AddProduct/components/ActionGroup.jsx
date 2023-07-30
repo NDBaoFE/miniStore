@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
 
+import { useNavigate } from "react-router-dom";
 import ConfirmModal from "../../../components/ConfirmModal";
-import { GroupWrapper,FinishButton } from "./style"
+import { GroupWrapper,FinishButton, CancelButton } from "./style"
 import { useState } from "react";
 
 function ActionGroup({confirm}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const navigate = useNavigate()
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -15,6 +16,9 @@ function ActionGroup({confirm}) {
     setIsModalOpen(false);
   };
 
+  const backToPrevious = () => {
+    navigate('/product')
+  }
 
 
 
@@ -25,7 +29,7 @@ function ActionGroup({confirm}) {
          <p>Transaction Successful!</p>
          <p>Thank you for completing the sale.</p></>} title="Sale Confirmation"
            handleClose={handleClose} showModal={showModal}/>
-        <div>Discard Change</div>
+        <CancelButton onClick={() => backToPrevious()}>Discard Add</CancelButton>
         <FinishButton  type="submit" onClick={()=>confirm() }>Add Product</FinishButton>
     </GroupWrapper>
   )

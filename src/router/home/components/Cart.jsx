@@ -10,6 +10,7 @@ import { CartWrapper } from "./style";
 
 import { useDispatch } from "react-redux";
 import { ImCross } from "react-icons/im";
+import { formatNumberWithDecoration } from "../../../utils";
 function Cart() {
   let subTotal = 0;
   let totalQuantity = 0;
@@ -42,7 +43,7 @@ function Cart() {
           <Total>
             <Row>
               <div>{`${totalQuantity} items`}</div>
-              <div>{`SubTotal : ${subTotal}  VNĐ`}</div>
+              <div>{`SubTotal : ${formatNumberWithDecoration(subTotal)}  VNĐ`}</div>
             </Row>
             <Row>
               <div>Discount</div>
