@@ -36,8 +36,8 @@ function Radio({change,setChange}) {
             />
           ) : null}</StyledRadio>
           
-          <StyledRadio value={2} >CreditCard </StyledRadio>
-      <StyledRadio value={4}>
+          <StyledRadio value={2} >VN-Pay </StyledRadio>
+      <StyledRadio value={3}>
           Others..
         </StyledRadio>
     </StyledSpace>

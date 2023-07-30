@@ -38,7 +38,7 @@ function  OrderDetail({product}) {
           {// only render if there is new price 
           product.finalPrice != product.price &&  
            <Col>  
-           <OldPrice>  {`${formatNumberWithDecoration( product.price*product.quantity)} VNĐ`}</OldPrice> <Price>  {`${ formatNumberWithDecoration(product.finalPrice) } VNĐ`}</Price>
+           <OldPrice>  {`${formatNumberWithDecoration( product.price*product.quantity)} VNĐ`}</OldPrice> <Price>  {`${ formatNumberWithDecoration(product.finalPrice*product.quantity) } VNĐ`}</Price>
            </Col> }
            {product.finalPrice == product.price &&  
            <Price>  {`${formatNumberWithDecoration(product.price*product.quantity)} VNĐ`}</Price> }
