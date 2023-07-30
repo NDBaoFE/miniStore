@@ -21,7 +21,7 @@ function TicketList
     fetchData();
   }, [token]);
   return (
-    <Wrapper style={{marginTop: '50px', marginBottom: '50px',flexDirection:'column',width:'49%'}}>
+    <Wrapper style={{marginTop: '50px', marginBottom: '50px',flexDirection:'column',width:'49%',justifyContent: 'flex-start',height:'100%'}}>
        {data && <><HeroWrapper> <h2>Latest Ticket
         </h2></HeroWrapper>
        

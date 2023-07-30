@@ -22,7 +22,7 @@ import useAuth from '../../../utils/useAuth';
 const ScheduleComponent = ({open,setOpen,selectedValue,positions,setPositions,setLoaded}) => {
   const {userRole}=useAuth();
   const [openModal,setOpenModal] = useState(false);
-
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
 
   const handleCancel = () => {
@@ -36,6 +36,10 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setPositions,se
       return matchedItem.color;
     }
     return "#ff9683"; // Default color if no matching status found
+  };
+  const handleCardClick = (index) => {
+    setSelectedIndex(index);
+    setOpenModal(true);
   };
   return (
     
@@ -52,7 +56,7 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setPositions,se
       <ModalContainer> 
         <Left>{selectedValue ? selectedValue.slice(0,3).map((item,index)=>{
          
-          return  <Card key={userShifts[index].id}  style={{height:170,margin: 20}}>
+          return  <Card key={userShifts[index].id}  style={{height:170,margin: 20}} onClick={()=>handleCardClick(index)}>
           <Img  alt="" src={userShifts[index].shiftImg} />
        <Info>
          <ShiftName style={{color: `${userShifts[index].shiftType == "Night"? "white":"inherit"}`}}>{userShifts[index].shiftName}</ShiftName>
@@ -67,7 +71,7 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setPositions,se
      <span style={{marginLeft:20}}>{positions[index].user.name}</span>
      <Tag color={`${positions[index].user.role.name == "admin"? "red": positions[index].user.role.name == "saler" ?"green":"blue" }`}  style={{marginLeft:20}}>{positions[index].user.role.name}</Tag>
     </EmployeeCard>
-     <Status color={applyStatus(selectedValue[index].status)}>Status:{selectedValue[index].status}</Status>
+     <Status color={applyStatus(selectedValue[index].status)}>Status: {selectedValue[index].status}</Status>
       </> : <h2>Empty</h2>} 
    
        </Team>
@@ -78,7 +82,7 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setPositions,se
         <Right>{selectedValue ? selectedValue.slice(3).map((item,index)=>{
 
           index+=3;
-          return  <Card key={userShifts[index].id}  style={{height:170,margin: 20}}>
+          return  <Card key={userShifts[index].id}  style={{height:170,margin: 20}} onClick={()=>handleCardClick(index)}>
           <Img  alt="" src={userShifts[index].shiftImg} />
        <Info>
          <ShiftName style={{color: `${userShifts[index].shiftType == "Night"? "white":"inherit"}`}}>{userShifts[index].shiftName}</ShiftName>
@@ -103,7 +107,7 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setPositions,se
       <ActionGroup setOpen={setOpen} positions={positions}  setOpenModal={setOpenModal} setLoaded={setLoaded}/>
      </ModalContainer>
      <DndProvider backend={HTML5Backend}>
-     <AssignModal openModal={openModal} setOpenModal={setOpenModal}  selectedValue={selectedValue} setPositions={setPositions} positions={positions} />
+     <AssignModal openModal={openModal} setOpenModal={setOpenModal}  selectedValue={selectedValue} setPositions={setPositions} positions={positions} selectedIndex={selectedIndex}/>
         </DndProvider>
       </StyledModal>
   );

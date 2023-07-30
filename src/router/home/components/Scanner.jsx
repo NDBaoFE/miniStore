@@ -19,22 +19,20 @@ const useAudio = () => {
   
     useEffect(() => {
         playing ? audio.play() : audio.pause();
-      },
-      [playing]
-    );
+    }, [playing]);
   
     useEffect(() => {
-      audio.addEventListener('ended', () => setPlaying(false));
-      return () => {
-        audio.removeEventListener('ended', () => setPlaying(false));
-      };
+        audio.addEventListener('ended', () => setPlaying(false));
+        return () => {
+            audio.removeEventListener('ended', () => setPlaying(false));
+        };
     }, []);
   
     return [playing, toggle];
-  };
+};
 
 function Html5QrcodePluginModal({ openScanner, setOpenScanner}) {
-    const [ toggle] = useAudio();
+    const [, toggle] = useAudio(); // Notice the comma before "toggle" to skip the first element.
     const  fps=20;
     const qrbox=250;
     const disableFlip=false;
