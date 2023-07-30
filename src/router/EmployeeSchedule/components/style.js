@@ -504,3 +504,10 @@ export const WorkingShiftContainer = styled.div`
         height: 100px;
     }
 `;
+
+export const Status = styled.h4`
+span{
+    color: black
+}
+    color: ${(props) => props.color};
+`;

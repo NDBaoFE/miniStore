@@ -80,9 +80,14 @@ const OrderManagemntPage = () => {
 
 
 
-    let total = 0
+    let totalSale = 0
+    let totalImport = 0
     for(let item of order ){
-      total += item.total;
+      if(item.type === false){
+        totalSale += item.total;
+      }else{
+        totalImport += item.total
+      }
     }
 
 
@@ -117,8 +122,33 @@ const OrderManagemntPage = () => {
       render: (_, record) => <span style={{color:"green", fontWeight:600}}>{formatNumberWithDecoration(record.total)} VND</span>,
     },
     {
-      title: "Payment Method",
-      dataIndex: "paymentMethod",
+      title: "Type",
+      dataIndex: "type",
+      render: (type) => {
+        if (type === false || type ===null) {
+          return (
+            <div
+              style={{
+                color: "green",
+                fontWeight: 600,
+              }}
+            >
+              Sale
+            </div>
+          );
+        } else {
+          return (
+            <div
+              style={{
+                color: "red",
+                fontWeight: 600,
+              }}
+            >
+              Import
+            </div>
+          );
+        }
+      },
 
     },
     {
@@ -193,8 +223,8 @@ const OrderManagemntPage = () => {
                         index == 0
                           ? report.numberOfProcessedTickets 
                           : index == 1
-                          ? total
-                          : 0
+                          ? totalSale
+                          : totalImport
                       }
                       fontStyle={{ fontSize: 32 }}
                       configs={(number, index) => {

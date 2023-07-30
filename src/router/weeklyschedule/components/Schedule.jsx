@@ -10,7 +10,7 @@ import {  Card, Img, Info,
   Team
    } from './cardStyle';
 import {ModalContainer ,StyledModal, EmployeeCard, Left, Right, StyledButton, ButtonContainer, Status} from "./style"
-import { shiftStatus } from '../data';
+import { shiftStatus1 } from '../data';
 
 import ActionGroup from "./ActionGroup"
 import AssignModal from './AssignModal';
@@ -29,7 +29,7 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setPositions,se
     setOpen(false);
   }
   const applyStatus = (status) => {
-    const matchedItem = Object.values(shiftStatus).find((item) =>
+    const matchedItem = Object.values(shiftStatus1).find((item) =>
       item.data.includes(status)
     );
     if (matchedItem) {
@@ -67,7 +67,7 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setPositions,se
      <span style={{marginLeft:20}}>{positions[index].user.name}</span>
      <Tag color={`${positions[index].user.role.name == "admin"? "red": positions[index].user.role.name == "saler" ?"green":"blue" }`}  style={{marginLeft:20}}>{positions[index].user.role.name}</Tag>
     </EmployeeCard>
-     <Status color={applyStatus(selectedValue[index].status)}>Status:{selectedValue[index].status}</Status>
+     <Status color={applyStatus(selectedValue[index].status)}> <span>Status: </span>{selectedValue[index].status}</Status>
       </> : <h2>Empty</h2>} 
    
        </Team>
@@ -86,12 +86,13 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setPositions,se
        </Info>
        <Team>
        <ShiftType>{userShifts[index].shiftType}</ShiftType>
-      { positions[index].user ? <EmployeeCard >
+      { positions[index].user ?<> <EmployeeCard >
      <Image src={positions[index].user.userImg} alt=""  style={{width:50,height:50,borderRadius:50}}  />
      <span style={{marginLeft:20}}>{positions[index].user.name}</span>
      <Tag color={`${positions[index].user.role.name == "admin"? "red": positions[index].user.role.name == "saler" ?"green":"blue" }`}  style={{marginLeft:20}}>{positions[index].user.role.name}</Tag>
     </EmployeeCard>
-      
+    <Status color={applyStatus(selectedValue[index].status)}> <span>Status: </span>{selectedValue[index].status}</Status>
+      </>
      : <h2>Empty</h2>
     
     } 

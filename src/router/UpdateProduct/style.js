@@ -7,6 +7,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     position: relative;
+    margin-bottom: 50px;
 `;
 export const Left = styled.div`
     width: 54%;
@@ -21,6 +22,7 @@ export const Right = styled.div`
 `;
 export const ProductInfo = styled.div`
     display: flex;
+
 `;
 export const Stock = styled.div`
     padding: 0 30px;

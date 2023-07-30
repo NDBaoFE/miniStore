@@ -9,13 +9,14 @@ import {  Card, Img, Info,
   
   Team
    } from './cardStyle';
-import {ModalContainer ,StyledModal, EmployeeCard, Left, Right, StyledButton, ButtonContainer, NotiModal} from "./style"
+import {ModalContainer ,StyledModal, EmployeeCard, Left, Right, StyledButton, ButtonContainer, NotiModal,Status} from "./style"
 
 
 import ActionGroup from "./ActionGroup"
 
 
 import { userShifts } from './data';
+import { shiftStatus1 } from '../data';
 import useAuth from '../../../utils/useAuth';
 import { toastError, toastSuccess } from '../../../components/Toast';
 import productApi from '../../../utils/api/productApi';
@@ -91,6 +92,15 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setLoaded,loade
       setCheckinShift(shift);
       setType(condition);
     }
+    const applyStatus = (status) => {
+      const matchedItem = Object.values(shiftStatus1).find((item) =>
+        item.data.includes(status)
+      );
+      if (matchedItem) {
+        return matchedItem.color;
+      }
+      return "#ff9683"; // Default color if no matching status found
+    };
   return (
     
       <StyledModal
@@ -120,6 +130,7 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setLoaded,loade
      <Tag color={`${positions[index].user.role.name == "admin"? "red": positions[index].user.role.name == "saler" ?"green":"blue" }`}  style={{marginLeft:20}}>{positions[index].user.role.name}</Tag>
     </EmployeeCard> : (userRole == "saler"? (requests.find(request=> request.userShiftId == positions[index].userShiftId)? <h4>You already applied for this shift</h4>: <StyledButton onClick={()=>handleApply(positions[index].userShiftId)}>Apply</StyledButton>) : <h2>Empty</h2>)} 
     {positions[index].user && renderCheckinCheckoutButtons(index)}
+    <Status color={applyStatus(selectedValue[index].status)}> <span>Status: </span>{selectedValue[index].status}</Status>
        </Team>
        
        </Card>
@@ -130,18 +141,19 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setLoaded,loade
           index+=3;
           return  <Card key={userShifts[index].id}  style={{height:170,margin: 20}}>
           <Img  alt="" src={userShifts[index].shiftImg} />
-       <Info>
-         <ShiftName style={{color: `${userShifts[index].shiftType == "Night"? "white":"inherit"}`}}>{userShifts[index].shiftName}</ShiftName>
-         <ShiftTime style={{color: `${userShifts[index].shiftType == "Night"? "white":"inherit"}`}}>{userShifts[index].shiftTime}</ShiftTime>
-       </Info>
+        <Info>
+          <ShiftName style={{color: `${userShifts[index].shiftType == "Night"? "white":"inherit"}`}}>{userShifts[index].shiftName}</ShiftName>
+          <ShiftTime style={{color: `${userShifts[index].shiftType == "Night"? "white":"inherit"}`}}>{userShifts[index].shiftTime}</ShiftTime>
+        </Info>
        <Team>
        <ShiftType>{userShifts[index].shiftType}</ShiftType>
-      { positions[index].user ? <EmployeeCard >
+      { positions[index].user ?<> <EmployeeCard >
      <Image src={positions[index].user.userImg} alt=""  style={{width:50,height:50,borderRadius:50}}  />
      <span style={{marginLeft:20}}>{positions[index].user.name}</span>
      <Tag color={`${positions[index].user.role.name == "admin"? "red": positions[index].user.role.name == "saler" ?"green":"blue" }`}  style={{marginLeft:20}}>{positions[index].user.role.name}</Tag>
     </EmployeeCard>
-      
+    <Status color={applyStatus(selectedValue[index].status)}> <span>Status: </span>{selectedValue[index].status}</Status>
+      </>
      : userRole == "guard" ? <StyledButton  onClick={()=>handleApply(positions[index].userShiftId)}>Apply</StyledButton> : <h2>Empty</h2>
     
     } 

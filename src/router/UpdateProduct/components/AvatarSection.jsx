@@ -1,4 +1,5 @@
 
+import { formatNumberWithDecoration } from '../../../utils';
 import selector from './slice/selectors';
 import { AvatarWrapper,AvatarInfo,Avatar,Info } from './style'
 import { useSelector } from 'react-redux'
@@ -9,13 +10,14 @@ const productImg=useSelector(selector.productImg);
 const price=useSelector(selector.price);
   return (
     <AvatarWrapper>
-        <AvatarInfo>
+        <AvatarInfo style={{paddingTop: "7px"}}>
             <Avatar src={productImg.startsWith("http") ? productImg : `data:image/jpeg;base64,${productImg}`}   alt="avatar" onError={(e) => {
           e.target.src = placeholder;
         }}/>
             <Info>
-                <h3>{name}</h3>
-                <h3>{price||"Your price"}</h3>
+              
+                <h3 style={{paddingBottom: "20px", color: "green"}}>{name}</h3>
+                <h3 style={{paddingBottom:5, fontWeight:400}}>{formatNumberWithDecoration(price) +" VNĐ"||"Your price"}</h3>
             </Info>
         </AvatarInfo>
     </AvatarWrapper>

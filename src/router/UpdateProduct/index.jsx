@@ -122,7 +122,7 @@ function UpdateProduct() {
             >
               <Photo />
             </Row>
-            <Row>
+            <Row  style={{marginTop: 30}}>
               <Col span={24}>
                 <Label level={5}>Product name</Label>
                 <InputName />
