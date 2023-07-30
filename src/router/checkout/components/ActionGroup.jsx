@@ -71,7 +71,7 @@ function ActionGroup({change}) {
         maskClosable: true,
         title: 'Are you sure you want to make an order ?',
         icon: <BsExclamationCircle />,
-        content: 'Make sure you have enough  products for the customer',
+        content: 'Make sure you have enough products for the customer',
         okText: 'Confirm',
         cancelText: 'Cancel',
         onOk: async() => {
@@ -82,10 +82,16 @@ function ActionGroup({change}) {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
+
+
+  const backToPrevious = () => {
+    navigate('/home')
+  }
+
   return (
     <GroupWrapper>
        
-       <CancelButton onClick={() => backToPrevious()}>Discard sale</CancelButton>
+       <CancelButton onClick={() => backToPrevious()}>Discard Order</CancelButton>
         <FinishButton onClick={()=>confirm()}>Finish Sale</FinishButton>
       
         <ComponentToPrint ref={componentRef} change={change} orderList={orderList.data}/>
