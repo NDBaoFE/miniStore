@@ -95,7 +95,7 @@ function Profile() {
   };
 
   const token = localStorage.getItem("Authorization");
-  const [salary, setSalary] = useState(1000);
+  const [salary, setSalary] = useState(0);
   const [idUser, setIdUser] = useState(0)
   useEffect(() => {
     async function fetchData() {

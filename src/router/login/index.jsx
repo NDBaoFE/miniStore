@@ -41,7 +41,7 @@ const LoginForm = () => {
       let token = res.data.data["access token"];
       localStorage.setItem("Authorization", token);
       navigate("/home");
-      toastSuccess("Login Successfully");
+      toastSuccess(res.data.message);
     } else{
       toastError(res.data.message);
     }
@@ -52,7 +52,7 @@ const LoginForm = () => {
   };
 
   const handleFinishFailed = () => {
-    toastWarning("Hãy nhập tất cả các field!!")
+    toastWarning("Please enter email and password !!")
   };
 
   return (

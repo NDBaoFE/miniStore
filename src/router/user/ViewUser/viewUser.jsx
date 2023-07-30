@@ -170,7 +170,7 @@ console.log(roleImg);
             </Row>
 
             <Row>
-              <Col span={13}>
+              <Col span={10}>
                 <Label level={5}>Date of Birth</Label>
                 <SelectDateOfBirth />
               </Col>
