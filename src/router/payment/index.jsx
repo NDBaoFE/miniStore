@@ -6,11 +6,20 @@ import Button from "../../components/Button";
 import { StyledResult } from "./style";
 import productApi from "../../utils/api/productApi";
 
+import { useReactToPrint } from "react-to-print";
+import { ComponentToPrint } from "../checkout/components/bill";
+
 function Payment() {
   const location = useLocation();
   const [success,setSuccess]=useState(false);
   const apiCalledRef = useRef(false);
   const navigate=useNavigate();
+  const componentRef = useRef();
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  console.log(cart);
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
   useEffect(() => {
     const checkPaymentStatus = async () => {
       if (!apiCalledRef.current) {
@@ -20,6 +29,7 @@ function Payment() {
         const res = await paymentApi.getPaymentStatus(params.toString(), token);
         if (res.data.status === 200) {
           toastSuccess(res.data.message);
+          handlePrint();
           setSuccess(true);
          let cart = JSON.parse(localStorage.getItem("cart"));
           const res1=await productApi.makeOrder(cart,token);
@@ -49,6 +59,7 @@ function Payment() {
       <Button title="Back Home" key="console" style={{width:200,height:50,fontSize:"20px"}} onClick={()=>navigate("/")}/>
     ]}
   />
+   {cart && <ComponentToPrint ref={componentRef} change={0} orderList={cart.data}/>} 
 </div>
 
   </div>;

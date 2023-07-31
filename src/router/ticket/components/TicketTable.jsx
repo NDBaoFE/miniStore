@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 
-import { Table } from 'antd';
+import { Button, Table } from 'antd';
 
 import { Link } from 'react-router-dom';
 const columns = [
@@ -92,7 +92,7 @@ const columns = [
     dataIndex:'action',
     render: (_, record) => (
       <span>
-        <Link to={`/ticket/${record.ticket.ticketId}`}>View </Link>
+        <Button type="primary">Edit</Button> 
        
      </span>
     ),

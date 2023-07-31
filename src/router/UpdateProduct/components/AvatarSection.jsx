@@ -11,7 +11,7 @@ const price=useSelector(selector.price);
   return (
     <AvatarWrapper>
         <AvatarInfo style={{paddingTop: "7px"}}>
-            <Avatar src={productImg.startsWith("http") ? productImg : `data:image/jpeg;base64,${productImg}`}   alt="avatar" onError={(e) => {
+            <Avatar src={productImg ? productImg:placeholder}  alt="avatar" onError={(e) => {
           e.target.src = placeholder;
         }}/>
             <Info>

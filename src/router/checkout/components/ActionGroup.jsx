@@ -26,9 +26,9 @@ function ActionGroup({change}) {
     const modifiedOrderList = {
       ...orderList,
       data: orderList.data.map((order) => {
-       let {productId,price,quantity,voucherId}=order;
+       let {productId,price,quantity,voucherId,name}=order;
        
-        return {productId,price,quantity,voucherId};
+        return {productId,price,quantity,voucherId,name};
       }),
     };
     
@@ -45,6 +45,7 @@ function ActionGroup({change}) {
       if(totalPrice > parseInt(change)){
         toastError("Change is not enough");
       }else{
+        delete modifiedOrderList.name;
         const res= await productApi.makeOrder(modifiedOrderList,token)  ;
         if(res.data.status  ==200){
           toastSuccess("Make order Successfully");

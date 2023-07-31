@@ -13,7 +13,7 @@ export const initialState = {
     quantityAlert: 0,
     productCode: "",
     info: {},
-    types: ["Water", "Vegetable", "Neccessary"],
+    types: ["Drink", "Food", "Snacks", "Vegetables"],
 };
 
 export const name = "UpdateProduct";
