@@ -60,7 +60,7 @@ const columns = [
     dataIndex:'action',
     render: (_, record) => (
       <span>
-        <Link to={`/ticket/${record.ticketId}`}>View </Link>
+        <Link to={`/orderDetail/${record.orderId}`}>View </Link>
        
      </span>
     ),
