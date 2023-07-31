@@ -92,7 +92,7 @@ const columns = [
     dataIndex:'action',
     render: (_, record) => (
       <span>
-        <Button type="primary">Edit</Button> 
+        <Link to={`/ticket/${record.ticket.ticketId}`} >View</Link>
        
      </span>
     ),
