@@ -20,7 +20,7 @@ import Success from "../../components/Success";
 import { useState } from "react";
 import UploadImg from "./components/Upload";
 import { toastError, toastSuccess } from "../../components/Toast";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from 'react'
 function UpdateProduct() {
   const [updated, setUpdated] = useState(false);
@@ -35,7 +35,7 @@ function UpdateProduct() {
   const quantity = useSelector(selector.quantity);
   const info = useSelector(selector.info);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate()
   const { id } = useParams();
   const UpdateInfo = async () => {
     dispatch(actions.getProductInfo());
@@ -45,7 +45,8 @@ function UpdateProduct() {
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
-        toastSuccess("Add product Successfully");
+        toastSuccess(res.data.message);
+        navigate('/product')
       }, 2000);
     } else {
       toastError(res.data.message || "Update failed, please try again");
