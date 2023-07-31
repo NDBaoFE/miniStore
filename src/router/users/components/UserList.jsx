@@ -109,10 +109,10 @@ function UserList({
     new Chart(ctx, {
       type: 'pie',
       data: {
-        labels: ['AdminTest', 'Admin', 'Saler','Guard'],
+        labels: ['Saler1', 'Saler2', 'Guard1','Guard2'],
         datasets: [{
           label: '# of Votes',
-          data: [40,20, 20, 20],
+          data: [30,29, 20, 30],
           backgroundColor: [
             `${themes.colors.primary200}`,
             `${themes.colors.primary300}`,
