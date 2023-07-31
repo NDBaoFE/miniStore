@@ -172,8 +172,6 @@ const OrderManagemntPage = () => {
 
 
   const handleOrderDeleted = () => {
-    // Refresh the vouchers by triggering a re-render of the VoucherList component
-    // This can be done by incrementing the current page number or any other way to indicate a change
     SetReload(!reload);
   };
 
@@ -188,11 +186,12 @@ const OrderManagemntPage = () => {
       onOk: async () => {
         const token = localStorage.getItem("Authorization");
         const res = await orderManagementApi.deleteOrder(id, token);
-        if (res.status === 200) {
+        if (res.data.status === 200) {
           toastSuccess(res.data.message);
           setSearch(search);
         } else {
           toastError("Delete Order Failed");
+          toastError(res.data.message);
         }
         handleOrderDeleted();
       },
