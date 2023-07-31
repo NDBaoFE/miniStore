@@ -1,4 +1,4 @@
-import { get } from "./ApiCaller"; 
+import { get, post } from "./ApiCaller"; 
 
 
 const payslip = {
@@ -10,7 +10,18 @@ const payslip = {
     getPay: (token) =>{
         let url = `/salary/pay`
         return get(url, {}, {Authorization:token})
-    }
+    },
+    paySalary: (token) => {
+        const url = "/salary";
+        return post(
+            url,
+            {
+            },
+            {},
+            {Authorization:token}
+        );
+    },
 }
+
 
 export default payslip

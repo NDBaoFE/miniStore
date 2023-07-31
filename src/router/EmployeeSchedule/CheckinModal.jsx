@@ -15,8 +15,9 @@ import { themes } from "../../utils/theme";
 import { toastError, toastSuccess } from "../../components/Toast";
 
 import productApi from "../../utils/api/productApi";
+import payslip from "../../utils/api/payslipApi";
 
-const CheckinModal = ({ openCheckin,setOpenCheckin,checkinShift,type}) => {
+const CheckinModal = ({ openCheckin,setOpenCheckin,checkinShift,type,setLoaded,loaded,open,setOpen}) => {
     const inputRef = useRef(null);
     const [isFocus,setFocus] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -52,8 +53,18 @@ const CheckinModal = ({ openCheckin,setOpenCheckin,checkinShift,type}) => {
             setSuccess(true);
           setGreeny(true);
           toastSuccess("You have successfully checked in");
-  
+        
         }, 1000);
+        setTimeout(() => {
+           setLoaded(!loaded);
+           setOpenCheckin(false);
+          setSuccess(false);
+      }, 2000);
+      setTimeout(() => {
+        setOpen(false);
+        }, 3000);
+
+        
         }else{
           setTimeout( async () => {
             setFocus(false);
@@ -69,8 +80,17 @@ const CheckinModal = ({ openCheckin,setOpenCheckin,checkinShift,type}) => {
             setSuccess(true);
           setGreeny(true);
           toastSuccess("You have successfully checked out");
-  
         }, 1000);
+        setTimeout(() => {
+          setLoaded(!loaded);
+          setOpenCheckin(false);
+          setSuccess(false);
+     }, 2000);
+     setTimeout(() => {
+      setOpen(false);
+      }, 3000);
+        
+        await payslip.paySalary(token);
         }else{
           setTimeout( async () => {
             setFocus(false);
@@ -91,7 +111,7 @@ const CheckinModal = ({ openCheckin,setOpenCheckin,checkinShift,type}) => {
       }, 1000);
     }
      
-
+   
       
     
     

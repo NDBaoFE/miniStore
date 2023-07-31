@@ -34,8 +34,9 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setLoaded,loade
   const renderCheckinCheckoutButtons = (index) => {
     const hasUser = positions[index].user && positions[index].user.userId === userId;
     const isCheckedIn = selectedValue[index]?.isCheckedIn === true;
+    const isCheckedInLate = selectedValue[index]?.isCheckedInLate === true;
     const isCheckedOut= selectedValue[index]?.isCheckedOut === true;
-    if (hasUser && !isCheckedIn) {
+    if (hasUser && !isCheckedIn && !isCheckedInLate) {
       return (
         <ButtonContainer>
           <StyledButton type="primary" onClick={() => handleCheckin(selectedValue[index], true)}>
@@ -50,7 +51,7 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setLoaded,loade
       );
     }
   
-    if (hasUser && isCheckedIn && !isCheckedOut) {
+    if (hasUser && (isCheckedIn ||isCheckedInLate) && !isCheckedOut) {
       return (
         <ButtonContainer>
           <StyledButton type="primary" onClick={() => handleCheckin(selectedValue[index], false)}>
@@ -102,7 +103,7 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setLoaded,loade
       width={1200}
       
     >
-      <CheckinModal openCheckin={openCheckin} setOpenCheckin={setOpenCheckin} checkinShift={checkinShift} type={type} />
+      <CheckinModal openCheckin={openCheckin} setOpenCheckin={setOpenCheckin} checkinShift={checkinShift} type={type} setLoaded={setLoaded} loaded={loaded}  open={open} setOpen={setOpen}/>
       <ModalContainer> 
         <Left>{selectedValue ? selectedValue.slice(0,3).map((item,index)=>{
     

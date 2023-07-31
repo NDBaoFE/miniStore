@@ -187,7 +187,7 @@ const handleDrag = (e, data) => {
      workingShift={workingShift} profile={profile}  setCheckinShift={setCheckinShift} setOpenCheckin={setOpenCheckin}/>
     
      } 
-      <CheckinModal openCheckin={openCheckin} setOpenCheckin={setOpenCheckin} checkinShift={checkinShift} type={true} />
+      <CheckinModal openCheckin={openCheckin} setOpenCheckin={setOpenCheckin} checkinShift={checkinShift} type={true}  setLoaded={setLoaded} loaded={loaded}/>
   <div className="timetable" style={{ color: "black" }} ref={ref3} >
     <ActionHeader ref={ref2}>
 
