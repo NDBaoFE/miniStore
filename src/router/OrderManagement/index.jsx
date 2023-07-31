@@ -172,8 +172,6 @@ const OrderManagemntPage = () => {
 
 
   const handleOrderDeleted = () => {
-    // Refresh the vouchers by triggering a re-render of the VoucherList component
-    // This can be done by incrementing the current page number or any other way to indicate a change
     SetReload(!reload);
   };
 
