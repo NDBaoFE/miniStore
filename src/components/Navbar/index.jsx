@@ -67,7 +67,7 @@ function NavBar() {
             <Link to={`/notify/${option.userNotificationId}`} style={{ display: "contents" }}></Link>
             <div style={{ display: "flex", alignItems: "center",justifyContent:"space-between" }}>
             <StyledAvatar src={ava} style={{ marginRight: 12,width:"80px",height:"80px" }} width={80}  height={80}/>
-            <div style={{ fontWeight: "bold",lineHeight:"10px"}}>{option.title}</div>
+            <div style={{ fontWeight: "bold",lineHeight:"20px"}}>{option.title}</div>
             </div>
           
             <br />
