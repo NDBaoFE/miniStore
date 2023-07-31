@@ -188,11 +188,12 @@ const OrderManagemntPage = () => {
       onOk: async () => {
         const token = localStorage.getItem("Authorization");
         const res = await orderManagementApi.deleteOrder(id, token);
-        if (res.status === 200) {
+        if (res.data.status === 200) {
           toastSuccess(res.data.message);
           setSearch(search);
         } else {
           toastError("Delete Order Failed");
+          toastError(res.data.message);
         }
         handleOrderDeleted();
       },
