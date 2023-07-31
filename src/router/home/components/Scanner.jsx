@@ -34,7 +34,7 @@
     };
 
     function Html5QrcodePluginModal({ openScanner, setOpenScanner}) {
-        const [ toggle] = useAudio();
+        const [,toggle] = useAudio();
         const  fps=20;
         const qrbox=250;
         const disableFlip=false;

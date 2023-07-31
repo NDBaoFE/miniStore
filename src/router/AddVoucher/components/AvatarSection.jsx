@@ -10,7 +10,7 @@ const voucherImg=useSelector(selector.voucherImg);
   return (
     <AvatarWrapper>
         <AvatarInfo>
-            <Avatar src={voucherImg.startsWith("http") ? voucherImg : `data:image/jpeg;base64,${voucherImg}`}   alt="avatar" onError={(e) => {
+            <Avatar src={voucherImg}   alt="avatar" onError={(e) => {
           e.target.src = Placeholder;
         }}/>
 
