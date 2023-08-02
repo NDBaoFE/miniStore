@@ -25,28 +25,32 @@ const slice = createSlice({
     reducers: {
         addProduct: (state, action) => {
             const { productId, quantity, addQuantity } = action.payload;
+            let productExists = false;
 
-            for (let product of state.orderList.data) {
-                if (product.productId == productId) {
-                    if (product.quantity < quantity) {
-                        product.quantity += addQuantity;
+            state.orderList.data = state.orderList.data.map((product) => {
+                if (product.productId === productId) {
+                    if (product.cartQuantity < quantity) {
+                        product.cartQuantity += addQuantity;
                     } else {
                         toastError("Not enough Quantity");
                     }
-
-                    return;
+                    productExists = true;
                 }
-            }
-            if (action.payload.quantity == 0) {
-                toastError("Can not add 0 quantity product");
-            } else {
-                const newProduct = {
-                    ...action.payload,
-                    quantity: addQuantity,
-                    voucherId: null,
-                    finalPrice: action.payload.price,
-                };
-                state.orderList.data.push(newProduct);
+                return product;
+            });
+
+            if (!productExists) {
+                if (quantity === 0) {
+                    toastError("Can not add 0 quantity product");
+                } else {
+                    const newProduct = {
+                        ...action.payload,
+                        cartQuantity: addQuantity,
+                        voucherId: null,
+                        finalPrice: action.payload.price,
+                    };
+                    state.orderList.data.push(newProduct);
+                }
             }
         },
         deleteProduct: (state, action) => {
@@ -68,8 +72,13 @@ const slice = createSlice({
         updateProductQuantity: (state, action) => {
             for (let product of state.orderList.data) {
                 if (product.productId == action.payload.productId) {
-                    product.quantity = action.payload.quantity;
-                    return;
+                    if (action.payload.InputQuantity > product.quantity) {
+                        toastError(
+                            `This product has only ${product.quantity} quantity`
+                        );
+                        product.cartQuantity = product.quantity;
+                    }
+                    product.cartQuantity = action.payload.InputQuantity;
                 }
             }
         },

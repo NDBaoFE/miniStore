@@ -15,8 +15,12 @@ function Radio({change,setChange}) {
     dispatch(updatePaymentMethod(e.target.value));
   };
   const handleChange = (e) => {
-      setChange(e.target.value);
-  }
+    // Only allow numeric values (integer) in the input field
+    const inputValue = e.target.value;
+    if (/^\d*$/.test(inputValue)) {
+      setChange(parseInt(inputValue, 10)); // Convert the input value to an integer
+    }
+  };
  
   return (
     <RadioContainer> 
@@ -28,6 +32,7 @@ function Radio({change,setChange}) {
             name="name"
             value={change}
             onChange={handleChange}
+            min={0}
             placeholder=" 💵 Enter Amount Received"
               style={{
                 width: 200,
@@ -37,9 +42,7 @@ function Radio({change,setChange}) {
           ) : null}</StyledRadio>
           
           <StyledRadio value={2} >VN-Pay </StyledRadio>
-      <StyledRadio value={3}>
-          Others..
-        </StyledRadio>
+
     </StyledSpace>
   </StyledRadio.Group>
   </RadioContainer>

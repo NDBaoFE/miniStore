@@ -9,7 +9,7 @@ import { formatNumberWithDecoration } from "../../../utils";
 function OrderSummary() {
   const {orderList,}=useSelector(selector);
  
-  const total=orderList.data.reduce((acc,item)=>acc+item.finalPrice*item.quantity,0);
+  const total=orderList.data.reduce((acc,item)=>acc+item.finalPrice*item.cartQuantity,0);
   const dispatch=useDispatch();
   dispatch(setTotalPrice(total*(1-orderList.percentDiscount)));
   return (

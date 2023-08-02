@@ -23,18 +23,20 @@ function Cart() {
   const handleDeleteVoucher=()=>{
     dispatch(removeApplyAllVoucher());
   }
+ 
    
   return (
     <CartWrapper>
       <OrderList>
         <div style={{maxHeight:"400px",overflowY:"scroll",overflowX:"hidden"}} className="cart">
         {orderList.data.map((product) => {
-            subTotal += product.finalPrice * product.quantity;
-            totalQuantity += product.quantity;
+            subTotal += product.finalPrice * product.cartQuantity;
+            totalQuantity += product.cartQuantity;
             return (
               <OrderDetail
                 key={product.productId}
-                product={product}
+                product={product} 
+                orderList={orderList}
               ></OrderDetail>
             );
           })}
@@ -53,7 +55,7 @@ function Cart() {
             <CloseButton onClick={handleDeleteVoucher}><ImCross/></CloseButton>
              </div>}
               {!isDiscount &&<div className="discount">
-                <Link to="/apply-voucher/applyAll">Add Voucher</Link>
+                <Link to="/apply-voucher/applyAll">Apply All Voucher</Link>
               </div>}
             </Row>
             <Row
