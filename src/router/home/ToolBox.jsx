@@ -15,7 +15,7 @@ function ToolBoxSection({setSearchValue,setOpenScanner}) {
   
       setSearchValue(e.target.value);
     }
- 
+    
     
   return (
     <ToolBox>

@@ -36,6 +36,7 @@ function ActionGroup({change}) {
     const token= localStorage.getItem("Authorization");
     if(paymentMethod == 2){
     localStorage.setItem("cart",JSON.stringify(modifiedOrderList));
+    localStorage.setItem("fullcart",JSON.stringify(orderList));
     // console.log(JSON.parse(localStorage.getItem("cart")));
     const res= await paymentApi.vnPay(totalPrice,token);
     if(res.data.status  ==200){

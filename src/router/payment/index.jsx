@@ -35,6 +35,7 @@ function Payment() {
           const res1=await productApi.makeOrder(cart,token);
           if(res1.data.status===200){
             localStorage.removeItem("cart");
+            localStorage.removeItem("fullcart");
           }
         } else {
           toastError(res.data.message);

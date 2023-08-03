@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
   import { Modal,Form,InputNumber,Input, Typography, Popconfirm, Image, Select } from 'antd';
 import { productSelector } from './slice/selector';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { setOpenTable, setProducts } from './slice';
 import productApi from '../../../utils/api/productApi';
 import { toastError, toastSuccess } from '../../../components/Toast';
@@ -18,6 +18,7 @@ const EditableCell = ({
     children,
     ...restProps
   }) => {
+    
     const {types}=useSelector(productSelector);
     const inputNode = inputType === 'number' ? <InputNumber /> : inputType === 'select' ? (
       <Select>
@@ -55,6 +56,7 @@ const EditableCell = ({
     );
   };
 function ImportList({columns,setReload,reload}) {
+  const [erros,setErros]=useState(null);
   const columnsToRemove = ['action','details','productId']; // The column key to be removed
 const dispatch=useDispatch();
 const newColumn = [{
@@ -125,6 +127,9 @@ const {importedList,isOpenTable,types}=useSelector(productSelector);
     
       setEditingKey(record.productCode);
     };
+    useEffect(()=>{
+  
+    },[erros])
     const save = async (key) => {
         try {
           const row = await form.validateFields();
@@ -154,6 +159,8 @@ const {importedList,isOpenTable,types}=useSelector(productSelector);
       };
     const handleCancel = () => {
       dispatch(setOpenTable(false));
+      setErros(null);
+  
     }
     const handleConfirm = async () => {
       const token=localStorage.getItem("Authorization");
@@ -163,7 +170,8 @@ const {importedList,isOpenTable,types}=useSelector(productSelector);
           dispatch(setOpenTable(false));
         }else{
           toastError(res.data.message);
-          dispatch(setOpenTable(false));
+          setErros(res.data.data);
+          console.log(res.data.data.err1);
           setReload(!reload);
         }
       }
@@ -183,7 +191,7 @@ const {importedList,isOpenTable,types}=useSelector(productSelector);
           }),
         };
       });
-      
+
   return (
     <Modal
     open={isOpenTable}
@@ -203,10 +211,33 @@ const {importedList,isOpenTable,types}=useSelector(productSelector);
         }}/>
     </ProductWrapper>
     </Form>
+
+    {erros && erros.err1 && erros.err2 && (
+  <div>
+    {erros.err1.map((err, index) => {
+      return (
+        <div key={index} style={{background:"#ff6961",padding:"0 40px",color:"white",fontSize:"18px",marginBottom:"10px"}}>
+        The Product must have Price which is greater then cost, please Try again !!
+      </div>
+      );
+    })}
+    {erros.err2.map((err, index) => {
+      console.log("hi");
+      return (
+        <div key={index} style={{background:"#ff6961",padding:"0 40px",color:"white",fontSize:"18px"}}>
+          The Product with the product code "{err.productCode}" is already exist, type another one !!
+        </div>
+      );
+    })}
+  </div>
+)}
     <div style={{display:"flex",justifyContent:"space-around",alignItems:"center"}}>
       <Button style={{maxWidth:200}} onClick={handleCancel}>Cancel</Button>
       <Button style={{maxWidth:200}}  onClick={handleConfirm}>Confirm</Button>
       </div>
+    
+      
+
    
     </Modal>
   )

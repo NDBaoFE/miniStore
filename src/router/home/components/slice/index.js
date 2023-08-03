@@ -6,7 +6,7 @@ import { toastError } from "../../../../components/Toast";
 export const initialState = {
     productId: 0,
     products: [],
-    orderList: {
+    orderList: JSON.parse(localStorage.getItem("fullcart")) || {
         data: [],
         voucherId: null,
         percentDiscount: 0,
@@ -18,6 +18,7 @@ export const initialState = {
     vouchers: [],
     totalPrice: "",
 };
+
 export const name = "orderList";
 const slice = createSlice({
     name,

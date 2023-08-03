@@ -3,33 +3,56 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import { selector } from "./slice/selector";
 import OrderDetail from "./OrderDetail";
-import { Link } from "react-router-dom";
-import { themes } from "../../../utils/theme";
+import { Link, useNavigate } from "react-router-dom";
 import { clearOrder, removeApplyAllVoucher } from "./slice";
 import { CartWrapper } from "./style";
 
 import { useDispatch } from "react-redux";
 import { ImCross } from "react-icons/im";
 import { formatNumberWithDecoration } from "../../../utils";
+import { toastError } from "../../../components/Toast";
 function Cart() {
   let subTotal = 0;
   let totalQuantity = 0;
+  const navigate=useNavigate();
   const { orderList } = useSelector(selector);
   const dispatch = useDispatch();
   const isDiscount = orderList.voucherId !== null;
   const handleClearCart=()=>{
     dispatch(clearOrder());
   }
+  const isHaving0Quantity=()=>{
+    let bool=false;
+     orderList.data.forEach((product)=>{
+      console.log(product.cartQuantity);
+      if(product.cartQuantity == 0 ){
+        
+     bool=true;
+      }
+     })
+     return bool;
+  }
   const handleDeleteVoucher=()=>{
     dispatch(removeApplyAllVoucher());
   }
- 
+ const handleCheckout=(subTotal)=>{
+  console.log(isHaving0Quantity());
+  if( isHaving0Quantity()){
+    toastError("Product quantity can't be 0, please try again");
+  }else if(subTotal == 0){
+    toastError("You have not select any product");  }else{
+      navigate("/checkout");
+    }
+ }
    
   return (
     <CartWrapper>
       <OrderList>
         <div style={{maxHeight:"400px",overflowY:"scroll",overflowX:"hidden"}} className="cart">
-          <div className="nav">
+         { orderList.data.length > 0 &&
+         
+         <>
+         <div className="nav">
             <div>Quantity</div>
             <div>Product</div>
             <div>Price</div>
@@ -46,6 +69,7 @@ function Cart() {
               ></OrderDetail>
             );
           })}
+          </>} 
         </div>
          
           <Total>
@@ -74,10 +98,8 @@ function Cart() {
               <DeleteButton style={{ marginRight: "20px" }} onClick={handleClearCart}>
                 <DeleteOutlined />
               </DeleteButton>
-              <Link to="/checkout" style={{ color: `${themes.colors.white}` }}>
-                {" "}
-                <PaymentButton>Go to Payment</PaymentButton>
-              </Link>
+
+                <PaymentButton onClick={()=>handleCheckout(subTotal)}>Go to Payment</PaymentButton>
             </Row>
           </Total>
         </OrderList>  
