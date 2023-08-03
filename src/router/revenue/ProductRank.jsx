@@ -5,7 +5,7 @@ import {  Body, EmployeeCard, HeroWrapper, Name, Wrapper } from './style'
 
 function ProductRank({data}) {
   return (
-    <Wrapper style={{marginTop: '85px', marginBottom: '50px',flexDirection:'column',width:'100%'}}>
+    <Wrapper style={{marginTop: '460px', marginBottom: '50px',flexDirection:'column',width:'100%'}}>
         <HeroWrapper> <h2>Top sold Product
         </h2></HeroWrapper>
        {data && <Body style={{background:"#fff",padding:"0 20px"}}>

@@ -25,7 +25,7 @@ function Menu() {
                 </Left>
                 <Right>
                     <div className='price'>{formatNumberWithDecoration(item.finalPrice*item.cartQuantity)} VNĐ</div>
-                    <div className='originalPrice'>{formatNumberWithDecoration(item.price*item.cartQuantity)} VNĐ</div>
+                    {item.finalPrice!= item.price && <div className='originalPrice'>{formatNumberWithDecoration(item.price*item.cartQuantity)} VNĐ</div> }
                 </Right>
             </ItemRow>
         })}

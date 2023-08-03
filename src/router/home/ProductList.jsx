@@ -36,7 +36,10 @@ function ProductList({search}) {
     fetchData();
 }, [current,search,token]);
 
-
+   // Reset current page to 1 whenever search changes
+   useEffect(() => {
+    setCurrent(1);
+}, [search]);
   const handlePageChange=(page)=>{
     setCurrent(page);
     navigate(`/home/${page}`);

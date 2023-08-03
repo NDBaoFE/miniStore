@@ -120,8 +120,6 @@ function Revenue() {
           <img src= {Scope} alt="scope" />
             </div>
           </Commercial>
-          <h2>Category Revenue</h2>
-            <CategoryChart/>
             
             <ProductRank data={data}/>
         </Right>

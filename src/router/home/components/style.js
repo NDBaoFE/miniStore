@@ -23,6 +23,15 @@ export const OrderList = styled.div`
     .cart::-webkit-scrollbar {
         width: 10px;
     }
+    .nav {
+        display: flex;
+        width: 90%;
+        justify-content: space-between;
+        margin-left: 20px;
+        font-weight: 700;
+        font-size: 14px;
+        color: ${themes.colors.primary};
+    }
 `;
 export const Row = styled.div`
     display: flex;
@@ -123,7 +132,7 @@ export const Quantity = styled(Input)`
     justify-content: center;
 `;
 export const CloseButton = styled.div`
-    margin-left: 30px;
+    margin-left: 10px;
     cursor: pointer;
     text-align: center;
     &:hover {

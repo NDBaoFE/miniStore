@@ -159,10 +159,10 @@ const {importedList,isOpenTable,types}=useSelector(productSelector);
       const token=localStorage.getItem("Authorization");
       const res= await productApi.importProduct(importedList,token);
         if(res.data.status===200){
-          toastSuccess("Imported Successfully");
+          toastSuccess(res.data.message);
           dispatch(setOpenTable(false));
         }else{
-          toastError("Imported Successfully");
+          toastError(res.data.message);
           dispatch(setOpenTable(false));
           setReload(!reload);
         }
