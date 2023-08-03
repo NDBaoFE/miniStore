@@ -114,6 +114,14 @@ const adminRoute = [
         exact: true,
         restrict: true,
     }
+
+    ,{
+        index: true,
+        path: "voucher/detail/:id",
+        component: <OrderDetailTable/>,
+        exact: true,
+        restrict: true,
+    }
     ,{
         index: true,
         path: "voucher/new",

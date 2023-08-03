@@ -85,8 +85,14 @@ const OrderManagemntPage = () => {
     for(let item of order ){
       if(item.type === false){
         totalSale += item.total;
+        if (totalSale < 0){
+          totalSale = 0
+        }
       }else{
-        totalImport += item.total
+        totalImport += item.total;
+        if(totalImport <0){
+          totalImport = 0;
+        }
       }
     }
 

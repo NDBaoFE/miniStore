@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react'
 import ToolBoxSection from './components/ToolBox'
 import { Container, NotiModal, StyledSpace } from './style'
 import Spinner from '../../components/Spinnner';
-import {  useParams } from 'react-router-dom';
+import {  Link, useParams } from 'react-router-dom';
 import VoucherList from './components/VoucherList';
 
 import {ExclamationCircleOutlined} from "@ant-design/icons"
 
-import { Image } from 'antd';
+import { Button, Image } from 'antd';
 import productApi from '../../utils/api/productApi';
 import { toastError, toastSuccess } from '../../components/Toast';
 function VoucherManagement() {
@@ -161,7 +161,7 @@ function VoucherManagement() {
         key: 'action',
         render: (_, record) => (
           <StyledSpace size="middle">
-
+             <Button><Link to={`/voucher/detail/${record.orderId}`}>View </Link></Button>
             <div onClick={()=>confirm(record.voucherId)}>Delete</div>
           </StyledSpace>
         ),

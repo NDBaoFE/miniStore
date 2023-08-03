@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { get, post, remove, put } from "./ApiCaller";
+import { get, post, remove, put } from "./ApiCaller"; 
 
 const userApi = {
     getUser: (search, current, token) => {

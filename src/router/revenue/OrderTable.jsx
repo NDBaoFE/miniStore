@@ -47,13 +47,7 @@ const columns = [
       <span>{record.total}</span>
     ),
   },
-  {
-    title: 'Payment Method',
-    dataIndex: 'paymentMethod',
-    render: (_, record) => (
-      <span>MasterCard</span>
-    ),
-  },
+
   {
     title: 'Action',
     key: 'action',

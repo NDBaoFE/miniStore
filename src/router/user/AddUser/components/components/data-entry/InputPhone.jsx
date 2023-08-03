@@ -20,7 +20,8 @@ const InputPhone = () => {
           required: true,
           message: "Phone number can not be empty",
         },
-        {max: 10, message: "Phone number should be shoter than 10 numbers"
+        { max: 10, 
+          message: "Phone number should be shoter than 10 numbers"
         },
         {
           message: 'Phone Number is not on the right format',

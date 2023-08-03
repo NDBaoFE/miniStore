@@ -117,7 +117,7 @@ const confirm = () => {
             </Row>
             <Row >
                 <Col span={24}>
-                <Label level={5}>Voucher Name</Label>
+                <Label level={5}>Voucher Description</Label>
                 <InputDescription/>
                  </Col>
             </Row>

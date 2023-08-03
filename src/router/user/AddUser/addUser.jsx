@@ -33,6 +33,7 @@ import { toastError, toastSuccess } from "../../../components/Toast";
 import Photo from "./components/Photo";
 import UploadImg from "./components/Upload";
 import { useNavigate } from "react-router-dom";
+import Success from "../../../components/Success";
 
 const AddUser = () => {
   const navigate=useNavigate();
@@ -48,21 +49,28 @@ const AddUser = () => {
   const gender = useSelector(selectors.gender);
   const info = useSelector(selectors.info);
   const dispatch = useDispatch();
+
   const [success,setSuccess]=useState(false);
+
+
+
   const UpdateInfo = async () => {
     const token=localStorage.getItem("Authorization");
     dispatch(actions.getUserInfo());
     const res = await userApi.addUser(info,token);
-    if (res.data.status == 200) {
 
-   
+    if(res.data.status == 200){
+       
       setSuccess(true);
       setTimeout(() => {setSuccess(false);  
       toastSuccess("Add User Successfully");
-      navigate('/user'); },2000);
-    } else {
+      navigate('/user'); 
+    },1000);
+      
+  }else{
       toastError(res.data.message);
-    }
+  }
+ 
   };
 
   const handleFinish = () => {

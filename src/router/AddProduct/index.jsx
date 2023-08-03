@@ -38,6 +38,7 @@ function AddProduct() {
 
   const dispatch=useDispatch();
     const navigate=useNavigate()
+    
   const UpdateInfo = async () => {
     
     dispatch(actions.getProductInfo());

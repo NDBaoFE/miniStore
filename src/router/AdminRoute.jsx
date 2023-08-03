@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from "react-router-dom";
+                             import { Navigate, Outlet } from "react-router-dom";
 import useAuth from "../utils/useAuth";
 import { toastError } from "../components/Toast";
 
