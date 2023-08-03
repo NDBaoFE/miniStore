@@ -1,4 +1,5 @@
 
+import { formatNumberWithDecoration } from '../../../utils';
 import selector from './slice/selectors';
 import { AvatarWrapper,AvatarInfo,Avatar,Info } from './style'
 import { useSelector } from 'react-redux'
@@ -15,7 +16,7 @@ const price=useSelector(selector.price);
         }}/>
             <Info>
                 <h3>{name}</h3>
-                <h3>{price!= null ? `${price} VNĐ`:"Your price"}</h3>
+                <h3>{price!= null ? `${ formatNumberWithDecoration(price) } VNĐ`:"Your price"}</h3>
             </Info>
         </AvatarInfo>
     </AvatarWrapper>

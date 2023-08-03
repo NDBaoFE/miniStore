@@ -59,8 +59,8 @@ const handleFinish = () => {
 };
 
 const handleFinishFailed = () => {
-    console.log(' Please enter all the information !!');
-};
+    toastError("Validation failed, please check again");
+  };
 const confirm = () => {
     NotiModal.confirm({
         maskClosable: true,

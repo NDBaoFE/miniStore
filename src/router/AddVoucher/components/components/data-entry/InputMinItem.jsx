@@ -13,10 +13,20 @@ const InputMinItem = () => {
         dispatch(actions.getVoucherInfo());
     };
 
+    const validateMinItem = (_, value) => {
+        if (/^[1-9][0-9]*$/.test(value)) {
+            return Promise.resolve();
+        } else {
+            return Promise.reject('Minimum Item must be a positive integer');
+        }
+    };
+
     return (
         <Form.Item
             name="minItem"
-           
+            rules={[
+                { validator: validateMinItem }
+            ]}
         >
             <Input
                 type="number"

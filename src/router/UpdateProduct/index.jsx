@@ -57,7 +57,7 @@ function UpdateProduct() {
   };
 
   const handleFinishFailed = () => {
-    console.log(" Please enter all the information");
+    toastError("Validation failed, please check again");
   };
   const token = localStorage.getItem("Authorization");
   useEffect(() => {
