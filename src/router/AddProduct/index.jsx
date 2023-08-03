@@ -12,7 +12,6 @@ import InputCost from "./components/components/data-entry/InputCost";
 import InputProductCode from "./components/components/data-entry/InputProductCode";
 import SelectType from "./components/components/data-entry/SelecType";
 import InputQuantity from "./components/components/data-entry/InputQuantity";
-import InputQuantityAlert from "./components/components/data-entry/InputQuantityAlert";
 import ActionGroup from "./components/ActionGroup";
 import selector from "./components/slice/selectors";
 import { actions } from "./components/slice";
@@ -143,12 +142,12 @@ const confirm = () => {
                 <InputQuantity/>
                  </Col>
             </Row>
-            <Row >
+            {/* <Row >
                 <Col span={24}>
                 <Label level={5}>Product Quantity on Alert</Label>
                 <InputQuantityAlert/>
                  </Col>
-            </Row>
+            </Row> */}
                    <Row></Row>
           </Stock></Right>
           <ActionGroup confirm={confirm}/>
