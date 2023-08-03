@@ -26,9 +26,9 @@ function ActionGroup({change}) {
     const modifiedOrderList = {
       ...orderList,
       data: orderList.data.map((order) => {
-       let {productId,price,quantity,voucherId,name}=order;
-       
-        return {productId,price,quantity,voucherId,name};
+       let {productId,price,cartQuantity,voucherId,name}=order;
+       let quantity1= cartQuantity;
+        return {productId,price,quantity:quantity1,voucherId,name};
       }),
     };
     

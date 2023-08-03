@@ -18,7 +18,6 @@ function  OrderDetail({product,orderList}) {
     const dispatch = useDispatch();
     const [quantity, setQuantity] = useState(product.cartQuantity);
     const handleChangeQuantity = (e) => {
-      console.log(e.target.value);
       if(parseInt(e.target.value) > product.quantity){
         toastError(`This product only have ${product.quantity} items`)
         setQuantity(product.quantity);

@@ -49,13 +49,13 @@ import { useSelector } from "react-redux";
             </th>
           </tr>
           { orderList.map((item,index) => {
-           total+=item.price * item.quantity;
+           total+=item.price * item.cartQuantity;
             return (
               <tr key={index}>
               <td>{item.name}</td>
               <td>{item.price}</td>
-              <td>{item.quantity}</td>
-              <td>{ item.price * item.quantity}</td>
+              <td>{item.cartQuantity}</td>
+              <td>{ item.price * item.cartQuantity}</td>
             </tr>
             )
           })}
