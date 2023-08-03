@@ -3,54 +3,110 @@ import React from "react";
 import { Space, Table, Button } from "antd";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import orderManagementApi from "../../../utils/api/orderManagementApi";
+
 import { useState } from "react";
 import { formatNumberWithDecoration } from "../../../utils";
+import productApi from "../../../utils/api/productApi";
+
+
+
+
+
+
+
 const columns = [
   {
     title: "Voucher Name",
-    dataIndex: "productId",
-    key: "productId",
+    dataIndex: "name",
+    key: "name",
   },
   {
     title: "Voucher Description",
-    dataIndex: "product",
-    key: "product",
-    render: (product) => {
-      return product.name;
+    dataIndex: "description",
+    key: "description",
+
+  
+  },
+
+  {
+    title: 'Is Apply to All',
+    key: 'isApplyAll',
+    render: (isApplyAll) => {
+      if (isApplyAll === true) {
+        return (
+          <div
+   
+          >
+            Yes
+          </div>
+        );
+      } else {
+        return (
+          <div
+      
+          >
+            No
+          </div>
+        );
+      }
     },
   },
 
 
   {
-    title: "Price",
-    dataIndex: "price",
-    render: (_, record) => <span style={{color:"green", fontWeight:600}}>{formatNumberWithDecoration(record.price)} VND</span>,
+    title: "Quantity",
+    dataIndex: "quantity",
+    
   },
 
   {
-    title: "Quantity",
-    dataIndex: "quantity",
-    key: "quantity",
+    title: "Min Total",
+    dataIndex: "minTotal",
+   
   },
+
   {
-    title: "Total",
-    dataIndex: "total",
-    key: "total",
-    render: (_, record) => <span style={{color:"green", fontWeight:600}}>{formatNumberWithDecoration(record.total)} VND</span>
+    title: "Min Item",
+    dataIndex: "minItem",
+   
   },
+
+  
+  {
+    title: "Percent Discount (%)",
+    dataIndex: "percentDiscount",
+    render: (percentDiscount) => {
+      const multipliedValue = percentDiscount * 100;
+      return <span>{multipliedValue}</span>;
+    },
+  },
+
+  {
+    title: 'Expire Date',
+    dataIndex: 'expireDate',
+    key: 'expireDate',
+    render: (_, record) => (
+
+        <div >{record.expireDate||"None"}</div>
+     
+    ),
+    // sorter: (a, b) => a.minTotal - b.minTotal,
+    // sortDirections: ['descend', 'ascend'],
+  },
+
+  
+  
 ];
 
 
-const OrderDetailTable = () => {
+const VoucherDetailTable = () => {
   const [voucherDetail, setVoucherDetail] = useState([])
   const token = localStorage.getItem('Authorization')
   const { id } = useParams();
   useEffect(()=>{
     async function fetchData() {
       try {
-        const response = await orderManagementApi.getOrderDetail(id,token);
-        console.log(response.data);
+        const response = await productApi.getVoucherDetail(id,token);
         setVoucherDetail(response.data.data);
   
       } catch (error) {
@@ -59,20 +115,24 @@ const OrderDetailTable = () => {
     }
     fetchData();
 
-  })
+  }, [token])
+
+console.log(voucherDetail);
 
   return (
     <Container>
-      <div style={{margin: 25, fontSize: 30}}>
-        Order Detail of #{id}
+       <div style={{margin: 25, fontSize: 30}}>
+        Voucher Detail of #{id}
       </div>
 
 
-      <Table columns={columns} dataSource={voucherDetail} />
+      <Table columns={columns} dataSource={[voucherDetail]} />
 
-      <Button><Link to={`/voucher`}>Back to order</Link></Button>
+      <Button><Link to={`/voucher`}>Back to voucher</Link></Button> 
+
+  
     </Container>
   );
 };
 
-export default OrderDetailTable;
+export default VoucherDetailTable;

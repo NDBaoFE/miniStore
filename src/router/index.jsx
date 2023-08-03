@@ -36,6 +36,7 @@ import PayrollByUser from "./payrollByUser";
 import OrderManagemntPage from "./OrderManagement";
 import OrderDetailTable from "./OrderManagement/components/OrderDetailTable";
 import Payment from "./payment";
+import VoucherDetailTable from "./VoucherMangement/components/VoucherDetailTable";
 
 
 const publicRoute = [
@@ -118,7 +119,7 @@ const adminRoute = [
     ,{
         index: true,
         path: "voucher/detail/:id",
-        component: <OrderDetailTable/>,
+        component: <VoucherDetailTable/>,
         exact: true,
         restrict: true,
     }

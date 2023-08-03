@@ -132,6 +132,12 @@ const productApi = {
         return get(url, {}, { Authorization: token });
     },
 
+    getVoucherDetail: ( id,token) => {
+        const url = `/voucher/${id}`
+
+        return get(url, {}, { Authorization: token });
+    },
+
     getAllTicket: (token) => {
         const url = `/ticket`;
         return get(url, {}, { Authorization: token });

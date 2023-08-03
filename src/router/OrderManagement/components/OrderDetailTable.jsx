@@ -59,7 +59,9 @@ const OrderDetailTable = () => {
     }
     fetchData();
 
-  })
+  }, [token])
+
+console.log(orderDetail);
 
   return (
     <Container>

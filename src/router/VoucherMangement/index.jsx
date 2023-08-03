@@ -161,7 +161,7 @@ function VoucherManagement() {
         key: 'action',
         render: (_, record) => (
           <StyledSpace size="middle">
-             <Button><Link to={`/voucher/detail/${record.orderId}`}>View </Link></Button>
+             <Button><Link to={`/voucher/detail/${record.voucherId}`}>View </Link></Button>
             <div onClick={()=>confirm(record.voucherId)}>Delete</div>
           </StyledSpace>
         ),

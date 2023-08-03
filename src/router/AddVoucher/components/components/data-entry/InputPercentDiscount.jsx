@@ -34,6 +34,7 @@ const InputPercentDiscount = () => {
         ]}
       >
       
+
             <Input
                 type="number"
                 placeholder="percentDiscount"
