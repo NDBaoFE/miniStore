@@ -13,15 +13,26 @@ const InputQuantity = () => {
         dispatch(actions.getProductInfo());
     };
 
+    const validateQuantity = (_, value) => {
+        if (/^[1-9][0-9]*$/.test(value)) {
+            return Promise.resolve();
+        } else {
+            return Promise.reject('Quantity must be a positive integer');
+        }
+    };
+
     return (
         <Form.Item
             name="quantity"
-            rules={[{ required: true, message: "quantity can  not be Empty" }]}
+            rules={[
+                { required: true, message: "Quantity cannot be empty" },
+                { validator: validateQuantity }
+            ]}
         >
             <Input
-              name="productQuantity"
+                name="productQuantity"
                 type="number"
-                placeholder="quantity"
+                placeholder="Quantity"
                 value={quantity}
                 onChange={handleQuantityChange}
             />

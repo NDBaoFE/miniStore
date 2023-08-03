@@ -13,9 +13,20 @@ const InputQuantityAlert = () => {
         dispatch(actions.getProductInfo());
     };
 
+    const validateQuantityAlert = (_, value) => {
+        if (/^[1-9][0-9]*$/.test(value)) {
+            return Promise.resolve();
+        } else {
+            return Promise.reject('Quantity Alert must be a positive integer');
+        }
+    };
+
     return (
         <Form.Item
             name="quantityAlert"
+            rules={[
+                { validator: validateQuantityAlert }
+            ]}
         >
             <Input
                 name="productQuantity"

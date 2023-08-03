@@ -13,14 +13,27 @@ const InputQuantity = () => {
         dispatch(actions.getVoucherInfo());
     };
 
+    const validateQuantity = (_, value) => {
+        if (value === 0) {
+            return Promise.reject('Quantity cannot be 0');
+        } else if (/^[1-9][0-9]*$/.test(value)) {
+            return Promise.resolve();
+        } else {
+            return Promise.reject('Quantity must be a positive integer');
+        }
+    };
+
     return (
         <Form.Item
             name="quantity"
-            rules={[{ required: true, message: "quantity can  not be 0" }]}
+            rules={[
+                { required: true, message: "Quantity cannot be empty" },
+                { validator: validateQuantity }
+            ]}
         >
             <Input
                 type="number"
-                placeholder="quantity"
+                placeholder="Quantity"
                 value={quantity}
                 onChange={handleQuantityChange}
             />
