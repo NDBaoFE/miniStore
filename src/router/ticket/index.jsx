@@ -42,7 +42,7 @@ function TicketPage() {
             
             }else{
 
-              let array=[...processedTickets,...unprocessedTickets];
+              let array=[...unprocessedTickets,...processedTickets];
               setTickets(array);
             }
           
