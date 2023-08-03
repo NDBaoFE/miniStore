@@ -51,7 +51,7 @@ function  OrderDetail({product,orderList}) {
            <Quantity value={quantity} onChange={handleChangeQuantity} type="number" min={1}/> }
             <Name>{product.name}</Name>
          
-          {// only render if there is new price 
+         {} {// only render if there is new price 
           product.finalPrice != product.price &&  
            <Col>  
            <OldPrice>  {`${formatNumberWithDecoration( product.price*product.cartQuantity)} VNĐ`}</OldPrice> <Price>  {`${ formatNumberWithDecoration(product.finalPrice*product.cartQuantity) } VNĐ`}</Price>

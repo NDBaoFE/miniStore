@@ -23,6 +23,10 @@ export const OrderList = styled.div`
     .cart::-webkit-scrollbar {
         width: 10px;
     }
+    .title {
+        display: flex;
+        width: 100%;
+    }
 `;
 export const Row = styled.div`
     display: flex;
