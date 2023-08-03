@@ -21,10 +21,12 @@ function  OrderDetail({product,orderList}) {
       if(parseInt(e.target.value) > product.quantity){
         toastError(`This product only have ${product.quantity} items`)
         setQuantity(product.quantity);
+        dispatch(updateProductQuantity({productId: product.productId, InputQuantity: product.quantity,quantity:product.quantity}));
         return;
       }
       if(e.target.value == ""){
-        setQuantity(1);
+        setQuantity(0);
+        dispatch(updateProductQuantity({productId: product.productId, InputQuantity: 0,quantity:product.quantity}));
         return;
       }
        
@@ -33,7 +35,7 @@ function  OrderDetail({product,orderList}) {
     }
     useEffect(() => {{
       setQuantity(product.cartQuantity);
-    }},[orderList])
+    }},[orderList,product.cartQuantity])
     const handleRemoveVoucher = () => {
      if(product.voucherId){
       dispatch(removeVoucher(product))
@@ -51,7 +53,7 @@ function  OrderDetail({product,orderList}) {
            <Quantity value={quantity} onChange={handleChangeQuantity} type="number" min={1}/> }
             <Name>{product.name}</Name>
          
-         {} {// only render if there is new price 
+         { 
           product.finalPrice != product.price &&  
            <Col>  
            <OldPrice>  {`${formatNumberWithDecoration( product.price*product.cartQuantity)} VNĐ`}</OldPrice> <Price>  {`${ formatNumberWithDecoration(product.finalPrice*product.cartQuantity) } VNĐ`}</Price>
