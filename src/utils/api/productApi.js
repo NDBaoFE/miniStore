@@ -195,7 +195,11 @@ const productApi = {
         return put(
             url,
 
-            { ...shift, isCheckedIn: isCheckin, isCheckedOut: isCheckout },
+            {
+                isCheckedIn: isCheckin,
+                isCheckedOut: isCheckout,
+                userShiftId: shift.userShiftId,
+            },
 
             {},
             { Authorization: token }
