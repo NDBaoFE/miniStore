@@ -39,6 +39,7 @@ function Payment() {
           }
         } else {
           toastError(res.data.message);
+          localStorage.removeItem("cart");
           setSuccess(false);
         }
         apiCalledRef.current = true;

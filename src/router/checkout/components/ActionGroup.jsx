@@ -96,7 +96,7 @@ function ActionGroup({change}) {
        <CancelButton onClick={() => backToPrevious()}>Discard Order</CancelButton>
         <FinishButton onClick={()=>confirm()}>Finish Sale</FinishButton>
       
-        <ComponentToPrint ref={componentRef} change={change} orderList={orderList.data}/>
+        <ComponentToPrint ref={componentRef} change={change} orderList={orderList}/>
     </GroupWrapper>
   )
 }

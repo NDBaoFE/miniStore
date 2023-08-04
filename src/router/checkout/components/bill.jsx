@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 
 
  export const ComponentToPrint = React.forwardRef(({change,orderList}, ref) => {
-
   const {paymentMethod,note} = useSelector(selector);
   let total=0;
   let totalQuanity=0;
@@ -48,14 +47,14 @@ import { useSelector } from "react-redux";
               Amount
             </th>
           </tr>
-          { orderList.map((item,index) => {
+          { orderList.data.map((item,index) => {
            total+=item.finalPrice * item.cartQuantity;
             return (
               <tr key={index}>
               <td>{item.name}</td>
               <td>{item.finalPrice}</td>
               <td>{item.cartQuantity}</td>
-              <td>{ item.finalPrice * item.cartQuantity}</td>
+              <td>{ item.finalPrice * item.cartQuantity} VNĐ</td>
             </tr>
             )
           })}
@@ -63,10 +62,19 @@ import { useSelector } from "react-redux";
           
           <tr className="total">
             <td></td>
-            <td>Total</td>
-            <td>{ totalQuanity}</td>
-            <td>{total}</td>
+            <td>Subtotal</td>
+            <td> </td>
+            <td>{total} VNĐ</td>
+          
           </tr>
+           { orderList.data.percentDiscount !=0 && <tr className="total">
+            <td></td>
+            <td>Total</td>
+            <td> </td>
+          
+             { orderList.data.percentDiscount !=0  &&  <td>{total*(1-orderList.percentDiscount)} VNĐ</td>}
+          </tr>}
+          
           {change != 0 && <>
             <tr >
             <td></td>
@@ -78,7 +86,7 @@ import { useSelector } from "react-redux";
             <td></td>
             <td>Change </td>
             <td></td>
-            <td>{change-total}</td>
+            <td>{ change - total*(1-orderList.percentDiscount)} VNĐ</td>
           </tr>
           </>  }
         
