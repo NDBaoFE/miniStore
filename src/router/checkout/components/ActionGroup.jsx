@@ -51,6 +51,8 @@ function ActionGroup({change}) {
         if(res.data.status  ==200){
           toastSuccess("Make order Successfully");
           dispatch(clearOrder());
+          localStorage.removeItem("fullcart");
+          localStorage.removeItem("cart");
           handlePrint();
           navigate(-1);
         }else{
