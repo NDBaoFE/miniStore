@@ -189,6 +189,19 @@ const productApi = {
         const url = `/shiftRequest?shiftRequestId=${id}`;
         return remove(url, {}, {}, { Authorization: token });
     },
+    editCheckin(isCheckin, isCheckout, shift, token) {
+        const url = `/userShift/fix`;
+
+        if (isCheckin)
+            return put(
+                url,
+
+                { ...shift, isCheckedIn: isCheckin, isCheckedOut: isCheckout },
+
+                {},
+                { Authorization: token }
+            );
+    },
 };
 
 export default productApi;

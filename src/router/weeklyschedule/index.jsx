@@ -236,7 +236,7 @@ const handleDrag = (e, data) => {
   </div>
 </Container>
 </div>
-<ScheduleComponent open={open}  setOpen={setOpen} selectedValue={selectedValue} positions={positions} setPositions={setPositions}  setLoaded={setLoaded} /></> :<EmployeeTimetable/>}
+<ScheduleComponent open={open}  setOpen={setOpen} selectedValue={selectedValue} positions={positions} setPositions={setPositions}  setLoaded={setLoaded}  loaded={loaded}/></> :<EmployeeTimetable/>}
    </> ;
 };
 

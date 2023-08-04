@@ -19,11 +19,14 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import { userShifts } from './data';
 import useAuth from '../../../utils/useAuth';
-const ScheduleComponent = ({open,setOpen,selectedValue,positions,setPositions,setLoaded}) => {
+import EditModal from './EditCheckin';
+import Button from '../../../components/Button';
+const ScheduleComponent = ({open,setOpen,selectedValue,positions,setPositions,setLoaded,loaded}) => {
   const {userRole}=useAuth();
   const [openModal,setOpenModal] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(null);
-
+  const [element,setElement]=useState(null);
+  const [openEdit,setOpenEdit]=useState(false);
 
   const handleCancel = () => {
     setOpen(false);
@@ -37,10 +40,13 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setPositions,se
     }
     return "#ff9683"; // Default color if no matching status found
   };
-  const handleCardClick = (index) => {
-    setSelectedIndex(index);
-    setOpenModal(true);
-  };
+
+  const handleEditCheckin = (shift) => {
+    setOpenModal(false);
+    setOpenEdit(true);
+    console.log(shift);
+    setElement(shift);
+  };  
   return (
     
       <StyledModal
@@ -56,7 +62,7 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setPositions,se
       <ModalContainer> 
         <Left>{selectedValue ? selectedValue.slice(0,3).map((item,index)=>{
          
-          return  <Card key={userShifts[index].id}  style={{height:170,margin: 20}} onClick={()=>handleCardClick(index)}>
+          return  <Card key={userShifts[index].id}  style={{height:170,margin: 20}} >
           <Img  alt="" src={userShifts[index].shiftImg} />
        <Info>
          <ShiftName style={{color: `${userShifts[index].shiftType == "Night"? "white":"inherit"}`}}>{userShifts[index].shiftName}</ShiftName>
@@ -71,7 +77,8 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setPositions,se
      <span style={{marginLeft:20}}>{positions[index].user.name}</span>
      <Tag color={`${positions[index].user.role.name == "admin"? "red": positions[index].user.role.name == "saler" ?"green":"blue" }`}  style={{marginLeft:20}}>{positions[index].user.role.name}</Tag>
     </EmployeeCard>
-     <Status color={applyStatus(selectedValue[index].status)}> <span>Status: </span>{selectedValue[index].status}</Status>
+     <Status color={applyStatus(selectedValue[index].status)} style={{margin:"5px 0"}}> <span>Status: </span>{selectedValue[index].status}</Status>
+     <Button title="Edit Checkin" onClick={()=>handleEditCheckin(selectedValue[index])}/>
       </> : <h2>Empty</h2>} 
    
        </Team>
@@ -82,7 +89,7 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setPositions,se
         <Right>{selectedValue ? selectedValue.slice(3).map((item,index)=>{
 
           index+=3;
-          return  <Card key={userShifts[index].id}  style={{height:170,margin: 20}} onClick={()=>handleCardClick(index)}>
+          return  <Card key={userShifts[index].id}  style={{height:170,margin: 20}} >
           <Img  alt="" src={userShifts[index].shiftImg} />
        <Info>
          <ShiftName style={{color: `${userShifts[index].shiftType == "Night"? "white":"inherit"}`}}>{userShifts[index].shiftName}</ShiftName>
@@ -96,6 +103,7 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setPositions,se
      <Tag color={`${positions[index].user.role.name == "admin"? "red": positions[index].user.role.name == "saler" ?"green":"blue" }`}  style={{marginLeft:20}}>{positions[index].user.role.name}</Tag>
     </EmployeeCard>
     <Status color={applyStatus(selectedValue[index].status)}> <span>Status: </span>{selectedValue[index].status}</Status>
+    <Button title="Edit Checkin" onClick={()=>handleEditCheckin(selectedValue[index])}/>
       </>
      : <h2>Empty</h2>
     
@@ -109,6 +117,7 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setPositions,se
      </ModalContainer>
      <DndProvider backend={HTML5Backend}>
      <AssignModal openModal={openModal} setOpenModal={setOpenModal}  selectedValue={selectedValue} setPositions={setPositions} positions={positions} selectedIndex={selectedIndex}/>
+    {element && <EditModal openEdit={openEdit} setOpenEdit={setOpenEdit}  selectedValue={element} setLoaded={setLoaded} loaded={loaded}/>} 
         </DndProvider>
       </StyledModal>
   );
