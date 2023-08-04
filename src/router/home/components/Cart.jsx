@@ -48,8 +48,15 @@ console.log(isDiscount());
      })
      return bool;
   }
+      // Function to remove the voucherId from the cart
+      function removeVoucherId() {
+        const cartData=JSON.parse(localStorage.getItem("fullcart"));
+        cartData.voucherId = null;
+        localStorage.setItem("fullcart", JSON.stringify(cartData));
+      }
   const handleDeleteVoucher=()=>{
     dispatch(removeApplyAllVoucher());
+    removeVoucherId();
   }
  const handleCheckout=(subTotal)=>{
   console.log(isHaving0Quantity());
