@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import ConfirmModal from "../../../components/ConfirmModal";
-import { GroupWrapper,FinishButton,  CancelButton } from "./style"
+import { GroupWrapper,FinishButton } from "./style"
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selector } from "../../home/components/slice/selector";

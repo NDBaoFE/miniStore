@@ -17,9 +17,25 @@ function Cart() {
   const navigate=useNavigate();
   const { orderList } = useSelector(selector);
   const dispatch = useDispatch();
-  const isDiscount = orderList.voucherId !== null;
+  const isDiscount = () => {
+    // Check if any product in the cart has a voucherId set (discount applied)
+    const hasProductDiscount = orderList.data.some((product) => product.voucherId !== null);
+    console.log(hasProductDiscount);
+  
+    // Check if a general discount is applied through the voucherId
+    const hasGeneralDiscount = orderList.voucherId !== null;
+  
+    // Return true if either a product-specific discount or general discount is present
+    return hasProductDiscount || hasGeneralDiscount;
+  };
+console.log(isDiscount());
+  function clearCart() {
+    localStorage.setItem("fullcart",{});
+   
+  }
   const handleClearCart=()=>{
     dispatch(clearOrder());
+    clearCart();
   }
   const isHaving0Quantity=()=>{
     let bool=false;
@@ -43,7 +59,8 @@ function Cart() {
     toastError("You have not select any product");  }else{
       navigate("/checkout");
     }
- }
+ }  // Function to clear the entire cart
+  
    
   return (
     <CartWrapper>
@@ -79,13 +96,13 @@ function Cart() {
             </Row>
             <Row>
               <div>Discount</div>
-             {isDiscount && 
+             {isDiscount() && 
              <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",width:"80px"}}>
              <div className="discount"> {`${orderList.percentDiscount*100}%`}</div>
             <CloseButton onClick={handleDeleteVoucher}><ImCross/></CloseButton>
              </div>}
-              {!isDiscount &&<div className="discount">
-                <Link to="/apply-voucher/applyAll">Apply All Voucher</Link>
+              {!isDiscount() &&<div className="discount">
+                <Link to="/apply-voucher/applyAll">Apply  Voucher</Link>
               </div>}
             </Row>
             <Row

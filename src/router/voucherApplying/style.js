@@ -16,6 +16,12 @@ export const VoucherPlacement = styled.div`
     display: flex;
     width: 100%;
     justify-content: space-between;
+    .ant-image {
+        width: 600px;
+        img {
+            object-fit: contain;
+        }
+    }
     .ant-image-img {
         height: 100%;
     }

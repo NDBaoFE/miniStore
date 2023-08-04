@@ -36,15 +36,40 @@ function  OrderDetail({product,orderList}) {
     useEffect(() => {{
       setQuantity(product.cartQuantity);
     }},[orderList,product.cartQuantity])
+    // Function to remove an item from the cart
+    function removeProduct(productId) {
+      const cartData=JSON.parse(localStorage.getItem("fullcart"));
+      console.log(productId);
+      
+      // Check if the product exists in the cart
+      if (cartData.data) {
+        cartData.data = cartData.data.filter((product) => product.productId != productId);
+      }
+      localStorage.setItem("fullcart", JSON.stringify(cartData));
+    }
+    
+    // Function to remove the voucherId from the cart
+    function removeVoucherId() {
+      const cartData=JSON.parse(localStorage.getItem("fullcart"));
+      cartData.voucherId = null;
+      localStorage.setItem("fullcart", JSON.stringify(cartData));
+    }
+    
+  
+
     const handleRemoveVoucher = () => {
      if(product.voucherId){
       dispatch(removeVoucher(product))
+      removeVoucherId();
      }else{
       toastError("No Voucher left to remove")
      }
      
     }
-
+const handleRemoveProduct = () => {
+  dispatch(deleteProduct(product.productId));
+  removeProduct(product.productId);
+}
 
   return (
     <Wrapper key={product.productId} style={{backgroundColor: showActions ?`${themes.colors.gray}` : "transparent"}}>  
@@ -61,7 +86,7 @@ function  OrderDetail({product,orderList}) {
            {product.finalPrice == product.price &&  
            <Price>  {`${formatNumberWithDecoration(product.price*product.cartQuantity)} VNĐ`}</Price> }
          
-            <CloseButton onClick={() => dispatch(deleteProduct(product.productId))}><ImCross/></CloseButton>
+            <CloseButton onClick={handleRemoveProduct}><ImCross/></CloseButton>
           </OrderDetailRow> 
           { showActions &&<ActionRow> {product.voucherId && <div onClick={handleRemoveVoucher}><EditOutlined />Remove Voucher</div>}<Link to={`/apply-voucher/${product.productId}`}><div > <TagOutlined />{product.voucherId ? "Edit Voucher" : "Add Voucher"}</div></Link></ActionRow>}
            </Wrapper>

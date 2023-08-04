@@ -120,16 +120,27 @@ const slice = createSlice({
             }
         },
         applyVoucher: (state, action) => {
-            for (let product of state.orderList.data) {
-                if (product.productId == action.payload.productId) {
-                    product.voucherId = action.payload.voucherId;
-                    product.finalPrice = calculateFinalPrice(
-                        product,
-                        action.payload
-                    );
+            const { productVouchers, voucherId } =
+                action.payload.currentVoucher;
+            if (productVouchers && productVouchers.length > 0) {
+                for (let product of state.orderList.data) {
+                    if (
+                        productVouchers.find(
+                            (pv) => pv.product.productId === product.productId
+                        )
+                    ) {
+                        product.voucherId = voucherId;
+                        product.finalPrice = calculateFinalPrice(
+                            product,
+                            action.payload.currentVoucher
+                        );
+                        state.orderList.percentDiscount =
+                            action.payload.currentVoucher.percentDiscount;
+                    }
                 }
             }
         },
+
         applyToAllVoucher: (state, action) => {
             state.orderList.voucherId = action.payload.voucherId;
             state.orderList.percentDiscount = action.payload.percentDiscount;
@@ -148,6 +159,10 @@ const slice = createSlice({
         removeApplyAllVoucher: (state) => {
             state.orderList.voucherId = null;
             state.orderList.percentDiscount = 0;
+            for (let product of state.orderList.data) {
+                product.voucherId = null;
+                product.finalPrice = product.price;
+            }
         },
     },
 });

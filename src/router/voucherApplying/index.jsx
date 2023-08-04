@@ -5,25 +5,30 @@ import VoucherList from "./components/VoucherList"
 import { useDispatch } from "react-redux"
 import placeholder from "../../assets/image/placeholder.png"
 import { applyToAllVoucher, applyVoucher, } from "../home/components/slice/index"
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { toastSuccess } from "../../components/Toast"
+import { Item, StyledBadge } from "../AddVoucher/style"
+import { BsFillGridFill } from "react-icons/Bs"
+import ProductDrawer from "./components/ProductDrawer"
 
 function VoucherApply() {
 const navigate=useNavigate();
   const dispatch = useDispatch();
-  const {id} = useParams();
-
+  const [openDrawer,setOpenDrawer]=useState(false);
   const [currentVoucher,setCurrentVoucher]=useState();
 const handleApplyVoucher=()=>{
-  if(id == "applyAll"){
-    dispatch(applyToAllVoucher(currentVoucher));
+  if(currentVoucher.isApplyAll == true){
+    dispatch(applyToAllVoucher({currentVoucher}));
   }else{
-    dispatch(applyVoucher({...currentVoucher,productId:id}))
+    dispatch(applyVoucher({currentVoucher}))
   }
  
   navigate(-1);
-  toastSuccess("add Voucher Successfully !!")
+  toastSuccess("Add  Voucher Successfully !!")
+}
+const onClose = () => {
+  setOpenDrawer(false);
 }
 
   return (
@@ -42,14 +47,20 @@ const handleApplyVoucher=()=>{
       
          
            <div> Item Required: <span>{currentVoucher.minItem||"none"}</span> </div>
-           <div> Exprire Date :<span>30/6/2023</span></div>
+           
       
-          <Row style={{justifyContent:"flex-end"}}><Button onClick={handleApplyVoucher}>Apply</Button></Row>
+          <Row style={{justifyContent:"space-between"}}>
+          <Item   onClick={()=>{setOpenDrawer(true)}}  >
+                    <StyledBadge count={0} showZero color="lime"  offset={[10, 0]}><BsFillGridFill  style={{marginRight:"20px", fontSize:"25px"}} />Choose Upload</StyledBadge> 
+                </Item>
+            <Button onClick={handleApplyVoucher}>Apply</Button></Row>
         </VoucherInfoWrapper>
+        { currentVoucher &&<ProductDrawer onClose={onClose} openDrawer={openDrawer} products={currentVoucher.productVouchers}/>}
         </VoucherInfo>}
       </VoucherPlacement>
       <ToolBox/>
       <VoucherList setCurrentVoucher={setCurrentVoucher}/>
+     
     </Container>
   )
 }

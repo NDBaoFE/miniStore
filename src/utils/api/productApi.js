@@ -124,10 +124,7 @@ const productApi = {
     },
 
     getVoucher: (type, id, count, token) => {
-        const url =
-            type == true
-                ? `/getAllVouchers?results=${count}`
-                : `/getVoucherByProductId?productId=${id}&results=${count}`;
+        const url = "/voucherapply";
 
         return get(url, {}, { Authorization: token });
     },
