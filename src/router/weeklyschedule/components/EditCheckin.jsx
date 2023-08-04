@@ -8,7 +8,7 @@ import productApi from '../../../utils/api/productApi';
 import { toast } from 'react-toastify';
 import { toastError, toastSuccess } from '../../../components/Toast';
 
-const EditModal = ({ openEdit, setOpenEdit,selectedValue,setLoaded,loaded}) => {
+const EditModal = ({ openEdit, setOpenEdit,selectedValue,setLoaded,loaded,setOpenModal}) => {
   const [isCheckin, setCheckin] = useState(selectedValue.isCheckedIn);
   const [isCheckout, setCheckout] = useState(selectedValue.isCheckedOut);
     console.log(selectedValue);
@@ -26,9 +26,11 @@ const EditModal = ({ openEdit, setOpenEdit,selectedValue,setLoaded,loaded}) => {
   const handleConfirm = async() => {
     const token=localStorage.getItem("Authorization");
     const res=await productApi.editCheckin(isCheckin,isCheckout,selectedValue,token);
+    console.log(res);
     if(res.data.status == 200){
         toastSuccess("Edit Checkin Successfully");
         setOpenEdit(false);
+        setOpenModal(false);
         setLoaded(!loaded);
     }else{
         toastError("Edit Checkin Error, please try again later");

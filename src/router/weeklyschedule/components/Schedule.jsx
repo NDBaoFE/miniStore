@@ -117,7 +117,7 @@ const ScheduleComponent = ({open,setOpen,selectedValue,positions,setPositions,se
      </ModalContainer>
      <DndProvider backend={HTML5Backend}>
      <AssignModal openModal={openModal} setOpenModal={setOpenModal}  selectedValue={selectedValue} setPositions={setPositions} positions={positions} selectedIndex={selectedIndex}/>
-    {element && <EditModal openEdit={openEdit} setOpenEdit={setOpenEdit}  selectedValue={element} setLoaded={setLoaded} loaded={loaded}/>} 
+    {element && <EditModal openEdit={openEdit} setOpenEdit={setOpenEdit}  selectedValue={element} setLoaded={setLoaded} loaded={loaded} setOpenModal={setOpenModal}/>} 
         </DndProvider>
       </StyledModal>
   );

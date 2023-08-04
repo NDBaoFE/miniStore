@@ -192,15 +192,14 @@ const productApi = {
     editCheckin(isCheckin, isCheckout, shift, token) {
         const url = `/userShift/fix`;
 
-        if (isCheckin)
-            return put(
-                url,
+        return put(
+            url,
 
-                { ...shift, isCheckedIn: isCheckin, isCheckedOut: isCheckout },
+            { ...shift, isCheckedIn: isCheckin, isCheckedOut: isCheckout },
 
-                {},
-                { Authorization: token }
-            );
+            {},
+            { Authorization: token }
+        );
     },
 };
 
