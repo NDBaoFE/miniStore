@@ -190,16 +190,12 @@ const productApi = {
         return remove(url, {}, {}, { Authorization: token });
     },
     editCheckin(isCheckin, isCheckout, shift, token) {
-        const url = `/userShift/fix`;
+        const url = `/userShift/fix?isCheckedIn=${isCheckin}&isCheckedOut=${isCheckout}&userShiftId=${shift.userShiftId}`;
 
         return put(
             url,
 
-            {
-                isCheckedIn: isCheckin,
-                isCheckedOut: isCheckout,
-                userShiftId: shift.userShiftId,
-            },
+            {},
 
             {},
             { Authorization: token }
