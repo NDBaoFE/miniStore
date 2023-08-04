@@ -47,7 +47,7 @@ function AddVoucher() {
   const UpdateInfo = async () => {
     const token=localStorage.getItem("Authorization");
     dispatch(actions.getVoucherInfo());
-     const res= await productApi.addVoucher(info,productList,token);
+     const res= await productApi.addVoucher({...info,percentDiscount:percentDiscount/100},productList,token);
     if(res.data.status == 200){
        
         setSuccess(true);

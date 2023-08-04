@@ -41,7 +41,7 @@ const onClose = () => {
         <div>Code: <span>{currentVoucher?.name||"Voucher"}</span></div>
         <div>Quantity: <span>{currentVoucher?.quantity}</span></div>
           
-           <div>Discount: <span>{currentVoucher?.percentDiscount}%</span></div>
+           <div>Discount: <span>{currentVoucher?.percentDiscount*100}%</span></div>
            <div> Money Required: <span>{currentVoucher.minTotal||"None"}</span></div>
       
          
