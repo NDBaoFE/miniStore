@@ -8,7 +8,17 @@ import { formatNumberWithDecoration } from "../../../utils";
 
 function OrderSummary() {
   const {orderList,}=useSelector(selector);
- 
+  const isDiscount = () => {
+    // Check if any product in the cart has a voucherId set (discount applied)
+    const hasProductDiscount = orderList.data.some((product) => product.voucherId !== null);
+    console.log(hasProductDiscount);
+  
+    // Check if a general discount is applied through the voucherId
+    const hasGeneralDiscount = orderList.voucherId !== null;
+  
+    // Return true if either a product-specific discount or general discount is present
+    return hasProductDiscount || hasGeneralDiscount;
+  };
   const total=orderList.data.reduce((acc,item)=>acc+item.finalPrice*item.cartQuantity,0);
   const dispatch=useDispatch();
   dispatch(setTotalPrice(total*(1-orderList.percentDiscount)));
@@ -20,9 +30,9 @@ function OrderSummary() {
             <div>{formatNumberWithDecoration(total)} VNĐ</div>
         </Row>
         <Row>
-        <div>Discount</div>
-       {!orderList.voucherId && <Link to="/apply-voucher/applyAll" style={{textDecoration:"none"}}>  <div className="discount">Add Discount</div></Link>} 
-      {orderList.voucherId &&<Link to="/apply-voucher/applyAll" style={{textDecoration:"none"}}> <div className="discount">{orderList.percentDiscount*100}%</div></Link>}
+        
+        {orderList.percentDiscount != 0 && <><div>Discount</div><div className="discount"> {`${orderList.percentDiscount*100}%`}</div> </> }
+
         </Row>
         <Line/>
         <TotalRow>

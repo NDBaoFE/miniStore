@@ -5,14 +5,13 @@ import { ImCross } from "react-icons/im";
 import { useDispatch } from "react-redux";
 import { deleteProduct, updateProductQuantity,removeVoucher } from "./slice";
 import {  useEffect, useState } from "react";
-import { EditOutlined ,TagOutlined} from "@ant-design/icons";
 import { themes } from "../../../utils/theme";
-import { Link } from "react-router-dom";
 import { Badge, Col } from "antd";
 
 import { RiCoupon2Line } from "react-icons/ri";
 import { formatNumberWithDecoration } from "../../../utils";
 import { toastError } from "../../../components/Toast";
+import { StyledBadge } from "../../AddVoucher/style";
 function  OrderDetail({product,orderList}) {
     const [showActions, setShowActions] = useState(false);
     const dispatch = useDispatch();
@@ -48,24 +47,11 @@ function  OrderDetail({product,orderList}) {
       localStorage.setItem("fullcart", JSON.stringify(cartData));
     }
     
-    // Function to remove the voucherId from the cart
-    function removeVoucherId() {
-      const cartData=JSON.parse(localStorage.getItem("fullcart"));
-      cartData.voucherId = null;
-      localStorage.setItem("fullcart", JSON.stringify(cartData));
-    }
+
     
   
 
-    const handleRemoveVoucher = () => {
-     if(product.voucherId){
-      dispatch(removeVoucher(product))
-      removeVoucherId();
-     }else{
-      toastError("No Voucher left to remove")
-     }
-     
-    }
+
 const handleRemoveProduct = () => {
   dispatch(deleteProduct(product.productId));
   removeProduct(product.productId);
@@ -81,7 +67,9 @@ const handleRemoveProduct = () => {
          { 
           product.finalPrice != product.price &&  
            <Col>  
+           <Badge count={`-${product.percentDiscount*100}%`} showZero color="lime"  offset={[10, -10]}>
            <OldPrice>  {`${formatNumberWithDecoration( product.price*product.cartQuantity)} VNĐ`}</OldPrice> <Price>  {`${ formatNumberWithDecoration(product.finalPrice*product.cartQuantity) } VNĐ`}</Price>
+           </Badge>
            </Col> }
            {product.finalPrice == product.price &&  
            <Price>  {`${formatNumberWithDecoration(product.price*product.cartQuantity)} VNĐ`}</Price> }

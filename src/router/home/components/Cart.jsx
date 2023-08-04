@@ -68,7 +68,7 @@ console.log(isDiscount());
     }
  }  // Function to clear the entire cart
   
-   
+
   return (
     <CartWrapper>
       <OrderList>
@@ -104,8 +104,9 @@ console.log(isDiscount());
             <Row>
               <div>Discount</div>
              {isDiscount() && 
-             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",width:"80px"}}>
-             <div className="discount"> {`${orderList.percentDiscount*100}%`}</div>
+             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",width:"150px"}}>
+             {orderList.percentDiscount != 0 &&  <div className="discount"> {`${orderList.percentDiscount*100}%`}</div>}
+             {orderList.percentDiscount == 0 &&  <div className="discount"> Applied Voucher</div>}
             <CloseButton onClick={handleDeleteVoucher}><ImCross/></CloseButton>
              </div>}
               {!isDiscount() &&<div className="discount">

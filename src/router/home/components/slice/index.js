@@ -136,7 +136,7 @@ const slice = createSlice({
                             product,
                             action.payload.currentVoucher
                         );
-                        state.orderList.percentDiscount =
+                        product.percentDiscount =
                             action.payload.currentVoucher.percentDiscount;
                     }
                 }
@@ -149,9 +149,14 @@ const slice = createSlice({
         },
 
         applyToAllVoucher: (state, action) => {
-            state.orderList.voucherId = action.payload.voucherId;
-            state.orderList.percentDiscount = action.payload.percentDiscount;
-            toastSuccess("Apply Voucher Successfully");
+            if (state.orderList.data.length > 0) {
+                state.orderList.voucherId = action.payload.voucherId;
+                state.orderList.percentDiscount =
+                    action.payload.currentVoucher.percentDiscount;
+                toastSuccess("Apply Voucher Successfully");
+            } else {
+                toastError("No Product to apply");
+            }
         },
         setTotalPrice: (state, action) => {
             state.totalPrice = action.payload;
