@@ -88,7 +88,7 @@ const handleRemoveProduct = () => {
          
             <CloseButton onClick={handleRemoveProduct}><ImCross/></CloseButton>
           </OrderDetailRow> 
-          { showActions &&<ActionRow> {product.voucherId && <div onClick={handleRemoveVoucher}><EditOutlined />Remove Voucher</div>}<Link to={`/apply-voucher/${product.productId}`}><div > <TagOutlined />{product.voucherId ? "Edit Voucher" : "Add Voucher"}</div></Link></ActionRow>}
+          {/* { showActions &&<ActionRow> {product.voucherId && <div onClick={handleRemoveVoucher}><EditOutlined />Remove Voucher</div>}<Link to={`/apply-voucher/${product.productId}`}><div > <TagOutlined />{product.voucherId ? "Edit Voucher" : "Add Voucher"}</div></Link></ActionRow>} */}
            </Wrapper>
   )
 }
