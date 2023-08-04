@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
  export const ComponentToPrint = React.forwardRef(({change,orderList}, ref) => {
   const {paymentMethod,note} = useSelector(selector);
   let total=0;
-  let totalQuanity=0;
   return (
     <div style={{display:"none"}} >
       <div className="bill"ref={ref}>

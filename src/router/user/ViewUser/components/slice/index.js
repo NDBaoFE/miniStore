@@ -13,7 +13,7 @@ export const initialState = {
     roles: ["Admin", "Employee", "Guard"],
     roleId: 0,
     genders: ["Male", "Female"],
-    gender: true,
+    gender: 0,
     info: {},
 };
 

@@ -4,6 +4,7 @@ import {  Body, Email, EmployeeCard, HeroWrapper, Name, Wrapper } from './style'
 
 import { useEffect, useState } from 'react';
 import productApi from '../../utils/api/productApi';
+import { Link } from 'react-router-dom';
 function TicketList
 () {
   const [data,setData]=useState(null);
@@ -34,7 +35,7 @@ function TicketList
                         <Name>{item.ticket.title}</Name>
                         <Email>{item.ticket.user.name}</Email>
                     </div></div>
-                    <div>View</div>
+                    <Link to={`/ticket/${item.ticket.ticketId}`}>View</Link>
                     
             </EmployeeCard>)})}
         </Body></>} 

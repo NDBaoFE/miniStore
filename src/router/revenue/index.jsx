@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Row } from "antd"
 import EmployeeRank from "./EmployeeRank"
 import LineChart from "./Line"
-import CategoryChart from "./PieChart"
 import ProductRank from "./ProductRank"
 import { Container, Hero, Summary, Card, Header, Number, Action,IconWrapper, ChartContainer, Wrapper, Left, Right, Commercial, Info } from "./style"
 import Scope from "../../assets/image/scope.png"

@@ -47,7 +47,6 @@ const OrderManagemntPage = () => {
   };
 
 
-  const [loopOrder, setLoopOrder] = useState([])
   const [order, setOrder] = useState([]);
 
 
@@ -85,11 +84,17 @@ const OrderManagemntPage = () => {
     for(let item of order ){
       if(item.type === false){
         totalSale += item.total;
+        if(totalSale<0){
+          totalSale = 0;
+        }
       }else{
         totalImport += item.total
+        if(totalImport<0){
+          totalImport= 0;
+        }
       }
     }
-
+  
 
 
   const columns = [
@@ -119,7 +124,7 @@ const OrderManagemntPage = () => {
     {
       title: "Total",
       dataIndex: "total",
-      render: (_, record) => <span style={{color:"green", fontWeight:600}}>{formatNumberWithDecoration(record.total)} VND</span>,
+      render: (_, record) => <span style={{color:"green", fontWeight:600}}>{record.total} VND</span>,
     },
     {
       title: "Type",
