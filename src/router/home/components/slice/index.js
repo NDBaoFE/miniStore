@@ -1,7 +1,7 @@
 import { injectReducer } from "../../../../store";
 import { createSlice } from "@reduxjs/toolkit";
 import { calculateFinalPrice } from "../../../../utils/price";
-import { toastError } from "../../../../components/Toast";
+import { toastError, toastSuccess } from "../../../../components/Toast";
 
 export const initialState = {
     productId: 0,
@@ -120,6 +120,7 @@ const slice = createSlice({
             }
         },
         applyVoucher: (state, action) => {
+            let applied = false;
             const { productVouchers, voucherId } =
                 action.payload.currentVoucher;
             if (productVouchers && productVouchers.length > 0) {
@@ -129,6 +130,7 @@ const slice = createSlice({
                             (pv) => pv.product.productId === product.productId
                         )
                     ) {
+                        applied = true;
                         product.voucherId = voucherId;
                         product.finalPrice = calculateFinalPrice(
                             product,
@@ -139,11 +141,17 @@ const slice = createSlice({
                     }
                 }
             }
+            if (applied) {
+                toastSuccess("Apply Voucher Successfully");
+            } else {
+                toastError("No Product to apply");
+            }
         },
 
         applyToAllVoucher: (state, action) => {
             state.orderList.voucherId = action.payload.voucherId;
             state.orderList.percentDiscount = action.payload.percentDiscount;
+            toastSuccess("Apply Voucher Successfully");
         },
         setTotalPrice: (state, action) => {
             state.totalPrice = action.payload;
@@ -163,6 +171,7 @@ const slice = createSlice({
                 product.voucherId = null;
                 product.finalPrice = product.price;
             }
+            toastSuccess("Remove Voucher Successfully");
         },
     },
 });

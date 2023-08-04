@@ -25,7 +25,6 @@ const handleApplyVoucher=()=>{
   }
  
   navigate(-1);
-  toastSuccess("Add  Voucher Successfully !!")
 }
 const onClose = () => {
   setOpenDrawer(false);
@@ -42,7 +41,7 @@ const onClose = () => {
         <div>Code: <span>{currentVoucher?.name||"Voucher"}</span></div>
         <div>Quantity: <span>{currentVoucher?.quantity}</span></div>
           
-           <div>Discount: <span>{currentVoucher?.percentDiscount*100}%</span></div>
+           <div>Discount: <span>{currentVoucher?.percentDiscount}%</span></div>
            <div> Money Required: <span>{currentVoucher.minTotal||"None"}</span></div>
       
          
@@ -51,7 +50,7 @@ const onClose = () => {
       
           <Row style={{justifyContent:"space-between"}}>
           <Item   onClick={()=>{setOpenDrawer(true)}}  >
-                    <StyledBadge count={0} showZero color="lime"  offset={[10, 0]}><BsFillGridFill  style={{marginRight:"20px", fontSize:"25px"}} />Choose Upload</StyledBadge> 
+                    <BsFillGridFill  style={{marginRight:"20px", fontSize:"25px"}} />Choose Upload
                 </Item>
             <Button onClick={handleApplyVoucher}>Apply</Button></Row>
         </VoucherInfoWrapper>

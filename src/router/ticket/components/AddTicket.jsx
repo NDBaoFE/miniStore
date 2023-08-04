@@ -83,6 +83,8 @@ useEffect(() => {
   const onSearch = (value) => {
     console.log('search:', value);
   };
+     // eslint-disable-next-line arrow-body-style
+
   return (
     <AddTicketWrapper>
      <Form
@@ -158,7 +160,7 @@ useEffect(() => {
       <Form.Item
         name="startEndTime"
        >
-         <RangePicker style={{color: "green"}} />
+         <RangePicker style={{color: "green"}}   />
          </Form.Item>
       </>
         
