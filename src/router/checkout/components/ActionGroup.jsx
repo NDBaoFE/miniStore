@@ -31,7 +31,7 @@ function ActionGroup({change}) {
         return {productId,price,quantity:quantity1,voucherId,name};
       }),
     };
-    
+    console.log(modifiedOrderList);
     delete modifiedOrderList.percentDiscount;
     const token= localStorage.getItem("Authorization");
     if(paymentMethod == 2){

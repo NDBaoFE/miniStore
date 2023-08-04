@@ -150,7 +150,8 @@ const slice = createSlice({
 
         applyToAllVoucher: (state, action) => {
             if (state.orderList.data.length > 0) {
-                state.orderList.voucherId = action.payload.voucherId;
+                state.orderList.voucherId =
+                    action.payload.currentVoucher.voucherId;
                 state.orderList.percentDiscount =
                     action.payload.currentVoucher.percentDiscount;
                 toastSuccess("Apply Voucher Successfully");

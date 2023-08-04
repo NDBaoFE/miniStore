@@ -50,7 +50,7 @@
             if(quantity == 0 ){
                 toastError("Product quantity have to be greater then 0")
             }else{
-                dispatch(addProduct({...product,addQuantity:quantity}));
+                dispatch(addProduct({...product,addQuantity:parseInt(quantity)}));
                 setOpenScanner(false);
             }
         
